@@ -1,5 +1,12 @@
 description: GNU C library
+version: 2.18
+
 build-depends: linux-headers
+
+files:
+  - download:
+      url: http://ftp.gnu.org/pub/gnu/glibc/glibc-${version}.tar.xz
+      sha1: 1f0e4e7ba5fe1f45ffd0548b6c36caef0bc7e51f
 
 packages:
   glibc-dev:

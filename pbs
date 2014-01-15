@@ -18,6 +18,7 @@ db.load(srctree)
 db.dump(0)
 
 project = pbs.project.Project(db)
+project.load()
 
 print('output directory:', objtree)
 
@@ -38,5 +39,7 @@ while True:
         commands[args[0]].exec(project, *args)
     except EOFError:
         break
+
+project.save()
 
 # vim: set et sts=4 sw=4 ts=4

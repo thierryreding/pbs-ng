@@ -1,6 +1,8 @@
 import hashlib
+import http.client
 import os, os.path
 import string
+import urllib.request
 import yaml
 
 def iprint(indent, *args):
@@ -86,6 +88,9 @@ class SourceFile():
     def parse(self, yaml):
         pass
 
+    def fetch(self):
+        pass
+
     def dump(self, indent):
         pass
 
@@ -105,6 +110,34 @@ class DownloadSourceFile(SourceFile):
             self.sha1 = yaml['sha1']
         else:
             self.sha1 = None
+
+    def fetch(self):
+        url = self.source.subst(self.url)
+        filename = os.path.basename(url)
+        src = urllib.request.urlopen(url)
+
+        if isinstance(src, http.client.HTTPResponse):
+            headers = dict(src.getheaders())
+        else:
+            headers = src.info()
+
+        total = int(headers['Content-Length'])
+        done = 0
+
+        with open(os.path.join('download', filename), 'wb') as dst:
+            while True:
+                buf = src.read(512)
+                if not buf:
+                    break
+
+                done += len(buf)
+                dst.write(buf)
+
+                percentage = done * 100 / total
+
+                print("\rDownloading %s... %u%%" % (url, percentage), end = '')
+
+            print()
 
     def checksum(self):
         basename = self.source.subst(os.path.basename(self.url))
@@ -175,6 +208,10 @@ class Source():
 
     def __str__(self):
         return self.name
+
+    def fetch(self):
+        for source in self.files:
+            source.fetch()
 
     def dump(self, indent):
         iprint(indent, 'Source:', self.name)
