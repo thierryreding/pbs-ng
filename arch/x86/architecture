@@ -1,0 +1,9 @@
+name: x86
+description: Intel x86
+cpus:
+  i386:
+  i586:
+  i686:
+  i786:
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

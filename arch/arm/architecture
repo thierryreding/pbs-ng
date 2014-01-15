@@ -1,0 +1,8 @@
+name: arm
+description: Advanced RISC Machines (ARM)
+cpus:
+  xscale:
+  cortex-a9:
+  cortex-a15:
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

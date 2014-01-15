@@ -1,0 +1,22 @@
+description: Linux kernel
+version: 3.12.7
+
+files:
+- download:
+    url: https://www.kernel.org/pub/linux/kernel/v3.x/linux-${version}.tar.xz
+    sha1: 0000000000000000000000000000000000000000
+
+packages:
+  linux-headers:
+    files:
+      - /usr/include
+
+  linux-image:
+    files:
+      - /boot
+
+  linux-modules:
+    files:
+      - /lib/modules
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

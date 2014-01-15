@@ -1,0 +1,21 @@
+description: X library
+version: 1.6.2
+
+files:
+- download:
+    url: http://xorg.freedesktop.org/releases/individual/lib/libX11-${version}.tar.bz2
+    sha1: 0dd74854e6f6bb8a322e88ba3e89f87c3dcf9e08
+
+packages:
+  libx11:
+    files:
+      - /usr/lib/*.so.*
+
+  libx11-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
