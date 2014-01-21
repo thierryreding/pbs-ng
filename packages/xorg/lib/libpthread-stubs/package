@@ -1,0 +1,24 @@
+description: pthread stub library
+version: 0.3
+license: custom
+
+depends:
+
+files:
+- download:
+    url: http://xcb.freedesktop.org/dist/libpthread-stubs-${version}.tar.bz2
+    sha1: 7fc486ad0ec54938f8b781cc374218f50eac8b99
+
+packages:
+  libpthread-stubs:
+    files:
+      - /usr/lib/*.so.*
+
+  libpthread-stubs-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

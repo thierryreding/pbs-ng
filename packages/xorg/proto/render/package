@@ -1,0 +1,20 @@
+description: X11 Render extension wire protocol
+version: 0.11.1
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/proto/renderproto-${version}.tar.bz2
+      sha1: 7ae9868a358859fe539482b02414aa15c2d8b1e4
+
+packages:
+  renderproto-dev:
+    files:
+      - /usr/include
+      - /usr/lib
+
+  renderproto-doc:
+    files:
+      - /usr/share/doc
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

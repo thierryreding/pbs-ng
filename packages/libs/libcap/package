@@ -1,0 +1,28 @@
+description: POSIX 1003.1e capabilities
+version: 2.22
+license: GPL-2.0
+
+files:
+  - download:
+      url: ftp://ftp.archlinux.org/other/libcap/libcap-${version}.tar.gz
+      sha1: 7753165ca685a0c78735fa0db25b815d9576b1fe
+
+packages:
+  libcap:
+    files:
+      - /usr/lib/*.so.*
+
+  libcap-bin:
+    files:
+      - /usr/bin
+
+  libcap-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+
+  libcap-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

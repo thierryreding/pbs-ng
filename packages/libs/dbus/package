@@ -1,0 +1,40 @@
+description: message bus system
+version: 1.6.18
+license: GPL-2.0+, AFL-2.1
+
+files:
+  - download:
+      url: http://dbus.freedesktop.org/releases/dbus/dbus-${version}.tar.gz
+      sha1: d9eefcb533a9afbec96b0548925af4d88ea544e7
+
+packages:
+  dbus:
+    files:
+      - /etc
+      - /usr/bin
+      - /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+      - /usr/lib/systemd
+      - /usr/share/dbus-1
+      - /var/lib/dbus
+
+  dbus-doc:
+    files:
+      - /usr/share/doc
+      - /usr/share/licenses
+
+  dbus-man:
+    files:
+      - /usr/share/man
+
+  libdbus:
+    files:
+      - /usr/lib/*.so.*
+
+  libdbus-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/dbus-1.0/include
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

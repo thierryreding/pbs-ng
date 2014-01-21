@@ -1,0 +1,35 @@
+description: System V Release 4.0 curses emulation library
+version: 5.9
+license: MIT
+
+files:
+  - download:
+      url: http://ftp.gnu.org/pub/gnu/ncurses/ncurses-${version}.tar.gz
+      sha1: 3e042e5f2c7223bffdaac9646a533b8c758b65b5
+
+packages:
+  ncurses:
+    files:
+      - /usr/lib/*.so.*
+
+  ncurses-bin:
+    files:
+      - /usr/bin
+
+  ncurses-data:
+    files:
+      - /usr/share/tabset
+      - /usr/share/terminfo
+
+  ncurses-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  ncurses-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

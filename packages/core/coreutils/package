@@ -1,0 +1,28 @@
+description: The basic file, shell and text manipulation utilities of the GNU operating system
+version: 8.22
+license: GPL-3.0
+
+files:
+  - download:
+      url: http://ftp.gnu.org/gnu/coreutils/coreutils-${version}.tar.xz
+      sha1: cc7fe47b21eb49dd2ee4cdb707570f42fb2c8cc6
+
+packages:
+  coreutils:
+    files:
+      - /usr/bin
+      - /usr/lib
+
+  coreutils-doc:
+    files:
+      - /usr/share/info
+
+  coreutils-locale:
+    files:
+      - /usr/share/locale
+
+  coreutils-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

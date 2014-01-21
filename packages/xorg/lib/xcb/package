@@ -1,0 +1,33 @@
+description: X11 client-side library
+version: "1.10"
+license: custom
+
+depends:
+  - xorg/proto/xcb
+
+files:
+- download:
+    url: http://xcb.freedesktop.org/dist/libxcb-${version}.tar.bz2
+    sha1: bb1a3113eca5146e2a1cf6379c2e52c212a757e0
+
+packages:
+  libxcb:
+    files:
+      - /usr/lib/*.so.*
+
+  libxcb-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libxcb-doc:
+    files:
+      - /usr/share/doc
+
+  libxcb-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

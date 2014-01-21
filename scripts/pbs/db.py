@@ -1,7 +1,11 @@
 import hashlib
 import http.client
+import io
 import os, os.path
+import pbs
+import shutil
 import string
+import tarfile
 import urllib.request
 import yaml
 
@@ -25,6 +29,7 @@ class Architecture():
 
 class Section():
     def __init__(self, parent, name):
+        self.parent = parent
         self.sections = []
         self.packages = []
         self.name = name
@@ -89,6 +94,9 @@ class SourceFile():
         pass
 
     def fetch(self):
+        pass
+
+    def extract(self):
         pass
 
     def dump(self, indent):
@@ -156,19 +164,51 @@ class DownloadSourceFile(SourceFile):
 
         return digest.hexdigest() == self.sha1
 
+    def extract(self, directory, force = False):
+        basename = self.source.subst(os.path.basename(self.url))
+        filename = os.path.join('download', basename)
+
+        with io.open(filename, 'rb') as file:
+            filesize = file.seek(0, io.SEEK_END)
+            file.seek(0, io.SEEK_SET)
+
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+
+            with pbs.pushd(directory):
+                with tarfile.open(fileobj = file, mode = 'r') as tar:
+                    entry = tar.next()
+                    if not entry.isdir():
+                        print('WARNING: first entry is not a directory')
+                        name = os.path.dirname(entry.name)
+                    else:
+                        name = entry.name
+
+                    if os.path.exists(name) and force:
+                        print('removing %s...' % name, end = '', flush = True)
+                        shutil.rmtree(name)
+                        print('done')
+
+                    if not os.path.exists(name):
+                        for entry in tar:
+                            tar.extract(entry)
+
+                            progress = file.tell() * 100 / filesize
+                            print('\r \033[1;33m*\033[0m extracting %s...%3u%%' %
+                                    (filename, progress), end = '',
+                                    flush = True)
+
+                        status = 'done'
+                    else:
+                        status = 'skipped'
+
+                    print('\r \033[1;33m*\033[0m extracting %s...%s' %
+                            (filename, status))
+
     def dump(self, indent):
         url = self.source.subst(self.url)
         iprint(indent, 'Download:', url)
         iprint(indent, '  SHA1:', self.sha1)
-
-def load_source_file(source, yaml):
-    for key in yaml.keys():
-        if key == 'download':
-            source = DownloadSourceFile(source)
-            source.parse(yaml[key])
-            return source
-        else:
-            print('ERROR: invalid type of source file:', key)
 
 class Source():
     def __init__(self, section, name):
@@ -179,6 +219,25 @@ class Source():
         self.depends = []
         self.packages = []
 
+    def full_name(self):
+        parent = self.section
+        name = self.name
+
+        while parent and parent.parent:
+            name = parent.name + '/' + name
+            parent = parent.parent
+
+        return name
+
+    def parse_source_file(source, yaml):
+        for key in yaml.keys():
+            if key == 'download':
+                source = DownloadSourceFile(source)
+                source.parse(yaml[key])
+                return source
+            else:
+                print('ERROR: invalid type of source file:', key)
+
     def parse(self, yaml):
         if 'description' in yaml:
             self.description = yaml['description']
@@ -186,13 +245,13 @@ class Source():
             self.description = None
 
         if 'version' in yaml:
-            self.version = yaml['version']
+            self.version = str(yaml['version'])
         else:
             self.version = None
 
         if 'files' in yaml:
             for origin in yaml['files']:
-                source = load_source_file(self, origin)
+                source = Source.parse_source_file(self, origin)
                 self.files.append(source)
 
         if 'packages' in yaml:
@@ -203,6 +262,17 @@ class Source():
 
     def subst(self, template):
         keywords = { 'version': self.version }
+        version = self.version.split('.')
+
+        if len(version) > 0:
+            keywords['major'] = version[0]
+
+        if len(version) > 1:
+            keywords['minor'] = version[1]
+
+        if len(version) > 2:
+            keywords['micro'] = version[2]
+
         template = string.Template(template)
         return template.substitute(keywords)
 
@@ -212,6 +282,10 @@ class Source():
     def fetch(self):
         for source in self.files:
             source.fetch()
+
+    def extract(self, directory):
+        for source in self.files:
+            source.extract(directory)
 
     def dump(self, indent):
         iprint(indent, 'Source:', self.name)

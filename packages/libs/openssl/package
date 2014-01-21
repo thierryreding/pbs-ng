@@ -1,0 +1,29 @@
+description: The Open Source toolkit for Secure Socket Layer and Transport Layer Security
+version: 1.0.1e
+license: BSD
+
+files:
+  - download:
+      url: http://www.openssl.org/source/openssl-${version}.tar.gz
+      sha1: 3f1b1223c9e8189bfe4e186d86449775bd903460
+
+packages:
+  openssl:
+    files:
+      - /etc/ssl
+      - /usr/bin
+      - /usr/lib/*.so.*
+      - /usr/lib/ssl
+
+  openssl-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  openssl-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

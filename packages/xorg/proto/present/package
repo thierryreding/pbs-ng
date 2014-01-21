@@ -1,0 +1,20 @@
+description: X11 Present extension wire protocol
+version: 1.0
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/proto/presentproto-${version}.tar.bz2
+      sha1: 432371cdc464881029c3f39f9bf81cc80a484e54
+
+packages:
+  presentproto-dev:
+    files:
+      - /usr/include
+      - /usr/lib
+
+  presentproto-doc:
+    files:
+      - /usr/share/doc
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

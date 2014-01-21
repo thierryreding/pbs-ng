@@ -1,0 +1,26 @@
+description: TrueType font rendering library
+version: 1.5.17
+license: custom
+
+files:
+  - download:
+      url: http://prdownloads.sourceforge.net/libpng/libpng-${version}.tar.bz2
+      sha1: 899d660104f3ef5c349c57faad10844b388f8442
+
+packages:
+  libpng:
+    files:
+      - /usr/lib/*.so.*
+
+  libpng-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libpng-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

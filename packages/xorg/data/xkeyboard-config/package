@@ -1,0 +1,27 @@
+description: X keyboard configuration files
+version: 2.10.1
+license: custom
+
+files:
+  - download:
+      url: http://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-${version}.tar.bz2
+      sha1: 09114bfd92f5c5a468a02cb0b3593e8a78adaa0e
+
+packages:
+  xkeyboard-config:
+    files:
+      - /usr/share/X11
+
+  xkeyboard-config-dev:
+    files:
+      - /usr/share/pkgconfig
+
+  xkeyboard-config-locale:
+    files:
+      - /usr/share/locale
+
+  xkeyboard-config-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

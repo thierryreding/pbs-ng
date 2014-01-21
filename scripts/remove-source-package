@@ -1,0 +1,17 @@
+#!/bin/sh
+
+package="$1"
+sysroot="$2"
+
+if test -z "$1" -o -z "$2"; then
+	echo "usage: $0 source sysroot"
+	exit 1
+fi
+
+REMOVE_PACKAGE="${0%/*}/remove-package"
+
+echo "using $REMOVE_PACKAGE"
+
+for tarball in dist/packages/$package/*.tar.xz; do
+	$REMOVE_PACKAGE $tarball "$sysroot"
+done

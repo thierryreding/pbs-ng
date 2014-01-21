@@ -1,0 +1,32 @@
+description: POSIX 1003.1e capabilities
+version: 2.4.47
+license: LGPL-2.1
+
+files:
+  - download:
+      url: http://download.savannah.gnu.org/releases-noredirect/attr/attr-${version}.src.tar.gz
+      sha1: 5060f0062baee6439f41a433325b8b3671f8d2d8
+
+packages:
+  libattr:
+    files:
+      - /usr/lib/*.so.*
+
+  libattr-bin:
+    files:
+      - /usr/bin
+
+  libattr-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+
+  libattr-locale:
+    files:
+      - /usr/share/locale
+
+  libattr-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,0 +1,18 @@
+diff --git a/src/xftglyphs.c b/src/xftglyphs.c
+index 2f3dc5a6b423..602ef0f9cdc0 100644
+--- a/src/xftglyphs.c
++++ b/src/xftglyphs.c
+@@ -21,10 +21,10 @@
+  */
+ 
+ #include "xftint.h"
+-#include <freetype/ftoutln.h>
+-#include <freetype/ftlcdfil.h>
++#include <freetype2/ftoutln.h>
++#include <freetype2/ftlcdfil.h>
+ 
+-#include <freetype/ftsynth.h>
++#include <freetype2/ftsynth.h>
+ 
+ /*
+  * Validate the memory info for a font

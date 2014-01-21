@@ -1,0 +1,45 @@
+description: GNU C library
+version: 2.18
+
+build-depends: linux-headers
+
+files:
+  - download:
+      url: http://ftp.gnu.org/pub/gnu/glibc/glibc-${version}.tar.xz
+      sha1: 1f0e4e7ba5fe1f45ffd0548b6c36caef0bc7e51f
+
+packages:
+  glibc-bin:
+    files:
+      - /usr/bin
+      - /usr/sbin
+
+  glibc-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/*.o
+
+  glibc-doc:
+    files:
+      - /usr/share/info
+
+  glibc-locale:
+    files:
+      - /usr/share/i18n
+      - /usr/share/locale
+      - /usr/share/zoneinfo
+
+  glibc-plugins:
+    files:
+      - /usr/lib/audit
+      - /usr/lib/gconv
+
+  glibc:
+    files:
+      - /etc
+      - /lib
+      - /usr/lib/getconf
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

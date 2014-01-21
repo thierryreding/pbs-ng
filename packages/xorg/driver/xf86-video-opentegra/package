@@ -1,0 +1,21 @@
+description: Open-source Tegra X video driver
+version: 0.6.0
+license: custom
+
+depends:
+
+files:
+  - download:
+      url: http://people.freedesktop.org/~tagr/xf86-video-opentegra-${version}.tar.xz
+      sha1: 4e8d3468db8d6ea5c975d6672cf63d677b59bc20
+
+packages:
+  xf86-video-opentegra:
+    files:
+      - /usr/lib/xorg/modules/drivers/*.so
+
+  xf86-video-opentegra-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

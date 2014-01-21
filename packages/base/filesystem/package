@@ -1,0 +1,22 @@
+description: base filesystem layout
+version: 2014.01
+license:
+
+packages:
+  filesystem:
+    files:
+      - /bin
+      - /dev
+      - /etc
+      - /media
+      - /mnt
+      - /proc
+      - /root
+      - /run
+      - /sbin
+      - /sys
+      - /tmp
+      - /usr
+      - /var
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,0 +1,20 @@
+description: The Swiss Army Knife of Embedded Linux
+version: 1.22.0
+license: GPL-2
+
+build-depends: libc-dev
+
+files:
+  - download:
+      url: http://busybox.net/downloads/busybox-${version}.tar.bz2
+      sha1: 486fb55c3efa71148fe07895fd713ea3a5ae343a
+
+packages:
+  busybox:
+    files:
+      - /bin
+      - /sbin
+      - /usr/bin
+      - /usr/sbin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

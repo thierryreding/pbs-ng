@@ -1,0 +1,1 @@
+DESTDIR = $(TOP_OBJDIR)/$(PKGDIR)/install

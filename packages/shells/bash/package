@@ -1,5 +1,6 @@
 description: Bource Again SHell
 version: 4.2
+license: GPL-3.0
 
 files:
   - download:
@@ -9,6 +10,19 @@ files:
 packages:
   bash:
     files:
-      - /usr/bin
+      - /etc
+      - /bin
+
+  bash-doc:
+    files:
+      - /usr/share/info
+
+  bash-locale:
+    files:
+      - /usr/share/locale
+
+  bash-man:
+    files:
+      - /usr/share/man
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

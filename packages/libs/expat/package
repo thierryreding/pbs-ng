@@ -1,0 +1,29 @@
+description: an XML parser library
+version: 2.1.0
+license: custom
+
+files:
+  - download:
+      url: http://prdownloads.sourceforge.net/expat/expat-${version}.tar.gz
+      sha1: b08197d146930a5543a7b99e871cba3da614f6f0
+
+packages:
+  expat:
+    files:
+      - /usr/bin
+
+  expat-man:
+    files:
+      - /usr/share/man
+
+  libexpat:
+    files:
+      - /usr/lib/*.so.*
+
+  libexpat-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

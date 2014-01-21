@@ -1,0 +1,20 @@
+description: X11 font extension wire protocol
+version: 2.1.2
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/proto/fontsproto-${version}.tar.bz2
+      sha1: 538f0880faa6981cb1a348ced93dc715c42840f7
+
+packages:
+  fontsproto-dev:
+    files:
+      - /usr/include
+      - /usr/lib
+
+  fontsproto-doc:
+    files:
+      - /usr/share/doc
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

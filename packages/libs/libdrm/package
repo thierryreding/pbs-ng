@@ -1,0 +1,26 @@
+description: Userspace interface to kernel DRM services
+version: 2.4.51
+license: custom
+
+files:
+  - download:
+      url: http://dri.freedesktop.org/libdrm/libdrm-${version}.tar.bz2
+      sha1: 7b8e14be0b241f0feb9c2700d5f5a7ff7816303f
+
+packages:
+  libdrm:
+    files:
+      - /usr/lib/*.so.*
+
+  libdrm-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libdrm-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

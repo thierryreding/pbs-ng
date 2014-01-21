@@ -5,22 +5,21 @@ import readline
 import sys
 
 srctree = os.path.realpath(os.path.dirname(sys.argv[0]))
-objtree = os.getcwd()
-
 scripts_dir = os.path.join(srctree, 'scripts')
 sys.path.insert(1, scripts_dir)
 
 import pbs.commands, pbs.db, pbs.project
 
-commands = pbs.commands.load(srctree)
+commands = pbs.commands.load(pbs.srctree)
 db = pbs.db.Database()
-db.load(srctree)
+db.load(pbs.srctree)
 db.dump(0)
 
 project = pbs.project.Project(db)
 project.load()
 
-print('output directory:', objtree)
+print('source directory:', pbs.srctree)
+print('output directory:', pbs.objtree)
 
 while True:
     try:
@@ -28,6 +27,9 @@ while True:
     except EOFError:
         print()
         break
+
+    if not command:
+        continue
 
     args = command.split()
 
@@ -42,4 +44,4 @@ while True:
 
 project.save()
 
-# vim: set et sts=4 sw=4 ts=4
+# vim: et sts=4 sw=4 ts=4

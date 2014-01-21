@@ -1,0 +1,7 @@
+#!/usr/bin/python
+
+import crypt
+import sys
+
+password = crypt.crypt(sys.argv[1], crypt.METHOD_MD5)
+print(password)

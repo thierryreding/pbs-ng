@@ -1,0 +1,26 @@
+description: The pixel-manipulation library for X and cairo
+version: 0.32.4
+license: MIT
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/pixman-${version}.tar.bz2
+      sha1: e2708db16595412e5aaf21a66b6f18b7223eb6c3
+
+packages:
+  pixman:
+    files:
+      - /usr/lib/*.so.*
+
+  pixman-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  pixman-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

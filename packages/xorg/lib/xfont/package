@@ -1,0 +1,22 @@
+description: X11 font rasterisation library
+version: 1.4.7
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/libXfont-${version}.tar.bz2
+      sha1: 77f60d0a2190cb36c07c2217693f46d5e8942ca2
+
+packages:
+  libxfont:
+    files:
+      - /usr/lib/*.so.*
+
+  libxfont-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

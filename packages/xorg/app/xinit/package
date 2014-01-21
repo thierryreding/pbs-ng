@@ -1,0 +1,20 @@
+description: X.Org initialisation program
+version: 1.3.3
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/app/xinit-${version}.tar.bz2
+      sha1: c3c01c8c6012317f995669894d9e7b2838b61e58
+
+packages:
+  xinit:
+    files:
+      - /etc
+      - /usr/bin
+
+  xinit-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

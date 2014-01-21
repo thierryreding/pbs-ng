@@ -1,0 +1,27 @@
+description: X11 damaged region extension library
+version: 1.1.4
+license: custom
+
+depends:
+  - xorg/lib/xfixes
+  - xorg/proto/damage
+  - xorg/proto/fixes
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/libXdamage-${version}.tar.bz2
+      sha1: c3fc0f4b02dce2239bf46c82a5f06b06585720ae
+
+packages:
+  libxdamage:
+    files:
+      - /usr/lib/*.so.*
+
+  libxdamage-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,0 +1,30 @@
+From 30e11777bca8cba68a15a11a94739b48158ef520 Mon Sep 17 00:00:00 2001
+From: Keith Packard <keithp@keithp.com>
+Date: Fri, 15 Nov 2013 13:39:52 +0900
+Subject: [PATCH] Handle new DamageUnregister API which has only one argument
+
+API change in 1.15
+
+Signed-off-by: Keith Packard <keithp@keithp.com>
+---
+ src/drmmode_display.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/drmmode_display.h b/src/drmmode_display.h
+index de01e9290eb2..eac32fd841d5 100644
+--- a/src/drmmode_display.h
++++ b/src/drmmode_display.h
+@@ -42,6 +42,10 @@
+ #  endif
+ #endif
+ 
++#if XORG_VERSION_CURRENT >= XORG_VERSION_NUMERIC(1,14,99,2,0)
++#  define DamageUnregister(d, dd) DamageUnregister(dd)
++#endif
++
+ struct dumb_bo {
+     uint32_t handle;
+     uint32_t size;
+-- 
+1.8.4.2
+

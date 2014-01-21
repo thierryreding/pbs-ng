@@ -1,0 +1,30 @@
+diff --git a/Makefile.in b/Makefile.in
+index dab25d06cea1..95c2dc3bb7e0 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -9977,8 +9977,9 @@ man/yes.1:       src/yes
+ 	  && $(run_help2man)						\
+ 		     --source='$(PACKAGE_STRING)'			\
+ 		     --include=$(srcdir)/man/$$name.x			\
+-		     --output=$$t/$$name.1 $$t/$$name			\
++		     --output=$$t/$$name.1				\
+ 		     --info-page='coreutils \(aq'$$name' invocation\(aq' \
++		     $$t/$$name						\
+ 	  && sed \
+ 	       -e 's|$*\.td/||g' \
+ 	       -e '/For complete documentation/d' \
+diff --git a/man/local.mk b/man/local.mk
+index 45dbcb9559c9..a92eff9f7b0a 100644
+--- a/man/local.mk
++++ b/man/local.mk
+@@ -189,8 +189,9 @@ man/yes.1:       src/yes
+ 	  && $(run_help2man)						\
+ 		     --source='$(PACKAGE_STRING)'			\
+ 		     --include=$(srcdir)/man/$$name.x			\
+-		     --output=$$t/$$name.1 $$t/$$name			\
++		     --output=$$t/$$name.1				\
+ 		     --info-page='coreutils \(aq'$$name' invocation\(aq' \
++		     $$t/$$name						\
+ 	  && sed \
+ 	       -e 's|$*\.td/||g' \
+ 	       -e '/For complete documentation/d' \

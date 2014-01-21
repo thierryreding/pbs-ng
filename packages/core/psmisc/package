@@ -1,0 +1,23 @@
+description: Miscellaneous procfs tools
+version: 22.21
+license: GPL-2.0+
+
+files:
+  - download:
+      url: http://prdownloads.sourceforge.net/psmisc/psmisc-${version}.tar.gz
+      sha1: 4bb60610f7b604f58c52542f0e9dea89b5d72fae
+
+packages:
+  psmisc:
+    files:
+      - /usr/bin
+
+  psmisc-locale:
+    files:
+      - /usr/share/locale
+
+  psmisc-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

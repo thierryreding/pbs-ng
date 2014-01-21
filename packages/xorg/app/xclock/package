@@ -1,0 +1,20 @@
+description: X clock
+version: 1.0.7
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/app/xclock-${version}.tar.bz2
+      sha1: 1b54b96e057469f90a00a9f1ca79ed056cbde271
+
+packages:
+  xclock:
+    files:
+      - /usr/bin
+      - /usr/share/X11
+
+  xclock-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

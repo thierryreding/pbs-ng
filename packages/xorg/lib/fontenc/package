@@ -1,0 +1,22 @@
+description: X11 font encoding library
+version: 1.1.2
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/libfontenc-${version}.tar.bz2
+      sha1: 2beffa0e9260c479b49f90f789318c7f9db2d41d
+
+packages:
+  libfontenc:
+    files:
+      - /usr/lib/*.so.*
+
+  libfontenc-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,6 +1,12 @@
 description: X library
 version: 1.6.2
 
+depends:
+  - xorg/lib/xcb
+  - xorg/lib/xtrans
+  - xorg/proto/inputproto
+  - xorg/proto/kbproto
+
 files:
 - download:
     url: http://xorg.freedesktop.org/releases/individual/lib/libX11-${version}.tar.bz2

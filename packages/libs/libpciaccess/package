@@ -1,0 +1,25 @@
+description: X11 PCI access library
+version: 0.13.2
+license: custom
+
+depends:
+  - libs/libpciaccess
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/libpciaccess-${version}.tar.bz2
+      sha1: 63df515a4c5d5a339a7c1f9e4baa6543efa3c7da
+
+packages:
+  libpciaccess:
+    files:
+      - /usr/lib/*.so.*
+
+  libpciaccess-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

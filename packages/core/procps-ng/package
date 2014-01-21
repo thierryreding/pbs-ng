@@ -1,0 +1,31 @@
+description: Utilities for monitoring the system and its processes
+version: 3.3.9
+license: GPL-2.0, LGPL-2.0
+
+files:
+  - download:
+      url: http://prdownloads.sourceforge.net/procps-ng/procps-ng-${version}.tar.xz
+      sha1: 088c77631745fc75ee41fc29c254a4069be4869a
+
+packages:
+  procps-ng:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+
+  procps-ng-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  procps-ng-doc:
+    files:
+      - /usr/share/doc
+
+  procps-ng-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

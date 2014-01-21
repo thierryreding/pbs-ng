@@ -1,0 +1,27 @@
+description: A string search utility
+version: 4.2.2
+license: GPL-3.0
+
+files:
+  - download:
+      url: http://ftp.gnu.org/pub/gnu/sed/sed-${version}.tar.bz2
+      sha1: f17ab6b1a7bcb2ad4ed125ef78948092d070de8f
+
+packages:
+  sed:
+    files:
+      - /usr/bin
+
+  sed-doc:
+    files:
+      - /usr/share/info
+
+  sed-locale:
+    files:
+      - /usr/share/locale
+
+  sed-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

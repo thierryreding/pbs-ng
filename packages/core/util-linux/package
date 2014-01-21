@@ -1,0 +1,65 @@
+description: Miscellaneous system utilities for Linux
+version: 2.24.1
+license: GPL-2.0
+
+files:
+  - download:
+      url: http://www.kernel.org/pub/linux/utils/util-linux/v${major}.${minor}/util-linux-${version}.tar.xz
+      sha1: ecf75bbb77bba874fc11fc27423aa67b395b7ae5
+
+packages:
+  util-linux:
+    files:
+      - /bin
+      - /etc
+      - /sbin
+      - /usr/bin
+      - /usr/lib/systemd
+      - /usr/lib/tmpfiles.d
+      - /usr/sbin
+
+  util-linux-doc:
+    files:
+      - /usr/share/doc
+
+  util-linux-locale:
+    files:
+      - /usr/share/locale
+
+  util-linux-man:
+    files:
+      - /usr/share/man/man1
+      - /usr/share/man/man5
+      - /usr/share/man/man8
+
+  libblkid:
+    files:
+      - /usr/lib/libblkid.so.*
+
+  libblkid-dev:
+    files:
+      - /usr/include/blkid
+      - /usr/lib/libblkid.so
+      - /usr/lib/pkgconfig/blkid.pc
+
+  libmount:
+    files:
+      - /usr/lib/libmount.so.*
+
+  libmount-dev:
+    files:
+      - /usr/include/libmount
+      - /usr/lib/libmount.so
+      - /usr/lib/pkgconfig/mount.pc
+
+  libuuid:
+    files:
+      - /usr/lib/libuuid.so.*
+
+  libuuid-dev:
+    files:
+      - /usr/include/uuid
+      - /usr/lib/libuuid.so
+      - /usr/lib/pkgconfig/uuid.pc
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

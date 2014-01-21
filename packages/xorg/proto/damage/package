@@ -1,0 +1,20 @@
+description: X11 Damage extension wire protocol
+version: 1.2.1
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/proto/damageproto-${version}.tar.bz2
+      sha1: bd0f0f4dc8f37eaabd9279d10fe2889710507358
+
+packages:
+  damageproto-dev:
+    files:
+      - /usr/include
+      - /usr/lib
+
+  damageproto-doc:
+    files:
+      - /usr/share/doc
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,0 +1,27 @@
+description: A string search utility
+version: 2.16
+license: GPL-3.0
+
+files:
+  - download:
+      url: http://ftp.gnu.org/pub/gnu/grep/grep-${version}.tar.xz
+      sha1: 4ab9c1f8a5934734d3e01dc32ee1a8ae0f974359
+
+packages:
+  grep:
+    files:
+      - /usr/bin
+
+  grep-doc:
+    files:
+      - /usr/share/info
+
+  grep-locale:
+    files:
+      - /usr/share/locale
+
+  grep-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

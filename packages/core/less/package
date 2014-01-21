@@ -1,0 +1,19 @@
+description: A terminal based program for viewing text files
+version: 458
+license: GPL-3.0
+
+files:
+  - download:
+      url: http://www.greenwoodsoftware.com/less/less-${version}.tar.gz
+      sha1: d5b07180d3dad327ccc8bc66818a31577e8710a2
+
+packages:
+  less:
+    files:
+      - /usr/bin
+
+  less-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

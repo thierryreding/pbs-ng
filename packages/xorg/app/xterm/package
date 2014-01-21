@@ -1,0 +1,21 @@
+description: X terminal emulator
+version: 301
+license: custom
+
+files:
+  - download:
+      url: ftp://invisible-island.net/xterm/xterm-${version}.tgz
+      sha1: bba521c397741d2fef56f89acb4881ab452aad91
+
+packages:
+  xterm:
+    files:
+      - /usr/bin
+      - /usr/lib/X11/app-defaults
+      - /usr/share/pixmaps
+
+  xterm-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

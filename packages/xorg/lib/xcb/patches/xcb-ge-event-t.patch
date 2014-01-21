@@ -1,0 +1,20 @@
+diff --git a/src/xcb.h b/src/xcb.h
+index e62c985d5e8a..52073bedefb3 100644
+--- a/src/xcb.h
++++ b/src/xcb.h
+@@ -140,6 +140,7 @@ typedef struct {
+     uint32_t full_sequence;  /**< full sequence */
+ } xcb_generic_event_t;
+ 
++#if 0
+ /**
+  * @brief GE event
+  *
+@@ -159,6 +160,7 @@ typedef struct {
+     uint32_t pad[5];         /**< Padding */
+     uint32_t full_sequence;  /**< full sequence */
+ } xcb_ge_event_t;
++#endif
+ 
+ /**
+  * @brief Generic error.

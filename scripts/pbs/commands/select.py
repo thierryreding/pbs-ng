@@ -1,4 +1,4 @@
-description = 'select package'
+description = 'select package(s)'
 usage = 'select [options] package [package...]'
 summary = ''
 

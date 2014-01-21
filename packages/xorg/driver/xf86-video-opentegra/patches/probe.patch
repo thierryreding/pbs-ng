@@ -1,0 +1,33 @@
+diff --git a/src/driver.c b/src/driver.c
+index b84624ea52c1..264249606ef7 100644
+--- a/src/driver.c
++++ b/src/driver.c
+@@ -334,14 +334,15 @@ static Bool
+ ms_platform_probe(DriverPtr driver,
+               int entity_num, int flags, struct xf86_platform_device *dev, intptr_t match_data)
+ {
++    const char *busid = xf86_get_platform_device_attrib(dev, ODEV_ATTRIB_BUSID);
+     ScrnInfoPtr scrn = NULL;
+-    const char *path = xf86_get_platform_device_attrib(dev, ODEV_ATTRIB_PATH);
+-    int scr_flags = 0;
++    int scr_flags = 0, fd;
+ 
+     if (flags & PLATFORM_PROBE_GPU_SCREEN)
+             scr_flags = XF86_ALLOCATE_GPU_SCREEN;
+ 
+-    if (probe_hw(path)) {
++    fd = drmOpen(NULL, busid);
++    if (fd != -1) {
+         scrn = xf86AllocateScreen(driver, scr_flags);
+         xf86AddEntityToScreen(scrn, entity_num);
+ 
+@@ -356,7 +357,8 @@ ms_platform_probe(DriverPtr driver,
+         scrn->FreeScreen = FreeScreen;
+         scrn->ValidMode = ValidMode;
+         xf86DrvMsg(scrn->scrnIndex, X_INFO,
+-                   "using drv %s\n", path ? path : "default device");
++                   "using drv %s\n", busid ? busid : "default device");
++        drmClose(fd);
+     }
+ 
+     return scrn != NULL;

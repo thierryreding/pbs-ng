@@ -1,0 +1,37 @@
+description: A library for configuring and customizing font access
+version: 2.11.0
+license: custom
+
+files:
+  - download:
+      url: http://fontconfig.org/release/fontconfig-${version}.tar.gz
+      sha1: 650f8f3b8c7b6fac68c25f379616b5be48be13bf
+
+packages:
+  libfontconfig:
+    files:
+      - /etc/fonts
+      - /usr/lib/*.so.*
+      - /usr/share/fontconfig
+      - /usr/share/xml
+
+  libfontconfig-bin:
+    files:
+      - /usr/bin
+
+  libfontconfig-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libfontconfig-doc:
+    files:
+      - /usr/share/doc
+
+  libfontconfig-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

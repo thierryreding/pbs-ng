@@ -1,0 +1,27 @@
+description: A collection of common network programs
+version: 1.9.2
+license: GPL-3.0
+
+files:
+  - download:
+      url: http://ftp.gnu.org/pub/gnu/inetutils/inetutils-${version}.tar.xz
+      sha1: f9fc5c3ba7046d95fdfd0f1c6adf508220082893
+
+packages:
+  inetutils:
+    files:
+      - /usr/bin
+
+  inetutils-doc:
+    files:
+      - /usr/share/info
+
+  inetutils-locale:
+    files:
+      - /usr/share/locale
+
+  inetutils-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

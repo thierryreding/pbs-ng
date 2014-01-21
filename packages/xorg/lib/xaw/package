@@ -1,0 +1,30 @@
+description: X Athena widget library
+version: 1.0.12
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/libXaw-${version}.tar.bz2
+      sha1: 6919476379accaf21f2331004e5cfa7939a6786b
+
+packages:
+  libxaw:
+    files:
+      - /usr/lib/*.so.*
+
+  libxaw-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libxaw-doc:
+    files:
+      - /usr/share/doc
+
+  libxaw-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

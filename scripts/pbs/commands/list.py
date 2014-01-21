@@ -4,6 +4,6 @@ summary = ''
 
 def exec(project, *args):
     for package in project.packages:
-        print('package:', package)
+        print('package:', package.name)
 
 # vim: et sts=4 sw=4 ts=4

@@ -1,0 +1,30 @@
+description: X11 miscellaneous extensions library
+version: 1.3.2
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/libXext-${version}.tar.bz2
+      sha1: 49b6f026b0555d020014dbc24b49afc2986a30e0
+
+packages:
+  libxext:
+    files:
+      - /usr/lib/*.so.*
+
+  libxext-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libxext-doc:
+    files:
+      - /usr/share/doc
+
+  libxext-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

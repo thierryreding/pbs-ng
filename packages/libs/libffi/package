@@ -1,0 +1,30 @@
+description: Portable, high-level programming interface to various calling conventions
+version: 3.0.13
+license: MIT
+
+files:
+  - download:
+      url: ftp://sourceware.org/pub/libffi/libffi-${version}.tar.gz
+      sha1: f5230890dc0be42fb5c58fbf793da253155de106
+
+packages:
+  libffi:
+    files:
+      - /usr/lib/*.so.*
+
+  libffi-dev:
+    files:
+      - /usr/lib/libffi-*
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libffi-doc:
+    files:
+      - /usr/share/info
+      - /usr/share/licenses
+
+  libffi-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,0 +1,34 @@
+description: PAM (Pluggable Authentication Modules) library
+version: 1.1.8
+license: GPL-2.0
+
+files:
+  - download:
+      url: https://fedorahosted.org/releases/l/i/linux-pam/Linux-PAM-${version}.tar.bz2
+      sha1:
+
+packages:
+  pam:
+    files:
+      - /etc
+      - /usr/bin
+      - /usr/lib/*.so.*
+      - /usr/lib/security
+  pam-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+
+  pam-doc:
+    files:
+      - /usr/share/doc
+
+  pam-locale:
+    files:
+      - /usr/share/locale
+
+  pam-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,0 +1,30 @@
+description: Transport Independent RPC library (SunRPC replacement)
+version: 0.2.3
+license: BSD
+
+files:
+  - download:
+      url: http://prdownloads.sourceforge.net/libtirpc/libtirpc-${version}.tar.bz2
+      sha1: 7076d09762d11742de6d1b3d7162ee1e86d0b555
+
+packages:
+  libtirpc:
+    files:
+      - /etc
+      - /usr/lib/*.so.*
+
+  libtirpc-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libtirpc-doc:
+    files:
+      - /usr/share/licenses
+
+  libtirpc-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

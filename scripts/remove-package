@@ -1,0 +1,15 @@
+#!/bin/sh
+
+tarball="$1"
+sysroot="$2"
+
+tar tJf "$tarball" | while read path; do
+	filename="${sysroot}/${path}"
+
+	if test -e "$filename" -o -L "$filename"; then
+		if test ! -d "$filename" -o -L "$filename"; then
+			echo " RM      $path"
+			rm "$filename"
+		fi
+	fi
+done

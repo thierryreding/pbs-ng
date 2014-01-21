@@ -1,0 +1,37 @@
+description: The GNU debugger
+version: 7.6.2
+license: GPL-3.0
+
+files:
+  - download:
+      url: http://ftp.gnu.org/pub/gnu/gdb/gdb-${version}.tar.bz2
+      sha1:
+
+packages:
+  gdb:
+    files:
+      - /usr/bin
+      - /usr/share/gdb/syscalls
+
+  gdb-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+
+  gdb-doc:
+    files:
+      - /usr/share/doc
+
+  gdb-locale:
+    files:
+      - /usr/share/locale
+
+  gdb-man:
+    files:
+      - /usr/share/man
+
+  gdb-python:
+    files:
+      - /usr/share/gdb/python
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

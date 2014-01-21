@@ -1,0 +1,21 @@
+description: X11 Input extension wire protocol
+version: 2.3
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/proto/inputproto-${version}.tar.bz2
+      sha1: 4eacc1883593d3f0040e410be3afc8483c7d2409
+
+packages:
+  inputproto-dev:
+    files:
+      - /usr/include
+      - /usr/lib
+
+  inputproto-doc:
+    files:
+      - /usr/share/doc
+      - /usr/share/licenses
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
