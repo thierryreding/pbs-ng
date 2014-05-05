@@ -1,8 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
-builddir = $(CURDIR)/obj-$(HOST)
-
 $(builddir) $(DESTDIR):
 	mkdir -p $@
 

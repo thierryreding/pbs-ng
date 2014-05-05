@@ -1,9 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
-srcdir = $(CURDIR)/$(PACKAGE)-$(VERSION)
-builddir = $(CURDIR)/obj-$(HOST)
-
 common-args = \
 	-j $(JOBS)
 

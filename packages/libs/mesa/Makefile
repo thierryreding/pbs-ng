@@ -1,9 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
-srcdir = $(CURDIR)/Mesa-$(VERSION)
-builddir = $(CURDIR)/obj-$(HOST)
-
 $(srcdir)/stamp-patch:
 	cd $(srcdir) && PATH=/home/thierry.reding/src/pbs.git/build/venice2/rootfs/build-tools/bin:$$PATH autoreconf --force --install
 	#cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/ltmain-sysroot.patch

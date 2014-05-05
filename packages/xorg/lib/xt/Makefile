@@ -1,9 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
-srcdir = $(CURDIR)/libXt-$(VERSION)
-builddir = $(CURDIR)/obj-$(HOST)
-
 reconf-env = \
 	ACLOCAL_PATH=/usr/share/aclocal
 

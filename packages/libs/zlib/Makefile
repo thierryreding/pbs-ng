@@ -1,8 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
-srcdir = $(CURDIR)/$(PACKAGE)-$(VERSION)
-
 conf-env = \
 	CC='$(CROSS_COMPILE)gcc' \
 	CFLAGS='--sysroot $(SYSROOT)'

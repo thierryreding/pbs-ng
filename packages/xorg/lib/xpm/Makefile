@@ -1,9 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
-srcdir = $(CURDIR)/libXpm-$(VERSION)
-builddir = $(CURDIR)/obj-$(HOST)
-
 $(builddir):
 	mkdir -p $@
 

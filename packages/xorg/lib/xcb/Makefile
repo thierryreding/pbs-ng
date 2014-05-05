@@ -1,9 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
-srcdir = $(CURDIR)/libxcb-$(VERSION)
-builddir = $(CURDIR)/obj-$(HOST)
-
 $(srcdir)/stamp-patch:
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/xcb-ge-event-t.patch
 	cd $(srcdir) && autoreconf --force --install

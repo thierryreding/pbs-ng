@@ -1,9 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
-srcdir = $(CURDIR)/$(PACKAGE)-$(VERSION)
-builddir = $(CURDIR)/obj-$(HOST)
-
 soname = $(basename $(basename $(1)))
 CC = $(CROSS_COMPILE)gcc
 AWK = awk

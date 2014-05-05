@@ -1,9 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
-srcdir = $(CURDIR)/$(PACKAGE)-$(VERSION)
-builddir = $(CURDIR)/obj-$(HOST)
-
 $(srcdir)/stamp-patch:
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/xorg-server-1.15.patch
 	touch $@
