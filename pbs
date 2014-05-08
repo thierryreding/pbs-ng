@@ -3,6 +3,8 @@
 import os, os.path
 import readline
 import sys
+import time
+import traceback
 
 srctree = os.path.realpath(os.path.dirname(sys.argv[0]))
 scripts_dir = os.path.join(srctree, 'scripts')
@@ -12,14 +14,22 @@ import pbs.commands, pbs.db, pbs.project
 
 commands = pbs.commands.load(pbs.srctree)
 db = pbs.db.Database()
+start = time.clock()
 db.load(pbs.srctree)
-db.dump(0)
+end = time.clock()
+print('loaded database in %f seconds' % (end - start))
+#db.dump(0)
 
 project = pbs.project.Project(db)
 project.load()
 
 print('source directory:', pbs.srctree)
 print('output directory:', pbs.objtree)
+
+try:
+    readline.read_history_file('.history')
+except FileNotFoundError:
+    pass
 
 while True:
     try:
@@ -41,7 +51,11 @@ while True:
         commands[args[0]].exec(project, *args)
     except EOFError:
         break
+    except Exception as e:
+        print(' \033[1;31m!\033[0m', e)
+        traceback.print_exc(file=sys.stdout)
 
+readline.write_history_file('.history')
 project.save()
 
 # vim: et sts=4 sw=4 ts=4

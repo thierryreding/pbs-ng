@@ -1,0 +1,18 @@
+description: GNU readline library
+version: 6.3
+license: GPL-3.0
+
+depends:
+  - libs/ncurses
+
+files:
+  - download:
+      url: http://ftp.gnu.org/pub/gnu/readline/readline-${version}.tar.gz
+      sha1: 3e042e5f2c7223bffdaac9646a533b8c758b65b5
+
+packages:
+  readline:
+    files:
+      - /usr
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

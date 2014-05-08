@@ -1,9 +1,12 @@
 include $(TOP_SRCDIR)/packages/common.mk
-include config.mk
 
+ifeq ($(realpath $(srcdir)),$(srcdir))
 $(srcdir)/stamp-patch:
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/opentegra.patch
 	touch $@
+
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch
+endif
 
 $(builddir):
 	mkdir -p $@
@@ -21,11 +24,11 @@ conf-args = \
 	--with-sysroot=$(SYSROOT)
 
 conf-vars = \
-	CPPFLAGS='--sysroot $(SYSROOT)' \
-	CFLAGS='--sysroot $(SYSROOT)' \
-	LDFLAGS='--sysroot $(SYSROOT)'
+	CPPFLAGS='$(CPPFLAGS)' \
+	CFLAGS='$(CFLAGS)' \
+	LDFLAGS='$(LDFLAGS)'
 
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
+$(builddir)/stamp-configure: | $(builddir)
 	cd $(builddir) && \
 		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@

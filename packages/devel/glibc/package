@@ -1,12 +1,14 @@
 description: GNU C library
-version: 2.18
+version: 2.19
 
-build-depends: linux-headers
+depends:
+  - kernel/linux
+  - devel/gcc-libs
 
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/glibc/glibc-${version}.tar.xz
-      sha1: 1f0e4e7ba5fe1f45ffd0548b6c36caef0bc7e51f
+      sha1: b29e1f94b8a32e283e1cb66c9a913950c496fb51
 
 packages:
   glibc-bin:

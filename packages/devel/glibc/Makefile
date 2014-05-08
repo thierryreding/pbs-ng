@@ -1,11 +1,10 @@
 include $(TOP_SRCDIR)/packages/common.mk
-include config.mk
 
 $(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/make-4.patch
+	#cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/make-4.patch
 	touch $@
 
-patch: $(builddir)/stamp-patch
+patch: $(srcdir)/stamp-patch
 
 $(builddir):
 	mkdir -p $@

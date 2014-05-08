@@ -3,7 +3,7 @@ version: 0.13.2
 license: custom
 
 depends:
-  - libs/libpciaccess
+  - devel/glibc
 
 files:
   - download:

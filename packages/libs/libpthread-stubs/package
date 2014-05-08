@@ -3,6 +3,7 @@ version: 0.3
 license: custom
 
 depends:
+  - devel/glibc
 
 files:
 - download:

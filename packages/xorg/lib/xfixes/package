@@ -2,6 +2,9 @@ description: X11 miscellaneous "fixes" extension library
 version: 5.0.1
 license: custom
 
+depends:
+  - xorg/proto/fixes
+
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXfixes-${version}.tar.bz2

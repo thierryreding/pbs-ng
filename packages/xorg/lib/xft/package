@@ -4,6 +4,7 @@ license: custom
 
 depends:
   - libs/fontconfig
+  - xorg/lib/x11
   - xorg/lib/xrender
 
 files:

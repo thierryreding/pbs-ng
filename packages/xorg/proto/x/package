@@ -1,11 +1,14 @@
 description: X11 core wire protocol and auxiliary headers
-version: 7.0.25
+version: 7.0.26
 license: custom
+
+depends:
+  - devel/glibc
 
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/proto/xproto-${version}.tar.bz2
-      sha1: 335f84713f9da3f77c48536f53abb9b03bcb3961
+      sha1: 81101b78052fa0f652982081f9328f912b71a948
 
 packages:
   xproto-dev:

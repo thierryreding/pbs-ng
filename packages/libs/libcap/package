@@ -2,6 +2,9 @@ description: POSIX 1003.1e capabilities
 version: 2.22
 license: GPL-2.0
 
+depends:
+  - libs/attr
+
 files:
   - download:
       url: ftp://ftp.archlinux.org/other/libcap/libcap-${version}.tar.gz

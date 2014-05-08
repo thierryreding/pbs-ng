@@ -1,7 +1,8 @@
 include $(TOP_SRCDIR)/packages/common.mk
-include config.mk
 
 unexport srctree objtree
+
+KERNELSRC ?= $(CURDIR)/$(PACKAGE)-$(VERSION)
 
 common-args = \
 	-C '$(KERNELSRC)' \
@@ -11,7 +12,7 @@ common-args = \
 common-vars = \
 	CROSS_COMPILE='$(CROSS_COMPILE)' \
 	KBUILD_OUTPUT='$(CURDIR)/build' \
-	ARCH='$(ARCH)'
+	ARCH=$(ARCH)
 
 build-targets = \
 	zImage \
@@ -31,15 +32,17 @@ install-targets = \
 	zinstall \
 	modules_install
 
+env = env -i PATH=$(PATH) HOME=$(HOME)
+
 $(CURDIR)/build $(DESTDIR)/boot:
 	mkdir -p $@
 
 configure: $(CURDIR)/build
-	$(MAKE) $(common-args) $(common-vars) tegra_defconfig
+	$(env) $(MAKE) $(common-args) $(common-vars) tegra_defconfig
 
 build: configure
-	$(MAKE) $(common-args) $(common-vars) $(build-targets)
+	$(env) $(MAKE) $(common-args) $(common-vars) $(build-targets)
 
 install: build | $(CURDIR)/build $(DESTDIR)/boot
-	$(MAKE) $(install-args) $(install-vars) $(install-targets)
+	$(env) $(MAKE) $(install-args) $(install-vars) $(install-targets)
 	find $(DESTDIR)$(PREFIX)/include -name .install -o -name ..install.cmd -delete

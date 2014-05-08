@@ -1,6 +1,9 @@
 description: Miscellaneous system utilities for Linux
-version: 2.24.1
+version: 2.24.2
 license: GPL-2.0
+
+depends:
+  - libs/ncurses
 
 files:
   - download:

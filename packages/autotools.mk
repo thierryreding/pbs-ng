@@ -1,29 +1,31 @@
 include $(TOP_SRCDIR)/packages/common.mk
-include config.mk
 
 $(builddir):
 	mkdir -p $@
 
-conf-env = \
+env = env -i \
 	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
-	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)'
+	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)' \
+	PATH=$(PATH)
 
 conf-args = \
+	--build=$(BUILD) \
 	--host=$(HOST) \
 	--prefix=$(PREFIX) \
 	--libdir=$(PREFIX)/lib \
-	--with-sysroot=$(SYSROOT) \
-	--disable-documentation \
-	--disable-scanner
+	--mandir=$(PREFIX)/share/man \
+	--infodir=$(PREFIX)/share/info \
+	--localstatedir=/var \
+	--sysconfdir=/etc
 
 conf-vars = \
-	CPPFLAGS='--sysroot $(SYSROOT)' \
-	CFLAGS='--sysroot $(SYSROOT)' \
-	LDFLAGS='--sysroot $(SYSROOT)'
+	CPPFLAGS='$(CPPFLAGS)' \
+	CFLAGS='$(CFLAGS)' \
+	LDFLAGS='$(LDFLAGS)'
 
 $(builddir)/stamp-configure: | $(builddir)
 	cd $(builddir) && \
-		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
+		$(env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@
 
 build-args = \
@@ -31,7 +33,7 @@ build-args = \
 
 $(builddir)/stamp-build: $(builddir)/stamp-configure
 	cd $(builddir) && \
-		$(MAKE) $(build-args)
+		$(env) $(MAKE) $(build-args)
 	touch $@
 
 install-args = \
@@ -39,7 +41,7 @@ install-args = \
 
 $(builddir)/stamp-install: $(builddir)/stamp-build
 	cd $(builddir) && \
-		fakeroot $(MAKE) $(install-args) install
+		$(priv) $(MAKE) $(install-args) install
 	touch $@
 
 install: $(builddir)/stamp-install

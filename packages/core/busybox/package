@@ -2,7 +2,8 @@ description: The Swiss Army Knife of Embedded Linux
 version: 1.22.0
 license: GPL-2
 
-build-depends: libc-dev
+depends:
+  - devel/glibc
 
 files:
   - download:

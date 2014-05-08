@@ -1,8 +1,7 @@
 include $(TOP_SRCDIR)/packages/common.mk
-include config.mk
 
+CC = $(shell env -i PATH=$(PATH) which $(CROSS_COMPILE)gcc)
 soname = $(basename $(basename $(1)))
-CC = $(CROSS_COMPILE)gcc
 AWK = awk
 
 VERSION = $(shell $(CC) -dumpversion)

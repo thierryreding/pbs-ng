@@ -2,6 +2,31 @@ description: X.Org X server
 version: 1.15.0
 license: custom
 
+depends:
+  - devel/glibc
+  - libs/pixman
+  - libs/libdrm
+  - libs/mesa
+  - libs/libgcrypt
+  - libs/libpciaccess
+  - xorg/lib/x11
+  - xorg/lib/xfont
+  - xorg/lib/xkbfile
+  - xorg/lib/xtrans
+  - xorg/proto/gl
+  - xorg/proto/xcmisc
+  - xorg/proto/bigreqs
+  - xorg/proto/randr
+  - xorg/proto/render
+  - xorg/proto/fonts
+  - xorg/proto/video
+  - xorg/proto/composite
+  - xorg/proto/record
+  - xorg/proto/scrnsaver
+  - xorg/proto/resource
+  - xorg/proto/xf86dri
+  - xorg/proto/xinerama
+
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/xserver/xorg-server-${version}.tar.bz2

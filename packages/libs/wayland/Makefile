@@ -1,0 +1,59 @@
+include $(TOP_SRCDIR)/packages/common.mk
+
+$(builddir):
+	mkdir -p $@
+
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/ltmain-sysroot.patch
+	touch $@
+
+conf-env = \
+	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
+	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)'
+
+conf-args = \
+	--build=$(BUILD) \
+	--host=$(HOST) \
+	--prefix=$(PREFIX) \
+	--libdir=$(PREFIX)/lib \
+	--with-sysroot=$(SYSROOT) \
+	--disable-documentation \
+	--disable-scanner
+
+conf-vars = \
+	CPPFLAGS='--sysroot $(SYSROOT)' \
+	CFLAGS='--sysroot $(SYSROOT)' \
+	LDFLAGS='--sysroot $(SYSROOT)'
+
+env = env -i PATH=$(TOP_OBJTREE)/build-tools/bin:$(PATH) HOME=$(TOP_SRCTREE) \
+	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig:$(TOP_OBJTREE)/build-tools/share/pkgconfig' \
+	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)' \
+	ACLOCAL_PATH='$(SYSROOT)$(PREFIX)/share/aclocal:$(TOP_OBJTREE)/build-tools/share/aclocal'
+
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
+	# these are shipped in tarballs by mistake
+	rm -f $(srcdir)/protocol/wayland-client-protocol.h
+	rm -f $(srcdir)/protocol/wayland-server-protocol.h
+	cd $(builddir) && \
+		$(env) $(srcdir)/configure $(conf-args) $(conf-vars)
+	touch $@
+
+build-args = \
+	-j $(JOBS)
+
+$(builddir)/stamp-build: $(builddir)/stamp-configure
+	cd $(builddir) && \
+		$(env) $(MAKE) $(build-args)
+	touch $@
+
+install-args = \
+	DESTDIR='$(DESTDIR)'
+
+$(builddir)/stamp-install: $(builddir)/stamp-build
+	cd $(builddir) && \
+		fakeroot $(MAKE) $(install-args) install
+	touch $@
+
+install: $(builddir)/stamp-install
+
+.PHONY: install

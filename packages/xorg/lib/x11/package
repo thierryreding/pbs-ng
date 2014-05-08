@@ -4,8 +4,9 @@ version: 1.6.2
 depends:
   - xorg/lib/xcb
   - xorg/lib/xtrans
-  - xorg/proto/inputproto
-  - xorg/proto/kbproto
+  - xorg/proto/input
+  - xorg/proto/kb
+  - xorg/proto/xext
 
 files:
 - download:

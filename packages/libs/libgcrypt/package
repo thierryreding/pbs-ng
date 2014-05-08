@@ -1,0 +1,26 @@
+description: General purpose cryptographic library based on the code from GnuPG
+version: 1.6.1
+license: GPL
+
+depends:
+  - devel/glibc
+  - libs/libgpg-error
+
+files:
+  - download:
+      url: ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-${version}.tar.bz2
+      sha1: f03d9b63ac3b17a6972fc11150d136925b702f02
+
+packages:
+  libgcrypt:
+    files:
+      - /usr/lib/*.so.*
+
+  libgcrypt-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

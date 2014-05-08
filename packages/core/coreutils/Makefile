@@ -1,5 +1,4 @@
 include $(TOP_SRCDIR)/packages/common.mk
-include config.mk
 
 $(srcdir)/stamp-patch:
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/dummy-man.patch
@@ -25,6 +24,7 @@ conf-vars = \
 	PERL=no
 
 $(builddir)/stamp-configure: $(builddir)/config.cache
+	cd $(srcdir) && autoreconf
 	cd $(builddir) && \
 		$(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@

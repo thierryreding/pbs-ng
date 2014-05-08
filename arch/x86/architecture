@@ -1,9 +1,54 @@
-name: x86
+#name: x86
 description: Intel x86
-cpus:
-  i386:
-  i586:
-  i686:
-  i786:
+
+generation:
+  description: Architecture Generation
+  choice:
+    i386:
+      description: i386 (Intel 80386)
+
+    i486:
+      description: i486 (Intel 80486)
+
+    i586:
+      description: i586 (Pentium, Pentium MMX)
+
+    i686:
+      description: i686 (Pentium Pro, Pentium II/III)
+      default: yes
+
+    i786:
+      description: i786 (Pentium IV)
+
+    x86_64:
+      description: x86 64-bit
+
+cpu:
+  description: CPU
+  choice:
+    atom:
+      description: Intel Atom
+      defaults:
+        generation: x86_64
+
+    x86_64:
+      description: x86_64
+      defaults:
+        generation: x86_64
+
+    core-i3:
+      description: Intel Core i3
+      defaults:
+        generation: x86_64
+
+    core-i5:
+      description: Intel Core i5
+      defaults:
+        generation: x86_64
+
+    core-i7:
+      description: Intel Core i7
+      defaults:
+        generation: x86_64
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

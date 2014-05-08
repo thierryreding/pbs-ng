@@ -2,6 +2,9 @@ description: POSIX 1003.1e capabilities
 version: 2.4.47
 license: LGPL-2.1
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: http://download.savannah.gnu.org/releases-noredirect/attr/attr-${version}.src.tar.gz

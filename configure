@@ -1,0 +1,159 @@
+#!/bin/sh
+
+make_var()
+{
+	echo "$1" | tr ' ./-' '_'
+}
+
+check_path()
+{
+	echo "$PATH" | grep -E -q "(^|:)$1(:|\$)" || PATH="$PATH:$1"
+}
+
+check_program()
+{
+	var=`make_var "$1"`
+
+	echo -n "checking for $1... "
+
+	path=`command -v "$1"`
+	eval prog_$var="$path"
+
+	echo "$path"
+}
+
+check_header()
+{
+	filename="$1"
+	shift
+
+	var=`make_var "$filename"`
+
+	echo -n "checking for $filename... "
+
+	echo "#include <$filename>" > check.c
+
+	if $prog_gcc -o /dev/null -c check.c > /dev/null 2>&1; then
+		eval have_$var=yes
+		echo "found"
+	else
+		eval have_$var=no
+		echo "not found"
+	fi
+
+	rm check.c
+}
+
+for arg in $@; do
+	if test -n "$prev"; then
+		if test "${arg#-}" = "$arg"; then
+			eval $prev=$arg
+			prev=
+			shift; continue
+		else
+			echo "WARNING: missing argument for parameter: $prev"
+		fi
+
+		eval
+	fi
+
+	case $arg in
+		-o | --output)
+			prev=output
+			shift;
+			;;
+
+		*)
+			break
+			;;
+	esac
+done
+
+test -z "$output" && output="`dirname $0`/config.mk"
+
+#
+# make sure that sbin is in the path
+#
+
+check_path /sbin
+check_path /usr/sbin
+
+#
+# check for programs
+#
+
+check_program make
+check_program quilt
+check_program gcc
+check_program flex
+check_program bison
+check_program depmod
+check_program gawk
+check_program bash
+check_program wget
+check_program curl
+check_program cpio
+check_program mksquashfs
+
+#
+# check for header files
+#
+
+check_header ncurses.h
+
+build=$(scripts/config.guess)
+
+num_cpus=$(lscpu | awk '/^CPU\(s\):/ { print $2 }')
+
+#
+# print summary
+#
+
+echo "
+Programs:
+  make:       $prog_make
+  quilt:      $prog_quilt
+  gcc:        $prog_gcc
+  flex:       $prog_flex
+  bison:      $prog_bison
+  depmod:     $prog_depmod
+  gawk:       $prog_gawk
+  bash:       $prog_bash
+  wget:       $prog_wget
+  curl:       $prog_curl
+  cpio:       $prog_cpio
+  mksquashfs: $prog_mksquashfs
+
+Headers:
+  ncurses.h:  $have_ncurses_h
+
+System:
+  Build host: $build
+  CPU(s):     $num_cpus
+"
+
+#
+# write configuration file
+#
+
+echo -n "Writing config.mk... "
+exec 3> "$output"
+
+echo "MAKE = $prog_make" >&3
+echo "QUILT = $prog_quilt" >&3
+echo "GCC = $prog_gcc" >&3
+echo "FLEX = $prog_flex" >&3
+echo "BISON = $prog_bison" >&3
+echo "DEPMOD = $prog_depmod" >&3
+echo "AWK = $prog_gawk" >&3
+echo "BASH = $prog_bash" >&3
+echo "WGET = $prog_wget" >&3
+echo "CURL = $prog_curl" >&3
+echo "CPIO = $prog_cpio" >&3
+echo "MKSQUASHFS = $prog_mksquashfs" >&3
+echo >&3
+echo "BUILD = $build" >&3
+echo "NUM_CPUS = $num_cpus" >&3
+
+exec 3>&-
+echo "done"

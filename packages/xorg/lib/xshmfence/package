@@ -1,0 +1,25 @@
+description: Shared memory fences using futexes
+version: 1.1
+license: custom
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/libxshmfence-${version}.tar.bz2
+      sha1: 
+
+packages:
+  libxshmfence:
+    files:
+      - /usr/lib/*.so.*
+
+  libxshmfence-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

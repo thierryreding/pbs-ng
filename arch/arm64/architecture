@@ -1,8 +1,29 @@
-name: arm64
+#name: arm64
 description: 64-bit ARMv8 (AArch64)
-cpus:
-  cortex-a53:
-  cortex-a57:
-  denver:
+
+version:
+  description: Architecture Version
+  choice:
+    armv8-a:
+      description: ARMv8-A
+      default: yes
+
+cpu:
+  description: CPU
+  choice:
+    cortex-a53:
+      description: ARM Cortex-A53
+      defaults:
+        version: armv8-a
+
+    cortex-a57:
+      description: ARM Cortex-A57
+      defaults:
+        version: armv8-a
+
+    denver:
+      description: NVIDIA Denver
+      defaults:
+        version: armv8-a
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

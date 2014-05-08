@@ -1,11 +1,52 @@
 description: Userspace interface to kernel DRM services
-version: 2.4.51
+version: 2.4.54
 license: custom
+
+depends:
+  - devel/glibc
+  - libs/libpthread-stubs
 
 files:
   - download:
       url: http://dri.freedesktop.org/libdrm/libdrm-${version}.tar.bz2
-      sha1: 7b8e14be0b241f0feb9c2700d5f5a7ff7816303f
+      sha1: b73d69b42800755ed9dfd8aa9a906fe941cfbb7e
+
+options:
+  kms:
+    description: enable libkms support
+    default: yes
+
+  intel:
+    description: enable Intel API
+    default: no
+
+  vmwgfx:
+    description: enable vmwgfx API
+    default: no
+
+  radeon:
+    description: enable Radeon API
+    default: no
+
+  nouveau:
+    description: enable Nouveau API
+    default: no
+
+  omap:
+    description: enable OMAP API
+    default: no
+
+  exynos:
+    description: enable EXYNOS API
+    default: no
+
+  freedreno:
+    description: enable Freedreno API
+    default: no
+
+  tegra:
+    description: enable Tegra API
+    default: no
 
 packages:
   libdrm:

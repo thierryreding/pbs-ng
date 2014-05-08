@@ -1,9 +1,13 @@
 include $(TOP_SRCDIR)/packages/common.mk
-include config.mk
+
+#env = env -i \
+	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig:$(BUILD_TOOLS)/share/pkgconfig' \
+	ACLOCAL_PATH='$(SYSROOT)$(PREFIX)/share/aclocal:$(BUILD_TOOLS)/share/aclocal:$(TOOLCHAIN_BASE)/share/aclocal' \
+	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)' \
+	PATH=$(PATH)
 
 $(srcdir)/stamp-patch:
-	cd $(srcdir) && PATH=/home/thierry.reding/src/pbs.git/build/venice2/rootfs/build-tools/bin:$$PATH autoreconf --force --install
-	#cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/ltmain-sysroot.patch
+	cd $(srcdir) && autoreconf --force --install
 	touch $@
 
 $(builddir):
@@ -30,6 +34,7 @@ conf-args = \
 
 conf-vars = \
 	CPPFLAGS='--sysroot $(SYSROOT)' \
+	CXXFLAGS='--sysroot $(SYSROOT)' \
 	CFLAGS='--sysroot $(SYSROOT)' \
 	LDFLAGS='--sysroot $(SYSROOT)'
 

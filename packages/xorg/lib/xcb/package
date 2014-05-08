@@ -4,6 +4,7 @@ license: custom
 
 depends:
   - xorg/proto/xcb
+  - xorg/lib/xau
 
 files:
 - download:

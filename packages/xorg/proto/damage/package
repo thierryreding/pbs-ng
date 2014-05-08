@@ -2,6 +2,9 @@ description: X11 Damage extension wire protocol
 version: 1.2.1
 license: custom
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/proto/damageproto-${version}.tar.bz2

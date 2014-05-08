@@ -1,5 +1,4 @@
 include $(TOP_SRCDIR)/packages/common.mk
-include config.mk
 
 $(srcdir)/stamp-patch:
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/autotools.patch

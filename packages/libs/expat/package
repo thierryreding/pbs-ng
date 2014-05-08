@@ -2,6 +2,9 @@ description: an XML parser library
 version: 2.1.0
 license: custom
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: http://prdownloads.sourceforge.net/expat/expat-${version}.tar.gz

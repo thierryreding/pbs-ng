@@ -1,0 +1,17 @@
+description: libkmod
+version: 17
+
+depends:
+  - devel/glibc
+
+files:
+- download:
+    url: https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-${version}.tar.xz
+    sha1: d283d2a1b4bd4b630df82e706b53f969f1c13a7b
+
+packages:
+  kmod:
+    files:
+      - /usr
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

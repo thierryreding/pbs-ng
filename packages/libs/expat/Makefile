@@ -1,5 +1,4 @@
 include $(TOP_SRCDIR)/packages/common.mk
-include config.mk
 
 conf-args = \
 	--host=$(HOST) \

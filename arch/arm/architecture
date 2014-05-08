@@ -1,8 +1,76 @@
-name: arm
+#name: arm
 description: Advanced RISC Machines (ARM)
-cpus:
-  xscale:
-  cortex-a9:
-  cortex-a15:
+
+version:
+  description: Architecture Version
+  choice:
+    armv5:
+      description: ARMv5
+
+    armv7-a:
+      description: ARMv7-A
+      default: yes
+
+endian:
+  description: Endianness
+  choice:
+    little:
+      description: Little Endian
+      default: yes
+
+    big:
+      description: Big Endian
+
+fpu:
+  description: Floating-Point (VFP)
+  choice:
+    vfpv3:
+      description: VFPv3
+
+    vfpv3-d16:
+      description: VFPv3-D16
+      default: yes
+
+    vfpv4:
+      description: VFPv4
+
+extensions:
+  description: Extensions
+  options:
+    neon:
+      description: Advanced SIMD (NEON)
+
+    trustzone:
+      description: TrustZone Technology
+
+cpu:
+  description: CPU
+  choice:
+    xscale:
+      description: Intel/Marvell XScale
+      defaults:
+        version: armv5
+
+    cortex-a9:
+      description: ARM Cortex-A9
+      defaults:
+        version: armv7-a
+        fpu: vfpv3
+
+    cortex-a15:
+      description: ARM Cortex-A15
+      defaults:
+        version: armv7-a
+        fpu: vfpv4
+
+abi:
+  description: ABI
+  choice:
+    oabi:
+      description: Old ARM ABI
+
+    eabi:
+      description: New ARM "Embedded" ABI
+      default: yes
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

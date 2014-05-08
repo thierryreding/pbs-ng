@@ -2,6 +2,9 @@ description: XML-XCB protocol descriptions
 version: "1.10"
 license: custom
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: http://xcb.freedesktop.org/dist/xcb-proto-${version}.tar.bz2

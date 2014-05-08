@@ -2,6 +2,9 @@ description: System V Release 4.0 curses emulation library
 version: 5.9
 license: MIT
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/ncurses/ncurses-${version}.tar.gz

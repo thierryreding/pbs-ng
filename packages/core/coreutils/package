@@ -2,6 +2,9 @@ description: The basic file, shell and text manipulation utilities of the GNU op
 version: 8.22
 license: GPL-3.0
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: http://ftp.gnu.org/gnu/coreutils/coreutils-${version}.tar.xz
