@@ -466,7 +466,7 @@ class Project():
     def load(self, filename = '.config'):
         try:
             with open(filename, 'r') as stream:
-                values = yaml.load(stream)
+                values = yaml.load(stream, Loader = yaml.loader.BaseLoader)
         except:
             return
 

@@ -657,7 +657,7 @@ class Database():
         basename = os.path.basename(directory)
 
         stream = open(filename, 'r')
-        values = yaml.load(stream)
+        values = yaml.load(stream, Loader = yaml.BaseLoader)
         stream.close()
 
         architecture = Architecture(basename)
@@ -680,7 +680,7 @@ class Database():
         basename = os.path.basename(directory)
 
         stream = open(filename, 'r')
-        values = yaml.load(stream)
+        values = yaml.load(stream, Loader = yaml.BaseLoader)
         stream.close()
 
         source = Source(directory, section, basename)
