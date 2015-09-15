@@ -9,10 +9,10 @@ index c4abc71..366b7f8 100644
 -CFLAG= -O
 +CFLAG=
 +CFLAGS=$(EXTRA_CPPFLAGS) $(CFLAG) $(EXTRA_CFLAGS)
- DEPFLAG= -DOPENSSL_NO_EC_NISTP_64_GCC_128 -DOPENSSL_NO_GMP -DOPENSSL_NO_JPAKE -DOPENSSL_NO_MD2 -DOPENSSL_NO_RC5 -DOPENSSL_NO_RFC3779 -DOPENSSL_NO_SCTP -DOPENSSL_NO_STORE
+ DEPFLAG= -DOPENSSL_NO_EC_NISTP_64_GCC_128 -DOPENSSL_NO_GMP -DOPENSSL_NO_JPAKE -DOPENSSL_NO_LIBUNBOUND -DOPENSSL_NO_MD2 -DOPENSSL_NO_RC5 -DOPENSSL_NO_RFC3779 -DOPENSSL_NO_SCTP -DOPENSSL_NO_SSL_TRACE -DOPENSSL_NO_STORE -DOPENSSL_NO_UNIT_TEST
  PEX_LIBS= 
  EX_LIBS= 
-@@ -292,7 +293,7 @@ build_testapps:
+@@ -297,7 +298,7 @@ build_testapps:
  	@dir=crypto; target=testapps; $(BUILD_ONE_CMD)
  
  fips_premain_dso$(EXE_EXT): libcrypto.a
@@ -278,9 +278,9 @@ index f85fc84..7948acb 100644
  
 -CFLAGS= $(INCLUDES) $(CFLAG)
 +CFLAGS= $(EXTRA_CPPFLAGS) $(INCLUDES) $(CFLAG) $(EXTRA_CFLAGS)
+ ASFLAGS= $(INCLUDES) $(ASFLAG)
+ AFLAGS= $(ASFLAGS)
  
- GENERAL=Makefile
- TEST=ectest.c
 diff --git a/crypto/ecdh/Makefile b/crypto/ecdh/Makefile
 index 65d8904..91a3cbc 100644
 --- a/crypto/ecdh/Makefile
@@ -345,7 +345,7 @@ index 9c79f66..48f1367 100644
 +CFLAGS= $(EXTRA_CPPFLAGS) $(INCLUDES) $(CFLAG) $(EXTRA_CFLAGS)
  
  GENERAL=Makefile
- TEST=evp_test.c
+ TEST=evp_test.c evp_extra_test.c
 diff --git a/crypto/hmac/Makefile b/crypto/hmac/Makefile
 index 0e91709..1464180 100644
 --- a/crypto/hmac/Makefile
@@ -765,7 +765,7 @@ index 72c8227..ae1182a 100644
 +CFLAGS= $(EXTRA_CPPFLAGS) $(INCLUDES) $(CFLAG) $(EXTRA_CFLAGS)
  
  GENERAL=Makefile README
- TEST=
+ TEST=verify_extra_test.c
 diff --git a/crypto/x509v3/Makefile b/crypto/x509v3/Makefile
 index 556ef35..d75adc5 100644
 --- a/crypto/x509v3/Makefile
@@ -778,7 +778,7 @@ index 556ef35..d75adc5 100644
 +CFLAGS= $(EXTRA_CPPFLAGS) $(INCLUDES) $(CFLAG) $(EXTRA_CFLAGS)
  
  GENERAL=Makefile README
- TEST=
+ TEST=v3nametest.c
 diff --git a/engines/Makefile b/engines/Makefile
 index 2fa9534..43b29ce 100644
 --- a/engines/Makefile
@@ -817,12 +817,12 @@ index feaf3e3..b100ba1 100644
 +CFLAGS= $(EXTRA_CPPFLAGS) $(INCLUDES) $(CFLAG) $(EXTRA_CFLAGS)
  
  GENERAL=Makefile README ssl-lib.com install.com
- TEST=ssltest.c
+ TEST=ssltest.c heartbeat_test.c
 diff --git a/test/Makefile b/test/Makefile
 index 09e6848..df0fe00 100644
 --- a/test/Makefile
 +++ b/test/Makefile
-@@ -16,7 +16,7 @@ LIBKRB5=
+@@ -17,7 +17,7 @@ LIBKRB5=
  PEX_LIBS=
  EX_LIBS= #-lnsl -lsocket
  

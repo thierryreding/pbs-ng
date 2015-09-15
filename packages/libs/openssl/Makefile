@@ -4,7 +4,6 @@ $(srcdir)/stamp-patch:
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/no-rpath.patch
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/extra-cflags.patch
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/engines-path.patch
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/fix-pod-syntax.patch
 	touch $@
 
 conf-args = \
@@ -20,8 +19,9 @@ $(srcdir)/stamp-configure: $(srcdir)/stamp-patch
 	touch $@
 
 build-args = \
-	EXTRA_CPPFLAGS='--sysroot $(SYSROOT)' \
-	EXTRA_CFLAGS='--sysroot $(SYSROOT)'
+	EXTRA_CPPFLAGS='$(CPPFLAGS)' \
+	EXTRA_CFLAGS='$(CFLAGS)' \
+	-j $(JOBS)
 
 $(srcdir)/stamp-build: $(srcdir)/stamp-configure
 	cd $(srcdir) && \
@@ -29,15 +29,15 @@ $(srcdir)/stamp-build: $(srcdir)/stamp-configure
 	touch $@
 
 install-args = \
-	EXTRA_CPPFLAGS='--sysroot $(SYSROOT)' \
-	EXTRA_CFLAGS='--sysroot $(SYSROOT)' \
+	EXTRA_CPPFLAGS='$(CPPFLAGS)' \
+	EXTRA_CFLAGS='$(CFLAGS)' \
 	MANDIR=$(PREFIX)/share/man \
 	MANSUFFIX=ssl \
 	INSTALL_PREFIX='$(DESTDIR)'
 
 $(srcdir)/stamp-install: $(srcdir)/stamp-build
 	cd $(srcdir) && \
-		fakeroot $(MAKE) $(install-args) install
+		$(MAKE) $(install-args) install
 	touch $@
 
 install: $(srcdir)/stamp-install
