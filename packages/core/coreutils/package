@@ -1,5 +1,5 @@
 description: The basic file, shell and text manipulation utilities of the GNU operating system
-version: 8.22
+version: 8.24
 license: GPL-3.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://ftp.gnu.org/gnu/coreutils/coreutils-${version}.tar.xz
-      sha1: cc7fe47b21eb49dd2ee4cdb707570f42fb2c8cc6
+      sha1: cf3d9983461c2b0c074a76804c18464e9a474883
 
 packages:
   coreutils:

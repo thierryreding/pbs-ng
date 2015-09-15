@@ -1,13 +1,9 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(srcdir)/stamp-patch:
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/dummy-man.patch
-	touch $@
-
 $(builddir):
 	mkdir -p $@
 
-$(builddir)/config.cache: $(srcdir)/stamp-patch | $(builddir)
+$(builddir)/config.cache: | $(builddir)
 	echo '# generated for $(HOST)' > $@
 	echo 'ac_cv_func_canonicalize_file_name=yes' >> $@
 	echo 'gl_cv_func_realpath_works=yes' >> $@
