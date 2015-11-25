@@ -1,0 +1,25 @@
+#!/bin/sh
+
+. /lib/lsb/init-functions
+
+log_action_begin_msg "Running shutdown scripts"
+echo && run-parts -a $1 /scripts/shutdown
+log_action_end_msg $?
+
+case $1 in
+	reboot)
+		if read param < /run/systemd/reboot-param; then
+			reboot -f $param
+		else
+			reboot -f
+		fi
+		;;
+
+	poweroff | shutdown | halt)
+		"$1" -f
+		;;
+
+	*)
+		poweroff -f
+		;;
+esac

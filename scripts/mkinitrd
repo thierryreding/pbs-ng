@@ -1,0 +1,229 @@
+#!/bin/sh -e
+
+srctree="${0%/*}/.."
+prefix=/usr
+libdirs="${prefix}/lib /lib"
+
+source="$1"
+dest="$2"
+
+if test -z "$source" -o -z "$dest"; then
+	echo "usage: $0 SOURCE DESTINATION"
+	exit 1
+fi
+
+function make_directory()
+{
+	local directory="$1"
+
+	if ! test -d "$dest$directory"; then
+		echo "  MKDIR    $directory"
+		mkdir -p "$dest$directory"
+	fi
+}
+
+function make_symlink()
+{
+	local target="$1"
+	local name="$2"
+
+	if ! test -L "$dest$name"; then
+		echo "  SYMLINK  $name --> $target"
+		ln -sf "$target" "$dest$name"
+	fi
+}
+
+function copy_directory()
+{
+	local destdir="${1%/*}"
+	local directory="$1"
+
+	make_directory "$destdir"
+
+	echo "  INSTALL  $directory"
+	cp -a "$source$directory" "$dest$destdir"
+}
+
+function copy_library()
+{
+	local destdir="${1%/*}"
+	local library="$1"
+
+	make_directory "$destdir"
+
+	if test -L "$source$library"; then
+		local target="$(readlink $source$library)"
+		local dir="${target%/*}"
+
+		if test "$dir" != "$target"; then
+			destdir="$destdir/$dir/"
+		else
+			destdir="$destdir/"
+		fi
+
+		copy_program "$destdir$target"
+		make_symlink "$target" "$library"
+
+		return
+	fi
+
+	if ! test -e "$dest$library"; then
+		echo "  INSTALL  $library"
+		cp "$source$library" "$dest$library"
+		chmod 0755 "$dest$library"
+	fi
+
+	${CROSS_COMPILE}objdump -p "$dest$library" | awk '/NEEDED/ { print $2 }' | while read soname; do
+		found=no
+
+		for libdir in $libdirs; do
+			if test -e "$source$libdir/$soname"; then
+				copy_library "$libdir/$soname"
+				found=yes
+				break
+			fi
+		done
+
+		if test "x$found" != "xyes"; then
+			echo "ERROR: $soname not found"
+		fi
+	done
+}
+
+function copy_program()
+{
+	local destdir="${1%/*}"
+	local program="$1"
+
+	make_directory "$destdir"
+
+	if test -L "$source$program"; then
+		local target="$(readlink $source$program)"
+		local dir="${target%/*}"
+
+		# TODO: clean this up sometime
+		if test "$dir" != "$target"; then
+			destdir="$destdir/$dir/"
+			target="${target##*/}"
+			dir="$dir/"
+		else
+			destdir="$destdir/"
+			dir=
+		fi
+
+		realdest="$(realpath $dest)"
+		destdir="$(realpath $dest$destdir)/"
+		destdir="${destdir#$realdest}"
+
+		copy_program "$destdir$target"
+		make_symlink "$dir$target" "$program"
+
+		return
+	fi
+
+	if ! test -e "$dest$program"; then
+		echo "  INSTALL  $program"
+		cp "$source$program" "$dest$program"
+		chmod 0755 "$dest$program"
+	fi
+
+	${CROSS_COMPILE}objdump -p "$dest$program" | awk '/NEEDED/ { print $2 }' | while read soname; do
+		found=no
+
+		for libdir in $libdirs; do
+			if test -e "$source$libdir/$soname"; then
+				copy_library "$libdir/$soname"
+				found=yes
+				break
+			fi
+		done
+
+		if test "x$found" != "xyes"; then
+			echo "ERROR: $soname not found"
+		fi
+	done
+}
+
+function install_script()
+{
+	local destdir="${1%/*}"
+	local script="$1"
+
+	make_directory "$destdir"
+
+	echo "  INSTALL  $script"
+	cp "$srctree/support/initrd$script" "$dest$script"
+	chmod 0755 "$dest$script"
+}
+
+function install_firmware()
+{
+	local firmware="/usr/lib/firmware/$1"
+	local destdir="${firmware%/*}"
+
+	make_directory "$destdir"
+
+	echo "  INSTALL  $firmware"
+	cp "$source$firmware" "$dest$firmware"
+}
+
+make_directory /etc
+make_directory /dev
+make_directory /proc
+make_directory /media
+make_directory /run
+make_directory /scripts
+make_directory /sys
+make_directory /usr
+make_directory /usr/bin
+make_directory /usr/lib
+
+make_symlink usr/bin /bin
+make_symlink usr/bin /sbin
+make_symlink bin /usr/sbin
+make_symlink usr/lib /lib
+
+copy_directory /usr/lib/udev/rules.d
+
+copy_program /usr/bin/mount
+copy_program /usr/bin/mount.nfs
+#copy_program /usr/bin/run-parts
+copy_program /usr/bin/sh
+copy_program /usr/bin/umount
+copy_program /usr/bin/blkid
+copy_program /usr/bin/fsck
+copy_program /usr/bin/halt
+copy_program /usr/bin/poweroff
+copy_program /usr/bin/reboot
+copy_program /usr/bin/switch_root
+copy_program /usr/bin/cat
+copy_program /usr/bin/cp
+copy_program /usr/bin/cut
+copy_program /usr/bin/echo
+copy_program /usr/bin/kill
+copy_program /usr/bin/ln
+copy_program /usr/bin/ls
+copy_program /usr/bin/mkdir
+copy_program /usr/bin/readlink
+copy_program /usr/bin/sleep
+copy_program /usr/bin/test
+copy_program /usr/bin/udevadm
+copy_program /usr/lib/systemd/systemd-udevd
+
+if ! test -d "$dest/lib/lsb"; then
+	echo '  MKDIR    /lib/lsb'
+	mkdir -p "$dest/lib/lsb"
+fi
+
+install_script /lib/lsb/init-functions
+install_script /shutdown
+install_script /scripts/shutdown/unmount
+install_script /init
+
+install_firmware rtl_nic/rtl8168g-2.fw
+
+echo '  GEN      initrd.gz'
+(cd "$dest" && find | cpio -H newc --quiet -o) | gzip -c > initrd.gz
+
+echo '  GEN      initrd.xz'
+(cd "$dest" && find | cpio -H newc --quiet -o) | xz --check=crc32 --lzma2=dict=32MiB -c > initrd.xz

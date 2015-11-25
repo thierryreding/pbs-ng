@@ -1,0 +1,247 @@
+#!/bin/sh
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+export PATH
+
+. /lib/lsb/init-functions
+
+log_action_begin_msg "Mounting /proc filesystem"
+mount -t proc none /proc
+log_action_end_msg $?
+
+log_action_begin_msg "Mounting /sys filesystem"
+mount -t sysfs none /sys
+log_action_end_msg $?
+
+log_action_begin_msg "Mounting /dev filesystem"
+mount -o mode=0755 -t devtmpfs none /dev
+log_action_end_msg $?
+
+if test -x /usr/sbin/plymouthd; then
+	log_action_begin_msg "Mounting /dev/pts filesystem"
+	mkdir -p /dev/pts && mount -t devpts devpts /dev/pts
+	log_action_end_msg $?
+fi
+
+log_action_begin_msg "Mounting /run filesystem"
+mount -o nosuid,nodev,mode=0755 -t tmpfs run /run &&
+	mkdir /run/lock &&
+	mkdir /run/initramfs
+log_action_end_msg $?
+
+log_action_begin_msg "Starting udev daemon"
+/usr/lib/systemd/systemd-udevd --daemon --resolve-names=never
+log_action_end_msg $?
+
+if test -x /usr/sbin/plymouthd; then
+	mkdir -p /var/log
+	mkdir -p /var/lib/plymouth
+
+	if [ "x`uname -m`" == "xi786" ]; then
+		log_progress_msg "Loading gfx driver..."
+		/sbin/modprobe i915 modeset=1
+
+		/usr/bin/udevadm trigger --attr-match=class=0x030000
+		/usr/bin/udevadm trigger --subsystem-match=graphics --subsystem-match=drm --subsystem-match=tty
+		/usr/bin/udevadm settle || true
+	fi
+
+	log_action_begin_msg "Starting plymouth daemon"
+	/usr/sbin/plymouthd --mode=boot --attach-to-session
+	log_action_end_msg $?
+
+	if test -x /usr/bin/plymouth; then
+		log_action_begin_msg "Showing boot splash"
+		/usr/bin/plymouth --show-splash
+		log_action_end_msg $?
+	fi
+fi
+
+log_action_begin_msg "Waiting for /dev filesystem to be populated"
+/usr/bin/udevadm trigger
+/usr/bin/udevadm settle || true
+log_action_end_msg $?
+
+cmdline=`cat /proc/cmdline`
+init=/sbin/init
+root=/dev/sda1:/rootfs.img
+disk=/media/disk
+mp=/rootfs
+debug=no
+ro=no
+
+for arg in $cmdline; do
+	case $arg in
+	root=*)
+		root=`echo $arg | cut -d= -f2-`
+		case $root in
+		LABEL=*)
+			label=`echo $arg | cut -d= -f3-`
+			root="/dev/disk/by-label/$label"
+			;;
+
+		UUID=*)
+			uuid=`echo $arg | cut -d= -f3-`
+			root="/dev/disk/by-uuid/$uuid"
+			;;
+
+		PARTUUID=*)
+			uuid=`echo $arg | cut -d= -f3-`
+			root="/dev/disk/by-partuuid/$uuid"
+			;;
+		esac
+		;;
+
+	nfsroot=*)
+		nfsroot=`echo $arg | cut -d= -f2-`
+		;;
+
+	init=*)
+		init=`echo $arg | cut -d = -f 2`
+		;;
+
+	ro)
+		ro=yes
+		;;
+
+	initrd.debug)
+		debug=yes
+		;;
+
+	*)
+		;;
+	esac
+done
+
+dev=`echo $root | cut -d : -f 1`
+img=`echo $root | cut -d : -f 2`
+
+if [ "x$dev" = "x$img" ]; then
+	img=
+fi
+
+if test "x$dev" != "x/dev/nfs"; then
+	log_action_begin_msg "Waiting for root device: $dev"
+	# wait for boot device
+	while ! test -e "$dev"; do
+		sleep 1
+	done
+	log_action_end_msg $?
+
+	# if initrd contains a utils for filesystem check use them at least
+	# on the filesystem containing the rootfs.img file.
+	if test -x /usr/sbin/fsck; then
+		log_action_begin_msg "Checking root device: $dev"
+		PATH=$PATH:/usr/sbin /usr/sbin/fsck -p $dev
+		log_action_end_msg $?
+	fi
+fi
+
+if test "x$debug" = "xyes"; then
+	/bin/sh
+fi
+
+log_action_begin_msg "Mounting root filesystem: $mp"
+mkdir -p "$mp"
+
+if [ "x$img" = "x" ]; then
+	if test "x$dev" = "x/dev/nfs"; then
+		dev=$nfsroot
+	fi
+
+	if [ "x$ro" = "xyes" ]; then
+		mount -o ro "$dev" "$mp"
+	else
+		mount "$dev" "$mp"
+	fi
+else
+	mkdir -p "$disk"
+
+	if [ "x$ro" = "xyes" ]; then
+		mount -o ro "$dev" "$disk"
+		mount -o ro,loop "${disk}${img}" "$mp"
+	else
+		mount "$dev" "$disk"
+		mount -o loop "${disk}${img}" "$mp"
+	fi
+fi
+
+log_action_end_msg $?
+
+if test "x$debug" = "xyes"; then
+	/bin/sh
+fi
+
+# for stateless (doesn't work yet)
+#log_action_begin_msg "Mounting /etc filesystem"
+#mount -t tmpfs none /etc
+#cp "${mp}/usr/share/factory/etc/hostname" /etc/hostname
+#cp "${mp}/usr/share/factory/etc/passwd" /etc/passwd
+#cp "${mp}/usr/share/factory/etc/shadow" /etc/shadow
+#cp -a "${mp}/etc/pam.d" /etc/pam.d
+# dbus doesn't work without this directory
+#cp -a "${mp}/etc/dbus-1" /etc/dbus-1
+#ln -s /proc/self/mounts /etc/mtab
+#mount --move /etc "${mp}/etc"
+#log_action_end_msg $?
+
+#mount -t tmpfs none "${mp}/root"
+
+log_action_begin_msg "Mounting /var filesystem"
+mount -t tmpfs none "${mp}/var"
+log_action_end_msg $?
+
+if [ "x$img" != "x" ]; then
+	mkdir -p "${mp}${disk}"
+	mount --move "$disk" "${mp}${disk}"
+fi
+
+while [ ! -x "${mp}${init}" ]; do
+	log_failure_msg "Target filesystem doesn't have $init"
+	exit 1
+done
+
+if [ "x$ro" = "xremount" ]; then
+	log_action_begin_msg "Remounting root filesystem read-only"
+	mount -o remount,ro "$mp"
+	log_action_end_msg $?
+fi
+
+log_action_begin_msg "Stopping systemd-udevd"
+for proc in /proc/[0-9]*; do
+	[ -x $proc/exe ] || continue
+	if [ "`readlink $proc/exe`" = /usr/lib/systemd/systemd-udevd ]; then
+		kill ${proc#/proc/} 2> /dev/null || true
+	fi
+done
+log_action_end_msg $?
+
+if test -b /dev/disk/by-label/persist; then
+	log_action_begin_msg "Mounting persistent storage at $mp/persist"
+	mount -o ro /dev/disk/by-label/persist $mp/persist
+	log_action_end_msg $?
+
+	if test -d /scripts/persist; then
+		log_action_begin_msg "Running scripts for persistent storage"
+		run-parts -a "$mp/persist" -a "$mp" /scripts/persist
+		log_action_end_msg $?
+	fi
+fi
+
+log_action_begin_msg "Moving /dev to root filesystem"
+mount --move /dev "$mp/dev"
+log_action_end_msg $?
+
+log_action_begin_msg "Moving /run to root filesystem"
+mount --move /run "$mp/run"
+log_action_end_msg $?
+
+log_action_begin_msg "Keeping initial ramdisk"
+cp -a /bin /etc /init /lib /sbin /scripts /shutdown /usr "$mp/run/initramfs"
+log_action_end_msg $?
+
+if test -x /usr/bin/plymouth; then
+	/usr/bin/plymouth --newroot=$mp
+fi
+
+exec switch_root "$mp" "$init" "$@"
