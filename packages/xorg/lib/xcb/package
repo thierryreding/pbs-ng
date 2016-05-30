@@ -1,15 +1,16 @@
 description: X11 client-side library
-version: "1.10"
+version: 1.12
 license: custom
 
 depends:
+  - libs/libpthread-stubs
   - xorg/proto/xcb
   - xorg/lib/xau
 
 files:
 - download:
     url: http://xcb.freedesktop.org/dist/libxcb-${version}.tar.bz2
-    sha1: bb1a3113eca5146e2a1cf6379c2e52c212a757e0
+    sha1: 2f03490d1c75c8a3f902f74b717af6501773926a
 
 packages:
   libxcb:

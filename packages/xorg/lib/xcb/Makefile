@@ -2,24 +2,19 @@ include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
 $(srcdir)/stamp-patch:
-	#cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/xcb-ge-event-t.patch
-	#cd $(srcdir) && autoreconf --force --install
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/ltmain-sysroot.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/sysroot.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/indent.patch
+	cd $(srcdir) && autoreconf --force --install
 	touch $@
 
 $(builddir):
 	mkdir -p $@
 
-conf-env = \
-	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
-	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)'
-
 conf-args = \
 	--host=$(HOST) \
 	--prefix=$(PREFIX) \
 	--libdir=$(PREFIX)/lib \
-	--with-sysroot=$(SYSROOT) \
-	--disable-rpath
+	--with-sysroot=$(SYSROOT)
 
 conf-vars = \
 	CPPFLAGS='--sysroot $(SYSROOT)' \
@@ -28,18 +23,15 @@ conf-vars = \
 
 $(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
 	cd $(builddir) && \
-		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
+		$(env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@
-
-build-env = \
-	PYTHONPATH='$(SYSROOT)$(PREFIX)/lib/python3.3/site-packages'
 
 build-args = \
 	-j $(JOBS)
 
 $(builddir)/stamp-build: $(builddir)/stamp-configure
 	cd $(builddir) && \
-		$(build-env) $(MAKE) $(build-args)
+		$(env) $(MAKE) $(build-args)
 	touch $@
 
 install-args = \
