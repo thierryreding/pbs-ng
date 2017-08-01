@@ -1,0 +1,33 @@
+include: packages/devel/python/package.include
+
+depends:
+  - build-tools/python
+  - libs/bzip2
+  - libs/openssl
+  - libs/xz
+
+packages:
+  python:
+    files:
+      - /usr/bin/2to3
+      - /usr/bin/idle${major}
+      - /usr/bin/pydoc${major}
+      - /usr/bin/python${major}.${minor}
+      - /usr/bin/python${major}
+      - /usr/bin/python
+      - /usr/share/man
+
+  python-dev:
+    files:
+      - /usr/bin/python${major}.${minor}-config
+      - /usr/bin/python${major}-config
+      - /usr/bin/python-config
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/pkgconfig
+
+  python-modules:
+    files:
+      - /usr/lib/python${major}.${minor}
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
