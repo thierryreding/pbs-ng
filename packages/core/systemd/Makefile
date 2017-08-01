@@ -1,52 +1,18 @@
-include $(TOP_SRCDIR)/packages/common.mk
+include $(TOP_SRCDIR)/packages/meson.mk
 
-$(builddir):
-	mkdir -p $@
+$(builddir)/stamp-install-hwdb: $(builddir)/stamp-install
+	# TODO add build-tools/systemd to get this binary irrespective of
+	# whether or not the build system has it installed
+	systemd-hwdb --root $(DESTDIR) update
 
-conf-env = \
-	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig' \
-	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)'
-
-conf-args = \
-	--config-cache \
-	--host=$(HOST) \
-	--prefix=$(PREFIX) \
-	--disable-gcrypt \
-	--disable-gudev
-
-conf-vars = \
-	CPPFLAGS='--sysroot $(SYSROOT)' \
-	CFLAGS='--sysroot $(SYSROOT)' \
-	LDFLAGS='--sysroot $(SYSROOT)'
-
-$(builddir)/config.cache: | $(builddir)
-	echo '# generated for $(HOST)' > $@
-	echo 'ac_cv_func_malloc_0_nonnull=yes' >> $@
-
-$(builddir)/stamp-configure: $(builddir)/config.cache | $(builddir)
-	cd $(builddir) && \
-		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
+$(builddir)/stamp-install-symlinks: $(builddir)/stamp-install
+	ln -sf ../lib/systemd/systemd $(DESTDIR)$(PREFIX)/bin/init
+	ln -sf systemctl $(DESTDIR)$(PREFIX)/bin/halt
+	ln -sf systemctl $(DESTDIR)$(PREFIX)/bin/poweroff
+	ln -sf systemctl $(DESTDIR)$(PREFIX)/bin/reboot
+	ln -sf systemctl $(DESTDIR)$(PREFIX)/bin/runlevel
+	ln -sf systemctl $(DESTDIR)$(PREFIX)/bin/shutdown
+	ln -sf systemctl $(DESTDIR)$(PREFIX)/bin/telinit
 	touch $@
 
-build-args = \
-	-j $(JOBS)
-
-$(builddir)/stamp-build: $(builddir)/stamp-configure
-	cd $(builddir) && \
-		$(MAKE) $(build-args)
-	touch $@
-
-install-args = \
-	-j $(JOBS)
-
-install-vars = \
-	DESTDIR='$(DESTDIR)'
-
-$(builddir)/stamp-install: $(builddir)/stamp-build
-	cd $(builddir) && \
-		$(MAKE) $(install-args) $(install-vars) install
-	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install
+install: $(builddir)/stamp-install-hwdb $(builddir)/stamp-install-symlinks
