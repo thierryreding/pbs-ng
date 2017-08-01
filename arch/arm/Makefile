@@ -26,7 +26,7 @@ LIBC = gnu
 
 HOST = $(ARCH_LONG)-$(VENDOR)-$(OS)-$(LIBC)$(ABI)
 
-CFLAGS = -marm -march=$(arch.version) -m$(arch.endian)-endian -Uarm
+CFLAGS = -O2 -g -marm -march=$(arch.version) -m$(arch.endian)-endian -Uarm
 
 ifneq ($(arch.fpu),)
   CFLAGS += -mfloat-abi=hard
