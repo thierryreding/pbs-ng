@@ -1,0 +1,19 @@
+description: Python 3.x binding to libudev
+version: 0.21.0
+license: LGPL
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/p/pyudev/pyudev-${version}.tar.gz
+      sha1: 58263b4358951d3a990bce7661e2e2ff30ca6cbe
+
+depends:
+  - build-tools/python-setuptools
+  - devel/python
+
+packages:
+  python-pyudev:
+    files:
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
