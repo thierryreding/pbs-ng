@@ -6,7 +6,7 @@ $(builddir):
 	mkdir -p $@
 
 $(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-compile.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/sysroot.patch
 	touch $@
 
 $(builddir)/config.cache: | $(builddir)

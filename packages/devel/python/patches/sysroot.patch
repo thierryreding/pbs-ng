@@ -1,8 +1,8 @@
 diff --git a/setup.py b/setup.py
-index 174ce720c802..b97672406940 100644
+index fe477974bd0b..65da8c844c6f 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -61,6 +61,22 @@ def add_dir_to_list(dirlist, dir):
+@@ -60,6 +60,22 @@ def add_dir_to_list(dirlist, dir):
              return
      dirlist.insert(0, dir)
  
@@ -25,7 +25,7 @@ index 174ce720c802..b97672406940 100644
  def macosx_sdk_root():
      """
      Return the directory of the current OSX SDK,
-@@ -128,6 +144,8 @@ def find_library_file(compiler, libname, std_dirs, paths):
+@@ -127,6 +143,8 @@ def find_library_file(compiler, libname, std_dirs, paths):
  
      if host_platform == 'darwin':
          sysroot = macosx_sdk_root()
@@ -34,7 +34,7 @@ index 174ce720c802..b97672406940 100644
  
      # Check whether the found file is in one of the standard directories
      dirname = os.path.dirname(result)
-@@ -154,6 +172,9 @@ def find_library_file(compiler, libname, std_dirs, paths):
+@@ -153,6 +171,9 @@ def find_library_file(compiler, libname, std_dirs, paths):
              #   /usr/lib/libedit.dylib
              if os.path.join(sysroot, p[1:]) == dirname:
                  return [ ]
@@ -44,7 +44,7 @@ index 174ce720c802..b97672406940 100644
  
          if p == dirname:
              return [ ]
-@@ -167,6 +188,9 @@ def find_library_file(compiler, libname, std_dirs, paths):
+@@ -166,6 +187,9 @@ def find_library_file(compiler, libname, std_dirs, paths):
          if host_platform == 'darwin' and is_macosx_sdk_path(p):
              if os.path.join(sysroot, p[1:]) == dirname:
                  return [ p ]
@@ -54,7 +54,7 @@ index 174ce720c802..b97672406940 100644
  
          if p == dirname:
              return [p]
-@@ -455,9 +479,11 @@ class PyBuildExt(build_ext):
+@@ -454,9 +478,11 @@ class PyBuildExt(build_ext):
              os.makedirs(self.build_temp)
          ret = os.system('%s -E -v - </dev/null 2>%s 1>/dev/null' % (gcc, tmpfile))
          is_gcc = False
@@ -66,7 +66,7 @@ index 174ce720c802..b97672406940 100644
          try:
              if ret >> 8 == 0:
                  with open(tmpfile) as fp:
-@@ -468,7 +494,7 @@ class PyBuildExt(build_ext):
+@@ -467,7 +493,7 @@ class PyBuildExt(build_ext):
                              in_incdirs = True
                          elif line.startswith("End of search list"):
                              in_incdirs = False
@@ -75,17 +75,7 @@ index 174ce720c802..b97672406940 100644
                              for d in line.strip().split("=")[1].split(":"):
                                  d = os.path.normpath(d)
                                  if '/gcc/' not in d:
-@@ -534,7 +560,8 @@ class PyBuildExt(build_ext):
-                         add_dir_to_list(dir_list, directory)
- 
-         if os.path.normpath(sys.base_prefix) != '/usr' \
--                and not sysconfig.get_config_var('PYTHONFRAMEWORK'):
-+                and not sysconfig.get_config_var('PYTHONFRAMEWORK') \
-+                and not cross_compiling:
-             # OSX note: Don't add LIBDIR and INCLUDEDIR to building a framework
-             # (PYTHONFRAMEWORK is set) to avoid # linking problems when
-             # building a framework with different architectures than
-@@ -555,7 +582,21 @@ class PyBuildExt(build_ext):
+@@ -555,7 +581,21 @@ class PyBuildExt(build_ext):
              inc_dirs = self.compiler.include_dirs + ['/usr/include']
          else:
              lib_dirs = self.compiler.library_dirs[:]
