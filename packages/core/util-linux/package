@@ -1,14 +1,16 @@
 description: Miscellaneous system utilities for Linux
-version: 2.24.2
+version: 2.30.1
 license: GPL-2.0
 
 depends:
   - libs/ncurses
+  - libs/pam
+  - libs/readline
 
 files:
   - download:
       url: http://www.kernel.org/pub/linux/utils/util-linux/v${major}.${minor}/util-linux-${version}.tar.xz
-      sha1: ecf75bbb77bba874fc11fc27423aa67b395b7ae5
+      sha1: 030b92cede3d68816d3206645c4262599175ec8a
 
 packages:
   util-linux:
@@ -54,6 +56,16 @@ packages:
       - /usr/include/libmount
       - /usr/lib/libmount.so
       - /usr/lib/pkgconfig/mount.pc
+
+  libsmartcols:
+    files:
+      - /usr/lib/libsmartcols.so.*
+
+  libsmartcols-dev:
+    files:
+      - /usr/include/libsmartcols
+      - /usr/lib/libsmartcols.so
+      - /usr/lib/pkgconfig/smartcols.pc
 
   libuuid:
     files:
