@@ -1,11 +1,15 @@
 description: Utilities for monitoring the system and its processes
-version: 3.3.9
+version: 3.3.11
 license: GPL-2.0, LGPL-2.0
+
+depends:
+  - devel/glibc
+  - libs/ncurses
 
 files:
   - download:
       url: http://prdownloads.sourceforge.net/procps-ng/procps-ng-${version}.tar.xz
-      sha1: 088c77631745fc75ee41fc29c254a4069be4869a
+      sha1: 1bdca65547df9ed019bd83649b0f8b8eaa017e25
 
 packages:
   procps-ng:
