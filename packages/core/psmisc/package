@@ -5,7 +5,10 @@ license: GPL-2.0+
 files:
   - download:
       url: http://prdownloads.sourceforge.net/psmisc/psmisc-${version}.tar.gz
-      sha1: 4bb60610f7b604f58c52542f0e9dea89b5d72fae
+      sha1: 09fabbef4539b58b6b8738a73da3d21d5daa1a58
+
+depends:
+  - libs/ncurses
 
 packages:
   psmisc:
