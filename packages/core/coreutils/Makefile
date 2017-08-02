@@ -1,47 +1,22 @@
-include $(TOP_SRCDIR)/packages/common.mk
+include $(TOP_SRCDIR)/packages/autotools.mk
 
-$(builddir):
-	mkdir -p $@
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/recursive-variable.patch
+	cd $(srcdir) && autoreconf --force --install
+	touch $@
 
 $(builddir)/config.cache: | $(builddir)
 	echo '# generated for $(HOST)' > $@
 	echo 'ac_cv_func_canonicalize_file_name=yes' >> $@
 	echo 'gl_cv_func_realpath_works=yes' >> $@
 
-conf-args = \
-	--config-cache \
-	--host=$(HOST) \
-	--prefix=$(PREFIX)
+conf-args += \
+	--config-cache
 
-conf-vars = \
-	CPPFLAGS='--sysroot $(SYSROOT)' \
-	CFLAGS='--sysroot $(SYSROOT)' \
-	LDFLAGS='--sysroot $(SYSROOT)' \
+conf-vars += \
 	PERL=no
 
-$(builddir)/stamp-configure: $(builddir)/config.cache
-	cd $(srcdir) && autoreconf
-	cd $(builddir) && \
-		$(srcdir)/configure $(conf-args) $(conf-vars)
-	touch $@
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch $(builddir)/config.cache
 
-build-args = \
-	ALL_MANS= \
-	-j $(JOBS)
-
-$(builddir)/stamp-build: $(builddir)/stamp-configure
-	cd $(builddir) && \
-		$(MAKE) $(build-args)
-	touch $@
-
-install-args = \
-	DESTDIR='$(DESTDIR)'
-
-$(builddir)/stamp-install: $(builddir)/stamp-build
-	cd $(builddir) && \
-		$(MAKE) $(install-args) install
-	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install
+build-args += \
+	ALL_MANS=
