@@ -18,8 +18,9 @@ srcdir = $(CURDIR)/source
 
 JOBS ?= $(NUM_CPUS)
 
-CPPFLAGS += --sysroot=$(SYSROOT)
-CFLAGS += --sysroot=$(SYSROOT)
-LDFLAGS += --sysroot=$(SYSROOT)
+CPPFLAGS += --sysroot $(SYSROOT)
+CFLAGS += --sysroot $(SYSROOT)
+CXXFLAGS += --sysroot $(SYSROOT)
+LDFLAGS += --sysroot $(SYSROOT)
 
 export ACLOCAL_PATH PKG_CONFIG_LIBDIR PKG_CONFIG_SYSROOT_DIR
