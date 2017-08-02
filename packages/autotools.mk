@@ -3,10 +3,9 @@ include $(TOP_SRCDIR)/packages/common.mk
 $(builddir):
 	mkdir -p $@
 
-env = env -i \
+conf-env = \
 	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
-	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)' \
-	PATH=$(PATH)
+	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)'
 
 conf-args = \
 	--build=$(BUILD) \
@@ -20,12 +19,13 @@ conf-args = \
 
 conf-vars = \
 	CPPFLAGS='$(CPPFLAGS)' \
+	CXXFLAGS='$(CXXFLAGS)' \
 	CFLAGS='$(CFLAGS)' \
 	LDFLAGS='$(LDFLAGS)'
 
 $(builddir)/stamp-configure: | $(builddir)
 	cd $(builddir) && \
-		$(env) $(srcdir)/configure $(conf-args) $(conf-vars)
+		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@
 
 build-args = \
@@ -41,9 +41,13 @@ install-args = \
 
 $(builddir)/stamp-install: $(builddir)/stamp-build
 	cd $(builddir) && \
-		$(priv) $(MAKE) $(install-args) install
+		$(FAKEROOT) $(MAKE) $(install-args) install
 	touch $@
 
 install: $(builddir)/stamp-install
 
 .PHONY: install
+
+ifeq ($(FORCE),y)
+.PHONY: $(builddir)/stamp-build
+endif
