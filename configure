@@ -102,7 +102,8 @@ check_program fakeroot
 
 check_header ncurses.h
 
-build=$(scripts/config.guess)
+guess="${0%%/*}/scripts/config.guess"
+build=$($guess)
 
 num_cpus=$(lscpu | awk '/^CPU\(s\):/ { print $2 }')
 
@@ -157,6 +158,9 @@ echo "FAKEROOT = $prog_fakeroot" >&3
 echo >&3
 echo "BUILD = $build" >&3
 echo "NUM_CPUS = $num_cpus" >&3
+echo >&3
+echo "-include \$(TOP_SRCDIR)/pbs.mk" >&3
 
 exec 3>&-
+
 echo "done"
