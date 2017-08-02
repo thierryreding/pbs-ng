@@ -1,19 +1,24 @@
 description: base filesystem layout
-version: 2014.01
+version: 2017.02
 license:
 
 packages:
   filesystem:
     files:
       - /bin
+      - /boot
       - /dev
       - /etc
+      - /home
+      - /lib
       - /media
       - /mnt
+      - /opt
       - /proc
       - /root
       - /run
       - /sbin
+      - /srv
       - /sys
       - /tmp
       - /usr
