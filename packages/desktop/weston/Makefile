@@ -3,6 +3,12 @@ include $(TOP_SRCDIR)/packages/common.mk
 $(builddir):
 	mkdir -p $@
 
+$(builddir)/stamp-patch: | $(builddir)
+	cd $(srcdir) && autoreconf --force --install
+	touch $@
+
+$(builddir)/stamp-configure: $(builddir)/stamp-patch
+
 conf-env = \
 	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
 	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)'
@@ -11,7 +17,10 @@ conf-args = \
 	--host=$(HOST) \
 	--prefix=$(PREFIX) \
 	--libdir=$(PREFIX)/lib \
-	--with-sysroot=$(SYSROOT)
+	--libexecdir=$(PREFIX)/lib/weston \
+	--with-sysroot=$(SYSROOT) \
+	--enable-clients \
+	--enable-demo-clients-install
 
 conf-vars = \
 	CPPFLAGS='--sysroot $(SYSROOT)' \

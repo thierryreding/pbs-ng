@@ -1,18 +1,40 @@
 description: Reference implementation of a Wayland compositor
-version: 1.4.92
+version: 2.0.0
 license: MIT
 
 depends:
+  - libs/cairo
+  - libs/libinput
+  - libs/libjpeg
+  - libs/libxkbcommon
+  - libs/mesa
+  - libs/mtdev
   - libs/wayland
+  - libs/wayland-protocols
+  - xorg/lib/xcursor
 
 files:
   - download:
       url: http://wayland.freedesktop.org/releases/weston-${version}.tar.xz
-      sha1: 6c0dc7ff4de30d5638bf175706477e6773a84d56
+      sha1: 90b3abb1b39f34a052d899ea85cc4e5e0be60bd3
 
 packages:
   weston:
     files:
       - /usr/bin
+      - /usr/lib/libweston-1/*.so
+      - /usr/lib/weston/weston-*
+      - /usr/lib/weston/*.so
+      - /usr/lib/*.so.*
+      - /usr/share/weston
+
+  weston-dev:
+    files:
+      - /usr/include
+      - /usr/lib/pkgconfig
+
+  weston-man:
+    files:
+      - /usr/share/man
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
