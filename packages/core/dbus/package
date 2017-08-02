@@ -1,14 +1,15 @@
 description: message bus system
-version: 1.8.2
+version: 1.11.8
 license: GPL-2.0+, AFL-2.1
 
 depends:
+  - core/systemd
   - libs/expat
 
 files:
   - download:
       url: http://dbus.freedesktop.org/releases/dbus/dbus-${version}.tar.gz
-      sha1: d9eefcb533a9afbec96b0548925af4d88ea544e7
+      sha1: 3f90a3d2ae6c67d2d1637039be9125c295c85a1a
 
 packages:
   dbus:
@@ -17,6 +18,7 @@ packages:
       - /usr/bin
       - /usr/lib/dbus-1.0/dbus-daemon-launch-helper
       - /usr/lib/systemd
+      - /usr/lib/sysusers.d
       - /usr/share/dbus-1
       - /var/lib/dbus
 
