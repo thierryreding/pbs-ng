@@ -94,6 +94,7 @@ check_program wget
 check_program curl
 check_program cpio
 check_program mksquashfs
+check_program fakeroot
 
 #
 # check for header files
@@ -123,6 +124,7 @@ Programs:
   curl:       $prog_curl
   cpio:       $prog_cpio
   mksquashfs: $prog_mksquashfs
+  fakeroot:   $prog_fakeroot
 
 Headers:
   ncurses.h:  $have_ncurses_h
@@ -151,6 +153,7 @@ echo "WGET = $prog_wget" >&3
 echo "CURL = $prog_curl" >&3
 echo "CPIO = $prog_cpio" >&3
 echo "MKSQUASHFS = $prog_mksquashfs" >&3
+echo "FAKEROOT = $prog_fakeroot" >&3
 echo >&3
 echo "BUILD = $build" >&3
 echo "NUM_CPUS = $num_cpus" >&3
