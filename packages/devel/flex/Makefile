@@ -10,7 +10,9 @@ conf-args = \
 conf-vars = \
 	CPPFLAGS='--sysroot $(SYSROOT)' \
 	CFLAGS='--sysroot $(SYSROOT)' \
-	LDFLAGS='--sysroot $(SYSROOT)'
+	LDFLAGS='--sysroot $(SYSROOT)' \
+	ac_cv_func_malloc_0_nonnull=yes \
+	ac_cv_func_realloc_0_nonnull=yes
 
 $(builddir)/stamp-configure: | $(builddir)
 	cd $(builddir) && \
