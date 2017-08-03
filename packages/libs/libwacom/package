@@ -1,0 +1,26 @@
+description: Library to identify Wacom tablets and their features
+version: 0.25
+license: MIT
+
+depends:
+  - libs/glib
+  - libs/libgudev
+
+files:
+  - download:
+      url: http://sourceforge.net/projects/linuxwacom/files/libwacom/libwacom-${version}.tar.bz2
+      sha1: 9e935f365c75a75e1eb62d865f50580ac1fa86db
+
+packages:
+  libwacom:
+    files:
+      - /usr/lib/*.so.*
+
+  libwacom-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
