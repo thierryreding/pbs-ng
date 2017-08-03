@@ -1,11 +1,11 @@
 description: X11 pixmap library
-version: 3.5.11
+version: 3.5.12
 license: custom
 
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXpm-${version}.tar.bz2
-      sha1: 77b95dd1c8cd9bc00b3b834b53d824409202acbb
+      sha1: 4e22fefe61714209539b08051b5287bcd9ecfd04
 
 packages:
   libxpm:
