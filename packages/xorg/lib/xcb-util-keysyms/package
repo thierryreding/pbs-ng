@@ -1,0 +1,26 @@
+description: utility libraries for XC binding - standard X key constants and conversion to/from keycodes
+version: 0.4.0
+license: custom
+
+depends:
+  - xorg/lib/xcb
+  - xorg/proto/xcb
+
+files:
+- download:
+    url: http://xcb.freedesktop.org/dist/xcb-util-keysyms-${version}.tar.bz2
+    sha1: ff02ee8ac22c53848af50c0a6a6b00feb002c1cb
+
+packages:
+  xcb-util-keysyms:
+    files:
+      - /usr/lib/*.so.*
+
+  xcb-util-keysyms-dev:
+    files:
+      - /usr/include/xcb
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
