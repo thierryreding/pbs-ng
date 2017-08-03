@@ -6,6 +6,7 @@ depends:
   - libs/libpthread-stubs
   - xorg/proto/xcb
   - xorg/lib/xau
+  - xorg/util/util-macros
 
 files:
 - download:

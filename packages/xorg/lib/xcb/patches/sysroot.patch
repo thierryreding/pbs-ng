@@ -1,24 +1,24 @@
-diff --git a/configure b/configure
-index aedb5176eee1..839c4f246ccd 100755
---- a/configure
-+++ b/configure
-@@ -19890,6 +19890,9 @@ fi
- { $as_echo "$as_me:${as_lineno-$LINENO}: checking XCBPROTO_XCBINCLUDEDIR" >&5
- $as_echo_n "checking XCBPROTO_XCBINCLUDEDIR... " >&6; }
+diff --git a/configure.ac b/configure.ac
+index ec315420d91a..7776af33b05b 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -73,6 +73,9 @@ AC_SUBST(NEEDED)
+ # Find the xcb-proto protocol descriptions
+ AC_MSG_CHECKING(XCBPROTO_XCBINCLUDEDIR)
  XCBPROTO_XCBINCLUDEDIR=`$PKG_CONFIG --variable=xcbincludedir xcb-proto`
 +if test "x$PKG_CONFIG_SYSROOT_DIR" != "x"; then
 +	XCBPROTO_XCBINCLUDEDIR="$PKG_CONFIG_SYSROOT_DIR$XCBPROTO_XCBINCLUDEDIR"
 +fi
- { $as_echo "$as_me:${as_lineno-$LINENO}: result: $XCBPROTO_XCBINCLUDEDIR" >&5
- $as_echo "$XCBPROTO_XCBINCLUDEDIR" >&6; }
+ AC_MSG_RESULT($XCBPROTO_XCBINCLUDEDIR)
+ AC_SUBST(XCBPROTO_XCBINCLUDEDIR)
  
-@@ -19902,6 +19905,9 @@ XCBPROTO_VERSION=`$PKG_CONFIG --modversion xcb-proto`
- { $as_echo "$as_me:${as_lineno-$LINENO}: checking XCBPROTO_XCBPYTHONDIR" >&5
- $as_echo_n "checking XCBPROTO_XCBPYTHONDIR... " >&6; }
+@@ -83,6 +86,9 @@ AC_SUBST(XCBPROTO_VERSION)
+ # Find the xcbgen Python package
+ AC_MSG_CHECKING(XCBPROTO_XCBPYTHONDIR)
  XCBPROTO_XCBPYTHONDIR=`$PKG_CONFIG --variable=pythondir xcb-proto`
 +if test "x$PKG_CONFIG_SYSROOT_DIR" != "x"; then
 +	XCBPROTO_XCBPYTHONDIR="$PKG_CONFIG_SYSROOT_DIR$XCBPROTO_XCBPYTHONDIR"
 +fi
- { $as_echo "$as_me:${as_lineno-$LINENO}: result: $XCBPROTO_XCBPYTHONDIR" >&5
- $as_echo "$XCBPROTO_XCBPYTHONDIR" >&6; }
+ AC_MSG_RESULT($XCBPROTO_XCBPYTHONDIR)
+ AC_SUBST(XCBPROTO_XCBPYTHONDIR)
  
