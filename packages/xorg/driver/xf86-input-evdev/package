@@ -1,0 +1,24 @@
+description: X.Org evdev input driver
+version: 2.10.3
+license: custom
+
+depends:
+  - libs/libevdev
+  - xorg/xserver
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/driver/xf86-input-evdev-${version}.tar.bz2
+      sha1: ec1ff149bad8a648ce6b1debb03fb332a45221f4
+
+packages:
+  xf86-input-evdev:
+    files:
+      - /usr/lib/xorg/modules/input/*.so
+      - /usr/share/X11/xorg.conf.d
+
+  xf86-input-evdev-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
