@@ -1,26 +1,22 @@
-description: A computer display server protocol
-version: 1.4.92
-license: MIT
+include: packages/libs/wayland/package.include
 
 depends:
-  - libs/libffi
-
-files:
-  - download:
-      url: http://wayland.freedesktop.org/releases/wayland-${version}.tar.xz
-      sha1: 0dbe48041a90b8f62993270ca11d29b84c9fe12f
+- build-tools/wayland
+- libs/expat
+- libs/libffi
+- libs/libxml2
 
 packages:
   wayland:
     files:
-      - /usr/lib/*.so.*
+    - /usr/lib/*.so.*
 
   wayland-dev:
     files:
-      - /usr/include
-      - /usr/lib/*.a
-      - /usr/lib/*.so
-      - /usr/lib/pkgconfig
-      - /usr/share/wayland
+    - /usr/include
+    - /usr/lib/*.a
+    - /usr/lib/*.so
+    - /usr/lib/pkgconfig
+    - /usr/share/wayland
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
