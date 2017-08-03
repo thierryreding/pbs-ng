@@ -1,41 +1,26 @@
-include $(TOP_SRCDIR)/packages/common.mk
+include $(TOP_SRCDIR)/packages/autotools.mk
 
-$(builddir):
-	mkdir -p $@
+$(srcdir)/stamp-patch:
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/gcc-5.1.patch
+	touch $@
 
-conf-args = \
-	--host=$(HOST) \
-	--prefix=$(PREFIX) \
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch
+
+conf-args += \
+	--with-pkg-config-libdir=$(PREFIX)/lib/pkgconfig \
+	--enable-pc-files \
+	--enable-widec \
+	--with-normal \
 	--with-shared \
-	--without-cxx \
-	--without-ada
+	--without-ada \
+	--without-cxx
 
-conf-vars = \
-	CPPFLAGS='--sysroot $(SYSROOT)' \
-	CFLAGS='--sysroot $(SYSROOT)' \
-	LDFLAGS='--sysroot $(SYSROOT)'
-
-$(builddir)/stamp-configure: | $(builddir)
-	cd $(builddir) && \
-		$(srcdir)/configure $(conf-args) $(conf-vars)
+$(builddir)/stamp-install-compat: $(builddir)/stamp-build
+	mkdir -p $(DESTDIR)$(PREFIX)/lib/pkgconfig
+	for lib in form menu ncurses panel; do \
+		echo "INPUT(-l$${lib}w)" > $(DESTDIR)$(PREFIX)/lib/lib$${lib}.so; \
+		ln -s $${lib}w.pc $(DESTDIR)$(PREFIX)/lib/pkgconfig/$${lib}.pc; \
+	done
 	touch $@
 
-build-args = \
-	-j $(JOBS)
-
-$(builddir)/stamp-build: $(builddir)/stamp-configure
-	cd $(builddir) && \
-		$(MAKE) $(build-args)
-	touch $@
-
-install-args = \
-	DESTDIR='$(DESTDIR)'
-
-$(builddir)/stamp-install: $(builddir)/stamp-build
-	cd $(builddir) && \
-		$(MAKE) $(install-args) install
-	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install
+install: $(builddir)/stamp-install-compat
