@@ -1,5 +1,5 @@
 description: an open-source implementation of the OpenGL specification
-version: 10.1.2
+version: 17.1.5
 license: custom
 
 depends:
@@ -14,12 +14,21 @@ depends:
   - xorg/lib/xfixes
   - xorg/lib/xshmfence
   - core/systemd # gbm requires udev
+  - libs/wayland-protocols
   - libs/wayland
+  - libs/zlib
+  - multimedia/libva
+  - multimedia/libvdpau
 
 files:
   - download:
-      url: ftp://ftp.freedesktop.org/pub/mesa/${version}/MesaLib-${version}.tar.bz2
-      sha1: 9debffff2d25628bd699e3707ba89da3a3976c55
+      url: https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz
+      sha1: 709a38eb9ecf54390c303071a016c23c1d4bd64b
+
+options:
+  debug:
+    description: enable debug support
+    default: yes
 
 packages:
   mesa:
