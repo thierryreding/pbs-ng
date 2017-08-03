@@ -1,11 +1,15 @@
 description: X Keyboard description compiler
-version: 1.2.4
+version: 1.4.0
 license: custom
+
+depends:
+  - xorg/lib/x11
+  - xorg/lib/xkbfile
 
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/app/xkbcomp-${version}.tar.bz2
-      sha1: 695d2f2824884d9e54aa1419282ae167fdea163b
+      sha1: 9578a564ff8fcf96581fb52860828fbab8c67b4f
 
 packages:
   xkbcomp:
