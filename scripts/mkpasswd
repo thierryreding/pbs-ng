@@ -1,7 +1,28 @@
 #!/usr/bin/python
 
+import argparse
 import crypt
 import sys
 
-password = crypt.crypt(sys.argv[1], crypt.METHOD_MD5)
+def method(string):
+    if string == 'crypt':
+        method = crypt.METHOD_CRYPT
+    elif string == 'md5':
+        method = crypt.METHOD_MD5
+    elif string == 'sha256':
+        method = crypt.METHOD_SHA256
+    elif string == 'sha512':
+        method = crypt.METHOD_SHA512
+    else:
+        msg = '%r is not a valid encryption method' % string
+        raise argparse.ArgumentTypeError(msg)
+
+    return method
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-m', '--method', type = method, default = 'crypt')
+parser.add_argument('password', type = str)
+args = parser.parse_args()
+
+password = crypt.crypt(args.password, args.method)
 print(password)
