@@ -1,5 +1,9 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
+$(srcdir)/stamp-patch: | $(srcdir)
+	rm $(srcdir)/src/fcobjshash.h
+	touch $@
+
 $(builddir):
 	mkdir -p $@
 
@@ -20,7 +24,7 @@ conf-vars = \
 	CFLAGS='--sysroot $(SYSROOT)' \
 	LDFLAGS='--sysroot $(SYSROOT)'
 
-$(builddir)/stamp-configure: | $(builddir)
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
 	cd $(builddir) && \
 		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@

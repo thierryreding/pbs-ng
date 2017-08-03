@@ -1,14 +1,16 @@
 description: A library for configuring and customizing font access
-version: 2.11.0
+version: 2.12.4
 license: custom
 
 depends:
   - devel/glibc
+  - libs/expat
+  - libs/freetype
 
 files:
   - download:
       url: http://fontconfig.org/release/fontconfig-${version}.tar.gz
-      sha1: 650f8f3b8c7b6fac68c25f379616b5be48be13bf
+      sha1: bd47252383fff73d51ebc6bb562f035e5caa7549
 
 packages:
   libfontconfig:
