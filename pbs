@@ -60,12 +60,21 @@ else:
         except EOFError:
             print()
             break
+        except KeyboardInterrupt:
+            print('')
+            continue
 
         if not command:
             continue
 
         args = command.split()
-        execute(args)
+
+        try:
+            execute(args)
+        except KeyboardInterrupt:
+            print('')
+            print('keyboard interrupt')
+            continue
 
     readline.write_history_file('.history')
 
