@@ -1,0 +1,24 @@
+description: Video Acceleration (VA) API for Linux
+version: 1.8.2
+license: MIT
+
+files:
+  - download:
+      url: http://www.freedesktop.org/software/vaapi/releases/libva/libva-${version}.tar.bz2
+      sha1: 7c4253c97f5e1e76500ff75321287131941494bc
+
+depends:
+  - libs/libdrm
+
+packages:
+  libva:
+    files:
+      - /usr/lib/*.so.*
+
+  libva-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
