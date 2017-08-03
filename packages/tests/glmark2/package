@@ -1,0 +1,14 @@
+description: example GL application using KMS and GBM
+version: git
+license: custom
+
+depends:
+  - libs/mesa
+
+packages:
+  glmark2:
+    files:
+      - /usr/bin
+      - /usr/share/glmark2
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
