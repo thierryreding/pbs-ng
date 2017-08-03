@@ -1,0 +1,15 @@
+description: time zone and daylight saving time data
+version: 2015f
+license: GPL
+
+files:
+  - download:
+      url: ftp://ftp.iana.org/tz/releases/tzdata${version}.tar.gz
+      sha1: 0b11e82445ca959be35f7a955c1cd92a91875313
+
+packages:
+  tzdata:
+    files:
+      - /usr/share/zoneinfo
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
