@@ -1,0 +1,24 @@
+description: USB device utilities
+version: 008
+license: GPL-2.0
+
+files:
+  - download:
+      url: https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-${version}.tar.xz
+      sha1: 233dee6cd6829476be778554984045663b568b18
+
+depends:
+  - core/systemd
+  - devel/glibc
+  - libs/libusb
+
+packages:
+  usbutils:
+    files:
+      - /usr/bin
+
+  usbutils-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
