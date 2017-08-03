@@ -1,0 +1,18 @@
+description: Primitive command line interface to RandR extension
+version: 1.5.0
+license: custom
+
+depends:
+  - xorg/lib/xrandr
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/app/xrandr-${version}.tar.bz2
+      sha1: f402b2ed85817c2e111afafd6f5d0657328be2fa
+
+packages:
+  xrandr:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
