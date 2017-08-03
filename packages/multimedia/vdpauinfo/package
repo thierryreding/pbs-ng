@@ -1,0 +1,18 @@
+description: VDPAU info tool
+version: 1.0
+license: custom
+
+files:
+  - download:
+      url: http://people.freedesktop.org/~aplattner/vdpau/vdpauinfo-${version}.tar.gz
+      sha1: eba0ab858ad8c06841276c658512167a175911fa
+
+depends:
+  - multimedia/libvdpau
+
+packages:
+  vdpauinfo:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
