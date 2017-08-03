@@ -18,8 +18,7 @@ $(builddir)/stamp-configure: $(builddir)/configparms
 			--prefix=$(PREFIX) \
 			--libdir=$(PREFIX)/lib \
 			--libexecdir=$(PREFIX)/lib \
-			--with-headers=$(SYSROOT)$(PREFIX)/include \
-			--enable-obsolete-rpc
+			--with-headers=$(SYSROOT)$(PREFIX)/include
 	touch $@
 
 $(builddir)/stamp-build: $(builddir)/stamp-configure | $(builddir)
