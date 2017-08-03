@@ -1,0 +1,29 @@
+description: PCI bus configuraiton space access library and tools
+version: 3.5.5
+license: GPL-2.0
+
+files:
+  - download:
+      url: https://www.kernel.org/pub/software/utils/pciutils/pciutils-${version}.tar.xz
+      sha1: 28f14e48a4ebe8714fba1a3f8cad89e6a4169853
+
+depends:
+  - devel/glibc
+
+packages:
+  pciutils:
+    files:
+      - /usr/bin
+      - /usr/share/hwdata
+
+  libpci:
+    files:
+      - /usr/lib/*.so.*
+
+  libpci-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
