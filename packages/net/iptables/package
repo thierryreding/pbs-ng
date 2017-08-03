@@ -1,0 +1,33 @@
+description: Linux kernel packet control tool
+version: 1.6.1
+license: GPL-2.0
+
+files:
+  - download:
+      url: http://www.netfilter.org/projects/iptables/files/iptables-${version}.tar.bz2
+      sha1: b2592490ca7a6c2cd0f069e167a4337c86acdf91
+
+depends:
+  - devel/glibc
+  - net/libnftnl
+
+packages:
+  iptables:
+    files:
+      - /etc
+      - /usr/bin
+      - /usr/lib/*.so.*
+      - /usr/lib/xtables
+      - /usr/sbin
+
+  iptables-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  iptables-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
