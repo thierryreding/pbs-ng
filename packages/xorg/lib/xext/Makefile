@@ -12,7 +12,8 @@ conf-args = \
 	--host=$(HOST) \
 	--prefix=$(PREFIX) \
 	--libdir=$(PREFIX)/lib \
-	--with-sysroot=$(SYSROOT)
+	--with-sysroot=$(SYSROOT) \
+	--disable-malloc0returnsnull
 
 conf-vars = \
 	CPPFLAGS='--sysroot $(SYSROOT)' \
