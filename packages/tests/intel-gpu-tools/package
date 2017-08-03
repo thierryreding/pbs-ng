@@ -1,0 +1,18 @@
+description: Variety of small tools for testing Intel graphics
+version: git
+license: custom
+
+depends:
+  - libs/cairo
+  - libs/glib
+  - libs/libdrm
+
+packages:
+  intel-gpu-tools:
+    files:
+      - /usr/bin
+      - /usr/lib/intel-gpu-tools:
+        - exclude:
+          - '*.la'
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
