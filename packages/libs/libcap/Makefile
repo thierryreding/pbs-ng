@@ -2,6 +2,7 @@ include $(TOP_SRCDIR)/packages/common.mk
 
 $(srcdir)/stamp-patch:
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-compile.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/gperf-3.1.patch
 	touch $@
 
 $(builddir):

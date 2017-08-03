@@ -1,0 +1,131 @@
+From 42c49e3998b54ed57764c347d67f70f2eb0ae0b1 Mon Sep 17 00:00:00 2001
+From: Thierry Reding <treding@nvidia.com>
+Date: Tue, 21 Feb 2017 17:12:57 +0100
+Subject: [PATCH] Support gperf 3.1
+
+gperf 3.1 introduced a change that makes the lookup function take a
+size_t as its second parameter, rather than an unsigned. This breaks the
+libcap build since the prototype conflicts with the generated function.
+
+Signed-off-by: Thierry Reding <treding@nvidia.com>
+---
+ Make.Rules              |  6 +++++-
+ libcap/Makefile         |  8 +++++---
+ libcap/cap_text.c       |  1 -
+ libcap/gen-cap-names.sh | 22 ++++++++++++++++++++++
+ libcap/gperf.c.in       | 13 +++++++++++++
+ 5 files changed, 45 insertions(+), 5 deletions(-)
+ create mode 100644 libcap/gen-cap-names.sh
+ create mode 100644 libcap/gperf.c.in
+
+diff --git a/Make.Rules b/Make.Rules
+index 8347b2699082..8c5a6f7fe765 100644
+--- a/Make.Rules
++++ b/Make.Rules
+@@ -49,7 +49,7 @@ KERNEL_HEADERS := $(topdir)/libcap/include/uapi
+ IPATH += -fPIC -I$(KERNEL_HEADERS) -I$(topdir)/libcap/include
+ 
+ CC := gcc
+-CFLAGS := -O2 -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 $(EXTRA_CFLAGS)
++CFLAGS := -O2 -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE $(EXTRA_CFLAGS)
+ BUILD_CC := $(CC)
+ BUILD_CFLAGS := $(IPATH)
+ AR := ar
+@@ -71,6 +71,10 @@ PAM_CAP := $(shell if [ -f /usr/include/security/pam_modules.h ]; then echo yes
+ INDENT := $(shell if [ -n "$$(which indent 2>/dev/null)" ]; then echo "| indent -kr" ; fi)
+ DYNAMIC := $(shell if [ ! -d "$(topdir)/.git" ]; then echo yes; fi)
+ 
++GPERF := $(shell which gperf)
++SED := sed
++AWK := awk
++
+ # When installing setcap, set its inheritable bit to be able to place
+ # capabilities on files. It can be used in conjunction with pam_cap
+ # (associated with su and certain users say) to make it useful for
+diff --git a/libcap/Makefile b/libcap/Makefile
+index d189777baa0f..e3ce39061c63 100644
+--- a/libcap/Makefile
++++ b/libcap/Makefile
+@@ -40,8 +40,10 @@ _makenames: _makenames.c cap_names.list.h
+ cap_names.h: _makenames
+ 	./_makenames > cap_names.h
+ 
+-$(GPERF_OUTPUT): cap_names.list.h
+-	perl -e 'print "struct __cap_token_s { const char *name; int index; };\n%{\nconst struct __cap_token_s *__cap_lookup_name(const char *, unsigned int);\n%}\n%%\n"; while ($$l = <>) { $$l =~ s/[\{\"]//g; $$l =~ s/\}.*// ; print $$l; }' < $< | gperf --ignore-case --language=ANSI-C --readonly --null-strings --global-table --hash-function-name=__cap_hash_name --lookup-function-name="__cap_lookup_name" -c -t -m20 $(INDENT) > $@
++export CC CFLAGS SED GPERF
++
++$(GPERF_OUTPUT): cap_names.list.h gen-cap-names.sh
++	$(SHELL) gen-cap-names.sh < $< > $@
+ 
+ cap_names.list.h: Makefile $(KERNEL_HEADERS)/linux/capability.h
+ 	@echo "=> making $@ from $(KERNEL_HEADERS)/linux/capability.h"
+@@ -78,6 +80,6 @@ endif
+ 
+ clean:
+ 	$(LOCALCLEAN)
+-	rm -f $(OBJS) $(LIBNAME)* $(STALIBNAME) libcap.pc
++	rm -f $(OBJS) $(LIBNAME)* $(STALIBNAME) libcap.pc gperf.c
+ 	rm -f cap_names.h cap_names.list.h _makenames $(GPERF_OUTPUT)
+ 	cd include/sys && $(LOCALCLEAN)
+diff --git a/libcap/cap_text.c b/libcap/cap_text.c
+index 42fb685221aa..a61aa45f0069 100644
+--- a/libcap/cap_text.c
++++ b/libcap/cap_text.c
+@@ -6,7 +6,6 @@
+  * representations of capability sets.
+  */
+ 
+-#define _GNU_SOURCE
+ #include <stdio.h>
+ 
+ #define LIBCAP_PLEASE_INCLUDE_ARRAY
+diff --git a/libcap/gen-cap-names.sh b/libcap/gen-cap-names.sh
+new file mode 100644
+index 000000000000..0693ef59d966
+--- /dev/null
++++ b/libcap/gen-cap-names.sh
+@@ -0,0 +1,22 @@
++#!/bin/sh -x
++
++GPERF_FLAGS="--ignore-case --language ANSI-C --readonly --null-strings --global-table --hash-function-name=__cap_hash_name --lookup-function-name=__cap_lookup_name -c -t -m20 $INDENT"
++GPERF_LEN_TYPE=unsigned
++
++$SED -e 's:["{}]::g' -e 's:,$::' > gperf.keys
++
++for GPERF_LEN_TYPE in unsigned size_t; do
++	(
++		$SED -e "s,@GPERF_LEN_TYPE@,$GPERF_LEN_TYPE," < gperf.c.in
++		cat gperf.keys
++	) | $GPERF $GPERF_FLAGS > gperf.c
++
++	if $CC $CFLAGS -o /dev/null -c gperf.c > /dev/null 2>&1; then
++		break
++	fi
++done
++
++cat gperf.c
++
++rm gperf.keys
++rm gperf.c
+diff --git a/libcap/gperf.c.in b/libcap/gperf.c.in
+new file mode 100644
+index 000000000000..32a68cf5b219
+--- /dev/null
++++ b/libcap/gperf.c.in
+@@ -0,0 +1,13 @@
++struct __cap_token_s {
++	const char *name;
++	int index;
++};
++
++%{
++
++#include <stdlib.h>
++
++const struct __cap_token_s *__cap_lookup_name(const char *, @GPERF_LEN_TYPE@);
++
++%}
++%%
+-- 
+2.11.1
+

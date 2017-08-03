@@ -1,5 +1,5 @@
 description: POSIX 1003.1e capabilities
-version: 2.22
+version: 2.25
 license: GPL-2.0
 
 depends:
@@ -7,8 +7,8 @@ depends:
 
 files:
   - download:
-      url: ftp://ftp.archlinux.org/other/libcap/libcap-${version}.tar.gz
-      sha1: 7753165ca685a0c78735fa0db25b815d9576b1fe
+      url: https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-${version}.tar.xz
+      sha1: f0b102e4a68e1bbdcb6b143b63c34a250e473088
 
 packages:
   libcap:
