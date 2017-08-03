@@ -1,0 +1,34 @@
+#!/usr/bin/python3
+
+import argparse
+import os, os.path
+import sys
+
+parser = argparse.ArgumentParser()
+parser.add_argument('root')
+parser.add_argument('packages', nargs = '*')
+args = parser.parse_args()
+
+srctree = os.path.realpath(os.path.dirname(sys.argv[0]))
+scripts_dir = os.path.join(srctree, 'scripts')
+sys.path.insert(1, scripts_dir)
+
+import pbs.commands, pbs.db, pbs.project
+
+db = pbs.db.Database()
+db.load(pbs.srctree)
+
+project = pbs.project.Project(db)
+project.load()
+
+if len(args.packages):
+    for name in args.packages:
+        package = project.find_package(name)
+        if not package:
+            print('ERROR: package', name, 'not found')
+            continue
+
+        package.install(args.root)
+else:
+    for package in project.packages:
+        package.install(args.root)
