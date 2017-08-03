@@ -1,5 +1,5 @@
 description: X11 PCI access library
-version: 0.13.2
+version: 0.13.5
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libpciaccess-${version}.tar.bz2
-      sha1: 63df515a4c5d5a339a7c1f9e4baa6543efa3c7da
+      sha1: ea98c13623e218359ca6d9af9ab9aa4780201a5b
 
 packages:
   libpciaccess:
