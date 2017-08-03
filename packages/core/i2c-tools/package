@@ -1,0 +1,18 @@
+description: heterogeneous set of I2C tools for Linux
+version: 3.1.1
+license: GPL
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-${version}.tar.bz2
+      sha1: 05e4e3b34ebc921812e14527936c0fae65729204
+
+packages:
+  i2c-tools:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
