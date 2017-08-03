@@ -1,0 +1,26 @@
+description: an event notification library
+version: 2.0.22
+license: BSD-3-Clause
+
+files:
+  - download:
+      url: http://prdownloads.sourceforge.net/levent/libevent/libevent-2.0/libevent-${version}-stable.tar.gz
+      sha1: a586882bc93a208318c70fc7077ed8fca9862864
+
+depends:
+  - devel/glibc
+
+packages:
+  libevent:
+    files:
+      - /usr/lib/*.so.*
+
+  libevent-dev:
+    files:
+      - /usr/bin
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
