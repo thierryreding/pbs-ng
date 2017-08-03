@@ -3,7 +3,6 @@ include config.mk
 
 $(srcdir)/stamp-patch:
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/ltmain-sysroot.patch
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/preprocessor.patch
 	touch $@
 
 $(builddir):
@@ -17,7 +16,8 @@ conf-args = \
 	--host=$(HOST) \
 	--prefix=$(PREFIX) \
 	--libdir=$(PREFIX)/lib \
-	--with-sysroot=$(SYSROOT)
+	--with-sysroot=$(SYSROOT) \
+	--disable-malloc0returnsnull
 
 conf-vars = \
 	CPPFLAGS='--sysroot $(SYSROOT)' \

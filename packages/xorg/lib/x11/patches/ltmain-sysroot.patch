@@ -1,13 +1,13 @@
 diff --git a/ltmain.sh b/ltmain.sh
-index aa5624c..0b11ae2 100755
+index 5eca4aeaae90..fdffdbe07fed 100644
 --- a/ltmain.sh
 +++ b/ltmain.sh
-@@ -6918,7 +6918,7 @@ func_mode_link ()
+@@ -8361,7 +8361,7 @@ func_mode_link ()
  	      fi
  	    else
  	      # We cannot seem to hardcode it, guess we'll fake it.
--	      add_dir="-L$libdir"
-+	      add_dir="-L$lt_sysroot$libdir"
+-	      add_dir=-L$libdir
++	      add_dir=-L$lt_sysroot$libdir
  	      # Try looking first in the location we're being installed to.
  	      if test -n "$inst_prefix_dir"; then
  		case $libdir in
