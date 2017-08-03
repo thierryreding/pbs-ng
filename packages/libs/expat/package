@@ -1,5 +1,5 @@
 description: an XML parser library
-version: 2.2.0
+version: 2.2.3
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://prdownloads.sourceforge.net/expat/expat-${version}.tar.bz2
-      sha1: 8453bc52324be4c796fd38742ec48470eef358b3
+      sha1: e2be3a2aa8d12ce70184aab418d0d5d96ed86d0e
 
 packages:
   expat:
