@@ -1,0 +1,26 @@
+description: utility to show the full path of commands
+version: 2.21
+license: GPL-3.0
+
+files:
+  - download:
+      url: http://ftp.gnu.org/pub/gnu/which/which-${version}.tar.gz
+      sha1: 6b6bec3d2b3d4661c164feb81b9b1d22d1359ded
+
+depends:
+  - devel/glibc
+
+packages:
+  which:
+    files:
+      - /usr/bin
+
+  which-doc:
+    files:
+      - /usr/share/info
+
+  which-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
