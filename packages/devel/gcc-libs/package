@@ -1,6 +1,9 @@
 description: Runtime libraries shipped by GCC
 version:
 
+depends:
+  - base/filesystem
+
 packages:
   gcc-libs:
     files:

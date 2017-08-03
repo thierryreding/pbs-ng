@@ -51,4 +51,7 @@ $(builddir)/stamp-install: $(DESTDIR)$(PREFIX)/lib | $(builddir)
 
 install: $(builddir)/stamp-install
 
+version:
+	@$(CC) -dumpversion
+
 .PHONY: install
