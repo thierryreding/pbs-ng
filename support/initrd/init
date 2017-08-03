@@ -155,6 +155,7 @@ if [ "x$img" = "x" ]; then
 		mount "$dev" "$mp"
 	fi
 else
+	modprobe mmc-block
 	mkdir -p "$disk"
 
 	if [ "x$ro" = "xyes" ]; then
