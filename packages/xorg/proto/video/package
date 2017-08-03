@@ -1,5 +1,5 @@
 description: X11 Video extension wire protocol
-version: 2.3.2
+version: 2.3.3
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/proto/videoproto-${version}.tar.bz2
-      sha1: aa60e3b93c6a78ad03f1c502b910e7c45faaedbc
+      sha1: 4556b5c2243a2ca290ea2140dc1a427c4bac8ba2
 
 packages:
   videoproto-dev:
