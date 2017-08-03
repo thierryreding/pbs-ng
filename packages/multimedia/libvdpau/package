@@ -1,0 +1,27 @@
+description: NVIDIA VDPAU library
+version: 1.1.1
+license: custom
+
+files:
+  - download:
+      url: http://people.freedesktop.org/~aplattner/vdpau/libvdpau-${version}.tar.bz2
+      sha1: 86516e2a962fd34f65d49115d6ddf15fd912f579
+
+depends:
+  - devel/glibc
+  - xorg/lib/x11
+
+packages:
+  libvdpau:
+    files:
+      - /usr/lib/*.so.*
+      - /usr/lib/vdpau/*.so.*
+
+  libvdpau-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/vdpau/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
