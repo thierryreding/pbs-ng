@@ -1,0 +1,26 @@
+description: X cursor management library
+version: 1.1.14
+license: custom
+
+depends:
+  - xorg/lib/xfixes
+  - xorg/lib/xrender
+
+files:
+- download:
+    url: http://xorg.freedesktop.org/releases/individual/lib/libXcursor-${version}.tar.bz2
+    sha1: 89870756758439f9216ddf5f2d3dca56570fc6b7
+
+packages:
+  libxcursor:
+    files:
+      - /usr/lib/*.so.*
+
+  libxcursor-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
