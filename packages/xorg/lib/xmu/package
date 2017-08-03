@@ -2,6 +2,11 @@ description: X11 miscellaneous micro-utility library
 version: 1.1.2
 license: custom
 
+depends:
+  - xorg/lib/x11
+  - xorg/lib/xext
+  - xorg/lib/xt
+
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXmu-${version}.tar.bz2
