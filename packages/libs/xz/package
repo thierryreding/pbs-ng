@@ -1,0 +1,38 @@
+description: Library and command-line tools for XZ and LZMA compressed files
+version: 5.2.3
+license: GPL-2.0+, LGPL-2.1+, GPL-3.0+
+
+files:
+  - download:
+      url: http://tukaani.org/xz/xz-${version}.tar.xz
+      sha1: a2975d12e0905daec48ec87c0098602e0669d195
+
+packages:
+  liblzma-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  liblzma:
+    files:
+      - /usr/lib/*.so.*
+
+  xz-doc:
+    files:
+      - /usr/share/doc
+
+  xz-locale:
+    files:
+      - /usr/share/locale
+
+  xz-man:
+    files:
+      - /usr/share/man
+
+  xz-utils:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
