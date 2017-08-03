@@ -1,0 +1,119 @@
+diff --git a/configure b/configure
+index d2540b0d3219..bdfbc5d91074 100755
+--- a/configure
++++ b/configure
+@@ -30,9 +30,13 @@ check_toolchain()
+     : ${PKG_CONFIG:=pkg-config}
+     : ${AR=ar}
+     : ${CC=gcc}
++    : ${CFLAGS=}
++    : ${LDFLAGS=}
+     echo "PKG_CONFIG:=${PKG_CONFIG}" >>Config
+     echo "AR:=${AR}" >>Config
+     echo "CC:=${CC}" >>Config
++    echo "CFLAGS:=${CFLAGS} \$(CFLAGS)" >>Config
++    echo "LDFLAGS:=${LDFLAGS} \$(LDFLAGS)" >>Config
+ }
+ 
+ check_atm()
+@@ -46,7 +50,7 @@ int main(int argc, char **argv) {
+ }
+ EOF
+ 
+-    $CC -I$INCLUDE -o $TMPDIR/atmtest $TMPDIR/atmtest.c -latm >/dev/null 2>&1
++    $CC $CFLAGS -I$INCLUDE -o $TMPDIR/atmtest $TMPDIR/atmtest.c -latm >/dev/null 2>&1
+     if [ $? -eq 0 ]
+     then
+ 	echo "TC_CONFIG_ATM:=y" >>Config
+@@ -87,7 +91,7 @@ int main(int argc, char **argv)
+ }
+ EOF
+ 
+-    if $CC -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL \
++    if $CC $CFLAGS -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL \
+ 	$(${PKG_CONFIG} xtables --cflags --libs) -ldl >/dev/null 2>&1
+     then
+ 	echo "TC_CONFIG_XT:=y" >>Config
+@@ -126,7 +130,7 @@ int main(int argc, char **argv) {
+ 
+ EOF
+ 
+-    $CC -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
++    $CC $CFLAGS -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
+     if [ $? -eq 0 ]
+     then
+ 	echo "TC_CONFIG_XT_OLD:=y" >>Config
+@@ -165,7 +169,7 @@ int main(int argc, char **argv) {
+ }
+ 
+ EOF
+-	$CC -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
++	$CC $CFLAGS -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
+ 
+ 	if [ $? -eq 0 ]
+ 	then
+@@ -215,7 +219,7 @@ int main(int argc, char **argv)
+ 	return 0;
+ }
+ EOF
+-    $CC -I$INCLUDE -o $TMPDIR/setnstest $TMPDIR/setnstest.c >/dev/null 2>&1
++    $CC $CFLAGS -I$INCLUDE -o $TMPDIR/setnstest $TMPDIR/setnstest.c >/dev/null 2>&1
+     if [ $? -eq 0 ]
+     then
+ 	echo "IP_CONFIG_SETNS:=y" >>Config
+@@ -247,7 +251,7 @@ int main(void)
+ #endif
+ EOF
+ 
+-    if $CC -I$INCLUDE -o $TMPDIR/ipsettest $TMPDIR/ipsettest.c >/dev/null 2>&1
++    if $CC $CFLAGS -I$INCLUDE -o $TMPDIR/ipsettest $TMPDIR/ipsettest.c >/dev/null 2>&1
+     then
+ 	echo "TC_CONFIG_IPSET:=y" >>Config
+ 	echo "yes"
+@@ -270,7 +274,7 @@ int main(void)
+ }
+ EOF
+ 
+-    if $CC -I$INCLUDE -o $TMPDIR/elftest $TMPDIR/elftest.c -lelf >/dev/null 2>&1
++    if $CC $CFLAGS -I$INCLUDE -o $TMPDIR/elftest $TMPDIR/elftest.c -lelf >/dev/null 2>&1
+     then
+ 	echo "TC_CONFIG_ELF:=y" >>Config
+ 	echo "yes"
+@@ -314,7 +318,7 @@ int main(int argc, char **argv) {
+ 	return 0;
+ }
+ EOF
+-    $CC -I$INCLUDE -o $TMPDIR/dbtest $TMPDIR/dbtest.c -ldb >/dev/null 2>&1
++    $CC $CFLAGS -I$INCLUDE -o $TMPDIR/dbtest $TMPDIR/dbtest.c -ldb >/dev/null 2>&1
+     if [ $? -eq 0 ]
+     then
+ 	echo "HAVE_BERKELEY_DB:=y" >>Config
+diff --git a/netem/Makefile b/netem/Makefile
+index e52e125e3bef..d5b73777e912 100644
+--- a/netem/Makefile
++++ b/netem/Makefile
+@@ -2,13 +2,13 @@ DISTGEN = maketable normal pareto paretonormal
+ DISTDATA = normal.dist pareto.dist paretonormal.dist experimental.dist
+ 
+ HOSTCC ?= $(CC)
+-CCOPTS  = $(CBUILD_CFLAGS)
++HOST_CFLAGS ?= $(CCOPTS)
+ LDLIBS += -lm 
+ 
+ all: $(DISTGEN) $(DISTDATA)
+ 
+ $(DISTGEN):
+-	$(HOSTCC) $(CCOPTS) -I../include -o $@ $@.c -lm
++	$(HOSTCC) $(HOST_CFLAGS) -I../include -o $@ $@.c -lm
+ 
+ %.dist: %
+ 	./$* > $@
+@@ -17,7 +17,7 @@ experimental.dist: maketable experimental.dat
+ 	./maketable experimental.dat > experimental.dist
+ 
+ stats: stats.c
+-	$(HOSTCC) $(CCOPTS) -I../include -o $@ $@.c -lm
++	$(HOSTCC) $(HOST_CFLAGS) -I../include -o $@ $@.c -lm
+ 
+ install: all
+ 	mkdir -p $(DESTDIR)$(LIBDIR)/tc

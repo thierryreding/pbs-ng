@@ -1,0 +1,24 @@
+description: IP routing utilities
+version: 4.9.0
+license: GPL-2.0
+
+depends:
+  - devel/glibc
+  - libs/db
+  - net/iptables
+
+files:
+  - download:
+      url: https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-${version}.tar.xz
+      sha1: fc28f956a7a9695473312d0ed35dc24a7ef9d7f6
+
+packages:
+  iproute2:
+    files:
+      - /usr/bin
+
+  iproute2-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
