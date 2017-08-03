@@ -34,6 +34,12 @@ install-vars = \
 $(builddir)/stamp-install: $(builddir)/stamp-build
 	cd $(builddir) && \
 		$(MAKE) $(install-args) $(install-vars) install
+	ln -s kmod $(DESTDIR)$(PREFIX)/bin/depmod
+	ln -s kmod $(DESTDIR)$(PREFIX)/bin/insmod
+	ln -s kmod $(DESTDIR)$(PREFIX)/bin/lsmod
+	ln -s kmod $(DESTDIR)$(PREFIX)/bin/modinfo
+	ln -s kmod $(DESTDIR)$(PREFIX)/bin/modprobe
+	ln -s kmod $(DESTDIR)$(PREFIX)/bin/rmmod
 	touch $@
 
 install: $(builddir)/stamp-install

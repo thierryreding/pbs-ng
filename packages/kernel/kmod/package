@@ -1,5 +1,6 @@
 description: libkmod
-version: 17
+version: 24
+license: GPL-2.0
 
 depends:
   - devel/glibc
@@ -7,11 +8,25 @@ depends:
 files:
 - download:
     url: https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-${version}.tar.xz
-    sha1: d283d2a1b4bd4b630df82e706b53f969f1c13a7b
+    sha1: ca506c529cb66ebe12cecb85844ebebf95eb6fa6
 
 packages:
   kmod:
     files:
-      - /usr
+      - /usr/bin
+
+  kmod-man:
+    files:
+      - /usr/share/man
+
+  libkmod:
+    files:
+      - /usr/lib/*.so.*
+
+  libkmod-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
