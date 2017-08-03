@@ -1,5 +1,5 @@
 description: X11 XKB extension wire protocol
-version: 1.0.6
+version: 1.0.7
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/proto/kbproto-${version}.tar.bz2
-      sha1: a2cc82357c22a1f4d6243017982c32703c95575c
+      sha1: bc9c0fa7d39edf4ac043e6eeaa771d3e245ac5b2
 
 packages:
   kbproto-dev:
