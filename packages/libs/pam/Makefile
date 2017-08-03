@@ -1,12 +1,5 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(srcdir)/stamp-patch:
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/autotools.patch
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-compile.patch
-	cd $(srcdir) && autoreconf --force --install
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/ltmain-sysroot.patch
-	touch $@
-
 $(builddir):
 	mkdir -p $@
 
@@ -28,7 +21,8 @@ conf-vars = \
 	CFLAGS='--sysroot $(SYSROOT)' \
 	LDFLAGS='--sysroot $(SYSROOT)'
 
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
+$(builddir)/stamp-configure: | $(builddir)
+	cd $(srcdir) && autoreconf --force --install
 	cd $(builddir) && \
 		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@
