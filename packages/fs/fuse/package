@@ -1,0 +1,33 @@
+description: FUSE (file system in userspace) library
+version: 2.9.4
+license: GPL-2.0
+
+files:
+  - download:
+      url: http://prdownloads.sourceforge.net/fuse/fuse-${major}.X/${version}/fuse-${version}.tar.gz
+      sha1: c8b25419f33624dc5240af6a5d26f2c04367ca71
+
+depends:
+  - devel/glibc
+
+packages:
+  libfuse:
+    files:
+      - /usr/lib/*.so.*
+
+  libfuse-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  fuse-utils:
+    files:
+      - /etc
+      - /usr/bin
+
+  fuse-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
