@@ -21,12 +21,16 @@ conf-args = \
 	--libdir=$(PREFIX)/lib \
 	--sysconfdir=/etc \
 	--localstatedir=/var \
-	--with-sysroot=$(SYSROOT)
+	--with-sysroot=$(SYSROOT) \
+	--enable-glamor
 
 conf-vars = \
 	CPPFLAGS='$(CPPFLAGS)' \
 	CFLAGS='$(CFLAGS)' \
 	LDFLAGS='$(LDFLAGS)'
+
+conf-vars += \
+	xorg_cv_MONOTONIC_CLOCK=yes
 
 $(builddir)/stamp-configure: | $(builddir)
 	cd $(builddir) && \
@@ -53,3 +57,7 @@ $(builddir)/stamp-install: $(builddir)/stamp-build
 install: $(builddir)/stamp-install
 
 .PHONY: install
+
+ifeq ($(FORCE),y)
+.PHONY: $(builddir)/stamp-build
+endif
