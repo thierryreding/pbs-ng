@@ -1,11 +1,15 @@
 description: TrueType font rendering library
-version: 1.5.17
+version: 1.6.15
 license: custom
+
+depends:
+  - devel/glibc
+  - libs/zlib
 
 files:
   - download:
-      url: http://prdownloads.sourceforge.net/libpng/libpng-${version}.tar.bz2
-      sha1: 899d660104f3ef5c349c57faad10844b388f8442
+      url: http://prdownloads.sourceforge.net/libpng/libpng-${version}.tar.xz
+      sha1: bddeac8ca97fbcf54d6d32c6eefed5d94b49df88
 
 packages:
   libpng:
