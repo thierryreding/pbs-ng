@@ -1,0 +1,28 @@
+diff --git a/include/X11/Xft/XftCompat.h b/include/X11/Xft/XftCompat.h
+index 0fced03a5ee8..5501ac8d4424 100644
+--- a/include/X11/Xft/XftCompat.h
++++ b/include/X11/Xft/XftCompat.h
+@@ -54,8 +54,8 @@ typedef FcChar32    XftChar32;
+ #define XFT_DPI		FC_DPI
+ 
+ /* specific to FreeType rasterizer */
+-#define XFT_CHAR_WIDTH	FC_CHAR_WIDTH
+-#define XFT_CHAR_HEIGHT	FC_CHAR_HEIGHT
++#define XFT_CHAR_WIDTH	FC_CHARWIDTH
++#define XFT_CHAR_HEIGHT	FC_CHARHEIGHT
+ #define XFT_MATRIX	FC_MATRIX
+ 
+ #define XFT_WEIGHT_LIGHT	FC_WEIGHT_LIGHT
+diff --git a/src/xftfreetype.c b/src/xftfreetype.c
+index a3b83329914f..fd5d4ca8c008 100644
+--- a/src/xftfreetype.c
++++ b/src/xftfreetype.c
+@@ -672,7 +672,7 @@ XftFontInfoFill (Display *dpy, _Xconst FcPattern *pattern, XftFontInfo *fi)
+     /*
+      * Check for fixed pixel spacing
+      */
+-    switch (FcPatternGetInteger (pattern, FC_CHAR_WIDTH, 0, &fi->char_width)) {
++    switch (FcPatternGetInteger (pattern, FC_CHARWIDTH, 0, &fi->char_width)) {
+     case FcResultNoMatch:
+ 	fi->char_width = 0;
+ 	break;
