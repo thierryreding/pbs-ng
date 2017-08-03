@@ -1,0 +1,30 @@
+description: JPEG codec library
+version: 9a
+license: custom
+
+depends:
+  - devel/glibc
+  - libs/libevdev
+
+files:
+  - download:
+      url: http://www.ijg.org/files/jpegsrc.v${version}.tar.gz
+      sha1: d65ed6f88d318f7380a3a5f75d578744e732daca
+
+packages:
+  libjpeg:
+    files:
+      - /usr/lib/*.so.*
+
+  libjpeg-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libjpeg-utils:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
