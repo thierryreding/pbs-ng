@@ -1,0 +1,20 @@
+description: Object-oriented DRM/KMS API
+version: git
+license: custom
+
+depends:
+  - libs/libdrm
+
+packages:
+  libdrm-kms:
+    files:
+      - /usr/lib/*.so.*
+
+  libdrm-kms-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
