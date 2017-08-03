@@ -2,13 +2,48 @@
 
 srctree="${0%/*}/.."
 prefix=/usr
-libdirs="${prefix}/lib /lib"
+libdirs="${prefix}/lib /lib ${prefix}/lib/systemd"
+output=initrd.gz
+kernel=
 
-source="$1"
-dest="$2"
+while test $# -gt 0; do
+	if test -n "$prev"; then
+		eval "$prev=$1"
+		shift; prev=
+		continue
+	fi
+
+	case $1 in
+		--kernel | -k)
+			prev=kernel
+			shift
+			;;
+
+		--output | -o)
+			prev=output
+			shift
+			;;
+
+		*)
+			break
+			;;
+	esac
+done
+
+if test -n "$1"; then
+	source="$1"
+fi
+
+if test -n "$2"; then
+	dest="$2"
+fi
 
 if test -z "$source" -o -z "$dest"; then
 	echo "usage: $0 SOURCE DESTINATION"
+	echo ""
+	echo "options:"
+	echo "  --kernel, -k RELEASE     kernel release"
+	echo "  --output, -o FILENAME    output file name"
 	exit 1
 fi
 
@@ -67,7 +102,7 @@ function copy_library()
 		return
 	fi
 
-	if ! test -e "$dest$library"; then
+	if test "$source$library" -nt "$dest$library"; then
 		echo "  INSTALL  $library"
 		cp "$source$library" "$dest$library"
 		chmod 0755 "$dest$library"
@@ -85,7 +120,7 @@ function copy_library()
 		done
 
 		if test "x$found" != "xyes"; then
-			echo "ERROR: $soname not found"
+			echo "ERROR: $library: $soname not found"
 		fi
 	done
 }
@@ -121,7 +156,7 @@ function copy_program()
 		return
 	fi
 
-	if ! test -e "$dest$program"; then
+	if test "$source$program" -nt "$dest$program"; then
 		echo "  INSTALL  $program"
 		cp "$source$program" "$dest$program"
 		chmod 0755 "$dest$program"
@@ -139,9 +174,20 @@ function copy_program()
 		done
 
 		if test "x$found" != "xyes"; then
-			echo "ERROR: $soname not found"
+			echo "ERROR: $program: $soname not found"
 		fi
 	done
+}
+
+function copy_file()
+{
+	local destdir="${1%/*}"
+	local file="$1"
+
+	make_directory "$destdir"
+
+	echo "  INSTALL  $file"
+	cp "$source$file" "$dest$file"
 }
 
 function install_script()
@@ -167,6 +213,29 @@ function install_firmware()
 	cp "$source$firmware" "$dest$firmware"
 }
 
+function install_module()
+{
+	local module_dir="/lib/modules/$kernel"
+	local depfile="$module_dir/modules.dep"
+	local module="$module_dir/$1"
+	local destdir="${module%/*}"
+
+	make_directory "$destdir"
+
+	while read name deps; do
+		if test "${name%:}" = "$1"; then
+			if test -n "$deps"; then
+				for dep in $deps; do
+					install_module $dep
+				done
+			fi
+		fi
+	done < "$source/$depfile"
+
+	echo "  INSTALL  $module"
+	cp "$source$module" "$dest$module"
+}
+
 make_directory /etc
 make_directory /dev
 make_directory /proc
@@ -187,11 +256,12 @@ copy_directory /usr/lib/udev/rules.d
 
 copy_program /usr/bin/mount
 copy_program /usr/bin/mount.nfs
-#copy_program /usr/bin/run-parts
+copy_program /usr/bin/run-parts
 copy_program /usr/bin/sh
 copy_program /usr/bin/umount
 copy_program /usr/bin/blkid
 copy_program /usr/bin/fsck
+copy_program /usr/bin/fsck.ext4
 copy_program /usr/bin/halt
 copy_program /usr/bin/poweroff
 copy_program /usr/bin/reboot
@@ -204,6 +274,7 @@ copy_program /usr/bin/kill
 copy_program /usr/bin/ln
 copy_program /usr/bin/ls
 copy_program /usr/bin/mkdir
+copy_program /usr/bin/modprobe
 copy_program /usr/bin/readlink
 copy_program /usr/bin/sleep
 copy_program /usr/bin/test
@@ -220,10 +291,42 @@ install_script /shutdown
 install_script /scripts/shutdown/unmount
 install_script /init
 
-install_firmware rtl_nic/rtl8168g-2.fw
+if test -n "$kernel"; then
+	#install_module kernel/drivers/i2c/busses/i2c-tegra.ko
+	#install_module kernel/drivers/phy/tegra/phy-tegra-xusb.ko
+	#install_module kernel/drivers/net/ethernet/realtek/r8169.ko
+	#install_module kernel/drivers/regulator/as3722-regulator.ko
+	#install_module kernel/drivers/net/usb/r8152.ko
 
-echo '  GEN      initrd.gz'
-(cd "$dest" && find | cpio -H newc --quiet -o) | gzip -c > initrd.gz
+	#install_module kernel/drivers/mmc/host/sdhci-tegra.ko
+	#install_module kernel/drivers/mmc/card/mmc_block.ko
 
-echo '  GEN      initrd.xz'
-(cd "$dest" && find | cpio -H newc --quiet -o) | xz --check=crc32 --lzma2=dict=32MiB -c > initrd.xz
+	copy_file "/lib/modules/$kernel/modules.builtin"
+	copy_file "/lib/modules/$kernel/modules.order"
+
+	echo "  DEPMOD   $kernel"
+	depmod -b "$dest" "$kernel"
+fi
+
+#install_firmware rtl_nic/rtl8168g-2.fw
+#install_firmware nvidia/tegra124/xusb.bin
+#install_firmware nvidia/tegra210/xusb.bin
+install_firmware nvidia/tegra186/xusb.bin
+
+case $output in
+	*.gz)
+		compress='gzip -c'
+		;;
+
+	*.xz)
+		compress='xz --check=crc32 --lzma2=dict=32MiB -c'
+		;;
+
+	*)
+		echo "unsupported output format: $output"
+		exit 1
+		;;
+esac
+
+echo "  GEN      $output"
+(cd "$dest" && find | cpio -H newc --quiet -o) | $compress > "$output"
