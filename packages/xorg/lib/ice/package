@@ -1,11 +1,15 @@
 description: X11 Inter-Client Exchange library
-version: 1.0.8
+version: 1.0.9
 license: custom
+
+depends:
+  - xorg/lib/xtrans
+  - xorg/proto/x
 
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libICE-${version}.tar.bz2
-      sha1: ddb14df8bbc43df7322978f5f9f802936e2a7324
+      sha1: 3c3a857a117ce48a1947a16860056e77cd494fdf
 
 packages:
   libice:
