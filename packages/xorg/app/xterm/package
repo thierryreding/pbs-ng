@@ -1,11 +1,15 @@
 description: X terminal emulator
-version: 301
+version: 330
 license: custom
+
+depends:
+  - libs/ncurses
+  - xorg/lib/xaw
 
 files:
   - download:
       url: ftp://invisible-island.net/xterm/xterm-${version}.tgz
-      sha1: bba521c397741d2fef56f89acb4881ab452aad91
+      sha1: 0b648aaba45715c156a25e7ff629c82eb9836bc0
 
 packages:
   xterm:
