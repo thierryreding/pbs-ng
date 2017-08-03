@@ -1,0 +1,33 @@
+include: packages/libs/libxml2/package.include
+
+depends:
+  - devel/glibc
+
+packages:
+  libxml2:
+    files:
+      - /usr/lib/*.so.*
+
+  libxml2-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+      - /usr/lib/pkgconfig
+      - /usr/share/aclocal
+
+  libxml2-utils:
+    files:
+      - /usr/bin
+
+  libxml2-doc:
+    files:
+      - /usr/share/doc
+      - /usr/share/gtk-doc
+
+  libxml2-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
