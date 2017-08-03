@@ -1,11 +1,11 @@
 description: Library that provides generic access to USB devices
-version: 1.0.20
+version: 1.0.21
 license: LGPL-2.1
 
 files:
   - download:
       url: https://prdownloads.sourceforge.net/libusb/libusb-${version}.tar.bz2
-      sha1: 9537243f165927bde74ad742e6b3effb0bd50cd2
+      sha1: 54d71841542eb1a6f0b0420878a4d5434efe8d28
 
 depends:
   - devel/glibc
