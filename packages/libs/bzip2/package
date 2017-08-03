@@ -1,0 +1,29 @@
+description: A high-quality data compression program
+version: 1.0.6
+license: custom
+
+files:
+  - download:
+      url: http://www.bzip.org/${version}/bzip2-${version}.tar.gz
+      sha1: 3f89f861209ce81a6bab1fd1998c0ef311712002
+
+packages:
+  libbz2:
+    files:
+      - /usr/lib/*.so.*
+
+  libbz2-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+
+  bzip2:
+    files:
+      - /usr/bin
+
+  bzip2-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
