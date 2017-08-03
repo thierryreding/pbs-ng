@@ -1,0 +1,24 @@
+description: Minimalistic user-space library oriented to netlink developers
+version: 1.0.4
+license: GPL-2.0
+
+files:
+  - download:
+      url: http://www.netfilter.org/projects/libmnl/files/libmnl-${version}.tar.bz2
+      sha1: 2db40dea612e88c62fd321906be40ab5f8f1685a
+
+depends:
+  - devel/glibc
+
+packages:
+  libmnl:
+    files:
+      - /usr/lib/*.so.*
+
+  libmnl-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
