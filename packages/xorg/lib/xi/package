@@ -1,0 +1,28 @@
+description: X11 Input extension library
+version: 1.7.9
+license: custom
+
+depends:
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/libXi-${version}.tar.bz2
+      sha1: 70d1148c39c0eaa7d7c18370f20709383271f669
+
+packages:
+  libxi:
+    files:
+      - /usr/lib/*.so.*
+
+  libxi-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libxi-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
