@@ -1,11 +1,19 @@
 description: Tab Window Manager for the X Window System
-version: 1.0.8
+version: 1.0.9
 license: custom
+
+depends:
+  - xorg/lib/ice
+  - xorg/lib/sm
+  - xorg/lib/x11
+  - xorg/lib/xext
+  - xorg/lib/xmu
+  - xorg/lib/xt
 
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/app/twm-${version}.tar.bz2
-      sha1: b568e6242c5a2b9a05d0a198b96f3d43cf792931
+      sha1: 09e8a8f0d1072e11eb0d6e354d75a555b9952755
 
 packages:
   twm:
