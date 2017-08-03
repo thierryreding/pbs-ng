@@ -1,0 +1,19 @@
+description: network monitoring tools, including ping
+version: 20150815
+license: GPL-2.0
+
+depends:
+  - libs/libcap
+  - libs/libidn
+
+files:
+  - download:
+      url: https://github.com/iputils/iputils/archive/s${version}.tar.gz
+      sha1: 14cd0f1cd87a21c60bf92fa6a18b56eeed55f459
+
+packages:
+  iputils:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
