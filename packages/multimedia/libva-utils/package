@@ -1,0 +1,19 @@
+description: collection of tests for VA-API
+version: 1.8.2
+license: MIT
+
+files:
+  - download:
+      url: http://www.freedesktop.org/software/vaapi/releases/libva/libva-utils-${version}.tar.bz2
+      sha1: 4cddc6ad67f8d3a0b903e06f34f8ca2da53b4f1d
+
+depends:
+  - libs/libdrm
+  - multimedia/libva
+
+packages:
+  libva-utils:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
