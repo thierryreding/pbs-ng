@@ -1,5 +1,5 @@
 description: XML-XCB protocol descriptions
-version: "1.10"
+version: 1.12
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://xcb.freedesktop.org/dist/xcb-proto-${version}.tar.bz2
-      sha1: 4595edfab6ab38f1f42f02f1caab5891fe114db3
+      sha1: e93da374ecef9359370edc0160bcb8b2a2f7d9f6
 
 packages:
   xcbproto-dev:

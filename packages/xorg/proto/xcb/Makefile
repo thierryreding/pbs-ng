@@ -1,6 +1,11 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/indentation.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/python3.patch
+	touch $@
+
 $(builddir):
 	mkdir -p $@
 
@@ -19,7 +24,7 @@ conf-vars = \
 	CFLAGS='--sysroot $(SYSROOT)' \
 	LDFLAGS='--sysroot $(SYSROOT)'
 
-$(builddir)/stamp-configure: | $(builddir)
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
 	cd $(builddir) && \
 		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@
