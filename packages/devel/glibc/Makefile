@@ -1,39 +1,31 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(srcdir)/stamp-patch: | $(srcdir)
-	#cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/make-4.patch
-	touch $@
-
-patch: $(srcdir)/stamp-patch
-
 $(builddir):
 	mkdir -p $@
 
 $(builddir)/configparms: | $(builddir)
 	echo '# generated' > $@
-	#echo 'slibdir=$(PREFIX)/lib' >> $@
+	echo 'slibdir=$(PREFIX)/lib' >> $@
+	echo 'rtlddir=$(PREFIX)/lib' >> $@
 	echo 'sbindir=$(PREFIX)/bin' >> $@
 	echo 'rootsbindir=$(PREFIX)/bin' >> $@
 	touch $@
 
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch $(builddir)/configparms
+$(builddir)/stamp-configure: $(builddir)/configparms
 	cd $(builddir) && \
 		$(srcdir)/configure \
 			--host=$(HOST) \
 			--prefix=$(PREFIX) \
+			--libdir=$(PREFIX)/lib \
 			--libexecdir=$(PREFIX)/lib \
 			--with-headers=$(SYSROOT)$(PREFIX)/include \
 			--enable-obsolete-rpc
 	touch $@
 
-configure: $(builddir)/stamp-configure
-
 $(builddir)/stamp-build: $(builddir)/stamp-configure | $(builddir)
 	cd $(builddir) && \
 		$(MAKE) -j $(JOBS)
 	touch $@
-
-build: $(builddir)/stamp-build
 
 $(builddir)/stamp-install: $(builddir)/stamp-build | $(builddir)
 	cd $(builddir) && \
@@ -42,4 +34,4 @@ $(builddir)/stamp-install: $(builddir)/stamp-build | $(builddir)
 
 install: $(builddir)/stamp-install
 
-.PHONY: patch configure build install
+.PHONY: install
