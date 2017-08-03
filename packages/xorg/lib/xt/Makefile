@@ -1,15 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include config.mk
 
-reconf-env = \
-	ACLOCAL_PATH=/usr/share/aclocal
-
-$(srcdir)/stamp-patch:
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-compile.patch
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/am-cflags.patch
-	cd $(srcdir) && $(reconf-env) autoreconf --force --install
-	touch $@
-
 $(builddir):
 	mkdir -p $@
 
@@ -32,7 +23,7 @@ conf-vars = \
 	CFLAGS_FOR_BUILD='-O2 -g' \
 	LDFLAGS_FOR_BUILD=''
 
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
+$(builddir)/stamp-configure: | $(builddir)
 	cd $(builddir) && \
 		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@

@@ -1,11 +1,15 @@
 description: X11 toolkit intrinsics library
-version: 1.1.4
+version: 1.1.5
 license: custom
+
+depends:
+  - xorg/lib/ice
+  - xorg/lib/sm
 
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXt-${version}.tar.bz2
-      sha1: 0111c316d83fb7e830c517128150094cb0a48ae7
+      sha1: c79e2c4f7de5259a2ade458817a139b66a043d59
 
 packages:
   libxt:
