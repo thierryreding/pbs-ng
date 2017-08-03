@@ -1,0 +1,30 @@
+description: GNU utilities to locate files
+version: 4.6.0
+license: GPL-3.0
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: http://ftp.gnu.org/gnu/findutils/findutils-${version}.tar.gz
+      sha1: f18e8aaee3f3d4173a1f598001003be8706d28b0
+
+packages:
+  findutils:
+    files:
+      - /usr/bin
+
+  findutils-doc:
+    files:
+      - /usr/share/info
+
+  findutils-locale:
+    files:
+      - /usr/share/locale
+
+  findutils-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
