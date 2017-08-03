@@ -1,12 +1,9 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-unexport srctree objtree
-
-KERNELSRC ?= $(CURDIR)/$(PACKAGE)-$(VERSION)
+KERNELSRC ?= $(CURDIR)/source
 
 common-args = \
 	-C '$(KERNELSRC)' \
-	--no-print-directory \
 	-j $(JOBS)
 
 common-vars = \
@@ -14,9 +11,20 @@ common-vars = \
 	KBUILD_OUTPUT='$(CURDIR)/build' \
 	ARCH=$(ARCH)
 
-build-targets = \
-	zImage \
-	modules
+defconfig = defconfig
+
+ifeq ($(ARCH),arm)
+  build-targets = zImage
+else
+  ifeq ($(ARCH),x86)
+    build-targets = bzImage
+  else
+    build-targets = Image
+  endif
+endif
+
+build-targets += all
+build-targets += modules
 
 install-args = \
 	$(common-args)
@@ -34,15 +42,22 @@ install-targets = \
 
 env = env -i PATH=$(PATH) HOME=$(HOME)
 
-$(CURDIR)/build $(DESTDIR)/boot:
+$(builddir) $(DESTDIR)/boot:
 	mkdir -p $@
 
-configure: $(CURDIR)/build
-	$(env) $(MAKE) $(common-args) $(common-vars) tegra_defconfig
+$(builddir)/stamp-configure: | $(builddir)
+	$(env) $(MAKE) $(common-args) $(common-vars) $(defconfig)
+	touch $@
 
-build: configure
+$(builddir)/stamp-build: $(builddir)/stamp-configure
 	$(env) $(MAKE) $(common-args) $(common-vars) $(build-targets)
+	touch $@
 
-install: build | $(CURDIR)/build $(DESTDIR)/boot
+$(builddir)/stamp-install: $(builddir)/stamp-build | $(DESTDIR)/boot
 	$(env) $(MAKE) $(install-args) $(install-vars) $(install-targets)
 	find $(DESTDIR)$(PREFIX)/include -name .install -o -name ..install.cmd -delete
+	touch $@
+
+install: $(builddir)/stamp-install
+
+.PHONY: install
