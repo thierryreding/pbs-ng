@@ -1,0 +1,28 @@
+description: OpenGL Utility Toolkit
+version: 3.0.0
+license: MIT
+
+depends:
+  - build-tools/cmake
+  - libs/glu
+  - libs/mesa
+  - xorg/lib/xi
+
+files:
+  - download:
+      url: http://prdownloads.sourceforge.net/freeglut/freeglut-${version}.tar.gz
+      sha1: fca52242f9344627a30f11487ee42002e6b0dacd
+
+packages:
+  libglut:
+    files:
+      - /usr/lib/*.so.*
+
+  libglut-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
