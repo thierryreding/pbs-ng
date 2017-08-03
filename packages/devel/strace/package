@@ -1,11 +1,11 @@
 description: A useful diagnostic, instructional and debugging tool
-version: 4.10
+version: 4.18
 license: custom
 
 files:
   - download:
       url: http://prdownloads.sourceforge.net/strace/strace-${version}.tar.xz
-      sha1: 5c3ec4c5a9eeb440d7ec70514923c2e7e7f9ab6c
+      sha1: ac2e6f746260dd71f6d22920d9ca8f4bfbe708a8
 
 packages:
   strace:
