@@ -1,5 +1,5 @@
 description: X11 core wire protocol and auxiliary headers
-version: 7.0.26
+version: 7.0.31
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/proto/xproto-${version}.tar.bz2
-      sha1: 81101b78052fa0f652982081f9328f912b71a948
+      sha1: 779fa333c5522cca40ca810c25a8fa60b6ccedfb
 
 packages:
   xproto-dev:
