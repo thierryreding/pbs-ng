@@ -1,0 +1,22 @@
+description: Mesa demos and tools
+version: 8.3.0
+license: custom
+
+depends:
+  - libs/freeglut
+  - libs/glew
+  - libs/mesa
+
+files:
+  - download:
+      url: ftp://ftp.freedesktop.org/pub/mesa/demos/${version}/mesa-demos-${version}.tar.bz2
+      sha1: 468a8f24938ab07e2e31828cf961515371d45b56
+
+packages:
+  mesa-demos:
+    files:
+      - /usr/bin/glxgears
+      - /usr/bin/glxinfo
+      - /usr/share/mesa-demos
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
