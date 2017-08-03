@@ -145,7 +145,7 @@ log_action_begin_msg "Mounting root filesystem: $mp"
 mkdir -p "$mp"
 
 if [ "x$img" = "x" ]; then
-	if test "x$dev" = "x/dev/nfs"; then
+	if test "x$dev" = "x/dev/nfs" -o "x$nfsroot" != "x"; then
 		dev=$nfsroot
 	fi
 
