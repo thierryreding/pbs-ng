@@ -1,14 +1,15 @@
 description: X11 keyboard file manipulation library
-version: 1.0.8
+version: 1.0.9
 license: custom
 
 depends:
   - devel/glibc
+  - xorg/lib/x11
 
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-${version}.tar.bz2
-      sha1: 05139829837c26e3a14a40a700f058c018bc71f5
+      sha1: d708d3415212febbc67d4d996d02d7e3218e13ad
 
 packages:
   libxkbfile:
