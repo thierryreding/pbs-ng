@@ -1,5 +1,5 @@
 description: X Rendering Extension client library
-version: 0.9.8
+version: 0.9.9
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXrender-${version}.tar.bz2
-      sha1: 0f5c843410029944bd06e19366db4932cf5944fa
+      sha1: 31bf63dfb4fcb82a6db73abe98df87cb50c17176
 
 packages:
   libxrender:

@@ -14,6 +14,10 @@ conf-args = \
 	--libdir=$(PREFIX)/lib \
 	--with-sysroot=$(SYSROOT)
 
+# XXX GNU C library specific?
+conf-args += \
+	--disable-malloc0returnsnull
+
 conf-vars = \
 	CPPFLAGS='--sysroot $(SYSROOT)' \
 	CFLAGS='--sysroot $(SYSROOT)' \
