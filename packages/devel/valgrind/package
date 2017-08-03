@@ -1,0 +1,24 @@
+description: A tool to help find memory-management problems in programs
+version: 3.13.0
+license: GPL-2.0
+
+files:
+  - download:
+      url: ftp://sourceware.org/pub/valgrind/valgrind-${version}.tar.bz2
+      sha1: ddf13e22dd0ee688bd533fc66b94cf88f75fad86
+
+depends:
+  - devel/glibc
+
+packages:
+  valgrind:
+    files:
+      - /usr/bin
+      - /usr/lib/valgrind
+
+  valgrind-dev:
+    files:
+      - /usr/include
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
