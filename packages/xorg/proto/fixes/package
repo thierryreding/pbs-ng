@@ -4,6 +4,7 @@ license: custom
 
 depends:
   - devel/glibc
+  - xorg/proto/xext
 
 files:
   - download:
