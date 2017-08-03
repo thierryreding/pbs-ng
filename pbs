@@ -1,10 +1,15 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
+import argparse
 import os, os.path
 import readline
 import sys
 import time
 import traceback
+
+parser = argparse.ArgumentParser()
+parser.add_argument('command', nargs = '*')
+args = parser.parse_args(sys.argv[1:])
 
 srctree = os.path.realpath(os.path.dirname(sys.argv[0]))
 scripts_dir = os.path.join(srctree, 'scripts')
@@ -18,7 +23,6 @@ start = time.clock()
 db.load(pbs.srctree)
 end = time.clock()
 print('loaded database in %f seconds' % (end - start))
-#db.dump(0)
 
 project = pbs.project.Project(db)
 project.load()
@@ -26,36 +30,45 @@ project.load()
 print('source directory:', pbs.srctree)
 print('output directory:', pbs.objtree)
 
-try:
-    readline.read_history_file('.history')
-except FileNotFoundError:
-    pass
-
-while True:
-    try:
-        command = input('> ')
-    except EOFError:
-        print()
-        break
-
-    if not command:
-        continue
-
-    args = command.split()
-
+def execute(args):
     if args[0] not in commands:
         print('unknown command "%s"' % args[0])
-        continue
+        return
 
     try:
         commands[args[0]].exec(project, *args)
+    # this can happen for commands that take interactive input, but we don't
+    # want those to generate any noise
     except EOFError:
-        break
+        pass
     except Exception as e:
         print(' \033[1;31m!\033[0m', e)
-        traceback.print_exc(file=sys.stdout)
+        traceback.print_exc(file = sys.stdout)
 
-readline.write_history_file('.history')
+if args.command:
+    # if a command was given on the command-line, execute it in batch mode
+    execute(args.command)
+else:
+    try:
+        readline.read_history_file('.history')
+    except FileNotFoundError:
+        pass
+
+    while True:
+        try:
+            command = input('> ')
+        except EOFError:
+            print()
+            break
+
+        if not command:
+            continue
+
+        args = command.split()
+        execute(args)
+
+    readline.write_history_file('.history')
+
 project.save()
 
 # vim: et sts=4 sw=4 ts=4
