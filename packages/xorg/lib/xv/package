@@ -1,0 +1,26 @@
+description: X11 Video extension library
+version: 1.0.11
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/libXv-${version}.tar.bz2
+      sha1: d79f9c56faedd682f420fa68bb9d7ff755b84579
+
+depends:
+  - xorg/lib/xext
+  - xorg/proto/video
+
+packages:
+  libxv:
+    files:
+      - /usr/lib/*.so.*
+
+  libxv-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
