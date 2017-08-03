@@ -6,7 +6,8 @@ $(builddir):
 conf-args = \
 	--host=$(HOST) \
 	--prefix=$(PREFIX) \
-	--sysconfdir=/etc
+	--sysconfdir=/etc \
+	--disable-gssapi
 
 conf-vars = \
 	CPPFLAGS='--sysroot $(SYSROOT)' \

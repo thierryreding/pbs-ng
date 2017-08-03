@@ -1,11 +1,11 @@
 description: Transport Independent RPC library (SunRPC replacement)
-version: 0.2.3
+version: 1.0.1
 license: BSD
 
 files:
   - download:
       url: http://prdownloads.sourceforge.net/libtirpc/libtirpc-${version}.tar.bz2
-      sha1: 7076d09762d11742de6d1b3d7162ee1e86d0b555
+      sha1: 8da1636f98b5909c0d587e7534bc1e91f5c1a970
 
 packages:
   libtirpc:
