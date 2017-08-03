@@ -1,11 +1,11 @@
 description: X keyboard configuration files
-version: 2.10.1
+version: 2.21
 license: custom
 
 files:
   - download:
       url: http://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-${version}.tar.bz2
-      sha1: 09114bfd92f5c5a468a02cb0b3593e8a78adaa0e
+      sha1: ccdc53ad0ff6bbabda19ef30a47c2cbe014d42ec
 
 packages:
   xkeyboard-config:
