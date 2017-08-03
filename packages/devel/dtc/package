@@ -1,0 +1,30 @@
+description: Device Tree Compiler
+version: 1.4.4
+license: GPL-2.0
+
+depends:
+  - build-tools/flex
+  - devel/glibc
+
+files:
+  - download:
+      url: https://www.kernel.org/pub/software/utils/dtc/dtc-${version}.tar.xz
+      sha1: c795d148c2198b60d8f176450d846a1a2e03b7f9
+
+packages:
+  dtc:
+    files:
+      - /usr/bin
+
+  libfdt:
+    files:
+      - /usr/lib/libfdt-${version}.so
+      - /usr/lib/libfdt.so.*
+
+  libfdt-dev:
+    files:
+      - /usr/include
+      - /usr/lib/libfdt.a
+      - /usr/lib/libfdt.so
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
