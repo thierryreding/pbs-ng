@@ -1,0 +1,33 @@
+description: wrapper library for evdev devices
+version: 1.5.7
+license: custom
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: http://www.freedesktop.org/software/libevdev/libevdev-${version}.tar.xz
+      sha1: ba1d8b66af9bd4e1d503ce6b2ed011e9e309048c
+
+packages:
+  libevdev:
+    files:
+      - /usr/lib/*.so.*
+
+  libevdev-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libevdev-man:
+    files:
+      - /usr/share/man
+
+  libevdev-utils:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
