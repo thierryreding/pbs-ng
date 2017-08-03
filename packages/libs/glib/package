@@ -1,0 +1,28 @@
+package: common C routines used by GTK+ and other libraries
+version: 2.52.3
+license: LGPL-2.1
+
+files:
+  - download:
+      url: http://ftp.gnome.org/pub/gnome/sources/glib/${major}.${minor}/glib-${version}.tar.xz
+      sha1: 9e31cce788d018894e6e0b1350263bc11b41cff8
+
+depends:
+  - devel/glibc
+  - libs/libffi
+  - libs/pcre
+
+packages:
+  libglib:
+    files:
+      - /usr/lib/*.so.*
+
+  libglib-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/glib-${major}.0/include
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
