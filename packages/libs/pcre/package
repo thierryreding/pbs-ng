@@ -1,0 +1,35 @@
+description: a library that implements Perl 5-style regular expressions
+version: 8.41
+license: BSD
+
+files:
+  - download:
+      url: ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${version}.tar.bz2
+      sha1: 7d1f4aae4191512744a718cc2b81bcf995ec1437
+
+depends:
+  - devel/glibc
+  - libs/bzip2
+  - libs/zlib
+
+packages:
+  libpcre:
+    files:
+      - /usr/lib/*.so.*
+
+  libpcre-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libpcre-man:
+    files:
+      - /usr/share/man/man3
+
+  libpcre-doc:
+    files:
+      - /usr/share/doc
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
