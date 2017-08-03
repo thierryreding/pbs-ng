@@ -11,8 +11,7 @@ conf-env = \
 conf-args = \
 	--host=$(HOST) \
 	--prefix=$(PREFIX) \
-	--libdir=$(PREFIX)/lib \
-	--with-sysroot=$(SYSROOT)
+	--libdir=$(PREFIX)/lib
 
 conf-vars = \
 	CPPFLAGS='--sysroot $(SYSROOT)' \
