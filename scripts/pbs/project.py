@@ -1,5 +1,4 @@
 import hashlib
-import glob
 import io
 import os, os.path
 import pbs.db
@@ -96,7 +95,7 @@ class Architecture():
             else:
                 print('arch.%s = %s' % (name, value.value.name), file = file)
 
-        archfile = os.path.join(pbs.srctree, 'arch', arch, 'Makefile')
+        archfile = os.path.join('$(TOP_SRCDIR)', 'arch', arch, 'Makefile')
         print('\ninclude %s' % archfile, file = file)
 
 class Package():
@@ -133,15 +132,14 @@ class Package():
         self.source.extract(directory)
 
     def generate_config(self, objtree):
-        relpath = os.path.relpath(pbs.objtree, objtree)
-        toplevel = os.path.join(relpath, 'config.mk')
+        toplevel = os.path.join('$(TOP_OBJDIR)', 'config.mk')
         filename = os.path.join(objtree, 'config.mk')
 
         with io.open(filename, 'w') as config:
             print('include', toplevel, file = config)
             print(file = config)
             print('package.name =', self.source.name, file = config)
-            print('package.version =', self.source.version, file = config)
+            print('package.version =', self.version, file = config)
             print('', file = config)
 
             for option in self.options:
@@ -153,43 +151,60 @@ class Package():
     def fetch(self):
         hash = self.source.hash()
 
-        if self.states['fetch'] != hash:
+        if self.states['fetch'] != hash or not self.source.exists():
             self.source.fetch()
 
         self.states['fetch'] = hash
 
+    def filter(self, info):
+        # Default to 0/0 (root/root) as owner and group by default.
+        # TODO implement explicit list of permissions to override
+        info.uid = 0
+        info.gid = 0
+
+        info.uname = 'root'
+        info.gname = 'root'
+
+        return info
+
     def package(self, destdir, distdir):
+        if not self.source.packages:
+            return
+
         with pbs.pushd(destdir):
             for package in self.source.packages:
-                filename = '%s-%s.tar.xz' % (package.name, self.source.version)
+                filename = '%s-%s.tar.xz' % (package.name, self.version)
                 filename = os.path.join(distdir, filename)
 
                 print(' \033[1;33m*\033[0m creating', filename)
 
                 with tarfile.open(filename, 'w:xz') as tarball:
                     for pattern in package.files:
-                        if pattern.startswith(os.sep):
-                            pattern = pattern[len(os.sep):]
-
-                        for match in glob.glob(pattern):
+                        for match in pattern.matches():
                             print('   \033[1;33m-\033[0m %s...' % match,
                                   end = '', flush = True)
-                            tarball.add(match)
+                            tarball.add(match,
+                                        exclude = pattern.exclude,
+                                        filter = self.filter)
                             print('done')
 
-    def build(self, dependencies = True):
+    def build(self, force = False, incremental = False, dependencies = True, seen = []):
         if dependencies:
             for source in self.project.depends.resolve(self.source, direct = True):
                 for package in self.project.packages:
                     if package.source == source:
-                        package.build()
+                        if not package in seen:
+                            package.build(False, False, dependencies, seen)
+                            seen.append(package)
 
         hash = self.hash()
         self.fetch()
 
         if self.states['build'] == hash:
             print(' \033[1;32m*\033[0m', self.source.full_name, 'is up-to-date')
-            return
+
+            if not force:
+                return
 
         parts = self.name.split('/')
         pkgtree = os.path.join('packages', *parts)
@@ -200,32 +215,36 @@ class Package():
         sysroot = os.path.join(pbs.objtree, 'sysroot')
         makefile = os.path.join(srctree, 'Makefile')
 
-        if os.path.exists(objtree):
+        if os.path.exists(objtree) and not incremental:
             print(' \033[1;33m*\033[0m removing %s...' % objtree, end = '',
                   flush = True)
             shutil.rmtree(objtree)
             print('done')
 
-        os.makedirs(objtree)
+        if not os.path.exists(objtree):
+            os.makedirs(objtree)
+
         self.generate_config(objtree)
 
         source = os.path.join(pbs.objtree, 'source', pkgtree)
         target = os.path.join(objtree, 'source')
 
-        if os.path.exists(source):
-            print(' \033[1;33m*\033[0m linking source from %s...' % \
-                  os.path.realpath(source), end = '', flush = True)
-            os.symlink(source, target)
-            print('done')
-        else:
-            target = os.path.join(objtree, 'source')
-            self.extract(target)
+        if not incremental:
+            if os.path.exists(source):
+                print(' \033[1;33m*\033[0m linking source from %s...' % \
+                      os.path.realpath(source), end = '', flush = True)
+                os.symlink(source, target)
+                print('done')
+            else:
+                target = os.path.join(objtree, 'source')
+                self.extract(target)
 
         command = [ 'make', '--no-print-directory', '-C', objtree,
                     '-f', makefile,
                     'TOP_SRCDIR=%s' % pbs.srctree,
                     'TOP_OBJDIR=%s' % pbs.objtree,
                     'PKGDIR=%s' % pkgtree,
+                    'FORCE=%s' % ('y' if incremental else 'n'),
                     'install' ]
 
         (columns, lines) = shutil.get_terminal_size()
@@ -261,19 +280,25 @@ class Package():
             os.makedirs(distdir)
 
         self.package(destdir, distdir)
-        self.install(distdir, sysroot)
+        self.install(sysroot, distdir)
 
         self.states['build'] = hash
 
-    def install(self, distdir, sysroot):
+    def install(self, sysroot, distdir = None):
         if not os.path.exists(sysroot):
             os.makedirs(sysroot)
 
+        if not distdir:
+            parts = self.name.split('/')
+            pkgtree = os.path.join('packages', *parts)
+            distdir = os.path.join(pbs.objtree, 'dist', pkgtree)
+
         with pbs.pushd(sysroot):
-            print(' \033[1;33m*\033[0m installing into', os.getcwd())
+            if self.source.packages:
+                print(' \033[1;33m*\033[0m installing into', os.getcwd())
 
             for package in self.source.packages:
-                filename = '%s-%s.tar.xz' % (package.name, self.source.version)
+                filename = '%s-%s.tar.xz' % (package.name, self.version)
                 filename = os.path.join(distdir, filename)
 
                 print('   \033[1;33m-\033[0m %s...' % filename, end = '',
@@ -329,9 +354,35 @@ class Package():
 
         return digest.hexdigest()
 
+    def watch(self):
+        self.source.watch()
+
+    def get_version(self):
+        pkgtree = os.path.join('packages', *self.name.split('/'))
+        srctree = os.path.join(pbs.srctree, pkgtree)
+        objtree = os.path.join(pbs.objtree, pkgtree)
+        makefile = os.path.join(srctree, 'Makefile')
+        command = [ 'make', '--no-print-directory', '-C', objtree,
+                    '-f', makefile,
+                    'TOP_SRCDIR=%s' % pbs.srctree,
+                    'TOP_OBJDIR=%s' % pbs.objtree,
+                    'PKGDIR=%s' % pkgtree,
+                    'version' ]
+
+        with subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT) as proc:
+            return proc.stdout.readline().decode('utf-8').strip()
+
+        return None
+
     def __getattr__(self, name):
         if name == 'name':
             return self.source.full_name
+
+        if name == 'version':
+            if self.source.version:
+                return self.source.version
+
+            return self.get_version()
 
         return super.__getattr__(self, name)
 
@@ -407,10 +458,33 @@ class Target():
 class Project():
     def __init__(self, db):
         self.db = db
+        self.target = Target(self)
         self.packages = []
 
-        self.depends = pbs.db.DependencyGraph(db)
-        self.target = Target(self)
+    def setup(self):
+        if not os.path.exists('target.mk'):
+            print("Target is not configured, please run `target configure'")
+
+        if not os.path.exists('config.mk'):
+            print("generating `config.mk'...")
+
+            toplevel = os.path.join('$(TOP_SRCDIR)', 'config.mk')
+            target = os.path.join('$(TOP_OBJDIR)', 'target.mk')
+
+            with io.open('config.mk', 'w') as file:
+                print('include', toplevel, file = file)
+                print('include', target, file = file)
+
+        if not os.path.exists('download'):
+            if os.path.lexists('download'):
+                print("removing dangling symlink `download'")
+                os.unlink('download')
+
+            relpath = os.path.relpath(pbs.srctree, pbs.objtree)
+            directory = os.path.join(relpath, 'download')
+
+            print("symlinking `download' to `%s'..." % directory)
+            os.symlink(directory, 'download')
 
     def find_package(self, name):
         source = self.db.find_package(name)
@@ -445,8 +519,14 @@ class Project():
         return package
 
     def deselect(self, name):
-        if name in self.packages:
-            del self.packages[name]
+        source = self.db.find_package(name)
+        if not source:
+            print('package', name, 'not found')
+            return
+
+        for package in self.packages:
+            if package.source == source:
+                self.packages.remove(package)
 
     def save(self, filename = '.config'):
         values = {
@@ -464,6 +544,10 @@ class Project():
         stream.close()
 
     def load(self, filename = '.config'):
+        # reset state
+        self.depends = pbs.db.DependencyGraph(self.db)
+        del self.packages[:]
+
         try:
             with open(filename, 'r') as stream:
                 values = yaml.load(stream, Loader = yaml.loader.BaseLoader)
@@ -478,5 +562,21 @@ class Project():
                 package = self.select(name)
                 if package:
                     package.load(values['packages'][name])
+
+        self.setup()
+
+    def export(self, filename = 'defconfig'):
+        values = {
+            'packages': {}
+        }
+
+        values['target'] = self.target.save()
+
+        for package in self.packages:
+            values['packages'][package.name] = None
+
+        stream = open(filename, 'w')
+        yaml.dump(values, stream, default_flow_style = False)
+        stream.close()
 
 # vim: et sts=4 sw=4 ts=4

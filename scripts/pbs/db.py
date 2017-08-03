@@ -1,13 +1,18 @@
+import distutils.version
+import fnmatch
+import glob
 import hashlib
 import http.client
 import io
 import os, os.path
 import pbs
+import re
 import readline
 import shutil
 import string
 import sys
 import tarfile
+import urllib.parse
 import urllib.request
 import yaml
 
@@ -17,6 +22,44 @@ def iprint(indent, *args):
 
 def error(*args):
     print('\033[1;31mERROR\033[0m:', *args)
+
+def resolve_paths(base, component):
+    return []
+
+def resolve(scheme, base, component, verbose = False):
+    result = []
+
+    # some FTP servers require directory names to end with a /
+    if scheme == 'ftp':
+        base = base + '/'
+
+    regex = re.compile(component)
+
+    request = urllib.request.urlopen(base)
+    for line in request:
+        line = line.strip().decode()
+
+        if verbose:
+            print(scheme, '>', line)
+
+        if scheme == 'ftp':
+            line = line.split(None, 8)[-1]
+
+        match = regex.search(line)
+        if match:
+            match = match.group(0)
+
+            if match not in result:
+                result.append(match)
+
+    return result
+
+class ChecksumError(Exception):
+    def __init__(self, source):
+        self.source = source
+
+    def __str__(self):
+        return 'checksum failure for file %s' % self.source.filename
 
 class Value():
     def __init__(self, option, value):
@@ -322,6 +365,52 @@ class Section():
         return self.name
 
 class Package():
+    class Pattern():
+        def __init__(self, source, obj):
+            self.source = source
+            self.excludes = []
+
+            if type(obj) is dict:
+                for pattern, options in obj.items():
+                    self.pattern = source.subst(pattern)
+
+                    for option in options:
+                        for key, value in option.items():
+                            if key == 'exclude':
+                                for pattern in value:
+                                    self.excludes.append(pattern)
+                            else:
+                                error('unknown pattern option:', key)
+            elif type(obj) is str:
+                self.pattern = source.subst(obj)
+            else:
+                error('unknown pattern type:', obj)
+                raise Exception
+
+        def matches(self):
+            if self.pattern.startswith(os.sep):
+                pattern = self.pattern[len(os.sep):]
+            else:
+                pattern = self.pattern
+
+            matches = []
+
+            for match in glob.glob(pattern):
+                for exclude in self.excludes:
+                    if fnmatch.fnmatch(match, exclude):
+                        continue
+
+                matches.append(match)
+
+            return matches
+
+        def exclude(self, filename):
+            for pattern in self.excludes:
+                if fnmatch.fnmatch(filename, pattern):
+                    return True
+
+            return False
+
     def __init__(self, source, name):
         self.source = source
         self.name = name
@@ -336,14 +425,21 @@ class Package():
 
             if 'files' in yaml:
                 for pattern in yaml['files']:
+                    pattern = Package.Pattern(self.source, pattern)
                     self.files.append(pattern)
 
     def dump(self, indent):
         iprint(indent, 'Package:', self.name)
         iprint(indent, '  Description:', self.description)
         iprint(indent, '  Files:')
-        for filename in self.files:
-            iprint(indent, '   ', filename)
+        for pattern in self.files:
+            iprint(indent, '   ', pattern.pattern)
+
+            if pattern.excludes:
+                iprint(indent, '    - exclude:')
+
+                for exclude in pattern.excludes:
+                    iprint(indent, '      -', exclude)
 
 class SourceFile():
     def __init__(self, source):
@@ -364,6 +460,7 @@ class SourceFile():
 class DownloadSourceFile(SourceFile):
     def __init__(self, source):
         SourceFile.__init__(self, source)
+        self.filename = None
 
     def parse(self, yaml):
         SourceFile.parse(self, yaml)
@@ -378,21 +475,56 @@ class DownloadSourceFile(SourceFile):
         else:
             self.sha1 = None
 
+        url = self.source.subst(self.url)
+        self.filename = os.path.basename(url)
+
+    def exists(self):
+        filename = os.path.join('download', self.filename)
+
+        return os.path.exists(filename)
+
     def fetch(self):
         url = self.source.subst(self.url)
-        filename = os.path.basename(url)
 
-        filename = os.path.join('download', filename)
-        if os.path.exists(filename):
-            if self.checksum():
-                return
-
-        src = urllib.request.urlopen(url)
+        # XXX This is suboptimal because it requires a network connection
+        # before it can be determined whether or not the file was already
+        # downloaded.
+        try:
+            src = urllib.request.urlopen(url)
+        except urllib.error.URLError as e:
+            print('failed to open %s:' % url, e)
+            return
 
         if isinstance(src, http.client.HTTPResponse):
             headers = dict(src.getheaders())
         else:
             headers = src.info()
+
+        if 'Content-Disposition' in headers:
+            header = headers['Content-Disposition']
+
+            parts = header.split(';')
+            if parts[0] == 'attachment':
+                if len(parts[1:]) > 1:
+                    print('WARNING: attachment:', ';'.join(parts[1:]))
+
+                for part in parts[1:]:
+                    key, value = part.strip().split('=')
+                    if key == 'filename':
+                        self.filename = value
+            else:
+                print('WARNING: Content-Disposition:', header)
+
+        filename = os.path.join('download', self.filename)
+        if os.path.exists(filename):
+            src.close()
+
+            if not self.checksum():
+                raise ChecksumError(self)
+
+            return
+
+        print("\r \033[1;33m*\033[0m downloading %s..." % url, end = '')
 
         if 'Content-Length' in headers:
             total = int(headers['Content-Length'])
@@ -402,6 +534,8 @@ class DownloadSourceFile(SourceFile):
         done = 0
 
         with open(filename, 'wb') as dst:
+            old_progress = -1
+
             while True:
                 buf = src.read(512)
                 if not buf:
@@ -415,19 +549,25 @@ class DownloadSourceFile(SourceFile):
                 else:
                     progress = 'n/a'
 
-                print("\r \033[1;33m*\033[0m downloading %s...%s" %
-                      (url, progress), end = '')
+                if progress != old_progress:
+                    print("\r \033[1;33m*\033[0m downloading %s...%s" %
+                          (url, progress), end = '')
+                    old_progress = progress
 
-            print()
+            print("\r \033[1;33m*\033[0m downloading %s...done" % url)
+
+        if not self.checksum():
+            raise ChecksumError(self)
 
     def checksum(self):
-        basename = self.source.subst(os.path.basename(self.url))
-        filename = os.path.join('download', basename)
+        filename = os.path.join('download', self.filename)
         size = os.path.getsize(filename)
 
         digest = hashlib.sha1()
 
         with open(filename, 'rb') as file:
+            old_progress = -1
+
             while True:
                 buf = file.read(512)
                 if not buf:
@@ -435,18 +575,19 @@ class DownloadSourceFile(SourceFile):
 
                 progress = file.tell() * 100 / size
 
-                print('\r \033[1;33m*\033[0m verifying %s...%3u%%' %
-                      (filename, progress), end = '')
+                if progress != old_progress:
+                    print('\r \033[1;33m*\033[0m verifying %s...%3u%%' %
+                          (filename, progress), end = '')
+                    old_progress = progress
 
                 digest.update(buf)
 
-            print()
+            print('\r \033[1;33m*\033[0m verifying %s...done' % filename)
 
         return digest.hexdigest() == self.sha1
 
     def extract(self, directory, force = False):
-        basename = self.source.subst(os.path.basename(self.url))
-        filename = os.path.join('download', basename)
+        filename = os.path.join('download', self.filename)
 
         with io.open(filename, 'rb') as file:
             filesize = file.seek(0, io.SEEK_END)
@@ -457,6 +598,8 @@ class DownloadSourceFile(SourceFile):
 
             with pbs.pushd(directory):
                 with tarfile.open(fileobj = file, mode = 'r') as tar:
+                    old_progress = -1
+
                     entry = tar.next()
                     if not entry.isdir():
                         print('WARNING: first entry is not a directory')
@@ -486,9 +629,12 @@ class DownloadSourceFile(SourceFile):
                             tar.extract(entry)
 
                             progress = file.tell() * 100 / filesize
-                            print('\r \033[1;33m*\033[0m extracting %s...%3u%%' %
-                                    (filename, progress), end = '',
-                                    flush = True)
+
+                            if progress != old_progress:
+                                print('\r \033[1;33m*\033[0m extracting %s...%3u%%' %
+                                        (filename, progress), end = '',
+                                        flush = True)
+                                old_progress = progress
 
                         status = 'done'
                     else:
@@ -501,6 +647,67 @@ class DownloadSourceFile(SourceFile):
         url = self.source.subst(self.url)
         iprint(indent, 'Download:', url)
         iprint(indent, '  SHA1:', self.sha1)
+
+    def watch(self, verbose = False):
+        print('  \033[33;1m-\033[0m %s... ' % self.url, end = '', flush = True)
+
+        keywords = {
+                'version': '([\d\.]+)',
+                'major': '(\d+)',
+                'minor': '(\d+)',
+                'micro': '(\d+)'
+            }
+
+        template = string.Template(self.url)
+        regex = template.substitute(keywords)
+
+        (scheme, netloc, path, *unused) = urllib.parse.urlparse(regex)
+        (params, query, fragment) = unused
+
+        if netloc == 'prdownloads.sourceforge.net':
+            print('\033[35;1mskipped\033[0m')
+            return
+
+        # initialize with the base URL
+        urls = [ scheme + '://' + netloc ]
+        path = path.split('/')[1:]
+
+        # iterate over each component (skipping the first because it's empty)
+        for component in path:
+            bases = []
+
+            for base in urls:
+                if re.findall('\(.*\)', component):
+                    try:
+                        matches = resolve(scheme, base, component)
+                    except Exception as e:
+                        print('\033[31;1mfailed\033[0m (%s)' % e)
+                        return
+
+                    for match in matches:
+                        bases.append(base + '/' + match)
+                else:
+                    bases.append(base + '/' + component)
+
+            urls = bases
+
+        if not urls:
+            print('\033[31;1mfailed\033[0m')
+            return
+
+        regex = re.compile(regex)
+        versions = []
+
+        for url in urls:
+            match = regex.match(url)
+            versions.append(match.group(match.lastindex))
+
+        latest = max(versions, key = distutils.version.LooseVersion)
+
+        if latest <= self.source.version:
+            print('\033[32;1mup-to-date\033[0m')
+        else:
+            print('\033[33;1m%s\033[0m' % latest)
 
 class Source():
     class Option():
@@ -518,6 +725,9 @@ class Source():
         self.directory = directory
         self.section = section
         self.name = name
+
+        self.description = None
+        self.version = None
 
         self.files = []
         self.depends = []
@@ -543,6 +753,10 @@ class Source():
                 source = DownloadSourceFile(source)
                 source.parse(yaml[key])
                 return source
+            elif key == 'source':
+                source = VCSSourceFile(source)
+                source.parse(yaml[key])
+                return source
             else:
                 error('invalid type of source file:', key)
 
@@ -553,39 +767,57 @@ class Source():
             option.description = values['description']
 
         if 'default' in values:
-            option.default = values['default']
+            if values['default'] == 'no':
+                option.default = False
+            elif values['default'] == 'yes':
+                option.default = True
+            else:
+                error('unknown default value', values['default'],
+                      'for option', name)
+                option.default = False
 
         return option
 
-    def parse(self, yaml):
-        if 'description' in yaml:
-            self.description = yaml['description']
-        else:
-            self.description = None
+    def parse(self, values):
+        if 'include' in values:
+            includes = values['include']
 
-        if 'version' in yaml:
-            self.version = str(yaml['version'])
-        else:
-            self.version = None
+            if isinstance(includes, str):
+                includes = [ includes ]
 
-        if 'depends' in yaml and yaml['depends']:
-            for name in yaml['depends']:
+            # includes are relative to the source tree
+            for include in includes:
+                filename = os.path.join(pbs.srctree, include)
+
+                with open(filename, 'r') as stream:
+                    nested = yaml.load(stream, Loader = yaml.BaseLoader)
+                    self.parse(nested)
+
+        if 'description' in values:
+            self.description = values['description']
+
+        if 'version' in values:
+            self.version = str(values['version'])
+
+        if 'depends' in values and values['depends']:
+            for name in values['depends']:
                 self.depends.append(name)
 
-        if 'options' in yaml and yaml['options']:
-            for name in yaml['options']:
-                option = Source.parse_option(self, name, yaml['options'][name])
+        if 'options' in values and values['options']:
+            for name in values['options']:
+                value = values['options'][name]
+                option = Source.parse_option(self, name, value)
                 self.options.append(option)
 
-        if 'files' in yaml:
-            for origin in yaml['files']:
+        if 'files' in values:
+            for origin in values['files']:
                 source = Source.parse_source_file(self, origin)
                 self.files.append(source)
 
-        if 'packages' in yaml:
-            for name in yaml['packages']:
+        if 'packages' in values:
+            for name in values['packages']:
                 package = Package(self, name)
-                package.parse(yaml['packages'][name])
+                package.parse(values['packages'][name])
                 self.packages.append(package)
 
     def subst(self, template):
@@ -614,6 +846,13 @@ class Source():
             for dependency in self.depends:
                 print(' ', dependency, file = stream)
 
+    def exists(self):
+        for source in self.files:
+            if not source.exists():
+                return False
+
+        return True
+
     def fetch(self):
         for source in self.files:
             source.fetch()
@@ -622,7 +861,7 @@ class Source():
         for source in self.files:
             source.extract(directory)
 
-    def dump(self, indent):
+    def dump(self, indent = 0):
         iprint(indent, 'Source:', self.name)
         iprint(indent, '  Description:', self.description)
 
@@ -635,10 +874,42 @@ class Source():
         for package in self.packages:
             package.dump(indent + 2)
 
+    '''
+    Obtain the list of a package file's dependencies. This is determined
+    by looking at the files that it includes.
+    '''
+    def includes(self, filename, recursive = True):
+        dependencies = []
+
+        with open(filename, 'r') as stream:
+            content = yaml.load(stream, Loader = yaml.BaseLoader)
+
+            if 'include' in content:
+                includes = content['include']
+
+                if isinstance(includes, str):
+                    includes = [ includes ]
+
+                # include files are relative to the source tree
+                for include in includes:
+                    include = os.path.join(pbs.srctree, include)
+
+                    if recursive:
+                        new = self.includes(include)
+                        dependencies.extend(new)
+
+                    dependencies.append(include)
+
+        return dependencies
+
     def hash(self):
         m = hashlib.sha1()
 
-        for filename in ['package', 'Makefile']:
+        dependencies = self.includes(os.path.join(self.directory, 'package'))
+        dependencies.append(os.path.join(self.directory, 'package'))
+        dependencies.append(os.path.join(self.directory, 'Makefile'))
+
+        for filename in dependencies:
             m.update(filename.encode())
 
             filename = os.path.join(self.directory, filename)
@@ -648,11 +919,26 @@ class Source():
 
         return m.hexdigest()
 
+    def watch(self):
+        print('\033[33;1m*\033[0m checking', self.full_name, 'for updates...',
+              end = '')
+
+        if self.files:
+            print()
+
+            for source in self.files:
+                source.watch()
+        else:
+            print(' \033[35;1mskipped\033[0m')
+
 class Database():
     def __init__(self):
-        pass
+        self.directory = None
 
-    def load_architecture(directory):
+    def load_architecture(directory = None):
+        if not directory:
+            directory = self.directory
+
         filename = os.path.join(directory, 'architecture')
         basename = os.path.basename(directory)
 
@@ -720,7 +1006,12 @@ class Database():
 
     def load(self, directory = None):
         if not directory:
-            directory = os.getcwd()
+            if self.directory:
+                directory = self.directory
+            else:
+                directory = os.getcwd()
+
+        self.directory = directory
 
         self.architectures = Database.load_architectures(directory)
         self.packages = Database.load_packages(directory)
