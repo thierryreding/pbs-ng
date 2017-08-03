@@ -1,11 +1,14 @@
 description: Portable, high-level programming interface to various calling conventions
-version: 3.0.13
+version: 3.2.1
 license: MIT
+
+depends:
+  - devel/glibc
 
 files:
   - download:
       url: ftp://sourceware.org/pub/libffi/libffi-${version}.tar.gz
-      sha1: f5230890dc0be42fb5c58fbf793da253155de106
+      sha1: 280c265b789e041c02e5c97815793dfc283fb1e6
 
 packages:
   libffi:

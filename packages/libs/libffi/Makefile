@@ -2,6 +2,7 @@ include $(TOP_SRCDIR)/packages/common.mk
 
 $(srcdir)/stamp-patch:
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/remove-libtool-ldflags.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/libdir.patch
 	touch $@
 
 $(builddir):
@@ -15,6 +16,7 @@ conf-args = \
 	--host=$(HOST) \
 	--prefix=$(PREFIX) \
 	--libdir=$(PREFIX)/lib \
+	--libexecdir=$(PREFIX)/lib \
 	--with-sysroot=$(SYSROOT)
 
 conf-vars = \
@@ -23,6 +25,7 @@ conf-vars = \
 	LDFLAGS='--sysroot $(SYSROOT)'
 
 $(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
+	cd $(srcdir) && autoreconf
 	cd $(builddir) && \
 		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@
