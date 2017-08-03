@@ -1,5 +1,5 @@
 description: Bource Again SHell
-version: 4.3
+version: 4.4
 license: GPL-3.0
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: ftp://ftp.gnu.org/pub/gnu/bash/bash-${version}.tar.gz
-      sha1: 487840ab7134eb7901fbb2e49b0ee3d22de15cb8
+      sha1: 8de012df1e4f3e91f571c3eb8ec45b43d7c747eb
 
 packages:
   bash:
