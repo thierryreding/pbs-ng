@@ -1,5 +1,5 @@
 description: X11 RandR extension wire protocol
-version: 1.4.0
+version: 1.5.0
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/proto/randrproto-${version}.tar.bz2
-      sha1: 65d2fc4440adf1557cde2b36901a3de21ab189c1
+      sha1: bc420745dc4af011988e9dcabdadf8829cbc2374
 
 packages:
   randrproto-dev:
