@@ -1,24 +1,20 @@
-include $(TOP_SRCDIR)/packages/common.mk
+include $(TOP_SRCDIR)/packages/autotools.mk
 
 ifeq ($(realpath $(srcdir)),$(srcdir))
-$(srcdir)/stamp-patch:
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/ltmain-sysroot.patch
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && autoreconf --force --install
 	touch $@
 
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
+else
+$(builddir)/stamp-prepare: | $(builddir)
+	cd $(srcdir) && autoreconf --force --install
+	touch $@
+
+$(builddir)/stamp-configure: $(builddir)/stamp-prepare
 endif
 
-$(builddir):
-	mkdir -p $@
-
-conf-env = \
-	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
-	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)'
-
-conf-args = \
-	--host=$(HOST) \
-	--prefix=$(PREFIX) \
-	--libdir=$(PREFIX)/lib \
+conf-args += \
 	--with-sysroot=$(SYSROOT)
 
 ifneq ($(package.option.kms),y)
@@ -64,9 +60,9 @@ else
 endif
 
 ifneq ($(package.option.freedreno),y)
-  conf-args += --disable-freedreno-experimental-api
+  conf-args += --disable-freedreno
 else
-  conf-args += --enable-freedreno-experimental-api
+  conf-args += --enable-freedreno
 endif
 
 ifneq ($(package.option.tegra),y)
@@ -75,32 +71,5 @@ else
   conf-args += --enable-tegra-experimental-api
 endif
 
-conf-vars = \
-	CPPFLAGS='--sysroot $(SYSROOT)' \
-	CFLAGS='--sysroot $(SYSROOT)' \
-	LDFLAGS='--sysroot $(SYSROOT)'
-
-$(builddir)/stamp-configure: | $(builddir)
-	cd $(builddir) && \
-		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
-	touch $@
-
-build-args = \
-	-j $(JOBS)
-
-$(builddir)/stamp-build: $(builddir)/stamp-configure
-	cd $(builddir) && \
-		$(MAKE) $(build-args)
-	touch $@
-
-install-args = \
-	DESTDIR='$(DESTDIR)'
-
-$(builddir)/stamp-install: $(builddir)/stamp-build
-	cd $(builddir) && \
-		fakeroot $(MAKE) $(install-args) install
-	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install
+conf-args += \
+	--enable-install-test-programs

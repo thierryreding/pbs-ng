@@ -1,15 +1,17 @@
 description: Userspace interface to kernel DRM services
-version: 2.4.54
+version: 2.4.82
 license: custom
 
 depends:
+  - build-tools/xorg/util-macros
   - devel/glibc
+  - libs/libpciaccess
   - libs/libpthread-stubs
 
 files:
   - download:
       url: http://dri.freedesktop.org/libdrm/libdrm-${version}.tar.bz2
-      sha1: b73d69b42800755ed9dfd8aa9a906fe941cfbb7e
+      sha1: c42ff308db6352eaf009a8209c7aaadbc951a89f
 
 options:
   kms:
@@ -30,7 +32,7 @@ options:
 
   nouveau:
     description: enable Nouveau API
-    default: no
+    default: yes
 
   omap:
     description: enable OMAP API
@@ -46,12 +48,20 @@ options:
 
   tegra:
     description: enable Tegra API
-    default: no
+    default: yes
 
 packages:
   libdrm:
     files:
       - /usr/lib/*.so.*
+
+  libdrm-utils:
+    files:
+      - /usr/bin/kms-*
+      - /usr/bin/modeprint
+      - /usr/bin/modetest
+      - /usr/bin/proptest
+      - /usr/bin/vbltest
 
   libdrm-dev:
     files:
