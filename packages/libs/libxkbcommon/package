@@ -1,0 +1,26 @@
+description: keyboard description handling library
+version: 0.7.1
+license: custom
+
+depends:
+  - devel/glibc
+  - xorg/util/util-macros
+
+files:
+  - download:
+      url: http://xkbcommon.org/download/libxkbcommon-${version}.tar.xz
+      sha1: 6c0007a0206cd8bc1fa68f50aa86627d669282a2
+
+packages:
+  libxkbcommon:
+    files:
+      - /usr/lib/*.so.*
+
+  libxkbcommon-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
