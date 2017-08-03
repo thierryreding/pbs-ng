@@ -1,0 +1,33 @@
+description: input device handling library
+version: 1.8.1
+license: custom
+
+depends:
+  - devel/glibc
+  - core/systemd # for libudev
+  - libs/libevdev
+  - libs/libwacom
+  - libs/mtdev
+
+files:
+  - download:
+      url: http://www.freedesktop.org/software/libinput/libinput-${version}.tar.xz
+      sha1: db474adb583633d0c6318973370c21702b6e654d
+
+packages:
+  libinput:
+    files:
+      - /usr/lib/*.so.*
+
+  libinput-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libinput-utils:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
