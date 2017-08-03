@@ -1,0 +1,26 @@
+description: ext2/3/4 filesystem utilities
+version: 1.43.4
+license: GPL-2.0, LPGL-2.1, MIT
+
+files:
+  - download:
+      url: https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v${version}/e2fsprogs-${version}.tar.xz
+      sha1: 3073dfe3d67075d3ae68e41e78120f14a18ac9ba
+
+depends:
+  - devel/glibc
+
+packages:
+  e2fsprogs:
+    files:
+      - /usr/bin
+
+  e2fsprogs-locale:
+    files:
+      - /usr/share/locale
+
+  e2fsprogs-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
