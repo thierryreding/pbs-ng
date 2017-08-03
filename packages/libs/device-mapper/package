@@ -1,0 +1,24 @@
+description: device mapper userspace library and tools
+version: 2.02.168
+license: GPL-2.0, LGPL-2.1
+
+files:
+  - download:
+      url: ftp://sources.redhat.com/pub/lvm2/LVM2.${version}.tgz
+      sha1: c650cad608e12d23995da9fa5e4a5485a8eeaae0
+
+depends:
+  - devel/glibc
+
+packages:
+  libdevmapper:
+    files:
+      - /usr/lib/*.so.*
+
+  libdevmapper-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
