@@ -1,0 +1,12 @@
+diff --git a/support/nsm/rpc.c b/support/nsm/rpc.c
+index 4e5f40e79d8f..d91c6eaa6c18 100644
+--- a/support/nsm/rpc.c
++++ b/support/nsm/rpc.c
+@@ -40,6 +40,7 @@
+ 
+ #include <time.h>
+ #include <stdbool.h>
++#include <stdint.h>
+ #include <string.h>
+ #include <unistd.h>
+ #include <fcntl.h>

@@ -1,11 +1,11 @@
 diff --git a/support/export/Makefile.am b/support/export/Makefile.am
-index 1ea15397c3a9..dfcf9e33c962 100644
+index be3de6902dd5..ba4f35f05eaa 100644
 --- a/support/export/Makefile.am
 +++ b/support/export/Makefile.am
 @@ -1,5 +1,6 @@
  ## Process this file with automake to produce Makefile.in
  
-+AM_CPPFLAGS = -I $(top_srcdir)/support/include
++AM_CPPFLAGS = -I $(top_srcdir)/support/include $(TIRPC_CFLAGS)
  
  GENFILES_CLNT	= mount_clnt.c
  GENFILES_XDR	= mount_xdr.c
@@ -22,7 +22,7 @@ index 10485808a85e..e20df7dc9275 100644
  libmisc_a_SOURCES = tcpwrapper.c from_local.c mountpoint.c
  
 diff --git a/support/nfs/Makefile.am b/support/nfs/Makefile.am
-index fb9b8c109723..24e29fb5d78e 100644
+index b74c8700e057..9012b3616c74 100644
 --- a/support/nfs/Makefile.am
 +++ b/support/nfs/Makefile.am
 @@ -1,5 +1,7 @@
@@ -32,7 +32,7 @@ index fb9b8c109723..24e29fb5d78e 100644
 +
  noinst_LIBRARIES = libnfs.a
  libnfs_a_SOURCES = exports.c rmtab.c xio.c rpcmisc.c rpcdispatch.c \
- 		   xlog.c xcommon.c wildmat.c mydaemon.c nfsclient.c \
+ 		   xlog.c xcommon.c wildmat.c mydaemon.c \
 diff --git a/support/nsm/Makefile.am b/support/nsm/Makefile.am
 index 2038e688be50..23dced8918e3 100644
 --- a/support/nsm/Makefile.am
@@ -109,32 +109,44 @@ index 8a9ec89cea76..b2d43fc76ff8 100644
  LIBTOOL = @LIBTOOL@ --tag=CC
  
  noinst_PROGRAMS = rpcgen
+diff --git a/utils/blkmapd/Makefile.am b/utils/blkmapd/Makefile.am
+index 203f9f2b6eb8..c63dd0a57fa6 100644
+--- a/utils/blkmapd/Makefile.am
++++ b/utils/blkmapd/Makefile.am
+@@ -1,5 +1,7 @@
+ ## Process this file with automake to produce Makefile.in
+ 
++AM_CPPFLAGS = -I $(top_srcdir)/support/include $(TIRPC_CFLAGS)
++
+ man8_MANS	= blkmapd.man
+ EXTRA_DIST = $(man8_MANS)
+ 
 diff --git a/utils/exportfs/Makefile.am b/utils/exportfs/Makefile.am
-index d0226fcafe79..4813496fd630 100644
+index d0226fcafe79..ff08b86e4741 100644
 --- a/utils/exportfs/Makefile.am
 +++ b/utils/exportfs/Makefile.am
 @@ -1,5 +1,7 @@
  ## Process this file with automake to produce Makefile.in
  
-+AM_CPPFLAGS = -I $(top_srcdir)/support/include
++AM_CPPFLAGS = -I $(top_srcdir)/support/include $(TIRPC_CFLAGS)
 +
  man5_MANS	= exports.man
  man7_MANS	= nfsd.man
  man8_MANS	= exportfs.man
 diff --git a/utils/idmapd/Makefile.am b/utils/idmapd/Makefile.am
-index c2f8ba1ca672..be8749bbe47d 100644
+index c2f8ba1ca672..690b1381a32c 100644
 --- a/utils/idmapd/Makefile.am
 +++ b/utils/idmapd/Makefile.am
 @@ -1,5 +1,7 @@
  ## Process this file with automake to produce Makefile.in
  
-+AM_CPPFLAGS = -I $(top_srcdir)/support/include
++AM_CPPFLAGS = -I $(top_srcdir)/support/include $(TIRPC_CFLAGS)
 +
  man8_MANS	= idmapd.man
  
  RPCPREFIX	= rpc.
 diff --git a/utils/mount/Makefile.am b/utils/mount/Makefile.am
-index e24f3bd24b1b..8c4dcc3a1538 100644
+index e24f3bd24b1b..84728bfe3503 100644
 --- a/utils/mount/Makefile.am
 +++ b/utils/mount/Makefile.am
 @@ -1,8 +1,6 @@
@@ -143,7 +155,7 @@ index e24f3bd24b1b..8c4dcc3a1538 100644
 -# These binaries go in /sbin (not /usr/sbin), and that cannot be
 -# overridden at config time.
 -sbindir = /sbin
-+AM_CPPFLAGS = -I $(top_srcdir)/support/include
++AM_CPPFLAGS = -I $(top_srcdir)/support/include $(TIRPC_CFLAGS)
  
  man8_MANS	= mount.nfs.man umount.nfs.man
  man5_MANS	= nfs.man
@@ -200,25 +212,25 @@ index ded1fd308608..612b8fe1858c 100644
  
  MAINTAINERCLEANFILES = Makefile.in
 diff --git a/utils/showmount/Makefile.am b/utils/showmount/Makefile.am
-index 4ba5ead572fc..91864d9756d5 100644
+index 4ba5ead572fc..0f3a3d58fef3 100644
 --- a/utils/showmount/Makefile.am
 +++ b/utils/showmount/Makefile.am
 @@ -1,5 +1,7 @@
  ## Process this file with automake to produce Makefile.in
  
-+AM_CPPFLAGS = -I $(top_srcdir)/support/include
++AM_CPPFLAGS = -I $(top_srcdir)/support/include $(TIRPC_CFLAGS)
 +
  man8_MANS	= showmount.man
  EXTRA_DIST	= $(man8_MANS)
  
 diff --git a/utils/statd/Makefile.am b/utils/statd/Makefile.am
-index 152b6806d29b..221ca5faf49b 100644
+index 152b6806d29b..452cc2787b0b 100644
 --- a/utils/statd/Makefile.am
 +++ b/utils/statd/Makefile.am
 @@ -1,5 +1,7 @@
  ## Process this file with automake to produce Makefile.in
  
-+AM_CPPFLAGS = -I $(top_srcdir)/support/include
++AM_CPPFLAGS = -I $(top_srcdir)/support/include $(TIRPC_CFLAGS)
 +
  man8_MANS = statd.man sm-notify.man
  
