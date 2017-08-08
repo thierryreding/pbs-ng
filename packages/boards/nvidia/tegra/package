@@ -1,0 +1,42 @@
+description: generic NVIDIA Tegra board
+version: 2017.07
+license: GPL-2.0
+
+depends:
+  - base/filesystem
+  - core/systemd
+  - xorg/xserver
+  - desktop/weston
+
+options:
+  soc:
+    description: SoC generation
+    choice:
+      tegra20:
+        description: NVIDIA Tegra20
+
+      tegra30:
+        description: NVIDIA Tegra30
+
+      tegra114:
+        description: NVIDIA Tegra114
+
+      tegra124:
+        description: NVIDIA Tegra124
+
+      tegra132:
+        description: NVIDIA Tegra132
+
+      tegra210:
+        description: NVIDIA Tegra210
+
+      tegra186:
+        description: NVIDIA Tegra186
+
+packages:
+  board-nvidia-tegra:
+    files:
+      - /etc
+      - /usr/lib/mkinitrd
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

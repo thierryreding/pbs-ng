@@ -1,0 +1,3 @@
+#!/bin/sh
+
+install_firmware nvidia/tegra210/xusb.bin

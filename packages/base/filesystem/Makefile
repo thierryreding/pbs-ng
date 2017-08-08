@@ -35,14 +35,9 @@ $(builddir)/stamp-install: | $(builddir) $(DESTDIR)
 	# files
 	dbus-uuidgen --ensure=$(DESTDIR)/etc/machine-id
 
-	echo 'root:$(password):0:0:root:/root:/bin/sh' > $(DESTDIR)/etc/passwd
-	echo 'messagebus:x:81:81:messagebus:/var/run/dbus:/bin/false' >> $(DESTDIR)/etc/passwd
-	echo 'systemd-network:x:193:193::/:/usr/bin/nologin' >> $(DESTDIR)/etc/passwd
-
-	echo 'lock:x:20:' > $(DESTDIR)/etc/group
-	echo 'utmp:x:54:' >> $(DESTDIR)/etc/group
-	echo 'messagebus:x:81:' >> $(DESTDIR)/etc/group
-	echo 'systemd-journal:x:190:' >> $(DESTDIR)/etc/group
+	for file in passwd group; do \
+		cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/$$file $(DESTDIR)/etc/$$file \
+	done
 
 	cp -a $(TOP_SRCDIR)/$(PKGDIR)/files/etc/pam.d/* $(DESTDIR)/etc/pam.d
 

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if test -n "$kernel"; then
+	install_module kernel/drivers/i2c/busses/i2c-tegra.ko
+	install_module kernel/drivers/phy/tegra/phy-tegra-xusb.ko
+	install_module kernel/drivers/net/ethernet/realtek/r8169.ko
+	install_module kernel/drivers/regulator/as3722-regulator.ko
+	install_module kernel/drivers/net/usb/r8152.ko
+
+	install_module kernel/drivers/mmc/host/sdhci-tegra.ko
+	install_module kernel/drivers/mmc/card/mmc_block.ko
+fi

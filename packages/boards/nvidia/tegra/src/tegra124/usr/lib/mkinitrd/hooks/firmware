@@ -1,0 +1,4 @@
+#!/bin/sh
+
+install_firmware rtl_nic/rtl8168g-2.fw
+install_firmware nvidia/tegra124/xusb.bin

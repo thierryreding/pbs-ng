@@ -1,0 +1,3 @@
+#!/bin/sh
+
+install_firmware rtl_nic/rtl8168g-2.fw

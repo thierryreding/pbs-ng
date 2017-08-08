@@ -1,0 +1,54 @@
+make_directory /etc
+make_directory /dev
+make_directory /proc
+make_directory /media
+make_directory /run
+make_directory /scripts
+make_directory /sys
+make_directory /usr
+make_directory /usr/bin
+make_directory /usr/lib
+
+make_symlink usr/bin /bin
+make_symlink usr/bin /sbin
+make_symlink bin /usr/sbin
+make_symlink usr/lib /lib
+
+copy_program /usr/bin/mount
+copy_program /usr/bin/mount.nfs
+copy_program /usr/bin/run-parts
+copy_program /usr/bin/sh
+copy_program /usr/bin/umount
+copy_program /usr/bin/blkid
+copy_program /usr/bin/fsck
+copy_program /usr/bin/fsck.ext4
+copy_program /usr/bin/halt
+copy_program /usr/bin/poweroff
+copy_program /usr/bin/reboot
+copy_program /usr/bin/switch_root
+copy_program /usr/bin/cat
+copy_program /usr/bin/cp
+copy_program /usr/bin/cut
+copy_program /usr/bin/echo
+copy_program /usr/bin/kill
+copy_program /usr/bin/ln
+copy_program /usr/bin/ls
+copy_program /usr/bin/mkdir
+copy_program /usr/bin/modprobe
+copy_program /usr/bin/readlink
+copy_program /usr/bin/sleep
+copy_program /usr/bin/test
+
+copy_program /usr/bin/udevadm
+copy_program /usr/lib/systemd/systemd-udevd
+copy_directory /usr/lib/udev/rules.d
+
+if ! test -d "$dest/lib/lsb"; then
+	echo '  MKDIR    /lib/lsb'
+	mkdir -p "$dest/lib/lsb"
+fi
+
+install_script /lib/lsb/init-functions
+install_script /shutdown
+install_script /scripts/shutdown/unmount
+install_script /init
