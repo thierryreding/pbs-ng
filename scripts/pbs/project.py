@@ -403,8 +403,9 @@ class Package():
                     with tarfile.open(fileobj = file, mode = 'r') as tarball:
                         for entry in tarball:
                             try:
-                                if entry.issym() and os.path.exists(entry.name):
-                                    os.unlink(entry.name)
+                                if os.path.exists(entry.name):
+                                    if not entry.isdir():
+                                        os.remove(entry.name)
 
                                 tarball.extract(entry)
                             except Exception as e:
