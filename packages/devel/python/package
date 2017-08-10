@@ -3,7 +3,7 @@ include: packages/devel/python/package.include
 depends:
   - build-tools/python
   - libs/bzip2
-  - libs/openssl
+  - libs/libressl
   - libs/xz
 
 packages:

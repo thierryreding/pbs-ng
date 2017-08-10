@@ -9,7 +9,7 @@ files:
 
 depends:
   - devel/glibc
-  - libs/openssl
+  - libs/libressl
 
 packages:
   openssh:
