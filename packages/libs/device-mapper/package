@@ -1,11 +1,11 @@
 description: device mapper userspace library and tools
-version: 2.02.168
+version: 2.02.173
 license: GPL-2.0, LGPL-2.1
 
 files:
   - download:
       url: ftp://sources.redhat.com/pub/lvm2/LVM2.${version}.tgz
-      sha1: c650cad608e12d23995da9fa5e4a5485a8eeaae0
+      sha1: 1e04b3e70a2eaec7c037b0b07f063eacc434d3f2
 
 depends:
   - devel/glibc
