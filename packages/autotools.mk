@@ -51,3 +51,24 @@ install: $(builddir)/stamp-install
 ifeq ($(FORCE),y)
 .PHONY: $(builddir)/stamp-build
 endif
+
+# These are useful if the source directory needs to be exclusively accessed
+# for a given build. This can be required if an autotools-based package needs
+# to be reconfigured (i.e. using autoreconf). Concurrent builds will mess up
+# the source directory if autoreconf runs while another process is running
+# the configure script, for example.
+#
+# To use these, make sure the target that runs autoreconf has a dependency on
+# the $(srcdir)/lock target. To ensure that the source directory can be reused
+# for new builds again, make sure to make your install: target depend on
+# $(srcdir)/unlock.
+#
+$(srcdir)/pbs.lock:
+	lockfile $@
+
+$(srcdir)/lock: $(srcdir)/pbs.lock
+
+$(srcdir)/unlock: $(builddir)/stamp-install
+	rm -f $(srcdir)/pbs.lock
+
+.PHONY: $(srcdir)/pbs.lock $(srcdir)/lock $(srcdir)/unlock
