@@ -1,5 +1,5 @@
 description: Reference implementation of a Wayland compositor
-version: 2.0.0
+version: 3.0.0
 license: MIT
 
 depends:
@@ -16,7 +16,7 @@ depends:
 files:
   - download:
       url: http://wayland.freedesktop.org/releases/weston-${version}.tar.xz
-      sha1: 90b3abb1b39f34a052d899ea85cc4e5e0be60bd3
+      sha1: 0a75c2ee10f2453a073411157bb6ed029080669f
 
 packages:
   weston:
