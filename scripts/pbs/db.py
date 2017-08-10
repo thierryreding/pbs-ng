@@ -716,9 +716,52 @@ class Source():
             self.description = None
             self.default = None
 
+        def parse(self, values):
+            if 'default' in values:
+                if values['default'] == 'no':
+                    self.default = False
+                elif values['default'] == 'yes':
+                    self.default = True
+                else:
+                    error('unknown default value', values['default'],
+                          'for option', name)
+                    self.default = False
+            else:
+                error('no default value for option', name)
+
         def dump(self, indent):
             iprint(indent, 'Option:', self.name)
             iprint(indent, '  Description:', self.description)
+            iprint(indent, '  Default:', self.default)
+
+    class Choice():
+        class Option():
+            def __init__(self, name, values):
+                self.name = name
+                self.description = None
+                self.default = False
+
+        def __init__(self, name):
+            self.name = name
+            self.description = None
+            self.default = None
+            self.options = []
+
+        def parse(self, values):
+            if 'description' in values:
+                self.description = values['description']
+
+            for key, value in values['choice'].items():
+                option = Option(key, value)
+                self.options.append(option)
+
+        def dump(self, indent):
+            iprint(indent, 'Choice:', self.name)
+            iprint(indent, '  Description:', self.description)
+
+            for option in self.options:
+                option.dump(indent + 2)
+
             iprint(indent, '  Default:', self.default)
 
     def __init__(self, directory, section, name):
@@ -761,21 +804,15 @@ class Source():
                 error('invalid type of source file:', key)
 
     def parse_option(self, name, values):
-        option = Source.Option(name)
+        if 'choice' in values:
+            option = Source.Choice(name)
+        else:
+            option = Source.Option(name)
 
         if 'description' in values:
             option.description = values['description']
 
-        if 'default' in values:
-            if values['default'] == 'no':
-                option.default = False
-            elif values['default'] == 'yes':
-                option.default = True
-            else:
-                error('unknown default value', values['default'],
-                      'for option', name)
-                option.default = False
-
+        option.parse(values)
         return option
 
     def parse(self, values):

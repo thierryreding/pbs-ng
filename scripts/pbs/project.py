@@ -101,16 +101,119 @@ class Architecture():
 class Package():
     class Option():
         def __init__(self, option):
-            self.option = option
+            self.source = option
+            self.value = option.default
+
+        def configure(self):
+            source = self.source
+
+            while True:
+                yes = 'Y'
+                no = 'n'
+
+                if self.value:
+                    yes = 'Y'
+                    no = 'n'
+                else:
+                    yes = 'y'
+                    no = 'N'
+
+                choice = input('  %s - %s [%s/%s] ' % (source.name,
+                                                       source.description,
+                                                       yes, no))
+                if choice == 'y' or choice == 'Y':
+                    self.value = True
+                    break
+                elif choice == 'n' or choice == 'N':
+                    self.value = False
+                    break
+                elif not choice:
+                    break
 
         def generate_config(self, file = sys.stdout):
-            if self.option.default:
+            name = self.source.name
+
+            if self.source.default:
                 value = 'y'
             else:
                 value = 'n'
 
-            print('package.option.%s =' % (self.option.name), value,
-                  file = file)
+            print('package.option.%s =' % (name), value, file = file)
+
+        def load(self, value):
+            name = self.source.name
+
+            if value == 'yes':
+                self.value = True
+            elif value == 'no':
+                self.value = False
+            else:
+                error('invalid value', value, 'for option', name)
+
+        def save(self):
+            values = {
+                self.source.name: 'yes' if self.value else 'no'
+            }
+
+            return values
+
+    class Choice():
+        def __init__(self, option):
+            self.source = option
+            self.value = None
+
+        def configure(self):
+            while True:
+                source = self.source
+                num_choices = 0
+                choices = []
+
+                print('  %s - %s' % (source.name, source.description))
+
+                for option in source.options:
+                    print('    %u. %s - %s' % (num_choices + 1, option.name,
+                                               option.description))
+                    choices.append(option)
+                    num_choices += 1
+
+                choice = input('choice[1-%u]: ' % num_choices)
+                option = None
+
+                try:
+                    choice = int(choice)
+                    if choice in range(1, num_choices + 1):
+                        option = choices[choice - 1]
+                except:
+                    pass
+
+                last = readline.get_current_history_length()
+                readline.remove_history_item(last - 1)
+
+                if option:
+                    break
+
+            self.value = option
+
+        def generate_config(self, file = sys.stdout):
+            name = self.source.name
+            value = self.value.name
+
+            print('package.option.%s =' % (name), value, file = file)
+
+        # XXX check that configuration value is a valid choice?
+        def load(self, value):
+            for option in self.source.options:
+                if value == option.name:
+                    self.value = option
+                    break
+
+        def save(self):
+            values = {}
+
+            if self.value:
+                values[self.source.name] = self.value.name
+
+            return values
 
     def __init__(self, project, source):
         self.project = project
@@ -121,12 +224,20 @@ class Package():
             'build': None
         }
 
-        for opt in source.options:
-            option = Package.Option(opt)
+        for option in source.options:
+            if isinstance(option, pbs.db.Source.Choice):
+                option = Package.Choice(option)
+            else:
+                option = Package.Option(option)
+
             self.options.append(option)
 
     def configure(self):
-        print('configuring', self.name)
+        if self.options:
+            print('configuring %s - %s:' % (self.source.name, self.source.description))
+
+            for option in self.options:
+                option.configure()
 
     def extract(self, directory):
         self.source.extract(directory)
@@ -332,6 +443,18 @@ class Package():
             for state, value in values['states'].items():
                 self.states[state] = value
 
+        if self.options and 'options' in values:
+            values = values['options']
+
+            for option in self.options:
+                name = option.source.name
+                # XXX enforce that we need a valid value here? force package
+                #     configuration if there is none?
+                if name in values:
+                    option.load(values[name])
+                else:
+                    option.load(None)
+
     def save(self):
         values = {
             'states': {}
@@ -339,6 +462,12 @@ class Package():
 
         for state in self.states:
             values['states'][state] = self.states[state]
+
+        if self.options:
+            values['options'] = {}
+
+            for option in self.options:
+                values['options'].update(option.save())
 
         return values
 
@@ -573,7 +702,13 @@ class Project():
         values['target'] = self.target.save()
 
         for package in self.packages:
-            values['packages'][package.name] = None
+            values['packages'][package.name] = {}
+
+            if package.options:
+                options = values['packages'][package.name]['options'] = {}
+
+                for option in package.options:
+                    options.update(option.save())
 
         stream = open(filename, 'w')
         yaml.dump(values, stream, default_flow_style = False)
