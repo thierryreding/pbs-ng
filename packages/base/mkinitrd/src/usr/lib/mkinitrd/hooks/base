@@ -8,6 +8,7 @@ make_directory /sys
 make_directory /usr
 make_directory /usr/bin
 make_directory /usr/lib
+make_directory /usr/lib/mkinitrd
 
 make_symlink usr/bin /bin
 make_symlink usr/bin /sbin
@@ -43,12 +44,7 @@ copy_program /usr/bin/udevadm
 copy_program /usr/lib/systemd/systemd-udevd
 copy_directory /usr/lib/udev/rules.d
 
-if ! test -d "$dest/lib/lsb"; then
-	echo '  MKDIR    /lib/lsb'
-	mkdir -p "$dest/lib/lsb"
-fi
-
-install_script /lib/lsb/init-functions
-install_script /shutdown
-install_script /scripts/shutdown/unmount
-install_script /init
+install_script /usr/lib/mkinitrd/init-functions /lib/lsb/init-functions
+install_script /usr/lib/mkinitrd/shutdown/shutdown /shutdown
+install_script /usr/lib/mkinitrd/shutdown/unmount /scripts/shutdown/unmount
+install_script /usr/lib/mkinitrd/init /init

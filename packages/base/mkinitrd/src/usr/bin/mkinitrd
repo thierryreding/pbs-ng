@@ -192,14 +192,27 @@ function copy_file()
 
 function install_script()
 {
-	local destdir="${1%/*}"
 	local script="$1"
+	local target="$2"
 
-	make_directory "$destdir"
+	if test "x$target" = "x"; then
+		target="$script"
+	fi
 
-	echo "  INSTALL  $script"
-	cp "$srctree/support/initrd$script" "$dest$script"
-	chmod 0755 "$dest$script"
+	destdir="${target%/*}"
+
+	if test "x$destdir" != "x"; then
+		make_directory "$destdir"
+	fi
+
+	if test "x$2" != "x"; then
+		echo "  INSTALL  $script -> $target"
+	else
+		echo "  INSTALL  $script"
+	fi
+
+	cp "$source$script" "$dest$target"
+	chmod 0755 "$dest$target"
 }
 
 function install_firmware()
@@ -236,82 +249,19 @@ function install_module()
 	cp "$source$module" "$dest$module"
 }
 
-make_directory /etc
-make_directory /dev
-make_directory /proc
-make_directory /media
-make_directory /run
-make_directory /scripts
-make_directory /sys
-make_directory /usr
-make_directory /usr/bin
-make_directory /usr/lib
+. "$source/etc/mkinitrd.conf"
 
-make_symlink usr/bin /bin
-make_symlink usr/bin /sbin
-make_symlink bin /usr/sbin
-make_symlink usr/lib /lib
-
-copy_directory /usr/lib/udev/rules.d
-
-copy_program /usr/bin/mount
-copy_program /usr/bin/mount.nfs
-copy_program /usr/bin/run-parts
-copy_program /usr/bin/sh
-copy_program /usr/bin/umount
-copy_program /usr/bin/blkid
-copy_program /usr/bin/fsck
-copy_program /usr/bin/fsck.ext4
-copy_program /usr/bin/halt
-copy_program /usr/bin/poweroff
-copy_program /usr/bin/reboot
-copy_program /usr/bin/switch_root
-copy_program /usr/bin/cat
-copy_program /usr/bin/cp
-copy_program /usr/bin/cut
-copy_program /usr/bin/echo
-copy_program /usr/bin/kill
-copy_program /usr/bin/ln
-copy_program /usr/bin/ls
-copy_program /usr/bin/mkdir
-copy_program /usr/bin/modprobe
-copy_program /usr/bin/readlink
-copy_program /usr/bin/sleep
-copy_program /usr/bin/test
-copy_program /usr/bin/udevadm
-copy_program /usr/lib/systemd/systemd-udevd
-
-if ! test -d "$dest/lib/lsb"; then
-	echo '  MKDIR    /lib/lsb'
-	mkdir -p "$dest/lib/lsb"
-fi
-
-install_script /lib/lsb/init-functions
-install_script /shutdown
-install_script /scripts/shutdown/unmount
-install_script /init
+for hook in $HOOKS; do
+	. "$source/usr/lib/mkinitrd/hooks/$hook"
+done
 
 if test -n "$kernel"; then
-	#install_module kernel/drivers/i2c/busses/i2c-tegra.ko
-	#install_module kernel/drivers/phy/tegra/phy-tegra-xusb.ko
-	#install_module kernel/drivers/net/ethernet/realtek/r8169.ko
-	#install_module kernel/drivers/regulator/as3722-regulator.ko
-	#install_module kernel/drivers/net/usb/r8152.ko
-
-	#install_module kernel/drivers/mmc/host/sdhci-tegra.ko
-	#install_module kernel/drivers/mmc/card/mmc_block.ko
-
 	copy_file "/lib/modules/$kernel/modules.builtin"
 	copy_file "/lib/modules/$kernel/modules.order"
 
 	echo "  DEPMOD   $kernel"
 	depmod -b "$dest" "$kernel"
 fi
-
-#install_firmware rtl_nic/rtl8168g-2.fw
-#install_firmware nvidia/tegra124/xusb.bin
-#install_firmware nvidia/tegra210/xusb.bin
-install_firmware nvidia/tegra186/xusb.bin
 
 case $output in
 	*.gz)
@@ -328,5 +278,7 @@ case $output in
 		;;
 esac
 
+cpio_args="--format newc --quiet --create --owner root:root"
+
 echo "  GEN      $output"
-(cd "$dest" && find | cpio -H newc --quiet -o) | $compress > "$output"
+(cd "$dest" && find | cpio $cpio_args) | $compress > "$output"
