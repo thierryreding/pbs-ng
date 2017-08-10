@@ -1,10 +1,16 @@
-description = 'scan for new package versions'
-usage = 'watch'
+import argparse
+
+description = 'scan for new package version(s)'
+usage = 'watch [options] [package...]'
 summary = ''
 
 def exec(project, *args):
-    if len(args) > 1:
-        for name in args[1:]:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('packages', nargs = '*')
+    args = parser.parse_args(args[1:])
+
+    if len(args.packages):
+        for name in args.packages:
             package = project.find_package(name)
             if not package:
                 print('ERROR: package', name, 'not found')
