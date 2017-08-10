@@ -22,17 +22,21 @@ files:
 packages:
   systemd:
     files:
-      - /etc/bash_completion.d
-      - /etc/dbus-1
+      - /etc/binfmt.d
+      - /etc/init.d
+      - /etc/kernel/install.d
       - /etc/modules-load.d
+      - /etc/pam.d
       - /etc/sysctl.d
       - /etc/systemd
       - /etc/tmpfiles.d
       - /etc/udev
+      - /etc/X11
       - /etc/xdg
       - /usr/bin
       - /usr/lib/*.so.*
       - /usr/lib/binfmt.d
+      - /usr/lib/environment.d
       - /usr/lib/kernel
       - /usr/lib/modules-load.d
       - /usr/lib/security
@@ -41,9 +45,11 @@ packages:
       - /usr/lib/sysusers.d
       - /usr/lib/tmpfiles.d
       - /usr/lib/udev
+      - /usr/share/bash-completion
       - /usr/share/dbus-1
       - /usr/share/factory
       - /usr/share/polkit-1
+      - /usr/share/systemd
 
   systemd-dev:
     files:
