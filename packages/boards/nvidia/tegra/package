@@ -4,6 +4,7 @@ license: GPL-2.0
 
 depends:
   - base/filesystem
+  - base/mkinitrd
   - core/systemd
   - xorg/xserver
   - desktop/weston
