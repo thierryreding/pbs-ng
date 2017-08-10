@@ -410,6 +410,7 @@ class Package():
                             except Exception as e:
                                 pbs.log.begin('%s...' % filename, indent = 1)
                                 pbs.log.fail('failed')
+                                raise
 
                             progress = file.tell() * 100 / filesize
                             pbs.log.begin('%s...%3u%%' % (filename, progress),
