@@ -1,15 +1,18 @@
 description: The Open Source toolkit for Secure Socket Layer and Transport Layer Security
-version: 1.0.2h
+version: 1.1.0f
 license: BSD
 
 depends:
   - devel/glibc
   - libs/zlib
 
+provides:
+  - libs/ssl
+
 files:
   - download:
       url: ftp://ftp.openssl.org/source/openssl-${version}.tar.gz
-      sha1: 577585f5f5d299c44dd3c993d3c0ac7a219e4949
+      sha1: 9e3e02bc8b4965477a7a1d33be1249299a9deb15
 
 packages:
   openssl:

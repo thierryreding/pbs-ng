@@ -1,26 +1,19 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(srcdir)/stamp-patch:
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/no-rpath.patch
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/extra-cflags.patch
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/engines-path.patch
-	touch $@
-
 conf-args = \
 	--cross-compile-prefix=$(HOST)- \
 	--prefix=$(PREFIX) \
 	--openssldir=/etc/ssl \
 	shared zlib-dynamic \
-	linux-generic32
+	linux-generic32 \
+	'$(CFLAGS)'
 
-$(srcdir)/stamp-configure: $(srcdir)/stamp-patch
+$(srcdir)/stamp-configure:
 	cd $(srcdir) && \
 		$(conf-env) ./Configure $(conf-args) $(conf-vars)
 	touch $@
 
 build-args = \
-	EXTRA_CPPFLAGS='$(CPPFLAGS)' \
-	EXTRA_CFLAGS='$(CFLAGS)' \
 	-j $(JOBS)
 
 $(srcdir)/stamp-build: $(srcdir)/stamp-configure
@@ -29,11 +22,8 @@ $(srcdir)/stamp-build: $(srcdir)/stamp-configure
 	touch $@
 
 install-args = \
-	EXTRA_CPPFLAGS='$(CPPFLAGS)' \
-	EXTRA_CFLAGS='$(CFLAGS)' \
-	MANDIR=$(PREFIX)/share/man \
-	MANSUFFIX=ssl \
-	INSTALL_PREFIX='$(DESTDIR)'
+	DESTDIR='$(DESTDIR)' \
+	MANSUFFIX=ssl
 
 $(srcdir)/stamp-install: $(srcdir)/stamp-build
 	cd $(srcdir) && \
