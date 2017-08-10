@@ -36,13 +36,15 @@ $(builddir)/stamp-install: | $(builddir) $(DESTDIR)
 	dbus-uuidgen --ensure=$(DESTDIR)/etc/machine-id
 
 	for file in passwd group; do \
-		cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/$$file $(DESTDIR)/etc/$$file \
+		cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/$$file $(DESTDIR)/etc/$$file; \
 	done
 
 	cp -a $(TOP_SRCDIR)/$(PKGDIR)/files/etc/pam.d/* $(DESTDIR)/etc/pam.d
 
 	cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/nsswitch.conf $(DESTDIR)/etc/nsswitch.conf
 	cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/os-release $(DESTDIR)/etc/os-release
+	cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/securetty $(DESTDIR)/etc/securetty
+	cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/shells $(DESTDIR)/etc/shells
 
 	# symlinks
 	ln -sf usr/bin $(DESTDIR)/bin
