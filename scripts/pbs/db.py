@@ -16,6 +16,12 @@ import urllib.parse
 import urllib.request
 import yaml
 
+try:
+    from packaging.version import Version
+except:
+    print('WARNING: packaging.version not found, version matching may be inaccurate')
+    from distutils.version import LooseVersion as Version
+
 def iprint(indent, *args):
     print(' ' * indent, end='')
     print(*args)
@@ -698,11 +704,13 @@ class DownloadSourceFile(SourceFile):
 
         for url in urls:
             match = regex.match(url)
-            versions.append(match.group(match.lastindex))
+            version = match.group(match.lastindex)
+            versions.append(Version(version))
 
-        latest = max(versions, key = distutils.version.LooseVersion)
+        current = Version(self.source.version)
+        latest = max(versions)
 
-        if latest <= self.source.version:
+        if latest <= current:
             pbs.log.done('up-to-date')
         else:
             pbs.log.mark('%s' % latest)
