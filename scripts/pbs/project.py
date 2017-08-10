@@ -354,21 +354,18 @@ class Package():
 
         with subprocess.Popen(command, stdout=subprocess.PIPE,
                               stderr=subprocess.STDOUT) as proc:
-            log = io.open(os.path.join(objtree, 'build.log'), 'w')
             pbs.log.info('building %s:' % self.name, *command)
 
-            while True:
-                line = proc.stdout.readline()
-                if not line:
-                    break
+            with io.open(os.path.join(objtree, 'build.log'), 'w') as log:
+                while True:
+                    line = proc.stdout.readline()
+                    if not line:
+                        break
 
-                print(line.decode(), file = log, end = '')
+                    line = line.decode()
 
-                for line in lines:
-                    print(line)
-
-            pbs.log.quote(line)
-            log.close()
+                    print(line, file = log, end = '')
+                    pbs.log.quote(line)
 
         if proc.returncode != 0:
             raise BuildError(self.source, proc.returncode)
