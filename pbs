@@ -42,7 +42,7 @@ def execute(args):
     except EOFError:
         pass
     except Exception as e:
-        print(' \033[1;31m!\033[0m', e)
+        pbs.log.error(e)
         traceback.print_exc(file = sys.stdout)
 
 if args.command:

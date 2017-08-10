@@ -14,9 +14,6 @@ def iprint(indent, *args):
     print(' ' * indent, end='')
     print(*args)
 
-def error(*args):
-    print('\033[1;31mERROR\033[0m:', *args)
-
 class BuildError(Exception):
     def __init__(self, package, error):
         self.package = package
@@ -148,7 +145,7 @@ class Package():
             elif value == 'no':
                 self.value = False
             else:
-                error('invalid value', value, 'for option', name)
+                pbs.log.error('invalid value', value, 'for option', name)
 
         def save(self):
             values = {
@@ -287,17 +284,16 @@ class Package():
                 filename = '%s-%s.tar.xz' % (package.name, self.version)
                 filename = os.path.join(distdir, filename)
 
-                print(' \033[1;33m*\033[0m creating', filename)
+                pbs.log.info('creating %s' % filename)
 
                 with tarfile.open(filename, 'w:xz') as tarball:
                     for pattern in package.files:
                         for match in pattern.matches():
-                            print('   \033[1;33m-\033[0m %s...' % match,
-                                  end = '', flush = True)
+                            pbs.log.begin('%s...' % match, indent = 1)
                             tarball.add(match,
                                         exclude = pattern.exclude,
                                         filter = self.filter)
-                            print('done')
+                            pbs.log.end('done')
 
     def build(self, force = False, incremental = False, dependencies = True, seen = []):
         if dependencies:
@@ -312,7 +308,7 @@ class Package():
         self.fetch()
 
         if self.states['build'] == hash:
-            print(' \033[1;32m*\033[0m', self.source.full_name, 'is up-to-date')
+            pbs.log.note('%s is up-to-date' % self.source.full_name)
 
             if not force:
                 return
@@ -327,10 +323,9 @@ class Package():
         makefile = os.path.join(srctree, 'Makefile')
 
         if os.path.exists(objtree) and not incremental:
-            print(' \033[1;33m*\033[0m removing %s...' % objtree, end = '',
-                  flush = True)
+            pbs.log.begin('removing %s...' % objtree)
             shutil.rmtree(objtree)
-            print('done')
+            pbs.log.end('done')
 
         if not os.path.exists(objtree):
             os.makedirs(objtree)
@@ -342,10 +337,9 @@ class Package():
 
         if not incremental:
             if os.path.exists(source):
-                print(' \033[1;33m*\033[0m linking source from %s...' % \
-                      os.path.realpath(source), end = '', flush = True)
+                pbs.log.begin('linking source from %s...' % os.path.realpath(source))
                 os.symlink(source, target)
-                print('done')
+                pbs.log.end('done')
             else:
                 target = os.path.join(objtree, 'source')
                 self.extract(target)
@@ -358,18 +352,10 @@ class Package():
                     'FORCE=%s' % ('y' if incremental else 'n'),
                     'install' ]
 
-        (columns, lines) = shutil.get_terminal_size()
-
-        wrap = textwrap.TextWrapper(initial_indent = ' \033[1;33m*\033[0m ',
-                                    subsequent_indent = ' \033[1;33m>\033[0m ',
-                                    break_on_hyphens = False,
-                                    width = columns)
-
         with subprocess.Popen(command, stdout=subprocess.PIPE,
                               stderr=subprocess.STDOUT) as proc:
-            print(' \033[1;33m*\033[0m building %s:' % self.name,
-                  ' '.join(command))
             log = io.open(os.path.join(objtree, 'build.log'), 'w')
+            pbs.log.info('building %s:' % self.name, *command)
 
             while True:
                 line = proc.stdout.readline()
@@ -377,11 +363,11 @@ class Package():
                     break
 
                 print(line.decode(), file = log, end = '')
-                lines = wrap.wrap(line.decode())
 
                 for line in lines:
                     print(line)
 
+            pbs.log.quote(line)
             log.close()
 
         if proc.returncode != 0:
@@ -406,14 +392,13 @@ class Package():
 
         with pbs.pushd(sysroot):
             if self.source.packages:
-                print(' \033[1;33m*\033[0m installing into', os.getcwd())
+                pbs.log.info('installing into %s' % os.getcwd())
 
             for package in self.source.packages:
                 filename = '%s-%s.tar.xz' % (package.name, self.version)
                 filename = os.path.join(distdir, filename)
 
-                print('   \033[1;33m-\033[0m %s...' % filename, end = '',
-                      flush = True)
+                pbs.log.begin('%s...' % filename, indent = 1)
 
                 filesize = os.path.getsize(filename)
 
@@ -426,14 +411,15 @@ class Package():
 
                                 tarball.extract(entry)
                             except Exception as e:
-                                print('\n     \033[1;31m!\033[0m', e)
+                                pbs.log.begin('%s...' % filename, indent = 1)
+                                pbs.log.fail('failed')
 
                             progress = file.tell() * 100 / filesize
-                            print('\r   \033[1;33m-\033[0m %s...%3u%%' %
-                                    (filename, progress), end = '',
-                                    flush = True)
+                            pbs.log.begin('%s...%3u%%' % (filename, progress),
+                                          indent = 1)
 
-                print('\r   \033[1;33m-\033[0m %s...done' % filename)
+                pbs.log.begin('%s...' % filename, indent = 1)
+                pbs.log.end('done')
 
     def load(self, values):
         if not values:

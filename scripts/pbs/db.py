@@ -20,9 +20,6 @@ def iprint(indent, *args):
     print(' ' * indent, end='')
     print(*args)
 
-def error(*args):
-    print('\033[1;31mERROR\033[0m:', *args)
-
 def resolve_paths(base, component):
     return []
 
@@ -118,7 +115,7 @@ class Option():
                 for key, value in value.items():
                     self.defaults[key] = value
             else:
-                error('unknown key:', key, 'value:', value)
+                pbs.log.error('unknown key:', key, 'value:', value)
 
     def dump(self, indent = 0):
         if self.default:
@@ -146,7 +143,7 @@ class OptionGroup():
                     option = Option(key, value)
                     self.options.append(option)
             else:
-                error('unknown key:', key, 'value:', value)
+                pbs.log.error('unknown key:', key, 'value:', value)
 
     def load(self, values):
         result = []
@@ -222,13 +219,14 @@ class Choice():
                     option = Option(key, value)
                     self.options.append(option)
             else:
-                error('unknown key:', key, 'value:', value)
+                pbs.log.error('unknown key:', key, 'value:', value)
 
         for option in self.options:
             if option.default:
                 if self.default:
-                    error('option', option.name, 'marked as default, but',
-                          self.default.name, 'is already the default')
+                    pbs.log.error('option', option.name, 'marked as default,'
+                                  'but', self.default.name, 'is already the'
+                                  'default')
                     option.default = False
                     continue
 
@@ -314,7 +312,7 @@ class Architecture():
                     choice = Choice(key, value)
                     self.options.append(choice)
                 else:
-                    error('unknown option:', key, 'value:', value)
+                    pbs.log.error('unknown option:', key, 'value:', value)
 
     def load(self, values):
         for option in self.options:
@@ -380,11 +378,11 @@ class Package():
                                 for pattern in value:
                                     self.excludes.append(pattern)
                             else:
-                                error('unknown pattern option:', key)
+                                pbs.log.error('unknown pattern option:', key)
             elif type(obj) is str:
                 self.pattern = source.subst(obj)
             else:
-                error('unknown pattern type:', obj)
+                pbs.log.error('unknown pattern type:', obj)
                 raise Exception
 
         def matches(self):
@@ -524,7 +522,7 @@ class DownloadSourceFile(SourceFile):
 
             return
 
-        print("\r \033[1;33m*\033[0m downloading %s..." % url, end = '')
+        pbs.log.begin('downloading %s...' % url)
 
         if 'Content-Length' in headers:
             total = int(headers['Content-Length'])
@@ -550,11 +548,11 @@ class DownloadSourceFile(SourceFile):
                     progress = 'n/a'
 
                 if progress != old_progress:
-                    print("\r \033[1;33m*\033[0m downloading %s...%s" %
-                          (url, progress), end = '')
+                    pbs.log.begin('downloading %s...%s' % (url, progress))
                     old_progress = progress
 
-            print("\r \033[1;33m*\033[0m downloading %s...done" % url)
+            pbs.log.begin('downloading %s...' % url)
+            pbs.log.end('done')
 
         if not self.checksum():
             raise ChecksumError(self)
@@ -576,13 +574,13 @@ class DownloadSourceFile(SourceFile):
                 progress = file.tell() * 100 / size
 
                 if progress != old_progress:
-                    print('\r \033[1;33m*\033[0m verifying %s...%3u%%' %
-                          (filename, progress), end = '')
+                    pbs.log.begin('verifying %s...%3u%%' % (filename, progress))
                     old_progress = progress
 
                 digest.update(buf)
 
-            print('\r \033[1;33m*\033[0m verifying %s...done' % filename)
+            pbs.log.begin('verifying %s...' % filename)
+            pbs.log.end('done')
 
         return digest.hexdigest() == self.sha1
 
@@ -608,9 +606,9 @@ class DownloadSourceFile(SourceFile):
                         name = entry.name
 
                     if os.path.exists(name) and force:
-                        print('removing %s...' % name, end = '', flush = True)
+                        pbs.log.begin('removing %s...' % name)
                         shutil.rmtree(name)
-                        print('done')
+                        pbs.log.end('done')
 
                     if not os.path.exists(name):
                         for entry in tar:
@@ -631,17 +629,16 @@ class DownloadSourceFile(SourceFile):
                             progress = file.tell() * 100 / filesize
 
                             if progress != old_progress:
-                                print('\r \033[1;33m*\033[0m extracting %s...%3u%%' %
-                                        (filename, progress), end = '',
-                                        flush = True)
+                                pbs.log.begin('extracting %s...%3u%%' %
+                                                  (filename, progress))
                                 old_progress = progress
 
                         status = 'done'
                     else:
                         status = 'skipped'
 
-                    print('\r \033[1;33m*\033[0m extracting %s...%s' %
-                            (filename, status))
+                    pbs.log.begin('extracting %s...' % filename)
+                    pbs.log.end(status)
 
     def dump(self, indent):
         url = self.source.subst(self.url)
@@ -649,7 +646,7 @@ class DownloadSourceFile(SourceFile):
         iprint(indent, '  SHA1:', self.sha1)
 
     def watch(self, verbose = False):
-        print('  \033[33;1m-\033[0m %s... ' % self.url, end = '', flush = True)
+        pbs.log.begin('%s... ' % self.url, indent = 1)
 
         keywords = {
                 'version': '([\d\.]+)',
@@ -665,7 +662,7 @@ class DownloadSourceFile(SourceFile):
         (params, query, fragment) = unused
 
         if netloc == 'prdownloads.sourceforge.net':
-            print('\033[35;1mskipped\033[0m')
+            pbs.log.skip('skipped')
             return
 
         # initialize with the base URL
@@ -681,7 +678,8 @@ class DownloadSourceFile(SourceFile):
                     try:
                         matches = resolve(scheme, base, component)
                     except Exception as e:
-                        print('\033[31;1mfailed\033[0m (%s)' % e)
+                        # XXX print error uncolorized?
+                        pbs.log.fail('failed (%s)' % e)
                         return
 
                     for match in matches:
@@ -692,7 +690,7 @@ class DownloadSourceFile(SourceFile):
             urls = bases
 
         if not urls:
-            print('\033[31;1mfailed\033[0m')
+            pbs.log.fail('failed')
             return
 
         regex = re.compile(regex)
@@ -705,9 +703,9 @@ class DownloadSourceFile(SourceFile):
         latest = max(versions, key = distutils.version.LooseVersion)
 
         if latest <= self.source.version:
-            print('\033[32;1mup-to-date\033[0m')
+            pbs.log.done('up-to-date')
         else:
-            print('\033[33;1m%s\033[0m' % latest)
+            pbs.log.mark('%s' % latest)
 
 class Source():
     class Option():
@@ -723,11 +721,11 @@ class Source():
                 elif values['default'] == 'yes':
                     self.default = True
                 else:
-                    error('unknown default value', values['default'],
-                          'for option', name)
+                    pbs.log.error('unknown default value', values['default'],
+                                  'for option', name)
                     self.default = False
             else:
-                error('no default value for option', name)
+                pbs.log.error('no default value for option', name)
 
         def dump(self, indent):
             iprint(indent, 'Option:', self.name)
@@ -801,7 +799,7 @@ class Source():
                 source.parse(yaml[key])
                 return source
             else:
-                error('invalid type of source file:', key)
+                pbs.log.error('invalid type of source file:', key)
 
     def parse_option(self, name, values):
         if 'choice' in values:
@@ -957,8 +955,7 @@ class Source():
         return m.hexdigest()
 
     def watch(self):
-        print('\033[33;1m*\033[0m checking', self.full_name, 'for updates...',
-              end = '')
+        pbs.log.begin('checking %s for updates...' % self.full_name)
 
         if self.files:
             print()
@@ -966,7 +963,7 @@ class Source():
             for source in self.files:
                 source.watch()
         else:
-            print(' \033[35;1mskipped\033[0m')
+            pbs.log.skip('skipped')
 
 class Database():
     def __init__(self):
@@ -1106,8 +1103,7 @@ class DependencyGraph():
                         node.add_edge(edge)
                         break
                 else:
-                    print(' \033[1;31m!\033[0m no source package found for',
-                          dependency)
+                    pbs.log.error('no source package found for', dependency)
 
     def add_section(self, section):
         for subsection in section.sections:
