@@ -8,6 +8,5 @@ def exec(project, *args):
             package = project.db.find_package(name)
             package.fetch()
     else:
-        for name in project.packages:
-            package = project.db.find_package(name)
+        for package in project.packages:
             package.fetch()
