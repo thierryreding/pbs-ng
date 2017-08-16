@@ -1,11 +1,11 @@
 description: OpenGL Extension Wrangler library
-version: 1.13.0
+version: 2.1.0
 license: BSD MIT GPL
 
 files:
   - download:
       url: http://prdownloads.sourceforge.net/glew/glew/${version}/glew-${version}.tgz
-      sha1: d5b1c499f429aa91c466193b4e8ea94a84019e37
+      sha1: 18eca05460d0b61709fc115e632b6fe320718b44
 
 packages:
   libglew:
