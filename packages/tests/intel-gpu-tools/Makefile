@@ -1,22 +1,18 @@
 include $(TOP_SRCDIR)/packages/autotools.mk
 
-ifeq ($(realpath $(srcdir)),$(srcdir))
-$(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && autoreconf --force --install
-	touch $@
-
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
-else
-$(builddir)/stamp-prepare: | $(builddir)
+# make sure to lock the source directory when building from a symlinked
+# source, otherwise two concurrent builds might get in each others' way
+ifneq ($(realpath $(srcdir)),$(srcdir))
+$(builddir)/stamp-prepare: $(srcdir)/lock | $(builddir)
 	cd $(srcdir) && autoreconf --force --install
 	touch $@
 
 $(builddir)/stamp-configure: $(builddir)/stamp-prepare
+
+install: $(srcdir)/unlock
 endif
 
 conf-args += \
 	--libexecdir=$(PREFIX)/lib \
-	--disable-assembler \
-	--disable-overlay \
 	--disable-shader-debugger \
 	--without-libunwind
