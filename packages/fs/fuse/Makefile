@@ -1,10 +1,11 @@
 include $(TOP_SRCDIR)/packages/autotools.mk
 
-$(srcdir)/stamp-patch:
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/namespace-conflict.patch
+$(srcdir)/stamp-prepare: | $(srcdir)
+	cp $(BUILD_TOOLS)/share/gettext/config.rpath $(srcdir)/
+	cd $(srcdir) && autoreconf --force --install
 	touch $@
 
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch
+$(builddir)/stamp-configure: $(srcdir)/stamp-prepare
 
 conf-args += \
 	MOUNT_FUSE_PATH=$(PREFIX)/bin

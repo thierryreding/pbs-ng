@@ -1,11 +1,11 @@
 description: FUSE (file system in userspace) library
-version: 2.9.4
+version: 3.1.1
 license: GPL-2.0
 
 files:
   - download:
-      url: http://prdownloads.sourceforge.net/fuse/fuse-${major}.X/${version}/fuse-${version}.tar.gz
-      sha1: c8b25419f33624dc5240af6a5d26f2c04367ca71
+      url: https://github.com/libfuse/libfuse/archive/fuse-${version}.tar.gz
+      sha1: 4b54d61614c2aab07490a67e2c5f768dc2c27d97
 
 depends:
   - devel/glibc
