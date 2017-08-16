@@ -1,15 +1,16 @@
 description: network monitoring tools, including ping
-version: 20150815
+version: 20161105
 license: GPL-2.0
 
 depends:
   - libs/libcap
   - libs/libidn
+  - libs/nettle
 
 files:
   - download:
       url: https://github.com/iputils/iputils/archive/s${version}.tar.gz
-      sha1: 14cd0f1cd87a21c60bf92fa6a18b56eeed55f459
+      sha1: d6fb34d3798eb042dd18a49c66a9680cc13e28ca
 
 packages:
   iputils:
