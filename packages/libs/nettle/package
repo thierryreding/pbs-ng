@@ -1,0 +1,25 @@
+description: low-level cryptographic library
+version: 3.3
+license: GPL-2.0
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://ftp.gnu.org/gnu/nettle/nettle-${version}.tar.gz
+      sha1: bf2b4d3a41192ff6177936d7bc3bee4cebeb86c4
+
+packages:
+  nettle:
+    files:
+      - /usr/lib/*.so.*
+
+  nettle-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
