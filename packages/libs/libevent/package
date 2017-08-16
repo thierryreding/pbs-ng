@@ -1,11 +1,11 @@
 description: an event notification library
-version: 2.0.22
+version: 2.1.8
 license: BSD-3-Clause
 
 files:
   - download:
-      url: http://prdownloads.sourceforge.net/levent/libevent/libevent-2.0/libevent-${version}-stable.tar.gz
-      sha1: a586882bc93a208318c70fc7077ed8fca9862864
+      url: https://github.com/libevent/libevent/archive/release-${version}-stable.tar.gz
+      sha1: 8a37ad06dd28ed3da785819da297b1a3b2ea9307
 
 depends:
   - devel/glibc
