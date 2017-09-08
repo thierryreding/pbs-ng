@@ -33,7 +33,7 @@ def exec(project, *args):
 
     command = [ mkinitrd, '--output', output, sysroot, initrd ]
 
-    pbs.log.print('creating initial ramdisk:', ' '.join(command))
+    pbs.log.info('creating initial ramdisk:', ' '.join(command))
 
     with subprocess.Popen(command, stdout=subprocess.PIPE,
                           stderr=subprocess.STDOUT) as proc:
@@ -42,4 +42,5 @@ def exec(project, *args):
             if not line:
                 break
 
-            pbs.log.print(line.decode().strip())
+            line = line.decode()
+            pbs.log.quote(line)
