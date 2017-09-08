@@ -89,10 +89,10 @@ index 88cbdb825689..1a097abe5212 100755
      then
  	echo "HAVE_BERKELEY_DB:=y" >>Config
 diff --git a/netem/Makefile b/netem/Makefile
-index a68e2fdb3037..6e89742390eb 100644
+index 2499f086f24d..0e4cd774b129 100644
 --- a/netem/Makefile
 +++ b/netem/Makefile
-@@ -2,13 +2,13 @@ DISTGEN = maketable normal pareto paretonormal
+@@ -4,7 +4,7 @@ DISTGEN = maketable normal pareto paretonormal
  DISTDATA = normal.dist pareto.dist paretonormal.dist experimental.dist
  
  HOSTCC ?= $(CC)
@@ -100,6 +100,8 @@ index a68e2fdb3037..6e89742390eb 100644
 +HOST_CFLAGS ?= $(CCOPTS)
  LDLIBS += -lm
  
+ ifeq ($(HAVE_MNL),y)
+@@ -15,7 +15,7 @@ endif
  all: $(DISTGEN) $(DISTDATA)
  
  $(DISTGEN):
@@ -108,7 +110,7 @@ index a68e2fdb3037..6e89742390eb 100644
  
  %.dist: %
  	./$* > $@
-@@ -17,7 +17,7 @@ experimental.dist: maketable experimental.dat
+@@ -24,7 +24,7 @@ experimental.dist: maketable experimental.dat
  	./maketable experimental.dat > experimental.dist
  
  stats: stats.c
