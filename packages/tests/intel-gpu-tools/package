@@ -6,6 +6,7 @@ depends:
   - libs/cairo
   - libs/glib
   - libs/libdrm
+  - libs/libunwind
 
 packages:
   intel-gpu-tools:

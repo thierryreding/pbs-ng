@@ -1,18 +1,1 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
-
-# make sure to lock the source directory when building from a symlinked
-# source, otherwise two concurrent builds might get in each others' way
-ifneq ($(realpath $(srcdir)),$(srcdir))
-$(builddir)/stamp-prepare: $(srcdir)/lock | $(builddir)
-	cd $(srcdir) && autoreconf --force --install
-	touch $@
-
-$(builddir)/stamp-configure: $(builddir)/stamp-prepare
-
-install: $(srcdir)/unlock
-endif
-
-conf-args += \
-	--libexecdir=$(PREFIX)/lib \
-	--disable-shader-debugger \
-	--without-libunwind
+include $(TOP_SRCDIR)/packages/meson.mk
