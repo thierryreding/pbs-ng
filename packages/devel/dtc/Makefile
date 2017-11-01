@@ -9,12 +9,14 @@ build-args = \
 	EXTRA_CPPFLAGS='$(CPPFLAGS)' \
 	EXTRA_CFLAGS='$(CFLAGS)' \
 	LDFLAGS='$(LDFLAGS)' \
-	-j $(JOBS) V=1
+	NO_PYTHON=1 \
+	-j $(JOBS)
 
 $(srcdir)/stamp-build: $(srcdir)/stamp-patch
 	cd $(srcdir) && $(env) $(MAKE) $(build-args)
 
 install-args = \
+	NO_PYTHON=1 \
 	DESTDIR=$(DESTDIR) \
 	PREFIX=/usr
 
