@@ -1,5 +1,5 @@
 description: Miscellaneous system utilities for Linux
-version: 2.30.1
+version: 2.31
 license: GPL-2.0
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: http://www.kernel.org/pub/linux/utils/util-linux/v${major}.${minor}/util-linux-${version}.tar.xz
-      sha1: 030b92cede3d68816d3206645c4262599175ec8a
+      sha1: 4ebb8a2c1da21a6da08b553abd0f4dd3dbc55b4e
 
 packages:
   util-linux:
