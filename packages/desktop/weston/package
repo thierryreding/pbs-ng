@@ -22,7 +22,7 @@ packages:
   weston:
     files:
       - /usr/bin
-      - /usr/lib/libweston-1/*.so
+      - /usr/lib/libweston-${major}/*.so
       - /usr/lib/weston/weston-*
       - /usr/lib/weston/*.so
       - /usr/lib/*.so.*
