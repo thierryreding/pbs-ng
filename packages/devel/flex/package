@@ -1,5 +1,5 @@
 description: A tool for generating text-scanning programs
-version: 2.5.39
+version: 2.6.4
 license: custom
 
 depends:
@@ -7,8 +7,8 @@ depends:
 
 files:
   - download:
-      url: http://prdownloads.sourceforge.net/flex/flex-${version}.tar.xz
-      sha1: 415e82bb0dc9b1713fc4802a9db2274cd8d2909a
+      url: https://github.com/westes/flex/releases/download/v${version}/flex-${version}.tar.gz
+      sha1: fafece095a0d9890ebd618adb1f242d8908076e1
 
 packages:
   flex:
