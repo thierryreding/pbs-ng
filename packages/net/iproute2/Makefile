@@ -16,10 +16,7 @@ $(srcdir)/stamp-configure: $(srcdir)/stamp-patch
 
 build-args = \
 	HOSTCC='gcc' \
-	HOST_CFLAGS='-O2 -g' \
-	CC='$(CROSS_COMPILE)gcc' \
-	CCOPTS='$(CFLAGS)' \
-	AR='$(CROSS_COMPILE)ar' \
+	CBUILD_CFLAGS='-O2 -g' \
 	DESTDIR='$(DESTDIR)' \
 	PREFIX='$(PREFIX)' \
 	SBINDIR='$(PREFIX)/bin' \
