@@ -1,10 +1,11 @@
 description: an open-source implementation of the OpenGL specification
-version: 17.2.0
+version: 17.3.0
 license: custom
 
 depends:
   - libs/expat
   - libs/libdrm
+  - libs/libunwind
   - xorg/proto/dri2
   - xorg/proto/dri3
   - xorg/proto/gl
@@ -23,7 +24,7 @@ depends:
 files:
   - download:
       url: https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz
-      sha1: 661cf338ef3d7df49ea3aa58a1e8ccb5c1527d20
+      sha1: 98f6a1f50dd0cc18f2d63d170ff4b2569fd72bcd
 
 options:
   debug:
