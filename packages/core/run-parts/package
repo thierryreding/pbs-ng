@@ -1,5 +1,5 @@
 description: run scripts or programs in a directory
-version: 4.8.2
+version: 4.8.3
 license: GPL
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://ftp.debian.org/debian/pool/main/d/debianutils/debianutils_${version}.tar.xz
-      sha1: 7207c72ed25e233d920a4cf8b0b7c720ab56067f
+      sha1: f5d076a215fa23d005cb80a83a208c7a0066e186
 
 packages:
   run-parts:
