@@ -1,11 +1,11 @@
 description: Netfilter library providing interface to the nf_tables subsystem
-version: 1.0.7
+version: 1.0.8
 license: GPL-2.0
 
 files:
   - download:
       url: http://www.netfilter.org/projects/libnftnl/files/libnftnl-${version}.tar.bz2
-      sha1: 381b2b3cbb3fad186cb3f57bbf32d70f0b3c3c8e
+      sha1: 8f9cb4983b54092478ade39f78b2850062729f4b
 
 depends:
   - devel/glibc
