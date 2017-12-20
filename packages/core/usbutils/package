@@ -1,11 +1,11 @@
 description: USB device utilities
-version: 008
+version: 009
 license: GPL-2.0
 
 files:
   - download:
       url: https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-${version}.tar.xz
-      sha1: 233dee6cd6829476be778554984045663b568b18
+      sha1: ae9caab499d76c0e9eb323f333d5ec92a25697a3
 
 depends:
   - core/systemd
