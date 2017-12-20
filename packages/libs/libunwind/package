@@ -1,0 +1,29 @@
+description: Portable and efficient C programming interface (API) to determine the call-chain of a program
+version: 1.2.1
+license: GPL-2.0
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: http://download.savannah.nongnu.org/releases/libunwind/libunwind-${version}.tar.gz
+      sha1: 4ce18ee9c168ed6de85126534d855ddcb696bb17
+
+packages:
+  libunwind:
+    files:
+      - /usr/lib/*.so.*
+
+  libunwind-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libunwind-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
