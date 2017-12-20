@@ -1,10 +1,10 @@
 description: Easily download, build, install, upgrade and uninstall Python packages
-version: 36.2.4
+version: 38.2.4
 license: custom
 
 files:
   - download:
       url: https://github.com/pypa/setuptools/archive/v${version}.tar.gz
-      sha1: 0b582e27d79a3d175136b2f33c2fbaf410448d47
+      sha1: bdf017bdca48ebe3c4438687eacc2e889076ed2b
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
