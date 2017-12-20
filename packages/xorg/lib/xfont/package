@@ -1,5 +1,5 @@
 description: X11 font rasterisation library
-version: 2.0.1
+version: 2.0.3
 license: custom
 
 depends:
@@ -14,7 +14,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXfont2-${version}.tar.bz2
-      sha1: 4cf056ab00bf631649e040051cf8e2b096cc245b
+      sha1: 1110f1ad4061d9e8131ecb941757480e3e32bca0
 
 packages:
   libxfont:
