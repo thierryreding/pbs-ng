@@ -1,7 +1,6 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
+include $(TOP_SRCDIR)/packages/meson.mk
 
 conf-args += \
-	--with-sysroot=$(SYSROOT) \
-	--disable-documentation \
-	--disable-debug-gui \
-	--disable-tests
+	-Ddocumentation=false \
+	-Ddebug-gui=false \
+	-Dtests=false
