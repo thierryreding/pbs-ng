@@ -2,7 +2,7 @@ include $(TOP_SRCDIR)/packages/autotools.mk
 
 ifeq ($(realpath $(srcdir)),$(srcdir))
 $(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/patches/ltmain-sysroot-2.4.2.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/ltmain-sysroot.patch
 	touch $@
 
 $(builddir)/stamp-configure: $(srcdir)/stamp-patch
