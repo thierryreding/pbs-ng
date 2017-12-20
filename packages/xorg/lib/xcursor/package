@@ -1,5 +1,5 @@
 description: X cursor management library
-version: 1.1.14
+version: 1.1.15
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
 - download:
     url: http://xorg.freedesktop.org/releases/individual/lib/libXcursor-${version}.tar.bz2
-    sha1: 89870756758439f9216ddf5f2d3dca56570fc6b7
+    sha1: 3e19f991f244b7fa31566adce7ead078424296cf
 
 packages:
   libxcursor:
