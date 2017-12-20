@@ -1,11 +1,11 @@
 description: Compression library implementing the deflate compression method found in gzip and PKZIP
-version: 1.2.8
+version: 1.2.11
 license: Zlib
 
 files:
   - download:
       url: http://prdownloads.sourceforge.net/libpng/zlib/${version}/zlib-${version}.tar.xz
-      sha1: b598beb7acc96347cbd1020b71aef7871d374677
+      sha1: e1cb0d5c92da8e9a8c2635dfa249c341dfd00322
 
 packages:
   zlib:
