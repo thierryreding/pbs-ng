@@ -16,7 +16,7 @@ conf-args += \
 	--with-sysroot=$(SYSROOT) \
 	--without-dri-drivers \
 	--with-gallium-drivers=swrast,nouveau,tegra \
-	--with-egl-platforms=x11,wayland,drm \
+	--with-platforms=x11,wayland,drm \
 	--enable-gles1 \
 	--enable-gles2 \
 	--enable-gbm
