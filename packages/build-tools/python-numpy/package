@@ -1,0 +1,10 @@
+description: array processing for numbers, strings, records, and objects
+version: 1.13.3
+license: BSD
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/bf/2d/005e45738ab07a26e621c9c12dc97381f372e06678adf7dc3356a69b5960/numpy-${version}.zip
+      sha1: 3d39f6768fa861c6b7000bb33182eb2599954d45
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
