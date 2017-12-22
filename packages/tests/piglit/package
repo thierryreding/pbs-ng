@@ -4,6 +4,10 @@ license: custom
 
 depends:
   - build-tools/cmake
+  - build-tools/python
+  - build-tools/python-mako
+  - build-tools/python-numpy
+  - build-tools/python-six
   - libs/glu
   - libs/waffle
 
