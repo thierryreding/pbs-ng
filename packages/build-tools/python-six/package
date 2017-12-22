@@ -1,0 +1,10 @@
+description: Python 2 and 3 compatibility utilities
+version: 1.11.0
+license: MIT
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/16/d8/bc6316cf98419719bd59c91742194c111b6f2e85abac88e496adefaf7afe/six-${version}.tar.gz
+      sha1: 3647372a0e104e7b53bd477762392024e1083ac0
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
