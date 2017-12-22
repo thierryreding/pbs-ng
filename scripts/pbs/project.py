@@ -130,7 +130,7 @@ class Package():
         def generate_config(self, file = sys.stdout):
             name = self.source.name
 
-            if self.source.default:
+            if self.value:
                 value = 'y'
             else:
                 value = 'n'
