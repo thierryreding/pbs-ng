@@ -1,5 +1,5 @@
 description: Linux kernel
-version: 4.14
+version: 4.15
 license: GPL-2.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
 - download:
     url: https://www.kernel.org/pub/linux/kernel/v${major}.x/linux-${version}.tar.xz
-    sha1: c64d80ad01a6a77bf46bce1bdc5c7f28bfb6bfd5
+    sha1: 5cf2693d2c6bf1e69a9216dceca6183c60eb11d5
 
 packages:
   linux-headers:
