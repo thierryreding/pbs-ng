@@ -10,6 +10,7 @@ import re
 import readline
 import shutil
 import string
+import subprocess
 import sys
 import tarfile
 import urllib.parse
@@ -754,6 +755,81 @@ class DownloadSourceFile(SourceFile):
             pbs.log.done('up-to-date')
         else:
             pbs.log.mark('%s' % latest)
+
+class SourceRepository:
+    def fetch(self, target):
+        pass
+
+class SubversionRepository(SourceRepository):
+    def __init__(self, url):
+        self.url = url
+
+    def fetch(self, target):
+        pbs.log.begin('checking %s out to %s...' % (self.url, target))
+
+        process = subprocess.run(['svn', 'co', self.url, target],
+                                 stderr = subprocess.STDOUT,
+                                 stdout = subprocess.PIPE)
+        if process.returncode:
+            log = process.stdout.decode('utf-8')
+            pbs.log.end('failed')
+            pbs.log.error(log)
+            raise Exception(log)
+        else:
+            pbs.log.end('done')
+
+    def __str__(self):
+        return 'svn: %s' % self.url
+
+class GitRepository(SourceRepository):
+    def __init__(self, url):
+        self.url = url
+
+    def fetch(self, target):
+        pbs.log.info('cloning %s to %s...' % (self.url, target))
+
+    def __str__(self):
+        return 'git: %s' % self.url
+
+class VCSSourceFile(SourceFile):
+    def __init__(self, source):
+        SourceFile.__init__(self, source)
+        self.repository = None
+
+    def parse(self, yaml):
+        SourceFile.parse(self, yaml)
+
+        if 'url' in yaml:
+            scheme, netloc, path, *unused = urllib.parse.urlparse(yaml['url'])
+
+            if '+' in scheme:
+                system, protocol = scheme.split('+')
+            else:
+                system = protocol = scheme
+
+            url = urllib.parse.urlunparse([protocol, netloc, path, *unused])
+
+            if system == 'svn':
+                self.repository = SubversionRepository(url)
+
+            if system == 'git':
+                self.repository = GitRepository(url)
+
+            if not self.repository:
+                raise Exception('unknown source repository type:', scheme)
+
+        else:
+            pbs.log.error('missing URL for source repository:', yaml)
+
+    def exists(self):
+        return False
+
+    def extract(self, directory):
+        self.repository.fetch(directory)
+
+    def watch(self):
+        pbs.log.begin('%s... ' % self.repository, indent = 1)
+        pbs.log.skip('skipped')
 
 class Source():
     class Option():
