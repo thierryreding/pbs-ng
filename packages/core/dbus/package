@@ -1,5 +1,5 @@
 description: message bus system
-version: 1.12.2
+version: 1.13.0
 license: GPL-2.0+, AFL-2.1
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: http://dbus.freedesktop.org/releases/dbus/dbus-${version}.tar.gz
-      sha1: 701da5c72a721ea1c4af66bc8606ac2deb5f7159
+      sha1: e00bd3861d65601c89114808df30bfb4247890ff
 
 packages:
   dbus:
