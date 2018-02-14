@@ -1,11 +1,11 @@
 description: ext2/3/4 filesystem utilities
-version: 1.43.8
+version: 1.43.9
 license: GPL-2.0, LPGL-2.1, MIT
 
 files:
   - download:
       url: https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v${version}/e2fsprogs-${version}.tar.xz
-      sha1: 87f52937400348696f27b96f737403fae877337c
+      sha1: cd5887b2536a8773335b912eb4ef313ea585cd44
 
 depends:
   - devel/glibc
