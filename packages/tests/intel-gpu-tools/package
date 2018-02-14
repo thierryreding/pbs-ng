@@ -5,7 +5,9 @@ license: custom
 depends:
   - libs/cairo
   - libs/glib
+  - libs/gsl
   - libs/libdrm
+  - libs/xmlrpc-c
 
 packages:
   intel-gpu-tools:
@@ -14,5 +16,6 @@ packages:
       - /usr/lib/intel-gpu-tools:
         - exclude:
           - '*.la'
+      - /usr/share
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

@@ -12,7 +12,10 @@ $(builddir)/stamp-configure: $(builddir)/stamp-prepare
 install: $(srcdir)/unlock
 endif
 
+conf-vars += \
+	ac_cv_prog_XMLRPC_C_CONFIG=no
+
 conf-args += \
 	--libexecdir=$(PREFIX)/lib \
 	--disable-shader-debugger \
-	--without-libunwind
+	--enable-chamelium
