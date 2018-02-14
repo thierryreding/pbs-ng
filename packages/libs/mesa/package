@@ -1,5 +1,5 @@
 description: an open-source implementation of the OpenGL specification
-version: 17.3.1
+version: 17.3.3
 license: custom
 
 depends:
@@ -24,7 +24,7 @@ depends:
 files:
   - download:
       url: https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz
-      sha1: 1bda76199addb01946e5a6cd35e00a05540b7eb0
+      sha1: 346f7813f493b1daf9d9079826a13dbd722b86ab
 
 options:
   debug:
