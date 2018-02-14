@@ -1,0 +1,26 @@
+description: XML-RPC for C and C++
+version: 1.43.06
+license: custom
+
+depends:
+  - devel/glibc
+  - libs/curl
+  - libs/libxml2
+
+files:
+  - source:
+      url: svn+https://svn.code.sf.net/p/xmlrpc-c/code/stable
+
+packages:
+  libxmlrpc-c:
+    files:
+      - /usr/lib/*.so.*
+
+  libxmlrpc-c-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

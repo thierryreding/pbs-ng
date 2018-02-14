@@ -1,0 +1,16 @@
+diff --git a/lib/expat/gennmtab/Makefile b/lib/expat/gennmtab/Makefile
+index ce92e09bdfcd..4574656a7edb 100644
+--- a/lib/expat/gennmtab/Makefile
++++ b/lib/expat/gennmtab/Makefile
+@@ -38,9 +38,9 @@ install:
+ dep: dep-common
+ 
+ gennmtab.o:%.o:%.c
+-	$(BUILDTOOL_CC) -c $< -o $@ $(CFLAGS_ALL) $(INCLUDES)
++	$(BUILDTOOL_CC) -c $< -o $@ $(BUILDTOOL_CFLAGS_ALL) $(INCLUDES)
+ 
+ gennmtab:%:%.o
+-	$(BUILDTOOL_CCLD) -o $@ $(LDFLAGS_ALL) $^
++	$(BUILDTOOL_CCLD) -o $@ $(BUILDTOOL_LDFLAGS_ALL) $^
+ 
+ include depend.mk

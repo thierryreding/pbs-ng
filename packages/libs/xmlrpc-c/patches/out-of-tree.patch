@@ -1,0 +1,13 @@
+diff --git a/lib/abyss/src/Makefile b/lib/abyss/src/Makefile
+index f95e745f049c..207eea6159cb 100644
+--- a/lib/abyss/src/Makefile
++++ b/lib/abyss/src/Makefile
+@@ -58,7 +58,7 @@ include $(SRCDIR)/common.mk
+ 
+ CFLAGS_LOCAL = -D_UNIX
+ 
+-INCLUDES = -Iblddir -Isrcdir -Isrcdir/include -Isrcdir/lib/util/include
++INCLUDES = -Iblddir -Iblddir/include -Isrcdir -Isrcdir/include -Isrcdir/lib/util/include
+ 
+ ABYSS_SHLIB = $(call shlibfn,libxmlrpc_abyss)
+ #ABYSS_SHLIB is e.g. libxmlrpc_abyss.so.3.1

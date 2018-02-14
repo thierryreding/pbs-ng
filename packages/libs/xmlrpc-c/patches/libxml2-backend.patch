@@ -1,0 +1,31 @@
+diff --git a/src/xmlrpc_libxml2.c b/src/xmlrpc_libxml2.c
+index 98dc80cec10f..62618916a39a 100644
+--- a/src/xmlrpc_libxml2.c
++++ b/src/xmlrpc_libxml2.c
+@@ -427,7 +427,7 @@ static xmlSAXHandler const saxHandler = {
+ 
+ 
+ static void
+-removeDocSizeLimit(xmlParserCtx * const parserP ATTR_UNUSED) {
++removeDocSizeLimit(xmlParserCtxt * const parserP ATTR_UNUSED) {
+ /*----------------------------------------------------------------------------
+    Set up *parserP to accept a document of any size.
+ 
+@@ -450,13 +450,13 @@ removeDocSizeLimit(xmlParserCtx * const parserP ATTR_UNUSED) {
+ 
+ 
+ static void
+-createParser(xmlrpc_env *    const envP,
+-             ParseContext *  const contextP,
+-             xmlParserCtx ** const parserPP) {
++createParser(xmlrpc_env *     const envP,
++             ParseContext *   const contextP,
++             xmlParserCtxt ** const parserPP) {
+ /*----------------------------------------------------------------------------
+    Create an appropriate Libxml2 parser for our purpose.
+ -----------------------------------------------------------------------------*/
+-    xmlParserCtx * parserP;
++    xmlParserCtxt * parserP;
+ 
+     parserP = xmlCreatePushParserCtxt((xmlSAXHandler *)&saxHandler, contextP,
+                                         NULL, 0, NULL);
