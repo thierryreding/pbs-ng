@@ -2,16 +2,11 @@ include $(TOP_SRCDIR)/packages/autotools.mk
 
 major = $(word 1, $(subst ., ,$(package.version)))
 
-$(srcdir)/stamp-patch:
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/gcc-5.1.patch
-	touch $@
-
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch
-
 conf-args += \
 	--with-pkg-config-libdir=$(PREFIX)/lib/pkgconfig \
 	--with-termlib=tinfo \
 	--with-ticlib=tic \
+	--disable-stripping \
 	--enable-pc-files \
 	--enable-widec \
 	--with-normal \
