@@ -1,0 +1,25 @@
+description: GNU Scientific Library - a modern numerical library for C and C++ programmers
+version: 2.4
+license: GPL
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: http://ftp.gnu.org/gnu/gsl/gsl-${version}.tar.gz
+      sha1: 5db17d71306139b811a218d8a8cf98e12e1f58ae
+
+packages:
+  libgsl:
+    files:
+      - /usr/lib/*.so.*
+
+  libgsl-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
