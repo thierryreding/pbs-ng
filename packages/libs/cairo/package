@@ -27,4 +27,4 @@ packages:
     files:
       - /usr/lib/*.so.*
 
-# vim: et ft=yaml sts=2 sw=2 sts=2
+# vim: et ft=yaml sts=2 sw=2 ts=2
