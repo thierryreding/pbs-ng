@@ -1,10 +1,6 @@
 include $(TOP_SRCDIR)/packages/autotools.mk
 
-$(srcdir)/stamp-patch:
-	#cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/out-of-tree.patch
-	touch $@
-
-$(srcdir)/configure: $(srcdir)/stamp-patch
+$(srcdir)/configure:
 	cd $(srcdir) && $(conf-env) ./autogen.sh
 
 $(builddir)/config.cache: | $(builddir)
