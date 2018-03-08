@@ -1,5 +1,8 @@
 include config.mk
 
+empty :=
+comma := ,
+
 DESTDIR = $(TOP_OBJDIR)/$(PKGDIR)/install
 BUILD_TOOLS = $(TOP_OBJDIR)/build-tools
 SYSROOT = $(TOP_OBJDIR)/sysroot
