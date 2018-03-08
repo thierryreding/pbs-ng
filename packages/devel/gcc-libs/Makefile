@@ -16,6 +16,11 @@ libgcc = $(abspath $(shell $(CC) -print-file-name=libgcc_s.so))
 libgcc-static = $(shell $(CC) -print-file-name=libgcc.a)
 libgcc-target = $(realpath $(libgcc))
 
+libatomic = $(abspath $(shell $(CC) -print-file-name=libatomic.so))
+libatomic-static = $(shell $(CC) -print-file-name=libatomic.a)
+libatomic-target = $(realpath $(libatomic))
+libatomic-soname = $(call soname,$(libatomic-target))
+
 ifeq ($(libgcc),$(libgcc-target))
   libgcc-soname = $(shell $(AWK) '/GROUP/ { print $$3 }' $(libgcc))
 else
@@ -48,6 +53,11 @@ $(builddir)/stamp-install: $(DESTDIR)$(PREFIX)/lib | $(builddir)
 	cp -dp $(srcdir)$(libstdcxx-soname) $(DESTDIR)$(PREFIX)/lib
 	cp -dp $(srcdir)libstdc++.so $(DESTDIR)$(PREFIX)/lib
 	cp -dp $(srcdir)libstdc++.a $(DESTDIR)$(PREFIX)/lib
+	# libatomic
+	cp -dp $(libatomic) $(DESTDIR)$(PREFIX)/lib
+	cp -dp $(libatomic-target) $(DESTDIR)$(PREFIX)/lib
+	cp -dp $(libatomic-soname) $(DESTDIR)$(PREFIX)/lib
+	cp -dp $(libatomic-static) $(DESTDIR)$(PREFIX)/lib
 
 install: $(builddir)/stamp-install
 
