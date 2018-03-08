@@ -4,7 +4,7 @@ $(builddir):
 	mkdir -p $@
 
 $(builddir)/cross-compile.cmake: $(TOP_SRCDIR)/support/cross-compile.cmake.in | $(builddir)
-	sed 's|@HOST@|$(HOST)|;s|@SYSROOT@|$(SYSROOT)|' $< > $@
+	sed 's|@ARCH@|$(ARCH)|;s|@HOST@|$(HOST)|;s|@SYSROOT@|$(SYSROOT)|' $< > $@
 
 env = \
 	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
