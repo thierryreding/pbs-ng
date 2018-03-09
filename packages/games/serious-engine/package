@@ -1,0 +1,18 @@
+description: Serious Engine 1.10
+version: git
+license: custom
+
+depends:
+  - libs/mesa
+  - libs/sdl
+  - multimedia/libogg
+  - multimedia/libvorbis
+
+packages:
+  serious-engine:
+    files:
+      - /usr/bin
+      - /usr/lib
+      - /usr/share
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
