@@ -1,0 +1,31 @@
+description: Cross-platform 3D audio library, software implementation
+version: 1.18.2
+license: LGPL
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/kcat/openal-soft/archive/openal-soft-${version}.tar.gz
+      sha1: f819c6720c4beead7653ebc35fbb2c287a8970fc
+
+packages:
+  libopenal:
+    files:
+      - /usr/lib/*.so.*
+      - /usr/share/openal
+
+  libopenal-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+      - /usr/lib/pkgconfig
+
+  openal-tools:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
