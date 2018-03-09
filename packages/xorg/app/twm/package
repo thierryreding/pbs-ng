@@ -1,5 +1,5 @@
 description: Tab Window Manager for the X Window System
-version: 1.0.9
+version: 1.0.10
 license: custom
 
 depends:
@@ -13,7 +13,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/app/twm-${version}.tar.bz2
-      sha1: 09e8a8f0d1072e11eb0d6e354d75a555b9952755
+      sha1: f632a47620dfe6d75b003839d269b14fa22b262e
 
 packages:
   twm:
