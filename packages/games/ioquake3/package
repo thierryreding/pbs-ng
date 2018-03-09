@@ -1,0 +1,18 @@
+description: Quake 3 Arena
+version: git
+license: custom
+
+depends:
+  - libs/mesa
+  - libs/sdl
+  - multimedia/libogg
+  - multimedia/libvorbis
+  - multimedia/openal
+
+packages:
+  ioquake3:
+    files:
+      - /usr/bin
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
