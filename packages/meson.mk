@@ -28,7 +28,7 @@ $(builddir)/stamp-build: $(builddir)/stamp-configure
 	touch $@
 
 $(builddir)/stamp-install: $(builddir)/stamp-build
-	$(env) $(FAKEROOT) ninja -C $(builddir) install
+	$(env) ninja -C $(builddir) install
 
 install: $(builddir)/stamp-install
 
