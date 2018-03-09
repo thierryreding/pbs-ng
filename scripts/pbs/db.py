@@ -833,12 +833,21 @@ class VCSSourceFile(SourceFile):
 
 class Source():
     class Option():
-        def __init__(self, name):
+        def __init__(self, name, parent = None):
             self.name = name
+            self.parent = parent
             self.description = None
             self.default = None
+            self.options = []
 
         def parse(self, values):
+            if 'options' in values and values['options']:
+                for name in values['options']:
+                    value = values['options'][name]
+
+                    option = Source.parse_option(name, value, self)
+                    self.options.append(option)
+
             if 'default' in values:
                 if values['default'] == 'no':
                     self.default = False
@@ -863,8 +872,9 @@ class Source():
                 self.description = None
                 self.default = False
 
-        def __init__(self, name):
+        def __init__(self, name, parent = None):
             self.name = name
+            self.parent = parent
             self.description = None
             self.default = None
             self.options = []
@@ -925,11 +935,12 @@ class Source():
             else:
                 pbs.log.error('invalid type of source file:', key)
 
-    def parse_option(self, name, values):
+    @staticmethod
+    def parse_option(name, values, parent = None):
         if 'choice' in values:
-            option = Source.Choice(name)
+            option = Source.Choice(name, parent)
         else:
-            option = Source.Option(name)
+            option = Source.Option(name, parent)
 
         if 'description' in values:
             option.description = values['description']
@@ -965,7 +976,7 @@ class Source():
         if 'options' in values and values['options']:
             for name in values['options']:
                 value = values['options'][name]
-                option = Source.parse_option(self, name, value)
+                option = Source.parse_option(name, value)
                 self.options.append(option)
 
         if 'files' in values:

@@ -97,11 +97,19 @@ class Architecture():
 
 class Package():
     class Option():
-        def __init__(self, option):
+        def __init__(self, option, parent = None):
             self.source = option
+            self.parent = parent
             self.value = option.default
 
-        def configure(self):
+            if parent:
+                self.name = '%s.%s' % (parent.name, option.name)
+            else:
+                self.name = option.name
+
+            self.options = Package.parse_options(option.options, self)
+
+        def configure(self, indent = 0):
             source = self.source
 
             while True:
@@ -115,7 +123,8 @@ class Package():
                     yes = 'y'
                     no = 'N'
 
-                choice = input('  %s - %s [%s/%s] ' % (source.name,
+                choice = input('%s%s - %s [%s/%s] ' % (' ' * (indent + 2),
+                                                       source.name,
                                                        source.description,
                                                        yes, no))
                 if choice == 'y' or choice == 'Y':
@@ -127,15 +136,21 @@ class Package():
                 elif not choice:
                     break
 
-        def generate_config(self, file = sys.stdout):
-            name = self.source.name
+            if self.value:
+                for option in self.options:
+                    option.configure(indent + 2)
 
+        def generate_config(self, file = sys.stdout):
             if self.value:
                 value = 'y'
             else:
                 value = 'n'
 
-            print('package.option.%s =' % (name), value, file = file)
+            print('package.option.%s =' % self.name, value, file = file)
+
+            if self.value:
+                for option in self.options:
+                    option.generate_config(file = file)
 
         def load(self, value):
             name = self.source.name
@@ -145,18 +160,39 @@ class Package():
             elif value == 'no':
                 self.value = False
             else:
-                pbs.log.error('invalid value', value, 'for option', name)
+                if self.options and isinstance(value, dict):
+                    for option in self.options:
+                        option.load(value[option.source.name])
+
+                    self.value = True
+                else:
+                    pbs.log.error('invalid value', value, 'for option', name)
 
         def save(self):
-            values = {
-                self.source.name: 'yes' if self.value else 'no'
-            }
+            values = {}
+
+            if self.value and self.options:
+                for option in self.options:
+                    if option.value:
+                        values[option.source.name] = 'yes'
+                    else:
+                        values[option.source.name] = 'no'
+
+            if not values:
+                values = {
+                    self.source.name: 'yes' if self.value else 'no'
+                }
+            else:
+                values = {
+                    self.source.name: values
+                }
 
             return values
 
     class Choice():
-        def __init__(self, option):
+        def __init__(self, option, parent = None):
             self.source = option
+            self.parent = parent
             self.value = None
 
         def configure(self):
@@ -212,6 +248,20 @@ class Package():
 
             return values
 
+    @staticmethod
+    def parse_options(source, parent = None):
+        options = []
+
+        for option in source:
+            if isinstance(option, pbs.db.Source.Choice):
+                option = Package.Choice(option, parent)
+            else:
+                option = Package.Option(option, parent)
+
+            options.append(option)
+
+        return options
+
     def __init__(self, project, source):
         self.project = project
         self.source = source
@@ -221,13 +271,7 @@ class Package():
             'build': None
         }
 
-        for option in source.options:
-            if isinstance(option, pbs.db.Source.Choice):
-                option = Package.Choice(option)
-            else:
-                option = Package.Option(option)
-
-            self.options.append(option)
+        self.options = Package.parse_options(source.options)
 
     def configure(self):
         if self.options:
