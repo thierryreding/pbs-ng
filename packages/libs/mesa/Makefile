@@ -34,6 +34,12 @@ else
   conf-args += -Dgallium-drivers=false
 endif
 
+ifeq ($(package.option.opencl),y)
+  conf-args += -Dgallium-opencl=standalone
+else
+  conf-args += -Dgallium-opencl=disabled
+endif
+
 ifeq ($(package.option.vulkan-drivers),y)
   vulkan-drivers-$(package.option.vulkan-drivers.intel) += intel
   vulkan-drivers-$(package.option.vulkan-drivers.amd) += amd

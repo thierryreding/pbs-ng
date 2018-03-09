@@ -6,7 +6,9 @@ depends:
   - devel/clang
   - devel/llvm
   - libs/expat
+  - libs/libclc
   - libs/libdrm
+  - libs/libelf
   - libs/libunwind
   - xorg/proto/dri2
   - xorg/proto/dri3
@@ -101,6 +103,10 @@ options:
       swr:
         description: swr gallium driver
         default: no
+
+  opencl:
+    description: OpenCL support
+    default: no
 
   vulkan-drivers:
     description: Vulkan drivers
