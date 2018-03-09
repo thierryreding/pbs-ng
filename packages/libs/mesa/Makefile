@@ -63,4 +63,4 @@ conf-args += \
 	-Dtexture-float=true \
 	-Ddri-drivers=false \
 	-Dgallium-omx=disabled \
-	-Dllvm=false
+	-Dllvm=true

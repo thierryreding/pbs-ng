@@ -3,6 +3,8 @@ version: 17.3.6
 license: custom
 
 depends:
+  - devel/clang
+  - devel/llvm
   - libs/expat
   - libs/libdrm
   - libs/libunwind
