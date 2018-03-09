@@ -1,5 +1,5 @@
 description: an open-source implementation of the OpenGL specification
-version: 17.3.3
+version: 17.3.6
 license: custom
 
 depends:
@@ -25,12 +25,116 @@ depends:
 files:
   - download:
       url: https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz
-      sha1: 346f7813f493b1daf9d9079826a13dbd722b86ab
+      sha1: eff29cb8c284a813977d4201dd646d949b1d8fc4
 
 options:
   debug:
     description: enable debug support
-    default: yes
+    default: no
+
+  gallium-drivers:
+    description: gallium drivers
+    default: no
+    options:
+      pl111:
+        description: PL111 gallium driver
+        default: no
+
+      radeonsi:
+        description: Radeon gallium driver
+        default: no
+
+      r300:
+        description: R300 gallium driver
+        default: no
+
+      r600:
+        description: R600 gallium driver
+        default: no
+
+      nouveau:
+        description: Nouveau gallium driver
+        default: no
+
+      freedreno:
+        description: freedreno gallium driver
+        default: no
+
+      swrast:
+        description: softpipe gallium driver
+        default: no
+
+      vc4:
+        description: VC4 gallium driver
+        default: no
+
+      vc5:
+        description: VC5 gallium driver
+        default: no
+
+      etnaviv:
+        description: etnaviv gallium driver
+        default: no
+
+      imx:
+        description: i.MX gallium driver
+        default: no
+
+      tegra:
+        description: Tegra gallium driver
+        default: no
+
+      i915:
+        description: i915 gallium driver
+        default: no
+
+      svga:
+        description: svga gallium driver
+        default: no
+
+      virgl:
+        description: virgl gallium driver
+        default: no
+
+      swr:
+        description: swr gallium driver
+        default: no
+
+  vulkan-drivers:
+    description: Vulkan drivers
+    default: no
+    options:
+      intel:
+        description: Intel Vulkan driver
+        default: no
+
+      amd:
+        description: AMD Vulkan driver
+        default: no
+
+  platforms:
+    description: platforms
+    default: no
+    options:
+      android:
+        description: Android platform
+        default: no
+
+      wayland:
+        description: Wayland platform
+        default: no
+
+      x11:
+        description: X11 platform
+        default: no
+
+      drm:
+        description: DRM platform
+        default: no
+
+      surfaceless:
+        description: surfaceless platform
+        default: no
 
 packages:
   mesa:

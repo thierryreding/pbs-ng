@@ -1,31 +1,66 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
+include $(TOP_SRCDIR)/packages/meson.mk
 
-# make sure to lock the source directory when building from a symlinked
-# source, otherwise two concurrent builds might step on each others' toes
-ifneq ($(realpath $(srcdir)),$(srcdir))
-$(builddir)/stamp-patch: $(srcdir)/lock | $(builddir)
-	cd $(srcdir) && autoreconf --force --install
-	touch $@
-
-$(builddir)/stamp-configure: $(builddir)/stamp-patch
-
-install: $(srcdir)/unlock
+ifeq ($(ARCH),arm64)
+  ARCH = aarch64
 endif
-
-conf-args += \
-	--with-sysroot=$(SYSROOT) \
-	--without-dri-drivers \
-	--with-gallium-drivers=swrast,nouveau,tegra \
-	--with-platforms=x11,wayland,drm \
-	--enable-gles1 \
-	--enable-gles2 \
-	--enable-gbm
 
 ifneq ($(package.option.debug),y)
-  conf-args += --disable-debug
+  conf-args += --buildtype release
 else
-  conf-args += --enable-debug
+  conf-args += --buildtype debug
 endif
 
-# prevent the host systems llvm-config script from messing with us
-conf-vars += LLVM_CONFIG=no
+ifeq ($(package.option.gallium-drivers),y)
+  gallium-drivers-$(package.option.gallium-drivers.pl111) += pl111
+  gallium-drivers-$(package.option.gallium-drivers.radeonsi) += radeonsi
+  gallium-drivers-$(package.option.gallium-drivers.r300) += r300
+  gallium-drivers-$(package.option.gallium-drivers.r600) += r600
+  gallium-drivers-$(package.option.gallium-drivers.nouveau) += nouveau
+  gallium-drivers-$(package.option.gallium-drivers.freedreno) += freedreno
+  gallium-drivers-$(package.option.gallium-drivers.swrast) += swrast
+  gallium-drivers-$(package.option.gallium-drivers.vc4) += vc4
+  gallium-drivers-$(package.option.gallium-drivers.vc5) += vc5
+  gallium-drivers-$(package.option.gallium-drivers.etnaviv) += etnaviv
+  gallium-drivers-$(package.option.gallium-drivers.imx) += imx
+  gallium-drivers-$(package.option.gallium-drivers.tegra) += tegra
+  gallium-drivers-$(package.option.gallium-drivers.i915) += i915
+  gallium-drivers-$(package.option.gallium-drivers.svga) += svga
+  gallium-drivers-$(package.option.gallium-drivers.virgl) += virgl
+  gallium-drivers-$(package.option.gallium-drivers.swr) += swr
+
+  gallium-drivers = $(subst $(empty) $(empty),$(comma),$(gallium-drivers-y))
+  conf-args += -Dgallium-drivers=$(gallium-drivers)
+else
+  conf-args += -Dgallium-drivers=false
+endif
+
+ifeq ($(package.option.vulkan-drivers),y)
+  vulkan-drivers-$(package.option.vulkan-drivers.intel) += intel
+  vulkan-drivers-$(package.option.vulkan-drivers.amd) += amd
+
+  vulkan-drivers = $(subst $(empty) $(empty),$(comma),$(vulkan-drivers-y))
+  conf-args += -Dvulkan-drivers=$(vulkan-drivers)
+else
+  conf-args += -Dvulkan-drivers=false
+endif
+
+ifeq ($(package.option.platforms),y)
+  platforms-$(package.option.platforms.android) += android
+  platforms-$(package.option.platforms.wayland) += wayland
+  platforms-$(package.option.platforms.x11) += x11
+  platforms-$(package.option.platforms.drm) += drm
+  platforms-$(package.option.platforms.surfaceless) += surfaceless
+
+  platforms = $(subst $(empty) $(empty),$(comma),$(platforms-y))
+  conf-args += -Dplatforms=$(platforms)
+else
+  conf-args += -Dplatforms=false
+endif
+
+conf-args += -Dbuild-tests=true
+
+conf-args += \
+	-Dtexture-float=true \
+	-Ddri-drivers=false \
+	-Dgallium-omx=disabled \
+	-Dllvm=false
