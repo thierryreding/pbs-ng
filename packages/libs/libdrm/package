@@ -1,5 +1,5 @@
 description: Userspace interface to kernel DRM services
-version: 2.4.89
+version: 2.4.91
 license: custom
 
 depends:
@@ -11,28 +11,32 @@ depends:
 files:
   - download:
       url: http://dri.freedesktop.org/libdrm/libdrm-${version}.tar.bz2
-      sha1: 43123da26271df9a29deb687c1855bef3fed249c
+      sha1: 44e42ce3cd41666e343ba393c73f6f1ad9fe1e74
 
 options:
   kms:
     description: enable libkms support
-    default: yes
+    default: no
 
   intel:
     description: enable Intel API
-    default: no
-
-  vmwgfx:
-    description: enable vmwgfx API
     default: no
 
   radeon:
     description: enable Radeon API
     default: no
 
+  amdgpu:
+    description: enable AMD GPU API
+    default: no
+
   nouveau:
     description: enable Nouveau API
-    default: yes
+    default: no
+
+  vmwgfx:
+    description: enable vmwgfx API
+    default: no
 
   omap:
     description: enable OMAP API
@@ -48,7 +52,15 @@ options:
 
   tegra:
     description: enable Tegra API
-    default: yes
+    default: no
+
+  vc4:
+    description: enable VC4 API
+    default: no
+
+  etnaviv:
+    description: enable etnaviv API
+    default: no
 
 packages:
   libdrm:

@@ -1,75 +1,76 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
-
-ifeq ($(realpath $(srcdir)),$(srcdir))
-$(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && autoreconf --force --install
-	touch $@
-
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
-else
-$(builddir)/stamp-prepare: | $(builddir)
-	cd $(srcdir) && autoreconf --force --install
-	touch $@
-
-$(builddir)/stamp-configure: $(builddir)/stamp-prepare
-endif
-
-conf-args += \
-	--with-sysroot=$(SYSROOT)
+include $(TOP_SRCDIR)/packages/meson.mk
 
 ifneq ($(package.option.kms),y)
-  conf-args += --disable-libkms
+  conf-args += -Dlibkms=false
 else
-  conf-args += --enable-libkms
+  conf-args += -Dlibkms=true
 endif
 
 ifneq ($(package.option.intel),y)
-  conf-args += --disable-intel
+  conf-args += -Dintel=false
 else
-  conf-args += --enable-intel
-endif
-
-ifneq ($(package.option.vmwgfx),y)
-  conf-args += --disable-vmwgfx
-else
-  conf-args += --enable-vmwgfx
+  conf-args += -Dintel=true
 endif
 
 ifneq ($(package.option.radeon),y)
-  conf-args += --disable-radeon
+  conf-args += -Dradeon=false
 else
-  conf-args += --enable-radeon
+  conf-args += -Dradeon=true
+endif
+
+ifneq ($(package.option.amdgpu),y)
+  conf-args += -Damdgpu=false
+else
+  conf-args += -Damdgpu=true
 endif
 
 ifneq ($(package.option.nouveau),y)
-  conf-args += --disable-nouveau
+  conf-args += -Dnouveau=false
 else
-  conf-args += --enable-nouveau
+  conf-args += -Dnouveau=true
+endif
+
+ifneq ($(package.option.vmwgfx),y)
+  conf-args += -Dvmwgfx=false
+else
+  conf-args += -Dvmwgfx=true
 endif
 
 ifneq ($(package.option.omap),y)
-  conf-args += --disable-omap-experimental-api
+  conf-args += -Domap=false
 else
-  conf-args += --enable-omap-experimental-api
+  conf-args += -Domap=true
 endif
 
 ifneq ($(package.option.exynos),y)
-  conf-args += --disable-exynos-experimental-api
+  conf-args += -Dexynos=false
 else
-  conf-args += --enable-exynos-experimental-api
+  conf-args += -Dexynos=true
 endif
 
 ifneq ($(package.option.freedreno),y)
-  conf-args += --disable-freedreno
+  conf-args += -Dfreedreno=false
 else
-  conf-args += --enable-freedreno
+  conf-args += -Dfreedreno=true
 endif
 
 ifneq ($(package.option.tegra),y)
-  conf-args += --disable-tegra-experimental-api
+  conf-args += -Dtegra=false
 else
-  conf-args += --enable-tegra-experimental-api
+  conf-args += -Dtegra=true
+endif
+
+ifneq ($(package.option.vc4),y)
+  conf-args += -Dvc4=false
+else
+  conf-args += -Dvc4=true
+endif
+
+ifneq ($(package.option.etnaviv),y)
+  conf-args += -Detnaviv=false
+else
+  conf-args += -Detnaviv=true
 endif
 
 conf-args += \
-	--enable-install-test-programs
+	-Dinstall-test-programs=true
