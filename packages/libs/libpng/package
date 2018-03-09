@@ -1,5 +1,5 @@
 description: free reference library for reading and writing PNGs
-version: 1.6.31
+version: 1.6.34
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: http://prdownloads.sourceforge.net/libpng/libpng-${version}.tar.xz
-      sha1: de695064363df331734466981ef7f6546ef516bf
+      sha1: 45de4ec996ffcc3e18037e7c128abe95f4d0292a
 
 packages:
   libpng:
