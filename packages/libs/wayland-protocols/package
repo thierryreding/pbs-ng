@@ -1,11 +1,11 @@
 description: Specifications of extended Wayland protocols
-version: 1.12
+version: 1.13
 license: MIT
 
 files:
   - download:
       url: https://wayland.freedesktop.org/releases/wayland-protocols-${version}.tar.xz
-      sha1: ac908e91c6c5e7802c0af48f55725ad683017e72
+      sha1: 1b4b3385e168c361b4d350668d92f3a90ceee189
 
 packages:
   wayland-protocols:
