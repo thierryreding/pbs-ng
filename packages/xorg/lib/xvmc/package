@@ -1,0 +1,25 @@
+description: X11 Video Motion Compensation extension library
+version: 1.0.10
+license: custom
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/libXvMC-${version}.tar.bz2
+      sha1: 8c50ee4a43aff84d807da2122ec6b0d8e3ce4635
+
+depends:
+  - xorg/lib/xv
+
+packages:
+  libxvmc:
+    files:
+      - /usr/lib/*.so.*
+
+  libxvmc-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
