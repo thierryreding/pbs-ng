@@ -1,0 +1,26 @@
+description: Simple DirectMedia Layer
+version: 2.0.8
+license: MIT
+
+depends:
+  - devel/glibc
+  - libs/mesa
+
+files:
+  - download:
+      url: https://www.libsdl.org/release/SDL2-${version}.tar.gz
+      sha1: 959ec6ded277821995d2e3cafd973f6ab9f48ab7
+
+packages:
+  libsdl:
+    files:
+      - /usr/lib/*.so.*
+
+  libsdl-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
