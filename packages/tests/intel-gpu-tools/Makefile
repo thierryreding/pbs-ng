@@ -10,6 +10,9 @@ $(builddir)/stamp-prepare: $(srcdir)/lock | $(builddir)
 $(builddir)/stamp-configure: $(builddir)/stamp-prepare
 
 install: $(srcdir)/unlock
+
+version:
+	@cd $(srcdir) && git describe --abbrev=12 | sed s/intel-gpu-tools-//
 endif
 
 conf-vars += \

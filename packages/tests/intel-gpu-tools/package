@@ -1,5 +1,5 @@
 description: Variety of small tools for testing Intel graphics
-version: git
+version:
 license: custom
 
 depends:
