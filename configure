@@ -88,6 +88,7 @@ check_program gcc
 check_program flex
 check_program bison
 check_program depmod
+check_program sed
 check_program gawk
 check_program bash
 check_program wget
@@ -120,6 +121,7 @@ Programs:
   bison:      $prog_bison
   depmod:     $prog_depmod
   gawk:       $prog_gawk
+  sed:        $prog_sed
   bash:       $prog_bash
   wget:       $prog_wget
   curl:       $prog_curl
@@ -149,6 +151,7 @@ echo "FLEX = $prog_flex" >&3
 echo "BISON = $prog_bison" >&3
 echo "DEPMOD = $prog_depmod" >&3
 echo "AWK = $prog_gawk" >&3
+echo "SED = $prog_sed" >&3
 echo "BASH = $prog_bash" >&3
 echo "WGET = $prog_wget" >&3
 echo "CURL = $prog_curl" >&3
