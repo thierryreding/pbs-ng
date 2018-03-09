@@ -1,0 +1,114 @@
+#!/bin/sh
+
+modules="$modules bitwriter engine mcdisassembler mcjit all-targets linker"
+modules="$modules coverage instrumentation ipo irreader lto option"
+modules="$modules objcarcopts profiledata"
+
+macros="$macros -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS"
+macros="$macros -D__STDC_LIMIT_MACROS"
+
+sysroot="@SYSROOT@"
+prefix="@PREFIX@"
+version="@VERSION@"
+
+major="${version%.*}"
+major="${major%.*}"
+
+minor="${version%.*}"
+minor="${minor#*.}"
+
+patch="${version#*.}"
+patch="${patch#*.}"
+
+libs="-lLLVM-$major.$minor"
+
+while test $# -gt 0; do
+	case $1 in
+		--version)
+			echo "$version"
+			shift
+			;;
+
+		--components)
+			echo "$modules"
+			shift
+			;;
+
+		--cppflags)
+			echo "-I$sysroot$prefix/include $macros"
+			shift
+			;;
+
+		--cxxflags)
+			echo "-I$sysroot$prefix/include $macros"
+			shift
+			;;
+
+		--ldflags)
+			echo "-L$sysroot$prefix/lib"
+			shift
+			;;
+
+		--link-static)
+			shift
+			;;
+
+		--system-libs)
+			shift
+			;;
+
+		--link-shared)
+			shift
+			;;
+
+		--libs)
+			echo "$libs"
+			shift
+			;;
+
+		--prefix)
+			echo "$prefix"
+			shift
+			;;
+
+		--bindir)
+			echo "${0%/*}"
+			shift
+			;;
+
+		--libdir)
+			echo "$sysroot$prefix/lib"
+			shift
+			;;
+
+		--includedir)
+			echo "$sysroot$prefix/include"
+			shift
+			;;
+
+		--src-root)
+			echo "@SOURCE_ROOT@"
+			shift
+			;;
+
+		--cmakedir)
+			echo "$sysroot$prefix/lib/cmake/llvm"
+			shift
+			;;
+
+		--assertion-mode)
+			echo "OFF"
+			shift
+			;;
+
+		--*)
+			echo "ERROR: invalid command-line option: $1"
+			exit 1
+			;;
+
+		*)
+			components="$components $1"
+			shift
+			;;
+	esac
+done
