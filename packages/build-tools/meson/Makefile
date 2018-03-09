@@ -1,9 +1,13 @@
 include $(TOP_SRCDIR)/packages/build-tools/common.mk
 
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-sizeof.patch
+	touch $@
+
 $(builddir):
 	mkdir -p $@
 
-$(builddir)/stamp-build: | $(builddir)
+$(builddir)/stamp-build: $(srcdir)/stamp-patch | $(builddir)
 	cd $(srcdir) && python3 setup.py build
 	touch $@
 
