@@ -14,6 +14,7 @@ depends:
   - xorg/lib/xdamage
   - xorg/lib/xfixes
   - xorg/lib/xshmfence
+  - xorg/lib/xvmc
   - core/systemd # gbm requires udev
   - libs/wayland-protocols
   - libs/wayland
