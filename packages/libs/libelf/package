@@ -1,0 +1,26 @@
+description: libraries to handle ELF object files and DWARD debugging information
+version: 0.170
+license: LGPL-3.0-or-later, GPL-2.0-OR-LATER, GPL-3.0-or-later
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://sourceware.org/elfutils/ftp/${version}/elfutils-${version}.tar.bz2
+      sha1: aff6feac0ff69eb7b240babdf2918f640eadb032
+
+packages:
+  libelf:
+    files:
+      - /usr/lib/*.so.*
+      - /usr/lib/elfutils
+
+  libelf-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
