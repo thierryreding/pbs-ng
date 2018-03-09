@@ -1,10 +1,10 @@
 description: XML parsing library
-version: 2.9.7
+version: 2.9.8
 license: MIT
 
 files:
   - download:
       url: ftp://xmlsoft.org/libxml2/libxml2-${version}.tar.gz
-      sha1: ab3325e6cdda50ab2382fdfe0bdb6f7d1b9224a6
+      sha1: 66bcefd98a6b7573427cf66f9d3841b59eb5b8c3
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
