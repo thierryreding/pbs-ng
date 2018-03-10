@@ -786,7 +786,30 @@ class GitRepository(SourceRepository):
         self.url = url
 
     def fetch(self, target):
-        pbs.log.info('cloning %s to %s...' % (self.url, target))
+        scheme, netloc, path, params, query, fragment, *unused = urllib.parse.urlparse(self.url)
+
+        if fragment:
+            branch = [ '--branch', fragment ]
+        else:
+            branch = []
+
+        url = urllib.parse.urlunparse([scheme, netloc, path, params, query, None, *unused])
+
+        if fragment:
+            pbs.log.info('cloning %s (branch %s) to %s...' % (url, fragment, target))
+        else:
+            pbs.log.info('cloning %s to %s...' % (url, target))
+
+        process = subprocess.run(['git', 'clone', *branch, url, target],
+                                 stderr = subprocess.STDOUT,
+                                 stdout = subprocess.PIPE)
+        if process.returncode:
+            log = process.stdout.decode('utf-8')
+            pbs.log.end('failed')
+            pbs.log.error(log)
+            raise Exception(log)
+        else:
+            pbs.log.end('done')
 
     def __str__(self):
         return 'git: %s' % self.url
