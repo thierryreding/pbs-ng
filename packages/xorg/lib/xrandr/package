@@ -5,7 +5,7 @@ license: custom
 depends:
   - xorg/lib/xext
   - xorg/lib/xrender
-  - xorg/proto/randr
+  - xorg/proto/xorgproto
 
 files:
   - download:

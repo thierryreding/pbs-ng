@@ -4,7 +4,7 @@ license: custom
 
 depends:
   - xorg/lib/xtrans
-  - xorg/proto/x
+  - xorg/proto/xorgproto
 
 files:
   - download:

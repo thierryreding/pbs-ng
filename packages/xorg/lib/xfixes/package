@@ -4,7 +4,7 @@ license: custom
 
 depends:
   - xorg/lib/x11
-  - xorg/proto/fixes
+  - xorg/proto/xorgproto
 
 files:
   - download:

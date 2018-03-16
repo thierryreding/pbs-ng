@@ -5,9 +5,7 @@ license: custom
 depends:
   - xorg/lib/xcb
   - xorg/lib/xtrans
-  - xorg/proto/input
-  - xorg/proto/kb
-  - xorg/proto/xext
+  - xorg/proto/xorgproto
 
 files:
 - download:

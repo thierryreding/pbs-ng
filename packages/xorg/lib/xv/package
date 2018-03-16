@@ -9,7 +9,7 @@ files:
 
 depends:
   - xorg/lib/xext
-  - xorg/proto/video
+  - xorg/proto/xorgproto
 
 packages:
   libxv:

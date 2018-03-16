@@ -8,8 +8,7 @@ depends:
   - libs/freetype
   - xorg/lib/fontenc
   - xorg/lib/xtrans
-  - xorg/proto/fonts
-  - xorg/proto/x
+  - xorg/proto/xorgproto
 
 files:
   - download:

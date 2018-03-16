@@ -4,8 +4,7 @@ license: custom
 
 depends:
   - xorg/lib/xfixes
-  - xorg/proto/damage
-  - xorg/proto/fixes
+  - xorg/proto/xorgproto
 
 files:
   - download:

@@ -4,7 +4,7 @@ license: custom
 
 depends:
   - devel/glibc
-  - xorg/proto/x
+  - xorg/proto/xorgproto
 
 files:
   - download:

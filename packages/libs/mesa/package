@@ -10,10 +10,7 @@ depends:
   - libs/libdrm
   - libs/libelf
   - libs/libunwind
-  - xorg/proto/dri2
-  - xorg/proto/dri3
-  - xorg/proto/gl
-  - xorg/proto/present
+  - xorg/proto/xorgproto
   - xorg/lib/xext
   - xorg/lib/xdamage
   - xorg/lib/xfixes
