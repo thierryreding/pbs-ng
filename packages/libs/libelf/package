@@ -4,6 +4,7 @@ license: LGPL-3.0-or-later, GPL-2.0-OR-LATER, GPL-3.0-or-later
 
 depends:
   - devel/glibc
+  - libs/zlib
 
 files:
   - download:
