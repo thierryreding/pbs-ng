@@ -5,7 +5,7 @@ license: MIT
 depends:
   - libs/cairo
   - libs/libinput
-  - libs/libjpeg
+  - libs/libjpeg-turbo
   - libs/libxkbcommon
   - libs/mesa
   - libs/mtdev

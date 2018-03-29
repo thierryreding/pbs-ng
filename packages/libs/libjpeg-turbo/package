@@ -1,15 +1,14 @@
 description: JPEG codec library
-version: 9b
+version: 1.5.3
 license: custom
 
 depends:
   - devel/glibc
-  - libs/libevdev
 
 files:
   - download:
-      url: http://www.ijg.org/files/jpegsrc.v${version}.tar.gz
-      sha1: 15dd867617a88abd07573e06a86ace9bdb998ac2
+      url: http://prdownloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-${version}.tar.gz
+      sha1: 87ebf4cab2bb27fcb8e7ccb18ec4eb680e1f2c2d
 
 packages:
   libjpeg:
