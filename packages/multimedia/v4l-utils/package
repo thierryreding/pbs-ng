@@ -1,0 +1,33 @@
+description: Userspace tools and conversion library for Video4Linux
+version: 1.14.2
+license: GPL-2.0
+
+files:
+  - download:
+      url: https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-${version}.tar.bz2
+      sha1: 8dfe4bebdfaf536ddc8771b60685b3a43dcc7cb3
+
+depends:
+  - devel/glibc
+
+packages:
+  libv4l:
+    files:
+      - /usr/lib/*.so.*
+      - /usr/lib/libv4l
+
+  libv4l-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  v4l-utils:
+    files:
+      - /etc
+      - /usr/bin
+      - /usr/lib/udev
+      - /usr/sbin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
