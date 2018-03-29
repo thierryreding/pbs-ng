@@ -1,5 +1,5 @@
 description: A URL retrieval utility and library
-version: 7.58.0
+version: 7.59.0
 license: MIT
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://curl.haxx.se/download/curl-${version}.tar.xz
-      sha1: edbc1a5a558b091e3c75987d26a4667ef20af84d
+      sha1: f6ec54869dce33abcba4e6d919165fe3c9e1dff5
 
 packages:
   curl:
