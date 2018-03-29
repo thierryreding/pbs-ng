@@ -1,5 +1,14 @@
 include $(TOP_SRCDIR)/packages/meson.mk
 
+ifeq ($(realpath $(srcdir)),$(srcdir))
+$(srcdir)/stamp-patch:
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/fix-ms-collisions.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/fix-noreturn.patch
+	touch $@
+
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch
+endif
+
 $(builddir)/stamp-install-hwdb: $(builddir)/stamp-install
 	# TODO add build-tools/systemd to get this binary irrespective of
 	# whether or not the build system has it installed
