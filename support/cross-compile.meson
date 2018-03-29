@@ -10,3 +10,7 @@ cpp = ['@HOST@-g++', '--sysroot', '@SYSROOT@']
 ar = '@HOST@-ar'
 strip = '@HOST@-strip'
 pkgconfig = 'pkg-config'
+llvm-config = '@HOST@-llvm-config'
+
+[properties]
+root = '@SYSROOT@'
