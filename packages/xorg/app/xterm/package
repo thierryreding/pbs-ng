@@ -1,5 +1,5 @@
 description: X terminal emulator
-version: 330
+version: 331
 license: custom
 
 depends:
@@ -8,8 +8,8 @@ depends:
 
 files:
   - download:
-      url: ftp://invisible-island.net/xterm/xterm-${version}.tgz
-      sha1: 0b648aaba45715c156a25e7ff629c82eb9836bc0
+      url: ftp://ftp.invisible-island.net/pub/xterm/xterm-${version}.tgz
+      sha1: ad8325e4a23cc32be0933b2f38ae11f96797b12a
 
 packages:
   xterm:
