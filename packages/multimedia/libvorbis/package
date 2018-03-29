@@ -1,5 +1,5 @@
 description: Vorbis codec library
-version: 1.3.5
+version: 1.3.6
 license: BSD
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://downloads.xiph.org/releases/vorbis/libvorbis-${version}.tar.xz
-      sha1: 7b4cdd4a73fadfed457ae40984cb0cc91146b300
+      sha1: 237e3d1c66452734fd9b32f494f44238b4f0185e
 
 packages:
   libvorbis:
