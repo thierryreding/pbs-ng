@@ -1,0 +1,23 @@
+description: a full-featured cross-platform image library
+version: 1.8.0
+license: LGPL-2.1-only
+
+depends:
+  - libs/libjpeg-turbo
+
+files:
+  - download:
+      url: http://prdownloads.sourceforge.net/openil/DevIL-${version}.tar.gz
+      sha1: fe5b65e46e8fe5345e4d6d741d966cfd2d25f2c3
+
+packages:
+  libjpeg-turbo:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+
+  libjpeg-turbo-dev:
+    files:
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
