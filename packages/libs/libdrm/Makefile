@@ -73,4 +73,5 @@ else
 endif
 
 conf-args += \
-	-Dinstall-test-programs=true
+	-Dinstall-test-programs=true \
+	-Dvalgrind=false

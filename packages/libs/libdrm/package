@@ -73,6 +73,7 @@ packages:
       - /usr/bin/modeprint
       - /usr/bin/modetest
       - /usr/bin/proptest
+      - /usr/bin/tegra-*
       - /usr/bin/vbltest
 
   libdrm-dev:
