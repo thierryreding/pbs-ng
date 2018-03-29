@@ -1,13 +1,20 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/llvm-bindir.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/llvm-cxxflags.patch
+	touch $@
+
 env += \
 	LD_LIBRARY_PATH=$(BUILD_TOOLS)/lib
 
 conf-args += \
 	--with-llvm-config=$(BUILD_TOOLS)/bin/$(HOST)-llvm-config \
+	--with-llvm-cxxflags='-I$(BUILD_TOOLS)/include' \
+	--with-llvm-bindir=$(BUILD_TOOLS)/bin \
 	--prefix=$(PREFIX)
 
-$(srcdir)/stamp-configure: | $(srcdir)
+$(srcdir)/stamp-configure: $(srcdir)/stamp-patch
 	cd $(srcdir) && \
 		./configure.py $(conf-args)
 	touch $@

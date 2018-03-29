@@ -1,0 +1,31 @@
+diff --git a/configure.py b/configure.py
+index 56723f7fdff5..97b595f9e9f3 100755
+--- a/configure.py
++++ b/configure.py
+@@ -23,6 +23,8 @@ import metabuild
+ p = OptionParser()
+ p.add_option('--with-llvm-config', metavar='PATH',
+              help='use given llvm-config script')
++p.add_option('--with-llvm-bindir', metavar='PATH',
++             help='use given directory to find LLVM binaries')
+ p.add_option('--with-cxx-compiler', metavar='PATH',
+              help='use given C++ compiler')
+ p.add_option('--prefix', metavar='PATH',
+@@ -40,6 +42,7 @@ p.add_option('--enable-runtime-subnormal', action="store_true", default=False,
+ (options, args) = p.parse_args()
+ 
+ llvm_config_exe = options.with_llvm_config or "llvm-config"
++llvm_bindir = options.with_llvm_bindir
+ 
+ prefix = options.prefix
+ if not prefix:
+@@ -77,7 +80,8 @@ if llvm_int_version < 390:
+     sys.exit(1)
+ 
+ llvm_system_libs = llvm_config(['--system-libs'])
+-llvm_bindir = llvm_config(['--bindir'])
++if not llvm_bindir:
++    llvm_bindir = llvm_config(['--bindir'])
+ llvm_core_libs = llvm_config(['--libs', 'core', 'bitreader', 'bitwriter']) + ' ' + \
+                  llvm_system_libs + ' ' + \
+                  llvm_config(['--ldflags'])
