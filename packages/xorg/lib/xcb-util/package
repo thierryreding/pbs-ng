@@ -1,0 +1,26 @@
+description: utility libraries for XC binding
+version: 0.4.0
+license: custom
+
+depends:
+  - xorg/lib/xcb
+  - xorg/proto/xcb
+
+files:
+- download:
+    url: http://xcb.freedesktop.org/dist/xcb-util-${version}.tar.bz2
+    sha1: 7f2e9b7efcc2c34eb1d6ae312c3d73b075832e46
+
+packages:
+  xcb-util:
+    files:
+      - /usr/lib/*.so.*
+
+  xcb-util-dev:
+    files:
+      - /usr/include/xcb
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
