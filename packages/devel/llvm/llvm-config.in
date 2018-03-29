@@ -73,17 +73,17 @@ while test $# -gt 0; do
 			;;
 
 		--bindir)
-			echo "${0%/*}"
+			echo "$prefix/bin"
 			shift
 			;;
 
 		--libdir)
-			echo "$sysroot$prefix/lib"
+			echo "$prefix/lib"
 			shift
 			;;
 
 		--includedir)
-			echo "$sysroot$prefix/include"
+			echo "$prefix/include"
 			shift
 			;;
 
