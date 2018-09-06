@@ -31,7 +31,7 @@ ifeq ($(package.option.gallium-drivers),y)
   gallium-drivers = $(subst $(empty) $(empty),$(comma),$(gallium-drivers-y))
   conf-args += -Dgallium-drivers=$(gallium-drivers)
 else
-  conf-args += -Dgallium-drivers=false
+  conf-args += -Dgallium-drivers=''
 endif
 
 ifeq ($(package.option.opencl),y)
@@ -47,7 +47,7 @@ ifeq ($(package.option.vulkan-drivers),y)
   vulkan-drivers = $(subst $(empty) $(empty),$(comma),$(vulkan-drivers-y))
   conf-args += -Dvulkan-drivers=$(vulkan-drivers)
 else
-  conf-args += -Dvulkan-drivers=false
+  conf-args += -Dvulkan-drivers=''
 endif
 
 ifeq ($(package.option.platforms),y)
@@ -60,13 +60,13 @@ ifeq ($(package.option.platforms),y)
   platforms = $(subst $(empty) $(empty),$(comma),$(platforms-y))
   conf-args += -Dplatforms=$(platforms)
 else
-  conf-args += -Dplatforms=false
+  conf-args += -Dplatforms=''
 endif
 
 conf-args += -Dbuild-tests=true
 
 conf-args += \
 	-Dtexture-float=true \
-	-Ddri-drivers=false \
+	-Ddri-drivers='' \
 	-Dgallium-omx=disabled \
 	-Dllvm=true

@@ -1,10 +1,12 @@
 description: an open-source implementation of the OpenGL specification
-version: 18.0.0
+version: 18.1.7
 license: custom
 
 depends:
+  - build-tools/python-mako
   - devel/clang
   - devel/llvm
+  - devel/spirv-tools
   - libs/expat
   - libs/libclc
   - libs/libdrm
@@ -14,6 +16,7 @@ depends:
   - xorg/lib/xext
   - xorg/lib/xdamage
   - xorg/lib/xfixes
+  - xorg/lib/xrandr
   - xorg/lib/xshmfence
   - xorg/lib/xvmc
   - core/systemd # gbm requires udev
@@ -26,7 +29,7 @@ depends:
 files:
   - download:
       url: https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz
-      sha1: 361ed565bb7d243c251bfccd4fe2776f54c6d968
+      sha1: 8f86e16a1c03665e55bc284c0e4a5b0a953bcadc
 
 options:
   debug:
@@ -148,6 +151,7 @@ packages:
       - /usr/lib/egl/*.so
       - /usr/lib/gallium-pipe/*.so
       - /usr/lib/gbm/*.so
+      - /usr/lib/vdpau/*
       - /usr/lib/*.so.*
 
   mesa-dev:
