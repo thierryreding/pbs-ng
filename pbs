@@ -19,9 +19,9 @@ import pbs.commands, pbs.db, pbs.project
 
 commands = pbs.commands.load(pbs.srctree)
 db = pbs.db.Database()
-start = time.clock()
+start = time.perf_counter()
 db.load(pbs.srctree)
-end = time.clock()
+end = time.perf_counter()
 print('loaded database in %f seconds' % (end - start))
 
 project = pbs.project.Project(db)

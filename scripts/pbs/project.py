@@ -1,3 +1,4 @@
+import functools
 import hashlib
 import io
 import os, os.path
@@ -308,7 +309,10 @@ class Package():
 
         self.states['fetch'] = hash
 
-    def filter(self, info):
+    def filter(self, info, exclude = None):
+        if exclude and exclude(info.name):
+            return None
+
         # Default to 0/0 (root/root) as owner and group by default.
         # TODO implement explicit list of permissions to override
         info.uid = 0
@@ -333,10 +337,10 @@ class Package():
                 with tarfile.open(filename, 'w:xz') as tarball:
                     for pattern in package.files:
                         for match in pattern.matches():
+                            func = functools.partial(self.filter,
+                                                     exclude = pattern.exclude)
                             pbs.log.begin('%s...' % match, indent = 1)
-                            tarball.add(match,
-                                        exclude = pattern.exclude,
-                                        filter = self.filter)
+                            tarball.add(match, filter = func)
                             pbs.log.end('done')
 
     def build(self, force = False, incremental = False, dependencies = True, seen = []):
