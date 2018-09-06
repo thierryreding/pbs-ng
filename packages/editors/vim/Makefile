@@ -27,6 +27,7 @@ $(srcdir)/src/auto/config.cache: | $(srcdir)
 	echo 'vim_cv_getcwd_broken=no' >> $@
 	echo 'vim_cv_stat_ignores_slash=yes' >> $@
 	echo 'vim_cv_memmove_handles_overlap=yes' >> $@
+	echo 'vim_cv_tgetent=zero' >> $@
 
 $(srcdir)/stamp-configure: $(srcdir)/src/auto/config.cache
 	cd $(srcdir) && $(conf-env) ./configure $(conf-args) $(conf-vars)
