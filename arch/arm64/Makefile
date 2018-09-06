@@ -4,3 +4,9 @@ OS = linux
 LIBC = gnu
 
 HOST = aarch64-$(VENDOR)-$(OS)-$(LIBC)
+
+ARCH_CPPFLAGS =
+ARCH_ASFLAGS =
+ARCH_CFLAGS = -O2 -g
+ARCH_CXXFLAGS = -O2 -g
+ARCH_LDFLAGS =

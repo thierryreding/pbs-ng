@@ -1,7 +1,9 @@
 ARCH = arm
 
+ARCH_LONG = $(ARCH)
+
 ifeq ($(arch.version),armv7-a)
-  ARCH_LONG = $(ARCH)v7
+  ARCH_LONG := $(ARCH_LONG)v7
 endif
 
 ifeq ($(arch.endian),little)
@@ -26,12 +28,30 @@ LIBC = gnu
 
 HOST = $(ARCH_LONG)-$(VENDOR)-$(OS)-$(LIBC)$(ABI)
 
-CFLAGS = -O2 -g -marm -march=$(arch.version) -m$(arch.endian)-endian -Uarm
+MARCH=$(arch.version)
 
 ifneq ($(arch.fpu),)
-  CFLAGS += -mfloat-abi=hard
+  ifeq ($(arch.extensions.neon),y)
+    MARCH := $(MARCH)+neon-$(arch.fpu)
+  else
+    MARCH := $(MARCH)+$(arch.fpu)
+  endif
+endif
+
+ARCH_CPPFLAGS =
+ARCH_ASFLAGS = -march=$(MARCH) -m$(arch.endian)-endian
+
+ARCH_CFLAGS = -O2 -g -marm -march=$(MARCH) -m$(arch.endian)-endian -Uarm
+
+ifneq ($(arch.fpu),)
+  ARCH_ASFLAGS += -mfloat-abi=hard
+  ARCH_CFLAGS += -mfloat-abi=hard
 endif
 
 ifeq ($(arch.abi),eabi)
-  CFLAGS += -mabi=aapcs-linux -mno-thumb-interwork
+  ARCH_ASFLAGS += -mabi=aapcs-linux -mno-thumb-interwork
+  ARCH_CFLAGS += -mabi=aapcs-linux -mno-thumb-interwork
 endif
+
+ARCH_CXXFLAGS =
+ARCH_LDFLAGS =
