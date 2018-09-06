@@ -1,5 +1,5 @@
 description: keyboard description handling library
-version: 0.8.0
+version: 0.8.2
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: http://xkbcommon.org/download/libxkbcommon-${version}.tar.xz
-      sha1: 2bdd5871e5e76f2fc427911f137aa46e91abbcf3
+      sha1: 5589b09b8490392573bba5527cc0cc82824028b1
 
 packages:
   libxkbcommon:
