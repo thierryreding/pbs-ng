@@ -1,5 +1,5 @@
 description: X library
-version: 1.6.5
+version: 1.6.6
 license: custom
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
 - download:
     url: http://xorg.freedesktop.org/releases/individual/lib/libX11-${version}.tar.bz2
-    sha1: c32155467508dfe783f9296ef22ee6ed53cae7df
+    sha1: b29cf4362b58188cb27fed2294788004af7428a9
 
 packages:
   libx11:
