@@ -1,0 +1,132 @@
+From 78d4929390da1fb63ab585abf1621d90725283d7 Mon Sep 17 00:00:00 2001
+From: Thierry Reding <treding@nvidia.com>
+Date: Fri, 16 Mar 2018 00:41:26 +0100
+Subject: [PATCH] Use dependencies for cc.find_library()
+
+Allows the `dependencies' keyword argument to be used with the
+cc.find_library() command. This has the effect of adding the compile and
+link arguments of each dependency to the command-line which may be
+necessary to find the library. The `dirs' keyword argument can still be
+used to specify a list of search directories that overrides any of the
+dependencies specified.
+
+Note that specifying the list of search directories is not safe unless
+you know exactly what you are doing because it will not attempt to link
+to the library. Instead it will return the path to the library if it
+exists, but that does not automatically guarantee that the library can
+really be linked against (for example during cross-compilation). This
+can lead the configuration step to succeed but give an error during
+linking. Attempting to link against the library using the library paths
+provided by the dependencies should therefore be the preferred method.
+
+Signed-off-by: Thierry Reding <treding@nvidia.com>
+---
+ docs/markdown/Reference-manual.md | 12 ++++++++----
+ mesonbuild/compilers/c.py         | 12 ++++++------
+ mesonbuild/compilers/vala.py      |  2 +-
+ mesonbuild/interpreter.py         |  3 ++-
+ 4 files changed, 17 insertions(+), 12 deletions(-)
+
+diff --git a/docs/markdown/Reference-manual.md b/docs/markdown/Reference-manual.md
+index 688af3758e3d..15b692631d0e 100644
+--- a/docs/markdown/Reference-manual.md
++++ b/docs/markdown/Reference-manual.md
+@@ -1591,10 +1591,14 @@ the following methods:
+   value of `dependency`. If the keyword argument `required` is false,
+   Meson will proceed even if the library is not found. By default the
+   library is searched for in the system library directory
+-  (e.g. /usr/lib). This can be overridden with the `dirs` keyword
+-  argument, which can be either a string or a list of strings.  Since
+-  *0.47.0* the value of a [`feature`](Build-options.md#features)
+-  option can also be passed to the `required` keyword argument.
++  (e.g. /usr/lib). If libraries are installed outside of the system
++  library directory, the `dependencies` keyword argument can be used
++  to look in additional directories. Furthermore, if it is known in
++  which directory the library is to be found, the list of search
++  directories can be overridden with the `dirs` keyword argument,
++  which can be either a string or a list of strings. Since *0.47.0*
++  the value of a [`feature`](Build-options.md#features) option can
++  also be passed to the `required` keyword argument.
+ 
+ - `first_supported_argument(list_of_strings)`, given a list of
+   strings, returns the first argument that passes the `has_argument`
+diff --git a/mesonbuild/compilers/c.py b/mesonbuild/compilers/c.py
+index dbbbed2f724c..32e810768854 100644
+--- a/mesonbuild/compilers/c.py
++++ b/mesonbuild/compilers/c.py
+@@ -898,13 +898,13 @@ class CCompiler(Compiler):
+                 return f
+         return None
+ 
+-    def find_library_real(self, libname, env, extra_dirs, code, libtype):
++    def find_library_real(self, libname, env, extra_dirs, code, libtype, dependencies):
+         # First try if we can just add the library as -l.
+         # Gcc + co seem to prefer builtin lib dirs to -L dirs.
+         # Only try to find std libs if no extra dirs specified.
+         if not extra_dirs:
+             args = ['-l' + libname]
+-            if self.links(code, env, extra_args=args):
++            if self.links(code, env, extra_args=args, dependencies=dependencies):
+                 return args
+         # Not found or we want to use a specific libtype? Try to find the
+         # library file itself.
+@@ -940,7 +940,7 @@ class CCompiler(Compiler):
+                     return [trial]
+         return None
+ 
+-    def find_library_impl(self, libname, env, extra_dirs, code, libtype):
++    def find_library_impl(self, libname, env, extra_dirs, code, libtype, dependencies):
+         # These libraries are either built-in or invalid
+         if libname in self.ignore_libs:
+             return []
+@@ -948,7 +948,7 @@ class CCompiler(Compiler):
+             extra_dirs = [extra_dirs]
+         key = (tuple(self.exelist), libname, tuple(extra_dirs), code, libtype)
+         if key not in self.find_library_cache:
+-            value = self.find_library_real(libname, env, extra_dirs, code, libtype)
++            value = self.find_library_real(libname, env, extra_dirs, code, libtype, dependencies)
+             self.find_library_cache[key] = value
+         else:
+             value = self.find_library_cache[key]
+@@ -956,9 +956,9 @@ class CCompiler(Compiler):
+             return None
+         return value[:]
+ 
+-    def find_library(self, libname, env, extra_dirs, libtype='default'):
++    def find_library(self, libname, env, extra_dirs, libtype='default', dependencies=None):
+         code = 'int main(int argc, char **argv) { return 0; }'
+-        return self.find_library_impl(libname, env, extra_dirs, code, libtype)
++        return self.find_library_impl(libname, env, extra_dirs, code, libtype, dependencies)
+ 
+     def thread_flags(self, env):
+         if for_haiku(self.is_cross, env):
+diff --git a/mesonbuild/compilers/vala.py b/mesonbuild/compilers/vala.py
+index 6194d1aed0ef..6d5c516f5d46 100644
+--- a/mesonbuild/compilers/vala.py
++++ b/mesonbuild/compilers/vala.py
+@@ -74,7 +74,7 @@ class ValaCompiler(Compiler):
+             return ['--debug']
+         return []
+ 
+-    def find_library(self, libname, env, extra_dirs):
++    def find_library(self, libname, env, extra_dirs, dependencies = None):
+         if extra_dirs and isinstance(extra_dirs, str):
+             extra_dirs = [extra_dirs]
+         # Valac always looks in the default vapi dir, so only search there if
+diff --git a/mesonbuild/interpreter.py b/mesonbuild/interpreter.py
+index 833e982ef324..4c1248bb11c1 100644
+--- a/mesonbuild/interpreter.py
++++ b/mesonbuild/interpreter.py
+@@ -1425,7 +1425,8 @@ class CompilerHolder(InterpreterObject):
+         for i in search_dirs:
+             if not os.path.isabs(i):
+                 raise InvalidCode('Search directory %s is not an absolute path.' % i)
+-        linkargs = self.compiler.find_library(libname, self.environment, search_dirs)
++        deps = self.determine_dependencies(kwargs)
++        linkargs = self.compiler.find_library(libname, self.environment, search_dirs, dependencies = deps)
+         if required and not linkargs:
+             raise InterpreterException('{} library {!r} not found'.format(self.compiler.get_display_language(), libname))
+         lib = dependencies.ExternalLibrary(libname, linkargs, self.environment,
+-- 
+2.18.0
+

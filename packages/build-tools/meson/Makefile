@@ -1,7 +1,7 @@
 include $(TOP_SRCDIR)/packages/build-tools/common.mk
 
 $(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-sizeof.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/find-library-dependencies.patch
 	touch $@
 
 $(builddir):
