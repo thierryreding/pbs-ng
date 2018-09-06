@@ -37,8 +37,12 @@ $(builddir)/stamp-build: $(builddir)/stamp-configure
 	touch $@
 
 $(builddir)/stamp-install: $(builddir)/stamp-build
-	$(env) ninja -C $(builddir) install
+	$(env) $(FAKEROOT) ninja -C $(builddir) install
 
 install: $(builddir)/stamp-install
 
 .PHONY: install
+
+ifeq ($(FORCE),y)
+.PHONY: $(builddir)/stamp-build
+endif
