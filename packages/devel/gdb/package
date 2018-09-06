@@ -1,11 +1,11 @@
 description: The GNU debugger
-version: 8.1.1
+version: 8.2
 license: GPL-3.0
 
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/gdb/gdb-${version}.tar.xz
-      sha1: 8c04c12f11b5ba74e7506785632c7fc593ead90f
+      sha1: ee66294d87a109f88a459d0da5d0bb2da5135f45
 
 depends:
   - libs/ncurses
