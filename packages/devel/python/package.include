@@ -1,10 +1,10 @@
 description: Python scripting language
-version: 3.6.3
+version: 3.6.5
 license: custom
 
 files:
   - download:
       url: http://python.org/ftp/python/${version}/Python-${version}.tar.xz
-      sha1: 6c71b14bdbc4d8aa0cfd59d4b6dc356d46abfdf5
+      sha1: 5a7a833a36f1006257d298787f4c38493c5d1689
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

@@ -5,10 +5,6 @@ MAJOR = $(word 1,$(subst ., ,$(package.version)))
 $(builddir):
 	mkdir -p $@
 
-$(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/sysroot.patch
-	touch $@
-
 $(builddir)/config.cache: | $(builddir)
 	echo '# generated for $(HOST)' > $@
 	echo 'ac_cv_buggy_getaddrinfo=no' >> $@
@@ -33,7 +29,7 @@ conf-vars = \
 	CXXFLAGS='$(CXXFLAGS)' \
 	LDFLAGS='$(LDFLAGS)'
 
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch $(builddir)/config.cache | $(builddir)
+$(builddir)/stamp-configure: $(builddir)/config.cache | $(builddir)
 	cd $(builddir) && \
 		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@
