@@ -1,10 +1,10 @@
 description: A computer display server protocol
-version: 1.14.0
+version: 1.15.0
 license: MIT
 
 files:
 - download:
     url: http://wayland.freedesktop.org/releases/wayland-${version}.tar.xz
-    sha1: 53a443be3bafe73209bbc49ef2cb134ed16e0141
+    sha1: 374e07b4f3b7fdfa7c4206cdd48224ea00d69d68
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
