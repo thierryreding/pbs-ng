@@ -5,8 +5,8 @@ cpu = '@CPU@'
 endian = '@ENDIAN@'
 
 [binaries]
-c = ['@HOST@-gcc', '--sysroot', '@SYSROOT@']
-cpp = ['@HOST@-g++', '--sysroot', '@SYSROOT@']
+c = '@HOST@-gcc'
+cpp = '@HOST@-g++'
 ar = '@HOST@-ar'
 strip = '@HOST@-strip'
 pkgconfig = 'pkg-config'
@@ -14,3 +14,7 @@ llvm-config = '@HOST@-llvm-config'
 
 [properties]
 root = '@SYSROOT@'
+c_args = [@CFLAGS@]
+c_link_args = [@LDFLAGS@]
+cpp_args = [@CXXFLAGS@]
+cpp_link_args = [@LDFLAGS@]

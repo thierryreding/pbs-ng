@@ -2,6 +2,7 @@ include config.mk
 
 empty :=
 comma := ,
+space := $(empty) $(empty)
 
 DESTDIR = $(TOP_OBJDIR)/$(PKGDIR)/install
 BUILD_TOOLS = $(TOP_OBJDIR)/build-tools

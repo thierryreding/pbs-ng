@@ -3,16 +3,25 @@ include $(TOP_SRCDIR)/packages/common.mk
 $(builddir):
 	mkdir -p $@
 
+cross-vars = \
+	OS ARCH CPU ENDIAN HOST SYSROOT
+
+cross-flags = \
+	CPPFLAGS CFLAGS CXXFLAGS LDFLAGS
+
+$(foreach var,$(cross-flags),$(eval flags_$(var) = $$($(var))))
+$(foreach var,$(cross-flags),$(eval flags_$(var) = $(patsubst %,'%',$(flags_$(var)))))
+$(foreach var,$(cross-flags),$(eval flags_$(var) = $(subst $(space),$(comma) ,$(flags_$(var)))))
+
+$(foreach var,$(cross-vars),$(eval expressions += -e "s|@$(var)@|$$($(var))|"))
+$(foreach var,$(cross-flags),$(eval expressions += -e "s|@$(var)@|$(flags_$(var))|"))
+
 $(builddir)/cross-compile.txt: $(TOP_SRCDIR)/support/cross-compile.meson | $(builddir)
-	sed 's|@OS@|$(OS)|;s|@ARCH@|$(ARCH)|;s|@CPU@|$(CPU)|;s|@ENDIAN@|$(ENDIAN)|;s|@HOST@|$(HOST)|;s|@SYSROOT@|$(SYSROOT)|' $< > $@
+	sed $(expressions) $< > $@
 
 env = \
 	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
 	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)' \
-	CPPFLAGS='$(CPPFLAGS)' \
-	CXXFLAGS='$(CXXFLAGS)' \
-	LDFLAGS='$(LDFLAGS)' \
-	CFLAGS='$(CFLAGS)' \
 	DESTDIR=$(DESTDIR)
 
 conf-args = \
