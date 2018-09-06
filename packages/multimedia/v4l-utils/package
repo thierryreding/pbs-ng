@@ -5,7 +5,7 @@ license: GPL-2.0
 files:
   - download:
       url: https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-${version}.tar.bz2
-      sha1: 8dfe4bebdfaf536ddc8771b60685b3a43dcc7cb3
+      sha1: e723e9ec2d2ca3ccfcaf87d4a52160f601cab3ab
 
 depends:
   - devel/glibc
