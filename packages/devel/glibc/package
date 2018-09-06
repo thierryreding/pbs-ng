@@ -1,5 +1,5 @@
 description: GNU C library
-version: 2.27
+version: 2.28
 license: GPL-2.0, LGPL-2.1
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/glibc/glibc-${version}.tar.xz
-      sha1: 1f7a9c43026484943ef7cf6885f2176a2bc1e093
+      sha1: ccb5dc9e51a9884df8488f86982439d47b283b2a
 
 packages:
   glibc-bin:
