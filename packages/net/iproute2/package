@@ -1,5 +1,5 @@
 description: IP routing utilities
-version: 4.15.0
+version: 4.18.0
 license: GPL-2.0
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-${version}.tar.xz
-      sha1: 33de969d5f3308f1c69ebff04536347574e85f48
+      sha1: ff02c7352bae407a76d71b36558700bb489026fc
 
 packages:
   iproute2:
