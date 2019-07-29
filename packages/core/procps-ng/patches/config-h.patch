@@ -1,0 +1,14 @@
+diff --git a/include/nls.h b/include/nls.h
+index 1166b7b78327..fe1dd81917c2 100644
+--- a/include/nls.h
++++ b/include/nls.h
+@@ -5,9 +5,6 @@
+ #ifndef PROCPS_NG_NLS_H
+ #define PROCPS_NG_NLS_H
+ 
+-/* programs issuing textdomain() need PACKAGE string */
+-#include "../config.h"
+-
+ /* programs issuing bindtextdomain() also need LOCALEDIR string */
+ #ifndef LOCALEDIR
+ #define LOCALEDIR "/usr/share/locale"
