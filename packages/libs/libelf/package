@@ -1,5 +1,5 @@
 description: libraries to handle ELF object files and DWARD debugging information
-version: 0.170
+version: 0.177
 license: LGPL-3.0-or-later, GPL-2.0-OR-LATER, GPL-3.0-or-later
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://sourceware.org/elfutils/ftp/${version}/elfutils-${version}.tar.bz2
-      sha1: aff6feac0ff69eb7b240babdf2918f640eadb032
+      sha1: 922161f84baaae845382338098071544b98ca92d
 
 packages:
   libelf:
