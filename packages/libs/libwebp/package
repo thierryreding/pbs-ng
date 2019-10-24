@@ -1,0 +1,30 @@
+description: WebP library and conversion tools
+version: 1.0.3
+license: BSD
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-${version}.tar.gz
+      sha1: 611400f942ce03c15fa03e1757b5e0f8713645e9
+
+packages:
+  libwebp:
+    files:
+      - /usr/lib/*.so.*
+
+  libwebp-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libwebp-utils:
+    files:
+      - /usr/bin
+      - /usr/share/man/man1
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
