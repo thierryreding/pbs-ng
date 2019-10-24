@@ -1,0 +1,25 @@
+description: A JSON implementation in C
+version: 0.13.1-20180305
+license: LGPL-2.1 MPL-1.1
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/json-c/json-c/archive/json-c-${version}.tar.gz
+      sha1: d4c667ab94e7051b1e78aa727f0d937caba971e9
+
+packages:
+  libjson-c-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libjson-c:
+    files:
+      - /usr/lib/*.so.*
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
