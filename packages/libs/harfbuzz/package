@@ -1,0 +1,29 @@
+description: OpenType text shaping engine
+version: 2.6.2
+license: MIT
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://www.freedesktop.org/software/harfbuzz/release/harfbuzz-${version}.tar.xz
+      sha1: 81d3f0cf5d560d7eee2eb0a8fb5a1640b1b9dac9
+
+packages:
+  libharfbuzz:
+    files:
+      - /usr/lib/*.so.*
+
+  libharfbuzz-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  harfbuzz-utils:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
