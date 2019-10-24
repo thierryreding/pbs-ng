@@ -1,0 +1,29 @@
+description: a free implementation of the Unicode Bidirectional Algorithm
+version: 1.0.7
+license: LGPL
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/fribidi/fribidi/releases/download/v${version}/fribidi-${version}.tar.bz2
+      sha1: 8dd337f24cc65b1e3157ad9d2e11fdfed37b52de
+
+packages:
+  fribidi:
+    files:
+      - /usr/lib/*.so.*
+
+  fribidi-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  fribidi-utils:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

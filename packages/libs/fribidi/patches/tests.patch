@@ -1,0 +1,12 @@
+diff --git a/test/meson.build b/test/meson.build
+index 45bd862d80cb..9f7e1a701419 100644
+--- a/test/meson.build
++++ b/test/meson.build
+@@ -1,7 +1,6 @@
+ tests = [
+   ['CapRTL', 'explicit'],
+   ['CapRTL', 'implicit'],
+-  ['CapRTL', 'isolate'],
+   ['ISO8859-8', 'hebrew'],
+   ['UTF-8', 'persian'],
+   ['UTF-8', 'reordernsm'],
