@@ -1,44 +1,18 @@
-include $(TOP_SRCDIR)/packages/common.mk
+include $(TOP_SRCDIR)/packages/autotools.mk
 
-$(builddir):
-	mkdir -p $@
-
-conf-args = \
-	--config-cache \
-	--host=$(HOST) \
-	--prefix=$(PREFIX) \
-	--with-curses
-
-conf-vars = \
-	CPPFLAGS='--sysroot $(SYSROOT)' \
-	CFLAGS='--sysroot $(SYSROOT)' \
-	LDFLAGS='--sysroot $(SYSROOT)'
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/no-rpath.patch
+	touch $@
 
 $(builddir)/config.cache: | $(builddir)
-	echo '#generated for $(HOST)' > $@
+	echo '# generated for $(HOST)' > $@
 	echo 'bash_cv_wcwidth_broken=yes' >> $@
 
-$(builddir)/stamp-configure: $(builddir)/config.cache | $(builddir)
-	cd $(builddir) && \
-		$(srcdir)/configure $(conf-args) $(conf-vars)
-	touch $@
+conf-args += \
+	--config-cache \
+	--with-curses
 
-build-args = \
-	-j $(JOBS)
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch $(builddir)/config.cache
 
-$(builddir)/stamp-build: $(builddir)/stamp-configure
-	cd $(builddir) && \
-		$(MAKE) $(build-args)
-	touch $@
-
-install-args = \
-	DESTDIR='$(DESTDIR)'
-
-$(builddir)/stamp-install: $(builddir)/stamp-build
-	cd $(builddir) && \
-		$(MAKE) $(install-args) install
-	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install
+build-args += \
+	SHLIB_LIBS='-lncurses'
