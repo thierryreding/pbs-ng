@@ -1,0 +1,11 @@
+diff --git a/src/include/gluos.h b/src/include/gluos.h
+index 290a06f0282b..83fd424f7f5e 100644
+--- a/src/include/gluos.h
++++ b/src/include/gluos.h
+@@ -83,4 +83,6 @@
+ #define GLAPIENTRY
+ #define WINGDIAPI
+ 
++#include <stddef.h>
++
+ #endif
