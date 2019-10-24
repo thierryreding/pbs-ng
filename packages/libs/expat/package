@@ -1,14 +1,7 @@
-description: an XML parser library
-version: 2.2.5
-license: custom
+include: packages/libs/expat/package.include
 
 depends:
   - devel/glibc
-
-files:
-  - download:
-      url: http://prdownloads.sourceforge.net/expat/expat-${version}.tar.bz2
-      sha1: 490659abd7d6c6d4cb4e60c945a15fbf081564f6
 
 packages:
   expat:

@@ -1,0 +1,10 @@
+description: an XML parser library
+version: 2.2.8
+license: custom
+
+files:
+  - download:
+      url: http://prdownloads.sourceforge.net/expat/expat-${version}.tar.bz2
+      sha1: e1665bdab5ceaab47718b5a7f3ffceca7f648433
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
