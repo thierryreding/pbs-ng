@@ -1,0 +1,25 @@
+description: implementation of the Stringprep, Punycode and IDNA specifications
+version: 2.2.0
+license: GPL-3.0, LPGL-3.0
+
+files:
+  - download:
+      url: http://ftp.gnu.org/gnu/libidn/libidn2-${version}.tar.gz
+      sha1: 384e54e90f5d6ae54fb1e326bcb446045b4d3891
+
+depends:
+  - devel/glibc
+
+packages:
+  libidn:
+    files:
+      - /usr/lib/*.so.*
+
+  libidn-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
