@@ -1,0 +1,26 @@
+description: A portable library for SSA/ASS subtitles rendering
+version: 0.14.0
+license: BSD
+
+files:
+  - download:
+      url: https://github.com/libass/libass/releases/download/${version}/libass-${version}.tar.xz
+      sha1: e7335c043445e6febaa6330fc38828b00c526cac
+
+depends:
+  - devel/glibc
+  - libs/fribidi
+
+packages:
+  libass:
+    files:
+      - /usr/lib/*.so.*
+
+  libass-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
