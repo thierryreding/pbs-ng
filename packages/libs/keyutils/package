@@ -1,0 +1,42 @@
+description: Linux key management utilities
+version: 1.6.1
+license: GPL-2.0-only LGPL-2.1
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/keyutils-${version}.tar.gz
+      sha1: 8ddc9fcb65e0bdccc3184e0c2b64be004112cfa6
+
+packages:
+  libkeyutils:
+    files:
+      - /usr/lib/*.so.*
+
+  libkeyutils-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libkeyutils-man:
+    files:
+      - /usr/share/man3
+
+  keyutils:
+    files:
+      - /etc
+      - /usr/bin
+      - /usr/share
+
+  keyutils-man:
+    files:
+      - /usr/share/man1
+      - /usr/share/man5
+      - /usr/share/man7
+      - /usr/share/man8
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
