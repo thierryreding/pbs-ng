@@ -1,0 +1,17 @@
+include: packages/libs/mpdecimal/package.include
+
+depends:
+  - devel/glibc
+
+packages:
+  libmpdec:
+    files:
+      - /usr/lib/*.so.*
+
+  libmpdec-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

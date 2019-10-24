@@ -1,0 +1,10 @@
+description: package for correctly-rounded, arbitrary precision decimal floating point arithmetic
+version: 2.4.2
+license: BSD-2-Clause
+
+files:
+  - download:
+      url: https://www.bytereef.org/software/mpdecimal/releases/mpdecimal-${version}.tar.gz
+      sha1: b926360a96fba40f9363abe111e24d776c661adb
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
