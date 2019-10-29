@@ -1,0 +1,25 @@
+description: SPIR-V Tools
+version: git
+license: Apache-2.0
+
+depends:
+  - devel/glibc
+  - devel/spirv-headers
+
+files:
+  - source:
+      url: git+https://github.com/KhronosGroup/SPIRV-Tools.git
+
+packages:
+  spirv-tools:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so
+
+  spirv-tools-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
