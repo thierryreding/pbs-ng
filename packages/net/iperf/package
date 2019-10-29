@@ -1,0 +1,22 @@
+description: A tool to measure maximum TCP bandwidth
+version: 2.0.13
+license: custom
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://prdownloads.sourceforge.net/iperf2/iperf-${version}.tar.gz
+      sha1: 0c7625c61087b9e6866421abb8bb533658b40a8d
+
+packages:
+  iperf:
+    files:
+      - /usr/bin
+
+  iperf-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
