@@ -1,0 +1,17 @@
+description: SPIR-V Headers
+version: git
+license: custom
+
+depends:
+  - devel/glibc
+
+files:
+  - source:
+      url: git+https://github.com/KhronosGroup/SPIRV-Headers.git
+
+packages:
+  spirv-headers-dev:
+    files:
+      - /usr/include
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
