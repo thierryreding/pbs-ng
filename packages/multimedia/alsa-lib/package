@@ -1,0 +1,27 @@
+description: Advanced Linux Sound Architecture - core libraries
+version: 1.1.9
+license: LGPL
+
+files:
+  - download:
+      url: ftp://ftp.alsa-project.org/pub/lib/alsa-lib-${version}.tar.bz2
+      sha1: 2404e1c377428908c5188076d5652a2a1ecd028e
+
+depends:
+  - devel/glibc
+
+packages:
+  libalsa:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+      - /usr/share/alsa
+
+  libalsa-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+      - /usr/share/aclocal
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
