@@ -5,7 +5,11 @@ MAJOR = $(word 1,$(subst ., ,$(package.version)))
 $(builddir):
 	mkdir -p $@
 
-$(builddir)/config.cache: | $(builddir)
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-compile.patch
+	touch $@
+
+$(builddir)/config.cache: $(srcdir)/stamp-patch | $(builddir)
 	echo '# generated for $(HOST)' > $@
 	echo 'ac_cv_buggy_getaddrinfo=no' >> $@
 	echo 'ac_cv_file__dev_ptmx=yes' >> $@
@@ -20,8 +24,10 @@ conf-args = \
 
 conf-args += \
 	--without-ensurepip \
+	--with-system-libmpdec \
 	--with-system-expat \
-	--with-system-ffi
+	--with-system-ffi \
+	--enable-shared
 
 conf-vars = \
 	CPPFLAGS='$(CPPFLAGS)' \

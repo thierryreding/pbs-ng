@@ -1,0 +1,44 @@
+diff --git a/setup.py b/setup.py
+index 20d7f35652fe..e5c8d7730a43 100644
+--- a/setup.py
++++ b/setup.py
+@@ -297,6 +297,7 @@ class PyBuildExt(build_ext):
+     def __init__(self, dist):
+         build_ext.__init__(self, dist)
+         self.srcdir = None
++        self.sysroot = None
+         self.lib_dirs = None
+         self.inc_dirs = None
+         self.config_h_vars = None
+@@ -645,6 +646,18 @@ class PyBuildExt(build_ext):
+                         add_dir_to_list(dir_list, directory)
+ 
+     def configure_compiler(self):
++        for var_name in ['CC', 'CPPFLAGS', 'CFLAGS', 'LD', 'LDFLAGS']:
++            var = sysconfig.get_config_var(var_name)
++            if var is not None:
++                m = re.search(r'--sysroot=([^"]\S*|"[^"]+")', var)
++                if m is not None:
++                    sysroot = m.group(1).strip('"')
++                    if self.sysroot:
++                        if sysroot != self.sysroot:
++                            log.error("sysroot mismatch: %s != %s" % (sysroot, self.sysroot))
++                    else:
++                        self.sysroot = sysroot
++
+         # Ensure that /usr/local is always used, but the local build
+         # directories (i.e. '.' and 'Include') must be first.  See issue
+         # 10520.
+@@ -653,7 +666,11 @@ class PyBuildExt(build_ext):
+             add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
+         # only change this for cross builds for 3.3, issues on Mageia
+         if CROSS_COMPILING:
+-            self.add_cross_compiling_paths()
++            # if we do have a sysroot, there's no need to add cross-compiling
++            # paths since all the files are assumed to already be available in
++            # the sysroot
++            if not self.sysroot:
++                self.add_cross_compiling_paths()
+         self.add_multiarch_paths()
+         self.add_ldflags_cppflags()
+ 

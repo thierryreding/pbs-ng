@@ -3,7 +3,10 @@ include: packages/devel/python/package.include
 depends:
   - build-tools/python
   - libs/bzip2
+  - libs/expat
+  - libs/libffi
   - libs/libressl
+  - libs/mpdecimal
   - libs/xz
 
 packages:
@@ -15,6 +18,7 @@ packages:
       - /usr/bin/python${major}.${minor}
       - /usr/bin/python${major}
       - /usr/bin/python
+      - /usr/lib/*.so.*
       - /usr/share/man
 
   python-dev:
@@ -24,6 +28,7 @@ packages:
       - /usr/bin/python-config
       - /usr/include
       - /usr/lib/*.a
+      - /usr/lib/*.so
       - /usr/lib/pkgconfig
 
   python-modules:
