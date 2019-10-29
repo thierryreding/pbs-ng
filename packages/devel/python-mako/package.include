@@ -1,0 +1,10 @@
+description: Super-fast templating language that borrows the best ideas from the existing templating languages
+version: 1.1.0
+license: MIT
+
+files:
+  - download:
+      url: https://files.pythonhosted.org/packages/b0/3c/8dcd6883d009f7cae0f3157fb53e9afb05a0d3d33b3db1268ec2e6f4a56b/Mako-${version}.tar.gz
+      sha1: 2b1158ba4e086257f23aa25f82f052644f316b7c
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
