@@ -1,0 +1,26 @@
+description: complete solution to record, convert and stream audio and video
+version: 4.1
+license: GPL-3.0-or-later
+
+files:
+  - download:
+      url: https://ffmpeg.org/releases/ffmpeg-${version}.tar.xz
+      sha1: 40bb9002df044514723e9cca7f0a049eee88fed8
+
+depends:
+  - devel/glibc
+
+packages:
+  ffmeg:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+
+  ffmpeg-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
