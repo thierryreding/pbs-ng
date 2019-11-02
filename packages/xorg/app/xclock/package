@@ -1,5 +1,5 @@
 description: X clock
-version: 1.0.7
+version: 1.0.9
 license: custom
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/app/xclock-${version}.tar.bz2
-      sha1: 1b54b96e057469f90a00a9f1ca79ed056cbde271
+      sha1: 774c711cf7ee3f601f7209bbb01ce3f0d5ddbde6
 
 packages:
   xclock:
