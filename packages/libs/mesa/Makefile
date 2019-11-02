@@ -10,6 +10,13 @@ else
   conf-args += --buildtype debug
 endif
 
+#
+# SDL 2.0.10 fails to build against Mesa's GLES1 headers on 32-bit ARM. Since
+# nothing really requires GLES1, let's just disable it.
+#
+conf-args += \
+	-Dgles1=false
+
 ifeq ($(package.option.gallium-drivers),y)
   gallium-drivers-$(package.option.gallium-drivers.pl111) += pl111
   gallium-drivers-$(package.option.gallium-drivers.radeonsi) += radeonsi
