@@ -1,4 +1,4 @@
 include $(TOP_SRCDIR)/packages/autotools.mk
 
-conf-args = \
+conf-args += \
 	--with-sysroot=$(SYSROOT)

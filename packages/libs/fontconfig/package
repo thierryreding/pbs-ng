@@ -1,5 +1,5 @@
 description: A library for configuring and customizing font access
-version: 2.13.1
+version: 2.13.92
 license: custom
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: http://fontconfig.org/release/fontconfig-${version}.tar.gz
-      sha1: e073e1d23d9d6e83a8d2d6eafa5905a541b77975
+      sha1: 3955fb5587b2d664173a7ba27c5956e26449a0d4
 
 packages:
   libfontconfig:
