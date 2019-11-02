@@ -1,5 +1,5 @@
 description: low-level cryptographic library
-version: 3.4
+version: 3.5.1
 license: GPL-2.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://ftp.gnu.org/gnu/nettle/nettle-${version}.tar.gz
-      sha1: f3c8495b7c43cba9cdd19503e7567095c680b490
+      sha1: 077a71eef4a62acc4480ff7e2051f806b1724ea2
 
 packages:
   nettle:
