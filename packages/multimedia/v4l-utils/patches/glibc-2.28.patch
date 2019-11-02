@@ -1,0 +1,44 @@
+diff --git a/lib/libv4lconvert/control/libv4lcontrol.c b/lib/libv4lconvert/control/libv4lcontrol.c
+index 1e784eda8a92..bb7ba6d95df8 100644
+--- a/lib/libv4lconvert/control/libv4lcontrol.c
++++ b/lib/libv4lconvert/control/libv4lcontrol.c
+@@ -19,6 +19,12 @@
+ # Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335  USA
+  */
+ 
++#ifdef ANDROID
++#include <android-config.h>
++#else
++#include <config.h>
++#endif
++
+ #include <sys/types.h>
+ #if defined(MAJOR_IN_SYSMACROS)
+ #include <sys/sysmacros.h>
+diff --git a/utils/v4l2-ctl/v4l2-ctl.cpp b/utils/v4l2-ctl/v4l2-ctl.cpp
+index e02dc7563e50..c566f4b15934 100644
+--- a/utils/v4l2-ctl/v4l2-ctl.cpp
++++ b/utils/v4l2-ctl/v4l2-ctl.cpp
+@@ -20,6 +20,12 @@
+     Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335  USA
+  */
+ 
++#ifdef ANDROID
++#include <android-config.h>
++#else
++#include <config.h>
++#endif
++
+ #include <unistd.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+@@ -32,6 +38,9 @@
+ #include <ctype.h>
+ #include <errno.h>
+ #include <sys/ioctl.h>
++#ifdef MAJOR_IN_SYSMACROS
++#include <sys/sysmacros.h>
++#endif
+ #include <sys/time.h>
+ #include <dirent.h>
+ #include <math.h>

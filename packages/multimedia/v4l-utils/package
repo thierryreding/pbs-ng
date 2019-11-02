@@ -1,11 +1,11 @@
 description: Userspace tools and conversion library for Video4Linux
-version: 1.14.2
+version: 1.18.0
 license: GPL-2.0
 
 files:
   - download:
       url: https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-${version}.tar.bz2
-      sha1: e723e9ec2d2ca3ccfcaf87d4a52160f601cab3ab
+      sha1: 3c3c9d4c9924f0153974ebcf8554331e04914050
 
 depends:
   - devel/glibc
