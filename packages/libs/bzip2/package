@@ -1,11 +1,11 @@
 description: A high-quality data compression program
-version: 1.0.6
+version: 1.0.8
 license: custom
 
 files:
   - download:
-      url: http://www.bzip.org/${version}/bzip2-${version}.tar.gz
-      sha1: 3f89f861209ce81a6bab1fd1998c0ef311712002
+      url: https://sourceware.org/pub/bzip2/bzip2-${version}.tar.gz
+      sha1: bf7badf7e248e0ecf465d33c2f5aeec774209227
 
 packages:
   libbz2:
