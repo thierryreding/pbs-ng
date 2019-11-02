@@ -1,0 +1,18 @@
+description: Open-source 2D/3D userspace for Tegra AR20
+version:
+license: custom
+
+depends:
+  - devel/glibc
+  - libs/devil
+  - xorg/lib/xcb
+  - xorg/lib/xcb-util-image
+
+packages:
+  grate:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+      - /usr/lib/grate
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
