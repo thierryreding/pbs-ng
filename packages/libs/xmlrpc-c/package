@@ -1,5 +1,5 @@
 description: XML-RPC for C and C++
-version: 1.43.06
+version: 1.51.03
 license: custom
 
 depends:
@@ -8,8 +8,9 @@ depends:
   - libs/libxml2
 
 files:
-  - source:
-      url: svn+https://svn.code.sf.net/p/xmlrpc-c/code/stable
+  - download:
+      url: https://prdownloads.sourceforge.net/xmlrpc-c/Xmlrpc-c%20Super%20Stable/${version}/xmlrpc-c-${version}.tgz
+      sha1: 6f7501c07ceb7769ee724251ddf516156f033df8
 
 packages:
   libxmlrpc-c:
