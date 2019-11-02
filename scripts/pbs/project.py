@@ -430,9 +430,9 @@ class Package():
         if not os.path.exists(sysroot):
             os.makedirs(sysroot)
 
+        pkgtree = os.path.join('packages', *self.name.split('/'))
+
         if not distdir:
-            parts = self.name.split('/')
-            pkgtree = os.path.join('packages', *parts)
             distdir = os.path.join(pbs.objtree, 'dist', pkgtree)
 
         with pbs.pushd(sysroot):
@@ -467,6 +467,22 @@ class Package():
 
                 pbs.log.begin('%s...' % filename, indent = 1)
                 pbs.log.end('done')
+
+        filename = os.path.join(pbs.srctree, pkgtree, 'post-install')
+        if os.path.exists(filename):
+            command = [ filename, sysroot ]
+
+            with subprocess.Popen(command, stdout = subprocess.PIPE,
+                                  stderr = subprocess.STDOUT) as proc:
+                pbs.log.info('running post-install script for %s...' % (self.name))
+
+                while True:
+                    line = proc.stdout.readline()
+                    if not line:
+                        break
+
+                    line = line.decode()
+                    pbs.log.quote(line)
 
     def load(self, values):
         if not values:
