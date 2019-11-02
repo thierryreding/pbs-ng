@@ -1,11 +1,11 @@
 description: Python 2 and 3 compatibility utilities
-version: 1.11.0
+version: 1.12.0
 license: MIT
 
 files:
   - download:
-      url: https://pypi.python.org/packages/16/d8/bc6316cf98419719bd59c91742194c111b6f2e85abac88e496adefaf7afe/six-${version}.tar.gz
-      sha1: 3647372a0e104e7b53bd477762392024e1083ac0
+      url: https://files.pythonhosted.org/packages/dd/bf/4138e7bfb757de47d1f4b6994648ec67a51efe58fa907c1e11e350cddfca/six-${version}.tar.gz
+      sha1: 1957b44942be21822414f4dde936e6c40b687565
 
 depends:
   - build-tools/python-setuptools
