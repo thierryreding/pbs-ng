@@ -1,8 +1,8 @@
 diff --git a/configure b/configure
-index f0668ab3f7e9..74318d8f8e4f 100755
+index b85eb58b2ba9..508f4ba0d0e5 100755
 --- a/configure
 +++ b/configure
-@@ -33,9 +33,13 @@ check_toolchain()
+@@ -16,9 +16,13 @@ check_toolchain()
      : ${PKG_CONFIG:=pkg-config}
      : ${AR=ar}
      : ${CC=gcc}
@@ -16,75 +16,75 @@ index f0668ab3f7e9..74318d8f8e4f 100755
  }
  
  check_atm()
-@@ -49,7 +53,7 @@ int main(int argc, char **argv) {
+@@ -32,7 +36,7 @@ int main(int argc, char **argv) {
  }
  EOF
  
--    $CC -I$INCLUDE -o $TMPDIR/atmtest $TMPDIR/atmtest.c -latm >/dev/null 2>&1
-+    $CC $CFLAGS -I$INCLUDE -o $TMPDIR/atmtest $TMPDIR/atmtest.c -latm >/dev/null 2>&1
-     if [ $? -eq 0 ]
-     then
+-    if $CC -I$INCLUDE -o $TMPDIR/atmtest $TMPDIR/atmtest.c -latm >/dev/null 2>&1; then
++    if $CC $CFLAGS -I$INCLUDE -o $TMPDIR/atmtest $TMPDIR/atmtest.c -latm >/dev/null 2>&1; then
  	echo "TC_CONFIG_ATM:=y" >>$CONFIG
-@@ -90,7 +94,7 @@ int main(int argc, char **argv)
+ 	echo yes
+     else
+@@ -70,7 +74,7 @@ int main(int argc, char **argv)
  }
  EOF
  
 -    if $CC -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL \
 +    if $CC $CFLAGS -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL \
- 	$(${PKG_CONFIG} xtables --cflags --libs) -ldl >/dev/null 2>&1
-     then
+ 	$(${PKG_CONFIG} xtables --cflags --libs) -ldl >/dev/null 2>&1; then
  	echo "TC_CONFIG_XT:=y" >>$CONFIG
-@@ -129,7 +133,7 @@ int main(int argc, char **argv) {
+ 	echo "using xtables"
+@@ -105,7 +109,7 @@ int main(int argc, char **argv) {
  
  EOF
  
--    $CC -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
-+    $CC $CFLAGS -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
-     if [ $? -eq 0 ]
-     then
+-    if $CC -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1; then
++    if $CC $CFLAGS -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1; then
  	echo "TC_CONFIG_XT_OLD:=y" >>$CONFIG
-@@ -168,7 +172,7 @@ int main(int argc, char **argv) {
+ 	echo "using old xtables (no need for xt-internal.h)"
+     fi
+@@ -139,7 +143,7 @@ int main(int argc, char **argv) {
  }
  
  EOF
--	$CC -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
-+	$CC $CFLAGS -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
- 
- 	if [ $? -eq 0 ]
- 	then
-@@ -218,7 +222,7 @@ int main(int argc, char **argv)
+-	if $CC -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1; then
++	if $CC $CFLAGS -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1; then
+ 	    echo "using old xtables with xt-internal.h"
+ 	    echo "TC_CONFIG_XT_OLD_H:=y" >>$CONFIG
+ 	fi
+@@ -185,7 +189,7 @@ int main(int argc, char **argv)
  	return 0;
  }
  EOF
--    $CC -I$INCLUDE -o $TMPDIR/setnstest $TMPDIR/setnstest.c >/dev/null 2>&1
-+    $CC $CFLAGS -I$INCLUDE -o $TMPDIR/setnstest $TMPDIR/setnstest.c >/dev/null 2>&1
-     if [ $? -eq 0 ]
-     then
+-    if $CC -I$INCLUDE -o $TMPDIR/setnstest $TMPDIR/setnstest.c >/dev/null 2>&1; then
++    if $CC $CFLAGS -I$INCLUDE -o $TMPDIR/setnstest $TMPDIR/setnstest.c >/dev/null 2>&1; then
  	echo "IP_CONFIG_SETNS:=y" >>$CONFIG
-@@ -251,7 +255,7 @@ int main(void)
+ 	echo "yes"
+ 	echo "CFLAGS += -DHAVE_SETNS" >>$CONFIG
+@@ -216,7 +220,7 @@ int main(void)
  #endif
  EOF
  
--    if $CC -I$INCLUDE -o $TMPDIR/ipsettest $TMPDIR/ipsettest.c >/dev/null 2>&1
-+    if $CC $CFLAGS -I$INCLUDE -o $TMPDIR/ipsettest $TMPDIR/ipsettest.c >/dev/null 2>&1
-     then
+-    if $CC -I$INCLUDE -o $TMPDIR/ipsettest $TMPDIR/ipsettest.c >/dev/null 2>&1; then
++    if $CC $CFLAGS -I$INCLUDE -o $TMPDIR/ipsettest $TMPDIR/ipsettest.c >/dev/null 2>&1; then
  	echo "TC_CONFIG_IPSET:=y" >>$CONFIG
  	echo "yes"
-@@ -315,7 +319,7 @@ int main(int argc, char **argv) {
+     else
+@@ -276,7 +280,7 @@ int main(int argc, char **argv) {
  	return 0;
  }
  EOF
--    $CC -I$INCLUDE -o $TMPDIR/dbtest $TMPDIR/dbtest.c -ldb >/dev/null 2>&1
-+    $CC $CFLAGS -I$INCLUDE -o $TMPDIR/dbtest $TMPDIR/dbtest.c -ldb >/dev/null 2>&1
-     if [ $? -eq 0 ]
-     then
+-    if $CC -I$INCLUDE -o $TMPDIR/dbtest $TMPDIR/dbtest.c -ldb >/dev/null 2>&1; then
++    if $CC $CFLAGS -I$INCLUDE -o $TMPDIR/dbtest $TMPDIR/dbtest.c -ldb >/dev/null 2>&1; then
  	echo "HAVE_BERKELEY_DB:=y" >>$CONFIG
-@@ -336,7 +340,7 @@ int main(int argc, char **argv) {
+ 	echo "yes"
+     else
+@@ -295,7 +299,7 @@ int main(int argc, char **argv) {
  	return 0;
  }
  EOF
--    $CC -I$INCLUDE -o $TMPDIR/strtest $TMPDIR/strtest.c >/dev/null 2>&1
-+    $CC $CFLAGS -I$INCLUDE -o $TMPDIR/strtest $TMPDIR/strtest.c >/dev/null 2>&1
-     if [ $? -eq 0 ]
-     then
+-    if $CC -I$INCLUDE -o $TMPDIR/strtest $TMPDIR/strtest.c >/dev/null 2>&1; then
++    if $CC $CFLAGS -I$INCLUDE -o $TMPDIR/strtest $TMPDIR/strtest.c >/dev/null 2>&1; then
  	echo "no"
+     else
+ 	if ${PKG_CONFIG} libbsd --exists; then
