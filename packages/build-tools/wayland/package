@@ -1,6 +1,7 @@
 include: packages/libs/wayland/package.include
 
 depends:
+  - build-tools/expat
   - build-tools/libffi
   - build-tools/libxml2
 
