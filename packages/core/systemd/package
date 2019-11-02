@@ -1,5 +1,5 @@
 description: system and service manager
-version: 239
+version: 243
 license: GPL-2.0 LGPL-2.1 MIT
 
 depends:
@@ -17,7 +17,7 @@ depends:
 files:
   - download:
       url: https://github.com/systemd/systemd/archive/v${version}.tar.gz
-      sha1: 8803baa484cbe36680463c8c5e6febeff074b8e7
+      sha1: 096305e5cff9a4889e2692c2ba39aa218fc7f50a
 
 packages:
   systemd:
