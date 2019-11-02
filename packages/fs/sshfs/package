@@ -1,11 +1,11 @@
 description: FUSE client based on the SSH File Transfer Protocol
-version: 3.3.1
+version: 3.5.2
 license: GPL-2.0
 
 files:
   - download:
       url: https://github.com/libfuse/sshfs/archive/sshfs-${version}.tar.gz
-      sha1: 6f058abb2ff8565c167f145dc3cbf54683128d09
+      sha1: f04f6b9734b0917a4b417483dbe2808623aaee29
 
 depends:
   - libs/glib
