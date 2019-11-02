@@ -1,10 +1,10 @@
 description: GNU internationalization library
-version: 0.19.8.1
+version: 0.20.1
 license: GPL
 
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/gettext/gettext-${version}.tar.gz
-      sha1: b5d24ba2958c91fc5cc0058165837c99a0f58784
+      sha1: 2aa01db95b064d7f5d1a46de34a2cc6a57eadf36
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
