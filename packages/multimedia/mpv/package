@@ -1,0 +1,23 @@
+description: a free, open-source, and cross-platform media player
+version: 0.30.0
+license: GPL-3.0-or-later
+
+files:
+  - download:
+      url: https://github.com/mpv-player/mpv/archive/v${version}.tar.gz
+      sha1: 94da9cc423339a8d4f583542a4e7c5f794b82e7b
+
+depends:
+  - devel/glibc
+  - multimedia/ffmpeg
+  - multimedia/libass
+  - multimedia/libvdpau
+  - xorg/lib/xscrnsaver
+  - xorg/lib/xinerama
+
+packages:
+  mpv:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
