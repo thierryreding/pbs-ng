@@ -2,10 +2,10 @@ diff --git a/src/mkheader.c b/src/mkheader.c
 index 5aeb1e748dd1..db151af12935 100644
 --- a/src/mkheader.c
 +++ b/src/mkheader.c
-@@ -91,6 +91,7 @@ canon_host_triplet (const char *triplet)
- 
+@@ -113,6 +113,7 @@ canon_host_triplet (const char *triplet)
      {"arm-unknown-linux-gnueabihf",  "arm-unknown-linux-gnueabi" },
      {"armv7-unknown-linux-gnueabihf"  },
+     {"armv7a-unknown-linux-gnueabihf" },
 +    {"armv7l-unknown-linux-gnueabihf" },
      {"armv5-unknown-linux-musleabi"   },
      {"armv6-unknown-linux-musleabihf" },

@@ -16,7 +16,8 @@ conf-args = \
 conf-vars = \
 	CPPFLAGS='--sysroot $(SYSROOT)' \
 	CFLAGS='--sysroot $(SYSROOT)' \
-	LDFLAGS='--sysroot $(SYSROOT)'
+	LDFLAGS='--sysroot $(SYSROOT)' \
+	AWK='$(AWK) --traditional'
 
 $(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
 	cd $(builddir) && \
