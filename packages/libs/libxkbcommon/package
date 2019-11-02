@@ -1,15 +1,18 @@
 description: keyboard description handling library
-version: 0.8.2
+version: 0.9.1
 license: custom
 
 depends:
+  - build-tools/wayland
   - devel/glibc
+  - libs/wayland
+  - libs/wayland-protocols
   - xorg/util/util-macros
 
 files:
   - download:
       url: http://xkbcommon.org/download/libxkbcommon-${version}.tar.xz
-      sha1: 5589b09b8490392573bba5527cc0cc82824028b1
+      sha1: 6685b3b98d1903e5e0ece1c234b9055fcb24701d
 
 packages:
   libxkbcommon:
