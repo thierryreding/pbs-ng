@@ -6,14 +6,16 @@ depends:
   - libs/cairo
   - libs/glib
   - libs/gsl
+  - libs/json-c
   - libs/libdrm
   - libs/xmlrpc-c
+  - multimedia/alsa-lib
 
 packages:
   intel-gpu-tools:
     files:
       - /usr/bin
-      - /usr/lib/intel-gpu-tools:
+      - /usr/lib/igt-gpu-tools:
         - exclude:
           - '*.la'
       - /usr/share
