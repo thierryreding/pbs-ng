@@ -1,14 +1,15 @@
 description: High productivity build system
-version: 0.47.1
+version: 0.52.0
 license: Apache-2.0
 
 depends:
   - build-tools/ninja
   - build-tools/python
+  - build-tools/python-setuptools
 
 files:
   - download:
       url: https://github.com/mesonbuild/meson/archive/${version}.tar.gz
-      sha1: 406529f53d6209e144dcee30aaa6c640782a8b5b
+      sha1: c2c0c299d4f78f4b704c8061c58c010947ddd790
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
