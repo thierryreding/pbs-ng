@@ -1,5 +1,5 @@
 description: free version of the SSH connectivity tools
-version: 7.6p1
+version: 8.1p1
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz
-      sha1: a6984bc2c72192bed015c8b879b35dd9f5350b3b
+      sha1: c44b96094869f177735ae053d92bd5fcab1319de
 
 packages:
   openssh:
@@ -17,5 +17,6 @@ packages:
       - /etc
       - /usr/bin
       - /usr/lib/ssh
+      - /usr/lib/systemd
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+root="$1"
+
+ssh-keygen -A -f "$root"
