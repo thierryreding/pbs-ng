@@ -4,6 +4,7 @@ conf-args += \
 	--with-systemdsystemunitdir=$(PREFIX)/lib/systemd/system \
 	--libexec=$(PREFIX)/lib/dbus-1.0 \
 	--enable-systemd \
+	--disable-rpath \
 	--without-x
 
 SYSUSERS = $(DESTDIR)$(PREFIX)/lib/sysusers.d
