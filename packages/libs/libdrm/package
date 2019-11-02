@@ -1,5 +1,5 @@
 description: Userspace interface to kernel DRM services
-version: 2.4.94
+version: 2.4.100
 license: custom
 
 depends:
@@ -11,7 +11,7 @@ depends:
 files:
   - download:
       url: http://dri.freedesktop.org/libdrm/libdrm-${version}.tar.bz2
-      sha1: f8daee6cc2e7d2c9eb2dd062a2712172fb9f4e18
+      sha1: 9f526909aba08b5658cfba3f7fde9385cad6f3b5
 
 options:
   kms:
