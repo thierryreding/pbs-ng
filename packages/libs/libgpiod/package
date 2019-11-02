@@ -1,5 +1,5 @@
 description: C library and tools for interacting with Linux GPIO character devices
-version: 0.3
+version: 1.4.1
 license: LGPL-2.1
 
 depends:
@@ -7,8 +7,8 @@ depends:
 
 files:
   - download:
-      url: https://github.com/brgl/libgpiod/archive/v${version}.tar.gz
-      sha1: 1dd87f9fc59466ab5a51fc5ba95b6530d7d95bba
+      url: https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/snapshot/libgpiod-${version}.tar.gz
+      sha1: 586a1254b9602adaca303f17dc7b7d2aa5aab4c9
 
 packages:
   libgpiod:
