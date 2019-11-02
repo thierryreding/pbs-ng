@@ -1,11 +1,11 @@
 description: cross-platform C library for OpenGL API and window system selection
-version: 1.5.2
+version: 1.6.0
 license: custom
 
 files:
   - download:
       url: http://www.waffle-gl.org/files/release/waffle-${version}/waffle-${version}.tar.xz
-      sha1: eff47f7b7798f1a0bab4b2a65126f91c220415fb
+      sha1: feb803364d6cf2fdc409a607fff25e112c80a8d7
 
 depends:
   - build-tools/cmake
