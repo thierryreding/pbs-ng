@@ -1,0 +1,30 @@
+description: X11 XFree86 video mode extension library
+version: 1.1.4
+license: custom
+
+depends:
+  - xorg/proto/xorgproto
+  - xorg/lib/xext
+
+files:
+  - download:
+      url: https://xorg.freedesktop.org/releases/individual/lib/libXxf86vm-${version}.tar.gz
+      sha1: 7ab340428ec501d6ebe3d307028c7a39f5b38495
+
+packages:
+  libxxf86vm:
+    files:
+      - /usr/lib/*.so.*
+
+  libxxf86vm-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libxxf86vm-doc:
+    files:
+      - /usr/share/doc
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
