@@ -1,5 +1,5 @@
 description: X.Org X server
-version: 1.20.1
+version: 1.20.5
 license: custom
 
 depends:
@@ -13,6 +13,7 @@ depends:
   - libs/libgcrypt
   - libs/libpciaccess
   - libs/wayland
+  - xorg/app/xkbcomp
   - xorg/font/font-util
   - xorg/lib/x11
   - xorg/lib/xcb-util-keysyms
@@ -24,7 +25,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/xserver/xorg-server-${version}.tar.bz2
-      sha1: fd43367c2b7bbb1a4b1dd90b06a021e68a9db240
+      sha1: fea6fd34c7f48b3c69fbecd8fb294eaa1498e69c
 
 packages:
   xorg-server:
