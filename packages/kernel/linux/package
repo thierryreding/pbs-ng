@@ -1,5 +1,5 @@
 description: Linux kernel
-version: 4.18
+version: 5.3
 license: GPL-2.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
 - download:
     url: https://www.kernel.org/pub/linux/kernel/v${major}.x/linux-${version}.tar.xz
-    sha1: a5898f3a6383946b1de8d9dd449c2ca361b14c3d
+    sha1: 988855d1fee4eb12495a5b3602e2f3471623ec3e
 
 packages:
   linux-headers:
