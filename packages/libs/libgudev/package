@@ -1,11 +1,11 @@
 description: GObject bindings for libudev
-version: 231
+version: 232
 license: LGPL-2.1
 
 files:
   - download:
       url: http://ftp.gnome.org/pub/gnome/sources/libgudev/${version}/libgudev-${version}.tar.xz
-      sha1: b48d867a488ebfca8cf2bec12e112bac9f3bf122
+      sha1: e8dc1c516a86e73e98d5c55c5570820073f0456c
 
 depends:
   - core/systemd
