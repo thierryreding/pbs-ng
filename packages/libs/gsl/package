@@ -1,5 +1,5 @@
 description: GNU Scientific Library - a modern numerical library for C and C++ programmers
-version: 2.5
+version: 2.6
 license: GPL
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://ftp.gnu.org/gnu/gsl/gsl-${version}.tar.gz
-      sha1: 9b3a32ba4f4e79fc6164fdc62e56003ae6e991e5
+      sha1: 9273164b6bdf60d0577518a1c1310eff6659e3dd
 
 packages:
   libgsl:
