@@ -1,0 +1,278 @@
+diff --git a/plugins/python/uwsgiplugin.py b/plugins/python/uwsgiplugin.py
+index 843876f30425..b1f533dac3a0 100644
+--- a/plugins/python/uwsgiplugin.py
++++ b/plugins/python/uwsgiplugin.py
+@@ -1,6 +1,7 @@
+ import os,sys
+ 
+ from distutils import sysconfig
++from uwsgiconfig import spcall
+ 
+ def get_python_version():
+     version = sysconfig.get_config_var('VERSION')
+@@ -17,49 +18,60 @@ CFLAGS = ['-I' + sysconfig.get_python_inc(), '-I' + sysconfig.get_python_inc(pla
+ LDFLAGS = []
+ 
+ if not 'UWSGI_PYTHON_NOLIB' in os.environ:
+-    LIBS = sysconfig.get_config_var('LIBS').split() + sysconfig.get_config_var('SYSLIBS').split()
+-    # check if it is a non-shared build (but please, add --enable-shared to your python's ./configure script)
+-    if not sysconfig.get_config_var('Py_ENABLE_SHARED'):
+-        libdir = sysconfig.get_config_var('LIBPL')
+-        # libdir does not exists, try to get it from the venv
+-        version = get_python_version()
+-        if not os.path.exists(libdir):
+-            libdir = '%s/lib/python%s/config' % (sys.prefix, version)
+-        # try skipping abiflag
+-        if not os.path.exists(libdir) and version.endswith('m'):
+-            version = version[:-1]
+-            libdir = '%s/lib/python%s/config' % (sys.prefix, version)
+-        # try 3.x style config dir
+-        if not os.path.exists(libdir):
+-            libdir = '%s/lib/python%s/config-%s' % (sys.prefix, version, get_python_version())
++    if sys.version_info[0] == 3:
++        pkgfile = 'python3'
++    else:
++        pkgfile = 'python2'
++
++    LIBS = spcall('pkg-config --libs %s' % pkgfile).split()
++
++    if LIBS:
++        CFLAGS = spcall('pkg-config --cflags %s' % pkgfile).split()
++    else:
++        LIBS = sysconfig.get_config_var('LIBS').split() + sysconfig.get_config_var('SYSLIBS').split()
+ 
+-        # get cpu type
+-        uname = os.uname()
+-        if uname[4].startswith('arm'):
+-            libpath = '%s/%s' % (libdir, sysconfig.get_config_var('LIBRARY'))
+-            if not os.path.exists(libpath): 
++        # check if it is a non-shared build (but please, add --enable-shared to your python's ./configure script)
++        if not sysconfig.get_config_var('Py_ENABLE_SHARED'):
++            libdir = sysconfig.get_config_var('LIBPL')
++            # libdir does not exists, try to get it from the venv
++            version = get_python_version()
++            if not os.path.exists(libdir):
++                libdir = '%s/lib/python%s/config' % (sys.prefix, version)
++            # try skipping abiflag
++            if not os.path.exists(libdir) and version.endswith('m'):
++                version = version[:-1]
++                libdir = '%s/lib/python%s/config' % (sys.prefix, version)
++            # try 3.x style config dir
++            if not os.path.exists(libdir):
++                libdir = '%s/lib/python%s/config-%s' % (sys.prefix, version, get_python_version())
++
++            # get cpu type
++            uname = os.uname()
++            if uname[4].startswith('arm'):
++                libpath = '%s/%s' % (libdir, sysconfig.get_config_var('LIBRARY'))
++                if not os.path.exists(libpath):
++                    libpath = '%s/%s' % (libdir, sysconfig.get_config_var('LDLIBRARY'))
++            else:
+                 libpath = '%s/%s' % (libdir, sysconfig.get_config_var('LDLIBRARY'))
++                if not os.path.exists(libpath):
++                    libpath = '%s/%s' % (libdir, sysconfig.get_config_var('LIBRARY'))
++            if not os.path.exists(libpath):
++                libpath = '%s/libpython%s.a' % (libdir, version)
++            LIBS.append(libpath)
++            # hack for messy linkers/compilers
++            if '-lutil' in LIBS:
++                LIBS.append('-lutil')
+         else:
+-            libpath = '%s/%s' % (libdir, sysconfig.get_config_var('LDLIBRARY'))
+-            if not os.path.exists(libpath): 
+-                libpath = '%s/%s' % (libdir, sysconfig.get_config_var('LIBRARY'))
+-        if not os.path.exists(libpath): 
+-            libpath = '%s/libpython%s.a' % (libdir, version)
+-        LIBS.append(libpath)
+-        # hack for messy linkers/compilers
+-        if '-lutil' in LIBS:
+-            LIBS.append('-lutil')
+-    else:
+-        try:
+-            libdir = sysconfig.get_config_var('LIBDIR')
+-        except:
+-            libdir = "%s/lib" % sysconfig.PREFIX
++            try:
++                libdir = sysconfig.get_config_var('LIBDIR')
++            except:
++                libdir = "%s/lib" % sysconfig.PREFIX
+ 
+-        LDFLAGS.append("-L%s" % libdir)
+-        LDFLAGS.append("-Wl,-rpath,%s" % libdir)
++            LDFLAGS.append("-L%s" % libdir)
++            LDFLAGS.append("-Wl,-rpath,%s" % libdir)
+ 
+-        os.environ['LD_RUN_PATH'] = "%s" % libdir
++            os.environ['LD_RUN_PATH'] = "%s" % libdir
+ 
+-        LIBS.append('-lpython%s' % get_python_version())
++            LIBS.append('-lpython%s' % get_python_version())
+ else:
+     LIBS = []
+diff --git a/uwsgiconfig.py b/uwsgiconfig.py
+index 22c9dd34685d..038fd1ccffed 100644
+--- a/uwsgiconfig.py
++++ b/uwsgiconfig.py
+@@ -43,6 +43,7 @@ def get_preprocessor():
+     return 'cpp'
+ 
+ CPP = os.environ.get('CPP', get_preprocessor())
++OBJCOPY = os.environ.get('OBJCOPY', 'objcopy')
+ 
+ try:
+     CPUCOUNT = int(os.environ.get('CPUCOUNT', -1))
+@@ -536,7 +537,7 @@ def build_uwsgi(uc, print_only=False, gcll=None):
+                         if os.system(binary_link_cmd) != 0:
+                             raise Exception('unable to link binary file')
+                         for kind in ('start','end'):
+-                            objcopy_cmd = "objcopy --redefine-sym _binary_%s_%s=%s_%s %s/%s.o" % (binarize('%s/%s' % (path, bfile[1])), kind, bfile[0], kind, path, bfile[1])
++                            objcopy_cmd = "%s --redefine-sym _binary_%s_%s=%s_%s %s/%s.o" % (OBJCOPY, binarize('%s/%s' % (path, bfile[1])), kind, bfile[0], kind, path, bfile[1])
+                             print(objcopy_cmd)
+                             if os.system(objcopy_cmd) != 0:
+                                 raise Exception('unable to link binary file')
+@@ -1074,24 +1075,40 @@ class uConf(object):
+         # re-enable after pcre fix
+         if self.get('pcre'):
+             if self.get('pcre') == 'auto':
+-                pcreconf = spcall('pcre-config --libs')
+-                if pcreconf:
+-                    self.libs.append(pcreconf)
+-                    pcreconf = spcall("pcre-config --cflags")
+-                    self.cflags.append(pcreconf)
++                print('looking for libpcre.pc...')
++                libs = spcall('pkg-config --libs libpcre')
++                print('libs:', libs)
++                if libs:
++                    cflags = spcall('pkg-config --cflags libpcre')
++                    print('cflags:', cflags)
++                else:
++                    libs = spcall('pcre-config --libs')
++                    if libs:
++                        cflags = spcall('pcre-config --cflags')
++
++                if libs:
++                    self.libs.append(libs)
++                    if cflags:
++                        self.cflags.append(cflags)
+                     self.gcc_list.append('core/regexp')
+                     self.cflags.append("-DUWSGI_PCRE")
+                     has_pcre = True
+ 
+             else:
+-                pcreconf = spcall('pcre-config --libs')
+-                if pcreconf is None:
++                libs = spcall('pkg-config --libs libpcre')
++                if libs:
++                    cflags = spcall('pkg-config --cflags libpcre')
++                else:
++                    libs = spcall('pcre-config --libs')
++                    if libs:
++                        cflags = spcall('pcre-config --cflags')
++
++                if libs is None:
+                     print("*** libpcre headers unavailable. uWSGI build is interrupted. You have to install pcre development package or disable pcre")
+                     sys.exit(1)
+                 else:
+-                    self.libs.append(pcreconf)
+-                    pcreconf = spcall("pcre-config --cflags")
+-                    self.cflags.append(pcreconf)
++                    self.libs.append(libs)
++                    self.cflags.append(cflags)
+                     self.gcc_list.append('core/regexp')
+                     self.cflags.append("-DUWSGI_PCRE")
+                     has_pcre = True
+@@ -1162,7 +1179,7 @@ class uConf(object):
+                                 os.system(binary_link_cmd)
+                                 if symbase:
+                                     for kind in ('start','end'):
+-                                        objcopy_cmd = "objcopy --redefine-sym _binary_%s_%s=_binary_%s%s_%s build/%s.o" % (binarize(fname), kind, binarize(symbase), binarize(fname[len(ef):]), kind, binarize(fname))
++                                        objcopy_cmd = "%s --redefine-sym _binary_%s_%s=_binary_%s%s_%s build/%s.o" % (OBJCOPY, binarize(fname), kind, binarize(symbase), binarize(fname[len(ef):]), kind, binarize(fname))
+                                         print(objcopy_cmd)
+                                         os.system(objcopy_cmd)
+                                 binary_list.append(binarize(fname))
+@@ -1173,7 +1190,7 @@ class uConf(object):
+                         binary_list.append(binarize(ef))
+                         if symbase:
+                             for kind in ('start','end'):
+-                                objcopy_cmd = "objcopy --redefine-sym _binary_%s_%s=_binary_%s_%s build/%s.o" % (binarize(ef), kind, binarize(symbase), kind, binarize(ef))
++                                objcopy_cmd = "%s --redefine-sym _binary_%s_%s=_binary_%s_%s build/%s.o" % (OBJCOPY, binarize(ef), kind, binarize(symbase), kind, binarize(ef))
+                                 print(objcopy_cmd)
+                                 os.system(objcopy_cmd)
+                 
+@@ -1305,11 +1322,17 @@ class uConf(object):
+ 
+         if self.get('xml'):
+             if self.get('xml') == 'auto':
+-                xmlconf = spcall('xml2-config --libs')
+-                if xmlconf and uwsgi_os != 'Darwin':
+-                    self.libs.append(xmlconf)
+-                    xmlconf = spcall("xml2-config --cflags")
+-                    self.cflags.append(xmlconf)
++                libs = spcall('pkg-config --libs libxml-2.0')
++                if libs:
++                    cflags = spcall('pkg-config --cflags libxml-2.0')
++                else:
++                    libs = spcall('xml2-config --libs')
++                    if libs:
++                        cflags = spcall('xml2-config --cflags')
++
++                if libs and uwsgi_os != 'Darwin':
++                    self.libs.append(libs)
++                    self.cflags.append(cflags)
+                     self.cflags.append("-DUWSGI_XML -DUWSGI_XML_LIBXML2")
+                     self.gcc_list.append('core/xmlconf')
+                     report['xml'] = 'libxml2'
+@@ -1319,21 +1342,23 @@ class uConf(object):
+                     self.gcc_list.append('core/xmlconf')
+                     report['xml'] = 'expat'
+             elif self.get('xml') == 'libxml2':
+-                xmlconf = spcall('xml2-config --libs')
+-                if xmlconf is None:
++                libs = spcall('pkg-config --libs libxml-2.0')
++                if libs:
++                    cflags = spcall('pkg-config --cflags libxml-2.0')
++                else:
++                    libs = spcall('xml2-config --libs')
++                    if libs:
++                        cflags = spcall('xml2-config --cflags')
++
++                if libs is None:
+                     print("*** libxml2 headers unavailable. uWSGI build is interrupted. You have to install libxml2 development package or use libexpat or disable XML")
+                     sys.exit(1)
+                 else:
+-                    self.libs.append(xmlconf)
+-                    xmlconf = spcall("xml2-config --cflags")
+-                    if xmlconf is None:
+-                        print("*** libxml2 headers unavailable. uWSGI build is interrupted. You have to install libxml2 development package or use libexpat or disable XML")
+-                        sys.exit(1)
+-                    else:
+-                        self.cflags.append(xmlconf)
+-                        self.cflags.append("-DUWSGI_XML -DUWSGI_XML_LIBXML2")
+-                        self.gcc_list.append('core/xmlconf')
+-                        report['xml'] = 'libxml2'
++                    self.libs.append(libs)
++                    self.cflags.append(cflags)
++                    self.cflags.append("-DUWSGI_XML -DUWSGI_XML_LIBXML2")
++                    self.gcc_list.append('core/xmlconf')
++                    report['xml'] = 'libxml2'
+             elif self.get('xml') == 'expat':
+                 self.cflags.append("-DUWSGI_XML -DUWSGI_XML_EXPAT")
+                 self.libs.append('-lexpat')
+@@ -1462,7 +1487,7 @@ def build_plugin(path, uc, cflags, ldflags, libs, name = None):
+             if os.system(binary_link_cmd) != 0:
+                 raise Exception('unable to link binary file')
+             for kind in ('start','end'):
+-                objcopy_cmd = "objcopy --redefine-sym _binary_%s_%s=%s_%s %s/%s.o" % (binarize('%s/%s' % (path, bfile[1])), kind, bfile[0], kind, path, bfile[1])
++                objcopy_cmd = "%s --redefine-sym _binary_%s_%s=%s_%s %s/%s.o" % (OBJCOPY, binarize('%s/%s' % (path, bfile[1])), kind, bfile[0], kind, path, bfile[1])
+                 print(objcopy_cmd)
+                 if os.system(objcopy_cmd) != 0:
+                     raise Exception('unable to link binary file')
+@@ -1538,7 +1563,7 @@ def build_plugin(path, uc, cflags, ldflags, libs, name = None):
+             for rp in requires:
+                 f.write("requires=%s\n" % rp)
+             f.close()
+-            objline = "objcopy %s.so --add-section uwsgi=.uwsgi_plugin_section %s.so" % (plugin_dest, plugin_dest)
++            objline = "%s %s.so --add-section uwsgi=.uwsgi_plugin_section %s.so" % (OBJCOPY, plugin_dest, plugin_dest)
+             print_compilation_output(None, objline)
+             os.system(objline)
+             os.unlink('.uwsgi_plugin_section')
