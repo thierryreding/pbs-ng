@@ -30,6 +30,7 @@ install-args =
 $(builddir)/stamp-install: $(builddir)/stamp-build
 	cd $(builddir) && \
 		$(env) $(MAKE) $(install-args) install
+	touch $@
 
 install: $(builddir)/stamp-install
 
