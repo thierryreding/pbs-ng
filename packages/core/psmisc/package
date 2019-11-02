@@ -1,11 +1,11 @@
 description: Miscellaneous procfs tools
-version: 23.1
+version: 23.2
 license: GPL-2.0+
 
 files:
   - download:
       url: http://prdownloads.sourceforge.net/psmisc/psmisc-${version}.tar.xz
-      sha1: d19031a5ba18a530aa0bb768cb74593f9af74b08
+      sha1: 2bf3ec1c87ab3bc0610c819452c21cf4b849b0b8
 
 depends:
   - libs/ncurses
