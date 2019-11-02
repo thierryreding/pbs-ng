@@ -10,7 +10,10 @@ $(builddir)/config.cache: | $(builddir)
 	echo 'ac_cv_func_realloc_0_nonnull=yes' >> $@
 
 conf-args += \
-	--config-cache \
-	--exec-prefix=/
+	--sbindir=$(PREFIX)/bin \
+	--libdir=$(PREFIX)/lib \
+	--bindir=$(PREFIX)/bin \
+	--exec-prefix=/ \
+	--config-cache
 
 $(builddir)/stamp-configure: $(srcdir)/stamp-patch $(builddir)/config.cache
