@@ -14,6 +14,6 @@ $(builddir)/stamp-install: | $(builddir)
 install: $(builddir)/stamp-install
 
 version:
-	@cd $(srcdir) && $(MAKE) version | cut -c 2-
+	@cd $(srcdir) && $(MAKE) version
 
 .PHONY: install version
