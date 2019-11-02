@@ -8,7 +8,10 @@ $(builddir)/stamp-build: | $(builddir)
 		$(env) $(srcdir)/configure.py --bootstrap
 	touch $@
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(BUILD_TOOLS)/bin:
+	install -m 755 -d $(BUILD_TOOLS)/bin
+
+$(builddir)/stamp-install: $(builddir)/stamp-build | $(BUILD_TOOLS)/bin
 	cd $(builddir) && \
 		install -m 755 -D ninja $(BUILD_TOOLS)/bin
 	touch $@
