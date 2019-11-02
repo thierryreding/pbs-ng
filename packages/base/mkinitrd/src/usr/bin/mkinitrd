@@ -160,6 +160,7 @@ function copy_program()
 		echo "  INSTALL  $program"
 		cp "$source$program" "$dest$program"
 		chmod 0755 "$dest$program"
+		${CROSS_COMPILE}strip "$dest$program"
 	fi
 
 	${CROSS_COMPILE}objdump -p "$dest$program" | awk '/NEEDED/ { print $2 }' | while read soname; do
