@@ -1,5 +1,5 @@
 description: wrapper library for evdev devices
-version: 1.5.9
+version: 1.8.0
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://www.freedesktop.org/software/libevdev/libevdev-${version}.tar.xz
-      sha1: 9457e33af5c1e66e29c1385a5550fe60aef8e42e
+      sha1: 4392d28fb91a5f6eb404aab531526f5fa0bbe73d
 
 packages:
   libevdev:
