@@ -1,0 +1,19 @@
+description: OpenCL conformance test suite
+version: git
+license: custom
+
+depends:
+  - devel/llvm-spirv
+  - libs/libclcxx
+  - libs/mesa
+
+files:
+  - source:
+      url: git+https://github.com/KhronosGroup/OpenCL-CTS.git
+
+packages:
+  opencl-cts:
+    files:
+      - /usr/lib/opencl-cts
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
