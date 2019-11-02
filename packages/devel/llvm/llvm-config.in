@@ -1,8 +1,17 @@
 #!/bin/sh
 
-modules="$modules bitwriter engine mcdisassembler mcjit all-targets linker"
-modules="$modules coverage instrumentation ipo irreader lto option"
-modules="$modules objcarcopts profiledata"
+modules="$modules all all-targets analysis arm armasmparser armasmprinter"
+modules="$modules armcodegen armdesc armdisassembler arminfo armutils"
+modules="$modules asmparser asmprinter binaryformat bitreader bitwriter"
+modules="$modules codegen core coroutines coverage debuginfocodeview"
+modules="$modules debuginfodwarf debuginfomsf debuginfopdb demangle"
+modules="$modules dlltooldriver engine executionengine fuzzmutate globalisel"
+modules="$modules instcombine instrumentation interpreter ipo irreader"
+modules="$modules libdriver lineeditor linker lto mc mcdisassembler mcjit"
+modules="$modules mcparser mirparser native nativecodegen objcarcopts object"
+modules="$modules objectyaml option orcjit passes profiledata runtimedyld"
+modules="$modules scalaropts selectiondag support symbolize tablegen target"
+modules="$modules transformutils vectorize windowsmanifest"
 
 macros="$macros -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS"
 macros="$macros -D__STDC_LIMIT_MACROS"
@@ -67,6 +76,11 @@ while test $# -gt 0; do
 			shift
 			;;
 
+		--libfiles)
+			echo "libLLVM-$version.so"
+			shift
+			;;
+
 		--prefix)
 			echo "$prefix"
 			shift
@@ -104,6 +118,11 @@ while test $# -gt 0; do
 
 		--has-rtti)
 			echo "YES"
+			shift
+			;;
+
+		--shared-mode)
+			echo "shared"
 			shift
 			;;
 
