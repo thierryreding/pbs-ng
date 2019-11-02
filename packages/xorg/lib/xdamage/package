@@ -1,5 +1,5 @@
 description: X11 damaged region extension library
-version: 1.1.4
+version: 1.1.5
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXdamage-${version}.tar.bz2
-      sha1: c3fc0f4b02dce2239bf46c82a5f06b06585720ae
+      sha1: 719ae6ab8c1b972c6386b654976c479255af5572
 
 packages:
   libxdamage:
