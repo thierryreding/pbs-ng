@@ -1,5 +1,5 @@
 description: Simple DirectMedia Layer
-version: 2.0.8
+version: 2.0.10
 license: MIT
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://www.libsdl.org/release/SDL2-${version}.tar.gz
-      sha1: 959ec6ded277821995d2e3cafd973f6ab9f48ab7
+      sha1: fb31312ea1d4b45db839796ae2336dfe3d5884e5
 
 packages:
   libsdl:
