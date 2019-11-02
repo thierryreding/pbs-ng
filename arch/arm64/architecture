@@ -26,4 +26,9 @@ cpu:
       defaults:
         version: armv8-a
 
+    carmel:
+      description: NVIDIA Carmel
+      defaults:
+        version: armv8-a
+
 # vim: et ft=yaml sts=2 sw=2 ts=2
