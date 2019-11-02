@@ -1,5 +1,5 @@
 description: Generic input driver for the X.Org server based on libinput
-version: 0.28.0
+version: 0.29.0
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/driver/xf86-input-libinput-${version}.tar.bz2
-      sha1: 07f5559bcf0363d4ecaf0b2cecb88ee7d2b16fc6
+      sha1: efa9dbe08ee827949aff0bd752f8270237247c56
 
 packages:
   xf86-input-libinput:
