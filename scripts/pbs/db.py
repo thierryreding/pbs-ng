@@ -467,6 +467,7 @@ class DownloadSourceFile(SourceFile):
     def __init__(self, source):
         SourceFile.__init__(self, source)
         self.filename = None
+        self.cached = False
 
     def parse(self, yaml):
         SourceFile.parse(self, yaml)
@@ -518,6 +519,7 @@ class DownloadSourceFile(SourceFile):
                     key, value = part.strip().split('=')
                     if key == 'filename':
                         self.filename = value
+                        self.cached = True
             else:
                 print('WARNING: Content-Disposition:', header)
 
@@ -925,7 +927,7 @@ class Source():
         self.name = name
 
         self.description = None
-        self.version = None
+        self.version = ''
 
         self.files = []
         self.depends = []

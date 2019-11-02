@@ -476,6 +476,14 @@ class Package():
             for state, value in values['states'].items():
                 self.states[state] = value
 
+        # look up cached filename
+        if 'files' in values:
+            for url, filename in values['files'].items():
+                for source in self.source.files:
+                    if source.url == url and source.filename != filename:
+                        source.filename = filename
+                        source.cached = True
+
         if self.options and 'options' in values:
             values = values['options']
 
@@ -501,6 +509,15 @@ class Package():
 
             for option in self.options:
                 values['options'].update(option.save())
+
+        if self.source.files:
+            for source in self.source.files:
+                if isinstance(source, pbs.db.DownloadSourceFile):
+                    if source.cached:
+                        if 'files' not in values:
+                            values['files'] = {}
+
+                        values['files'][source.url] = source.filename
 
         return values
 
