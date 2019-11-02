@@ -1123,6 +1123,10 @@ class Source():
         else:
             pbs.log.skip('skipped')
 
+class ParseException(Exception):
+    def __init__(self, source, message):
+        super().__init__('%s: %s' % (source, message))
+
 class Database():
     def __init__(self):
         self.directory = None
@@ -1162,7 +1166,12 @@ class Database():
         stream.close()
 
         source = Source(directory, section, basename)
-        source.parse(values)
+
+        try:
+            source.parse(values)
+        except:
+            raise ParseException(filename, 'failed to parse')
+
         return source
 
     def load_packages(directory):
