@@ -1,0 +1,25 @@
+description: A library to decode several popular sound file formats such as .WAV and .MP3
+version: 1.0.3
+license: LGPL-2.1-or-later
+
+depends:
+  - libs/sdl
+
+files:
+  - download:
+      url: https://icculus.org/SDL_sound/downloads/SDL_sound-${version}.tar.gz
+      sha1: 1984bc20b2c756dc71107a5a0a8cebfe07e58cb1
+
+packages:
+  libsdl-sound:
+    files:
+      - /usr/lib/*.so.*
+
+  libsdl-sound-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

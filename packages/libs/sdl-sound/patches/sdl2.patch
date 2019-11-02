@@ -1,0 +1,29 @@
+diff --git a/playsound/playsound.c b/playsound/playsound.c
+index d160e053c81c..e2cb5674030f 100644
+--- a/playsound/playsound.c
++++ b/playsound/playsound.c
+@@ -83,13 +83,12 @@ static void output_versions(const char *argv0)
+ {
+     Sound_Version compiled;
+     Sound_Version linked;
+-    SDL_version sdl_compiled;
+-    const SDL_version *sdl_linked;
++    SDL_version sdl_compiled, sdl_linked;
+ 
+     SOUND_VERSION(&compiled);
+     Sound_GetLinkedVersion(&linked);
+     SDL_VERSION(&sdl_compiled);
+-    sdl_linked = SDL_Linked_Version();
++    SDL_GetVersion(&sdl_linked);
+ 
+     fprintf(stdout,
+            "%s version %d.%d.%d\n"
+@@ -108,7 +107,7 @@ static void output_versions(const char *argv0)
+              compiled.major, compiled.minor, compiled.patch,
+              linked.major, linked.minor, linked.patch,
+              sdl_compiled.major, sdl_compiled.minor, sdl_compiled.patch,
+-             sdl_linked->major, sdl_linked->minor, sdl_linked->patch);
++             sdl_linked.major, sdl_linked.minor, sdl_linked.patch);
+ } /* output_versions */
+ 
+ 
