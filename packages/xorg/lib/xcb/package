@@ -1,5 +1,5 @@
 description: X11 client-side library
-version: 1.13
+version: 1.13.1
 license: custom
 
 depends:
@@ -11,7 +11,7 @@ depends:
 files:
 - download:
     url: http://xcb.freedesktop.org/dist/libxcb-${version}.tar.bz2
-    sha1: 212ad5f1f80def80536d78e3d20354a0370e7fe9
+    sha1: 2ab17a1bb2a44e0a9cb0b26bcf899689ba1bbb3b
 
 packages:
   libxcb:
