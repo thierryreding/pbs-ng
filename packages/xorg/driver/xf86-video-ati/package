@@ -1,0 +1,21 @@
+description: X.Org ATI video driver
+version: 18.0.1
+license: custom
+
+depends:
+
+files:
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/driver/xf86-video-ati-${version}.tar.bz2
+      sha1: b5a0b6a2fa839d668a3fb90280fede95f0bc130d
+
+packages:
+  xf86-video-ati:
+    files:
+      - /usr/lib/xorg/modules/drivers/*.so
+
+  xf86-video-ati-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
