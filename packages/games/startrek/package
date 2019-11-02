@@ -1,0 +1,16 @@
+description: Star Trek - The Action Game
+version: git
+license: custom
+
+depends:
+  - core/systemd # for libudev
+  - libs/drm-kms
+  - libs/libdrm
+  - libs/libinput
+
+packages:
+  startrek:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
