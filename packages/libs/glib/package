@@ -1,11 +1,11 @@
 package: common C routines used by GTK+ and other libraries
-version: 2.56.2
+version: 2.63.0
 license: LGPL-2.1
 
 files:
   - download:
-      url: http://ftp.gnome.org/pub/gnome/sources/glib/${major}.${minor}/glib-${version}.tar.xz
-      sha1: 8b18a92f81a8d033abfb43a628bae3bbaf71800c
+      url: https://ftp.gnome.org/pub/gnome/sources/glib/${major}.${minor}/glib-${version}.tar.xz
+      sha1: 3198783094e66c3d82cf11bd2c5eb095430de0c5
 
 depends:
   - devel/glibc
