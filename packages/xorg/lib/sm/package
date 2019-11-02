@@ -1,11 +1,11 @@
 description: X11 Session Management library
-version: 1.2.2
+version: 1.2.3
 license: custom
 
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libSM-${version}.tar.bz2
-      sha1: e6d5dab6828dfd296e564518d2ed0a349a25a714
+      sha1: 437d7b13fa2eba325df3a106f177df46ccec6546
 
 packages:
   libsm:
