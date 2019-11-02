@@ -15,6 +15,7 @@ packages:
   xkbcomp:
     files:
       - /usr/bin
+      - /usr/lib/pkgconfig
 
   xkbcomp-man:
     files:
