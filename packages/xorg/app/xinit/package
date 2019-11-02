@@ -1,11 +1,11 @@
 description: X.Org initialisation program
-version: 1.4.0
+version: 1.4.1
 license: custom
 
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/app/xinit-${version}.tar.bz2
-      sha1: fcdca692b09a45f546016fff78718d1cf7e7852f
+      sha1: d874a2eecf2c30291e327851b151fdab8183260c
 
 packages:
   xinit:
