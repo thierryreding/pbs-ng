@@ -1,5 +1,5 @@
 description: The Linux-native asynchronous I/O facility (aio) library
-version: 0.3.111
+version: 0.3.112
 license: LGPL
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://releases.pagure.org/libaio/libaio-${version}.tar.gz
-      sha1: 6ec2b954831d35573fd7f38e2423304eb841b50c
+      sha1: bf91f82cc48528c672c752536d121e4a08f4c3e0
 
 packages:
   libaio:
