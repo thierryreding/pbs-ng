@@ -1,5 +1,5 @@
 description: X.Org combined protocol headers
-version: 2018.4
+version: 2019.2
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/proto/xorgproto-${version}.tar.bz2
-      sha1: 2e4a3db312e1ce81e15515dfcac52ba0aa5a920c
+      sha1: 2dedbe3e4daccf0c3d675759ed82161a3e4cf1b5
 
 packages:
   xorgproto-dev:
