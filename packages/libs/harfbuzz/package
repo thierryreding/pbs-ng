@@ -1,5 +1,5 @@
 description: OpenType text shaping engine
-version: 2.6.2
+version: 2.6.3
 license: MIT
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://www.freedesktop.org/software/harfbuzz/release/harfbuzz-${version}.tar.xz
-      sha1: 81d3f0cf5d560d7eee2eb0a8fb5a1640b1b9dac9
+      sha1: 60889120d239a80624123c3a57ae0c4241245e92
 
 packages:
   libharfbuzz:
