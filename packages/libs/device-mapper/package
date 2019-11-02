@@ -1,11 +1,11 @@
 description: device mapper userspace library and tools
-version: 2.02.181
+version: 2.03.05
 license: GPL-2.0, LGPL-2.1
 
 files:
   - download:
-      url: ftp://sources.redhat.com/pub/lvm2/LVM2.${version}.tgz
-      sha1: 2802799c60ef4f61534df1e40bcc29e4e043b29b
+      url: https://mirrors.kernel.org/sourceware/lvm2/LVM2.${version}.tgz
+      sha1: edfa340a4bbdb3e995521bebbe5307fd7687ac3b
 
 depends:
   - devel/glibc
