@@ -1,5 +1,5 @@
 diff --git a/plugins/python/uwsgiplugin.py b/plugins/python/uwsgiplugin.py
-index 843876f30425..b1f533dac3a0 100644
+index 843876f30425..6fc4ef733cf0 100644
 --- a/plugins/python/uwsgiplugin.py
 +++ b/plugins/python/uwsgiplugin.py
 @@ -1,6 +1,7 @@
@@ -10,7 +10,7 @@ index 843876f30425..b1f533dac3a0 100644
  
  def get_python_version():
      version = sysconfig.get_config_var('VERSION')
-@@ -17,49 +18,60 @@ CFLAGS = ['-I' + sysconfig.get_python_inc(), '-I' + sysconfig.get_python_inc(pla
+@@ -17,49 +18,64 @@ CFLAGS = ['-I' + sysconfig.get_python_inc(), '-I' + sysconfig.get_python_inc(pla
  LDFLAGS = []
  
  if not 'UWSGI_PYTHON_NOLIB' in os.environ:
@@ -34,7 +34,11 @@ index 843876f30425..b1f533dac3a0 100644
 +    else:
 +        pkgfile = 'python2'
 +
-+    LIBS = spcall('pkg-config --libs %s' % pkgfile).split()
++    LIBS = spcall('pkg-config --libs %s-embed' % pkgfile).split()
++    if not LIBS:
++        LIBS = spcall('pkg-config --libs %s' % pkgfile).split()
++    else:
++        pkgfile = '%s-embed' % pkgfile
 +
 +    if LIBS:
 +        CFLAGS = spcall('pkg-config --cflags %s' % pkgfile).split()
@@ -110,7 +114,7 @@ index 843876f30425..b1f533dac3a0 100644
  else:
      LIBS = []
 diff --git a/uwsgiconfig.py b/uwsgiconfig.py
-index 22c9dd34685d..038fd1ccffed 100644
+index 22c9dd34685d..5088ae8f960f 100644
 --- a/uwsgiconfig.py
 +++ b/uwsgiconfig.py
 @@ -43,6 +43,7 @@ def get_preprocessor():
@@ -130,7 +134,7 @@ index 22c9dd34685d..038fd1ccffed 100644
                              print(objcopy_cmd)
                              if os.system(objcopy_cmd) != 0:
                                  raise Exception('unable to link binary file')
-@@ -1074,24 +1075,40 @@ class uConf(object):
+@@ -1074,24 +1075,37 @@ class uConf(object):
          # re-enable after pcre fix
          if self.get('pcre'):
              if self.get('pcre') == 'auto':
@@ -139,12 +143,9 @@ index 22c9dd34685d..038fd1ccffed 100644
 -                    self.libs.append(pcreconf)
 -                    pcreconf = spcall("pcre-config --cflags")
 -                    self.cflags.append(pcreconf)
-+                print('looking for libpcre.pc...')
 +                libs = spcall('pkg-config --libs libpcre')
-+                print('libs:', libs)
 +                if libs:
 +                    cflags = spcall('pkg-config --cflags libpcre')
-+                    print('cflags:', cflags)
 +                else:
 +                    libs = spcall('pcre-config --libs')
 +                    if libs:
@@ -181,7 +182,7 @@ index 22c9dd34685d..038fd1ccffed 100644
                      self.gcc_list.append('core/regexp')
                      self.cflags.append("-DUWSGI_PCRE")
                      has_pcre = True
-@@ -1162,7 +1179,7 @@ class uConf(object):
+@@ -1162,7 +1176,7 @@ class uConf(object):
                                  os.system(binary_link_cmd)
                                  if symbase:
                                      for kind in ('start','end'):
@@ -190,7 +191,7 @@ index 22c9dd34685d..038fd1ccffed 100644
                                          print(objcopy_cmd)
                                          os.system(objcopy_cmd)
                                  binary_list.append(binarize(fname))
-@@ -1173,7 +1190,7 @@ class uConf(object):
+@@ -1173,7 +1187,7 @@ class uConf(object):
                          binary_list.append(binarize(ef))
                          if symbase:
                              for kind in ('start','end'):
@@ -199,7 +200,7 @@ index 22c9dd34685d..038fd1ccffed 100644
                                  print(objcopy_cmd)
                                  os.system(objcopy_cmd)
                  
-@@ -1305,11 +1322,17 @@ class uConf(object):
+@@ -1305,11 +1319,17 @@ class uConf(object):
  
          if self.get('xml'):
              if self.get('xml') == 'auto':
@@ -222,7 +223,7 @@ index 22c9dd34685d..038fd1ccffed 100644
                      self.cflags.append("-DUWSGI_XML -DUWSGI_XML_LIBXML2")
                      self.gcc_list.append('core/xmlconf')
                      report['xml'] = 'libxml2'
-@@ -1319,21 +1342,23 @@ class uConf(object):
+@@ -1319,21 +1339,23 @@ class uConf(object):
                      self.gcc_list.append('core/xmlconf')
                      report['xml'] = 'expat'
              elif self.get('xml') == 'libxml2':
@@ -258,7 +259,7 @@ index 22c9dd34685d..038fd1ccffed 100644
              elif self.get('xml') == 'expat':
                  self.cflags.append("-DUWSGI_XML -DUWSGI_XML_EXPAT")
                  self.libs.append('-lexpat')
-@@ -1462,7 +1487,7 @@ def build_plugin(path, uc, cflags, ldflags, libs, name = None):
+@@ -1462,7 +1484,7 @@ def build_plugin(path, uc, cflags, ldflags, libs, name = None):
              if os.system(binary_link_cmd) != 0:
                  raise Exception('unable to link binary file')
              for kind in ('start','end'):
@@ -267,7 +268,7 @@ index 22c9dd34685d..038fd1ccffed 100644
                  print(objcopy_cmd)
                  if os.system(objcopy_cmd) != 0:
                      raise Exception('unable to link binary file')
-@@ -1538,7 +1563,7 @@ def build_plugin(path, uc, cflags, ldflags, libs, name = None):
+@@ -1538,7 +1560,7 @@ def build_plugin(path, uc, cflags, ldflags, libs, name = None):
              for rp in requires:
                  f.write("requires=%s\n" % rp)
              f.close()
