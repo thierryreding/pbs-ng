@@ -1,0 +1,23 @@
+description: library requirements of the OpenCL C programming language
+version: git
+license: MIT
+
+depends:
+  - build-tools/clang
+  - devel/glibc
+
+files:
+  - source:
+      url: git+https://llvm.org/git/libclc.git
+
+packages:
+  libclc:
+    files:
+      - /usr/lib/clc
+
+  libclc-dev:
+    files:
+      - /usr/include
+      - /usr/share/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

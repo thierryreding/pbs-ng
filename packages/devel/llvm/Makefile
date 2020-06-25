@@ -1,7 +1,5 @@
 include $(TOP_SRCDIR)/packages/cmake.mk
 
-srcdir := $(srcdir)/llvm
-
 TARGET = $(ARCH)
 
 ifeq ($(ARCH),arm64)
@@ -13,7 +11,6 @@ ifeq ($(ARCH),arm)
 endif
 
 cmake-args += \
-	-DLLVM_ENABLE_PROJECTS='clang;libcxx;libcxxabi;libclc' \
 	-DLLVM_TABLEGEN=$(BUILD_TOOLS)/bin/llvm-tblgen \
 	-DLLVM_DEFAULT_TARGET_TRIPLE=$(HOST) \
 	-DLLVM_TARGETS_TO_BUILD=$(TARGET) \
@@ -24,7 +21,7 @@ cmake-args += \
 	-DCMAKE_CROSSCOMPILING=True \
 	-DCMAKE_BUILD_TYPE=Release
 
-$(BUILD_TOOLS)/bin/$(HOST)-llvm-config: $(TOP_SRCDIR)/$(PKGDIR)/llvm-config.in $(TOP_SRCDIR)/$(PKGDIR)/Makefile
+$(BUILD_TOOLS)/bin/$(HOST)-llvm-config: $(TOP_SRCDIR)/$(PKGDIR)/llvm-config.in
 	$(SED) 's|@SYSROOT@|$(SYSROOT)|;s|@PREFIX@|$(PREFIX)|;s|@VERSION@|$(package.version)|;s|@SOURCE_ROOT@|$(srcdir)|' $< > $@
 	chmod a+x $@
 
