@@ -1,5 +1,5 @@
 description: library requirements of the OpenCL C programming language
-version: git
+version: 10.0.0
 license: MIT
 
 depends:
@@ -7,13 +7,14 @@ depends:
   - devel/glibc
 
 files:
-  - source:
-      url: git+https://llvm.org/git/libclc.git
+  - download:
+      url: https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/llvm-project-${version}.tar.xz
+      sha1: e36d6c2e5a2db5609e8a69d22afabe7b1e6f81d3
 
 packages:
   libclc:
     files:
-      - /usr/lib/clc
+      - /usr/share/clc
 
   libclc-dev:
     files:

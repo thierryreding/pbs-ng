@@ -1,5 +1,7 @@
 include $(TOP_SRCDIR)/packages/cmake.mk
 
+srcdir := $(srcdir)/llvm
+
 TARGET = $(ARCH)
 
 ifeq ($(ARCH),arm64)

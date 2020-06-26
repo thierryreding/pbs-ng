@@ -1,5 +1,7 @@
 include $(TOP_SRCDIR)/packages/build-tools/cmake.mk
 
+srcdir := $(srcdir)/clang
+
 cmake-args += \
 	-DCMAKE_BUILD_TYPE=Release
 

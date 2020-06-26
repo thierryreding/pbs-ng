@@ -1,44 +1,14 @@
-include $(TOP_SRCDIR)/packages/common.mk
+include $(TOP_SRCDIR)/packages/cmake.mk
 
-$(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/llvm-bindir.patch
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/llvm-cxxflags.patch
-	touch $@
+srcdir := $(srcdir)/libclc
 
-env += \
-	LD_LIBRARY_PATH=$(BUILD_TOOLS)/lib
-
-conf-args += \
-	--with-llvm-config=$(BUILD_TOOLS)/bin/$(HOST)-llvm-config \
-	--with-llvm-cxxflags='-I$(BUILD_TOOLS)/include' \
-	--with-llvm-bindir=$(BUILD_TOOLS)/bin \
-	--prefix=$(PREFIX)
-
-$(srcdir)/stamp-configure: $(srcdir)/stamp-patch
-	cd $(srcdir) && \
-		./configure.py $(conf-args)
-	touch $@
-
-build-args += \
-	-j $(JOBS)
-
-$(srcdir)/stamp-build: $(srcdir)/stamp-configure
-	cd $(srcdir) && \
-		$(env) $(MAKE) $(build-args)
-	touch $@
-
-install-args = \
-	DESTDIR=$(DESTDIR)
-
-$(srcdir)/stamp-install: $(srcdir)/stamp-build
-	cd $(srcdir) && \
-		$(MAKE) $(install-args) install
-	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install
-
-ifeq ($(FORCE),y)
-.PHONY: $(srcdir)/stamp-build
-endif
+#
+# Note that we override cmake-args here because we don't want to pull in any
+# of the cross-compilation arguments at this point. This is because we don't
+# actually compile any code in libclc but rather compile built-ins using the
+# LLVM/clang compiler infrastructure.
+#
+cmake-args = \
+	-DLLVM_CONFIG=$(BUILD_TOOLS)/bin/llvm-config \
+	-DCMAKE_INSTALL_PREFIX=$(PREFIX) \
+	-DCMAKE_BUILD_TYPE=Release

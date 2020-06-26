@@ -1,5 +1,7 @@
 include $(TOP_SRCDIR)/packages/cmake.mk
 
+srcdir := $(srcdir)/clang
+
 $(srcdir)/stamp-patch: | $(srcdir)
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-compile.patch
 	touch $@
