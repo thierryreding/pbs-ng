@@ -3,7 +3,7 @@ version: git
 license: custom
 
 depends:
-  - devel/llvm-spirv
+  - devel/spirv-llvm
   - libs/libclcxx
   - libs/mesa
 
