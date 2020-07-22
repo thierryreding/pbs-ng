@@ -1,0 +1,14 @@
+diff --git a/src/gpg-error-config-test.sh.in b/src/gpg-error-config-test.sh.in
+index 02bc8818b607..818955ccc758 100644
+--- a/src/gpg-error-config-test.sh.in
++++ b/src/gpg-error-config-test.sh.in
+@@ -8,6 +8,9 @@ export PKG_CONFIG_PATH
+ 
+ if [ "$1" = --old-new ]; then
+     PKG_CONFIG_CMD=./gpg-error-config-old
++    # Old gpg-error-config never supports PKG_CONFIG_SYSROOT_DIR
++    unset PKG_CONFIG_SYSROOT_DIR
++    unset PKG_CONFIG_LIBDIR
+ else
+     pkg_config_min_version=0.29
+     PKG_CONFIG_SYSROOT_DIR="/var/example-target"
