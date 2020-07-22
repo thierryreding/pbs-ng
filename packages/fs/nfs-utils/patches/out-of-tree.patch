@@ -1,0 +1,380 @@
+From 4084fb38797f0c6fc888e5d04b79fb55be5799f2 Mon Sep 17 00:00:00 2001
+From: Thierry Reding <treding@nvidia.com>
+Date: Mon, 13 Jul 2020 17:00:08 +0200
+Subject: [PATCH 2/3] out-of-tree
+
+---
+ support/export/Makefile.am    | 4 +++-
+ support/misc/Makefile.am      | 2 ++
+ support/nfs/Makefile.am       | 2 ++
+ support/nfsidmap/Makefile.am  | 3 +++
+ support/nsm/Makefile.am       | 2 ++
+ tools/mountstats/Makefile.am  | 2 +-
+ tools/nfs-iostat/Makefile.am  | 2 +-
+ tools/nfsconf/Makefile.am     | 2 ++
+ tools/nfsdclddb/Makefile.am   | 2 +-
+ tools/nfsdclnts/Makefile.am   | 2 +-
+ tools/rpcdebug/Makefile.am    | 2 ++
+ tools/rpcgen/Makefile.am      | 1 +
+ tools/rpcgen/rpc_main.c       | 6 +++---
+ utils/blkmapd/Makefile.am     | 2 +-
+ utils/exportfs/Makefile.am    | 2 ++
+ utils/gssd/Makefile.am        | 2 +-
+ utils/idmapd/Makefile.am      | 2 +-
+ utils/mount/Makefile.am       | 2 ++
+ utils/mountd/Makefile.am      | 2 ++
+ utils/nfsd/Makefile.am        | 2 ++
+ utils/nfsdcld/Makefile.am     | 2 +-
+ utils/nfsdcltrack/Makefile.am | 2 +-
+ utils/nfsidmap/Makefile.am    | 2 +-
+ utils/showmount/Makefile.am   | 2 ++
+ utils/statd/Makefile.am       | 2 ++
+ 25 files changed, 42 insertions(+), 14 deletions(-)
+
+diff --git a/support/export/Makefile.am b/support/export/Makefile.am
+index 13f7a49cefb6..ddf74dc2c1a9 100644
+--- a/support/export/Makefile.am
++++ b/support/export/Makefile.am
+@@ -9,6 +9,8 @@ GENFILES	= $(GENFILES_CLNT) $(GENFILES_SVC) $(GENFILES_XDR) $(GENFILES_H)
+ 
+ EXTRA_DIST	= mount.x
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include $(TIRPC_CFLAGS)
++
+ noinst_LIBRARIES = libexport.a
+ libexport_a_SOURCES = client.c export.c hostname.c \
+ 		      xtab.c mount_clnt.c mount_xdr.c
+@@ -24,7 +26,7 @@ dist-hook:
+ if CONFIG_RPCGEN
+ RPCGEN		= $(top_builddir)/tools/rpcgen/rpcgen
+ $(RPCGEN):
+-	make -C $(top_srcdir)/tools/rpcgen all
++	make -C ../../tools/rpcgen all
+ else
+ RPCGEN = @RPCGEN_PATH@
+ endif
+diff --git a/support/misc/Makefile.am b/support/misc/Makefile.am
+index f9993e3ac897..3757fea643e3 100644
+--- a/support/misc/Makefile.am
++++ b/support/misc/Makefile.am
+@@ -1,5 +1,7 @@
+ ## Process this file with automake to produce Makefile.in
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include $(TIRPC_CFLAGS)
++
+ noinst_LIBRARIES = libmisc.a
+ libmisc_a_SOURCES = tcpwrapper.c from_local.c mountpoint.c file.c \
+ 		    nfsd_path.c workqueue.c xstat.c
+diff --git a/support/nfs/Makefile.am b/support/nfs/Makefile.am
+index 67e3a8e134c8..b448d2abbfec 100644
+--- a/support/nfs/Makefile.am
++++ b/support/nfs/Makefile.am
+@@ -1,5 +1,7 @@
+ ## Process this file with automake to produce Makefile.in
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ noinst_LIBRARIES = 
+ noinst_LTLIBRARIES = libnfs.la libnfsconf.la
+ 
+diff --git a/support/nfsidmap/Makefile.am b/support/nfsidmap/Makefile.am
+index f5b9de0e1e91..a8ab83d03662 100644
+--- a/support/nfsidmap/Makefile.am
++++ b/support/nfsidmap/Makefile.am
+@@ -17,6 +17,9 @@ endif
+ if ENABLE_LDAP_SASL
+ KRB5_GSS_LIB=-lgssapi_krb5
+ endif
++
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ lib_LTLIBRARIES = libnfsidmap.la
+ pkgplugin_LTLIBRARIES = nsswitch.la static.la regex.la $(UMICH_LDAP_LIB) $(GUMS_MAPPING_LIB)
+ 
+diff --git a/support/nsm/Makefile.am b/support/nsm/Makefile.am
+index 8f5874ef26b8..e74121b1bbd9 100644
+--- a/support/nsm/Makefile.am
++++ b/support/nsm/Makefile.am
+@@ -9,6 +9,8 @@ GENFILES	= $(GENFILES_CLNT) $(GENFILES_SVC) $(GENFILES_XDR) $(GENFILES_H)
+ 
+ EXTRA_DIST	= sm_inter.x
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ noinst_LIBRARIES = libnsm.a
+ libnsm_a_SOURCES = $(GENFILES) file.c rpc.c
+ 
+diff --git a/tools/mountstats/Makefile.am b/tools/mountstats/Makefile.am
+index c2e9f9995ada..86ae4398d73f 100644
+--- a/tools/mountstats/Makefile.am
++++ b/tools/mountstats/Makefile.am
+@@ -8,6 +8,6 @@ EXTRA_DIST	= $(man8_MANS) $(PYTHON_FILES)
+ all-local: $(PYTHON_FILES)
+ 
+ install-data-hook:
+-	$(INSTALL) -m 755 mountstats.py $(DESTDIR)$(sbindir)/mountstats
++	$(INSTALL) -m 755 $(srcdir)/mountstats.py $(DESTDIR)$(sbindir)/mountstats
+ 
+ MAINTAINERCLEANFILES=Makefile.in
+diff --git a/tools/nfs-iostat/Makefile.am b/tools/nfs-iostat/Makefile.am
+index 3ae0f29701ca..c939d7e14d76 100644
+--- a/tools/nfs-iostat/Makefile.am
++++ b/tools/nfs-iostat/Makefile.am
+@@ -8,6 +8,6 @@ EXTRA_DIST	= $(man8_MANS) $(PYTHON_FILES)
+ all-local: $(PYTHON_FILES)
+ 
+ install-data-hook:
+-	$(INSTALL) -m 755 nfs-iostat.py $(DESTDIR)$(sbindir)/nfsiostat
++	$(INSTALL) -m 755 $(srcdir)/nfs-iostat.py $(DESTDIR)$(sbindir)/nfsiostat
+ 
+ MAINTAINERCLEANFILES=Makefile.in
+diff --git a/tools/nfsconf/Makefile.am b/tools/nfsconf/Makefile.am
+index b3c1495f83cd..391df314b930 100644
+--- a/tools/nfsconf/Makefile.am
++++ b/tools/nfsconf/Makefile.am
+@@ -3,6 +3,8 @@
+ man8_MANS	= nfsconf.man
+ EXTRA_DIST	= $(man8_MANS)
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ sbin_PROGRAMS = nfsconf
+ 
+ nfsconf_SOURCES = nfsconfcli.c
+diff --git a/tools/nfsdclddb/Makefile.am b/tools/nfsdclddb/Makefile.am
+index 18263fb2be7f..39538755c6c3 100644
+--- a/tools/nfsdclddb/Makefile.am
++++ b/tools/nfsdclddb/Makefile.am
+@@ -8,6 +8,6 @@ EXTRA_DIST	= $(man8_MANS) $(PYTHON_FILES)
+ all-local: $(PYTHON_FILES)
+ 
+ install-data-hook:
+-	$(INSTALL) -m 755 nfsdclddb.py $(DESTDIR)$(sbindir)/nfsdclddb
++	$(INSTALL) -m 755 $(srcdir)/nfsdclddb.py $(DESTDIR)$(sbindir)/nfsdclddb
+ 
+ MAINTAINERCLEANFILES=Makefile.in
+diff --git a/tools/nfsdclnts/Makefile.am b/tools/nfsdclnts/Makefile.am
+index d513edb27c8f..ff49a230cbd3 100644
+--- a/tools/nfsdclnts/Makefile.am
++++ b/tools/nfsdclnts/Makefile.am
+@@ -8,6 +8,6 @@ EXTRA_DIST      = $(man8_MANS) $(PYTHON_FILES)
+ all-local: $(PYTHON_FILES)
+ 
+ install-data-hook:
+-	$(INSTALL) -m 755 nfsdclnts.py $(DESTDIR)$(sbindir)/nfsdclnts
++	$(INSTALL) -m 755 $(srcdir)/nfsdclnts.py $(DESTDIR)$(sbindir)/nfsdclnts
+ 
+ MAINTAINERCLEANFILES=Makefile.in
+diff --git a/tools/rpcdebug/Makefile.am b/tools/rpcdebug/Makefile.am
+index b0a3e1f9fe1a..e620ec912d0b 100644
+--- a/tools/rpcdebug/Makefile.am
++++ b/tools/rpcdebug/Makefile.am
+@@ -3,6 +3,8 @@
+ man8_MANS = rpcdebug.man
+ EXTRA_DIST = $(man8_MANS)
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ sbin_PROGRAMS = rpcdebug
+ rpcdebug_SOURCES = rpcdebug.c
+ 
+diff --git a/tools/rpcgen/Makefile.am b/tools/rpcgen/Makefile.am
+index 457cd5074a1b..cf345b88e555 100644
+--- a/tools/rpcgen/Makefile.am
++++ b/tools/rpcgen/Makefile.am
+@@ -10,4 +10,5 @@ noinst_HEADERS = proto.h rpc_parse.h rpc_scan.h rpc_util.h
+ rpcgen_SOURCES = rpc_clntout.c rpc_cout.c rpc_hout.c rpc_main.c \
+ 	rpc_parse.c rpc_sample.c rpc_scan.c rpc_svcout.c rpc_tblout.c \
+ 	rpc_util.c
++rpcgen_CPPFLAGS = -I$(top_srcdir)/support/include
+ rpcgen_LDADD = $(LIBINTL)
+diff --git a/tools/rpcgen/rpc_main.c b/tools/rpcgen/rpc_main.c
+index e97940b91356..4263a4074306 100644
+--- a/tools/rpcgen/rpc_main.c
++++ b/tools/rpcgen/rpc_main.c
+@@ -480,7 +480,7 @@ c_output (const char *infile, const char *define, int extend,
+   add_warning ();
+   if (infile && (include = extendfile (infile, ".h")))
+     {
+-      fprintf (fout, "#include \"%s\"\n", include);
++      fprintf (fout, "#include \"%s\"\n", basename(include));
+       free (include);
+       /* .h file already contains rpc/rpc.h */
+     }
+@@ -682,7 +682,7 @@ s_output (int argc, const char *argv[], const char *infile, const char *define,
+   add_warning ();
+   if (infile && (include = extendfile (infile, ".h")))
+     {
+-      fprintf (fout, "#include \"%s\"\n", include);
++      fprintf (fout, "#include \"%s\"\n", basename(include));
+       free (include);
+     }
+   else
+@@ -783,7 +783,7 @@ l_output (const char *infile, const char *define, int extend,
+     fprintf (fout, "#include <memory.h> /* for memset */\n");
+   if (infile && (include = extendfile (infile, ".h")))
+     {
+-      fprintf (fout, "#include \"%s\"\n", include);
++      fprintf (fout, "#include \"%s\"\n", basename(include));
+       free (include);
+     }
+   else
+diff --git a/utils/blkmapd/Makefile.am b/utils/blkmapd/Makefile.am
+index 56c8a4bb4ee2..6bd743f1ad7c 100644
+--- a/utils/blkmapd/Makefile.am
++++ b/utils/blkmapd/Makefile.am
+@@ -3,7 +3,7 @@
+ man8_MANS	= blkmapd.man
+ EXTRA_DIST = $(man8_MANS)
+ 
+-AM_CFLAGS	+= -D_LARGEFILE64_SOURCE
++AM_CFLAGS	+= -D_LARGEFILE64_SOURCE -I$(top_srcdir)/support/include
+ sbin_PROGRAMS	= blkmapd
+ 
+ blkmapd_SOURCES = \
+diff --git a/utils/exportfs/Makefile.am b/utils/exportfs/Makefile.am
+index 96524c729359..0abe1eb52e2d 100644
+--- a/utils/exportfs/Makefile.am
++++ b/utils/exportfs/Makefile.am
+@@ -4,6 +4,8 @@ man5_MANS	= exports.man
+ man7_MANS	= nfsd.man
+ man8_MANS	= exportfs.man
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ EXTRA_DIST	= $(man5_MANS) $(man7_MANS) $(man8_MANS)
+ sbin_PROGRAMS	= exportfs
+ exportfs_SOURCES = exportfs.c
+diff --git a/utils/gssd/Makefile.am b/utils/gssd/Makefile.am
+index 321046b9b9a6..94100a849cd3 100644
+--- a/utils/gssd/Makefile.am
++++ b/utils/gssd/Makefile.am
+@@ -5,7 +5,7 @@ if CONFIG_SVCGSS
+ man8_MANS	+= svcgssd.man
+ endif
+ 
+-AM_CPPFLAGS += -I ../../support/nfsidmap
++AM_CFLAGS = -I$(top_srcdir)/support/include -I$(top_srcdir)/support/nfsidmap
+ 
+ RPCPREFIX	= rpc.
+ KPREFIX		= @kprefix@
+diff --git a/utils/idmapd/Makefile.am b/utils/idmapd/Makefile.am
+index e09e8c53821d..dd3f454901d8 100644
+--- a/utils/idmapd/Makefile.am
++++ b/utils/idmapd/Makefile.am
+@@ -2,7 +2,7 @@
+ 
+ man8_MANS	= idmapd.man
+ 
+-AM_CPPFLAGS += -I ../../support/nfsidmap
++AM_CFLAGS = -I$(top_srcdir)/support/include -I$(top_srcdir)/support/nfsidmap
+ 
+ RPCPREFIX	= rpc.
+ KPREFIX		= @kprefix@
+diff --git a/utils/mount/Makefile.am b/utils/mount/Makefile.am
+index ad0be93b1def..29a32b490280 100644
+--- a/utils/mount/Makefile.am
++++ b/utils/mount/Makefile.am
+@@ -7,6 +7,8 @@ sbindir = /sbin
+ man8_MANS	= mount.nfs.man umount.nfs.man
+ man5_MANS	= nfs.man
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ sbin_PROGRAMS	= mount.nfs
+ EXTRA_DIST = nfsmount.conf $(man8_MANS) $(man5_MANS)
+ mount_common = error.c network.c token.c \
+diff --git a/utils/mountd/Makefile.am b/utils/mountd/Makefile.am
+index 18610f18238c..0d6bedff4714 100644
+--- a/utils/mountd/Makefile.am
++++ b/utils/mountd/Makefile.am
+@@ -8,6 +8,8 @@ endif
+ man8_MANS	= mountd.man
+ EXTRA_DIST	= $(man8_MANS)
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ RPCPREFIX	= rpc.
+ KPREFIX		= @kprefix@
+ sbin_PROGRAMS	= mountd
+diff --git a/utils/nfsd/Makefile.am b/utils/nfsd/Makefile.am
+index 8acc9a04a8c0..51925839b9e5 100644
+--- a/utils/nfsd/Makefile.am
++++ b/utils/nfsd/Makefile.am
+@@ -3,6 +3,8 @@
+ man8_MANS	= nfsd.man
+ EXTRA_DIST	= $(man8_MANS)
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ RPCPREFIX	= rpc.
+ KPREFIX		= @kprefix@
+ sbin_PROGRAMS	= nfsd
+diff --git a/utils/nfsdcld/Makefile.am b/utils/nfsdcld/Makefile.am
+index 273d64f1c5f0..8c49effc5072 100644
+--- a/utils/nfsdcld/Makefile.am
++++ b/utils/nfsdcld/Makefile.am
+@@ -3,7 +3,7 @@
+ man8_MANS	= nfsdcld.man
+ EXTRA_DIST	= $(man8_MANS)
+ 
+-AM_CFLAGS	+= -D_LARGEFILE64_SOURCE
++AM_CFLAGS	+= -D_LARGEFILE64_SOURCE -I$(top_srcdir)/support/include
+ sbin_PROGRAMS	= nfsdcld
+ 
+ nfsdcld_SOURCES = nfsdcld.c sqlite.c legacy.c
+diff --git a/utils/nfsdcltrack/Makefile.am b/utils/nfsdcltrack/Makefile.am
+index 2f7fe3de6922..84b11577cc76 100644
+--- a/utils/nfsdcltrack/Makefile.am
++++ b/utils/nfsdcltrack/Makefile.am
+@@ -7,7 +7,7 @@ sbindir = /sbin
+ man8_MANS	= nfsdcltrack.man
+ EXTRA_DIST	= $(man8_MANS)
+ 
+-AM_CFLAGS	+= -D_LARGEFILE64_SOURCE
++AM_CFLAGS	+= -D_LARGEFILE64_SOURCE -I$(top_srcdir)/support/include
+ sbin_PROGRAMS	= nfsdcltrack
+ 
+ noinst_HEADERS	= sqlite.h
+diff --git a/utils/nfsidmap/Makefile.am b/utils/nfsidmap/Makefile.am
+index e5d7d04c1799..ed81794b5bac 100644
+--- a/utils/nfsidmap/Makefile.am
++++ b/utils/nfsidmap/Makefile.am
+@@ -3,7 +3,7 @@
+ man8_MANS = nfsidmap.man
+ sbin_PROGRAMS	= nfsidmap
+ 
+-AM_CPPFLAGS += -I ../../support/nfsidmap
++AM_CFLAGS = -I$(top_srcdir)/support/include -I$(top_srcdir)/support/nfsidmap
+ 
+ nfsidmap_SOURCES = nfsidmap.c
+ nfsidmap_LDADD = -lkeyutils \
+diff --git a/utils/showmount/Makefile.am b/utils/showmount/Makefile.am
+index d0a16b2b048a..482fe1a33ca8 100644
+--- a/utils/showmount/Makefile.am
++++ b/utils/showmount/Makefile.am
+@@ -3,6 +3,8 @@
+ man8_MANS	= showmount.man
+ EXTRA_DIST	= $(man8_MANS)
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ sbin_PROGRAMS	= showmount
+ showmount_SOURCES = showmount.c
+ showmount_LDADD = ../../support/export/libexport.a \
+diff --git a/utils/statd/Makefile.am b/utils/statd/Makefile.am
+index 6facc15d856c..8ab8d8222a8a 100644
+--- a/utils/statd/Makefile.am
++++ b/utils/statd/Makefile.am
+@@ -2,6 +2,8 @@
+ 
+ man8_MANS = statd.man sm-notify.man
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ RPCPREFIX	= rpc.
+ KPREFIX		= @kprefix@
+ sbin_PROGRAMS	= statd sm-notify
+-- 
+2.27.0
+

@@ -1,13 +1,7 @@
-description: support programs for Network File Systems
-version: 2.4.1
-license: GPL-2.0
-
-files:
-  - download:
-      url: http://prdownloads.sourceforge.net/nfs/nfs-utils/nfs-utils-${version}.tar.bz2
-      sha1: ddc20bfc8546c08fc1ed00ab6f3da8033f349f63
+include: packages/fs/nfs-utils/package.include
 
 depends:
+  - build-tools/nfs-utils
   - libs/device-mapper
   - libs/keyutils
   - libs/libevent
