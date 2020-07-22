@@ -1,0 +1,10 @@
+description: Portable, high-level programming interface to various calling conventions
+version: 3.3
+license: MIT
+
+files:
+  - download:
+      url: ftp://sourceware.org/pub/libffi/libffi-${version}.tar.gz
+      sha1: 8df6cb570c8d6596a67d1c0773bf00650154f7aa
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

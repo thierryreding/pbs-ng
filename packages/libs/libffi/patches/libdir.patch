@@ -1,10 +1,10 @@
 diff --git a/Makefile.am b/Makefile.am
-index 0e4045100ada..309474c6280c 100644
+index 9a73b70d345b..cfae0cc8c220 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -104,7 +104,7 @@ FLAGS_TO_PASS = $(AM_MAKEFLAGS)
- 
- MAKEOVERRIDES=
+@@ -34,7 +34,7 @@ MAKEOVERRIDES=
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = libffi.pc
  
 -toolexeclib_LTLIBRARIES = libffi.la
 +lib_LTLIBRARIES = libffi.la
