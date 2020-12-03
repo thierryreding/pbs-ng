@@ -2,7 +2,7 @@ diff --git a/config/ltmain.sh b/config/ltmain.sh
 index 5eca4aeaae90..fdffdbe07fed 100644
 --- a/config/ltmain.sh
 +++ b/config/ltmain.sh
-@@ -8460,7 +8460,7 @@ func_mode_link ()
+@@ -8462,7 +8462,7 @@ func_mode_link ()
  	      fi
  	    else
  	      # We cannot seem to hardcode it, guess we'll fake it.

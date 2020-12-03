@@ -1,5 +1,5 @@
 description: Portable and efficient C programming interface (API) to determine the call-chain of a program
-version: 1.4.0
+version: 1.5.0
 license: GPL-2.0
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: http://download.savannah.nongnu.org/releases/libunwind/libunwind-${version}.tar.gz
-      sha1: 6bb7726f9f7440319bf8efc55e32281e2e39e7f4
+      sha1: 13a77366ca15155b4f0c3535ce235164d42dca27
 
 packages:
   libunwind:
