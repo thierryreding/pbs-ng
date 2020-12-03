@@ -1,5 +1,5 @@
 description: XML-XCB protocol descriptions
-version: 1.13
+version: 1.14.1
 license: custom
 
 depends:
@@ -7,8 +7,8 @@ depends:
 
 files:
   - download:
-      url: http://xcb.freedesktop.org/dist/xcb-proto-${version}.tar.bz2
-      sha1: f7fa35ab59af18cecadbe83fe705281dcfd82ffd
+      url: http://xorg.freedesktop.org/releases/individual/proto/xcb-proto-${version}.tar.xz
+      sha1: 836d5b2dd00ff21bd038e92764fda9a256a1b022
 
 packages:
   xcbproto-dev:
