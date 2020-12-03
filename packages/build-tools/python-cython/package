@@ -1,0 +1,13 @@
+description: compiler for writing C extensions for the Python language
+version: 0.29.21
+license: Apache-2.0
+
+depends:
+  - build-tools/python
+
+files:
+  - download:
+      url: https://files.pythonhosted.org/packages/6c/9f/f501ba9d178aeb1f5bf7da1ad5619b207c90ac235d9859961c11829d0160/Cython-${version}.tar.gz
+      sha1: 3aafce4489a7bc7a48c843cdfb8dac4677fdac50
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
