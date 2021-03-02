@@ -1,13 +1,14 @@
 description: array processing for numbers, strings, records, and objects
-version: 1.16.1
+version: 1.19.0
 license: BSD
 
 depends:
   - build-tools/python
+  - build-tools/python-cython
 
 files:
   - download:
-      url: https://files.pythonhosted.org/packages/2b/26/07472b0de91851b6656cbc86e2f0d5d3a3128e7580f23295ef58b6862d6c/numpy-${version}.zip
-      sha1: 49787ce8e31aff103a7b182749abc3c0249b7f72
+      url: https://github.com/numpy/numpy/archive/v${version}.tar.gz
+      sha1: a6c099c0929e0b437a72fd60aad76d23061087c6
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

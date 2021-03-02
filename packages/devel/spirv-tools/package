@@ -1,14 +1,16 @@
 description: SPIR-V Tools
-version: git
+version: 2020.6
 license: Apache-2.0
 
 depends:
+  - build-tools/cmake
   - devel/glibc
   - devel/spirv-headers
 
 files:
-  - source:
-      url: git+https://github.com/KhronosGroup/SPIRV-Tools.git
+  - download:
+      url: https://github.com/KhronosGroup/SPIRV-Tools/archive/v${version}.tar.gz
+      sha1: f55f73dbab738846e0242af9b495ad79f9790f67
 
 packages:
   spirv-tools:

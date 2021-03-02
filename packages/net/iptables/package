@@ -1,11 +1,11 @@
 description: Linux kernel packet control tool
-version: 1.8.3
+version: 1.8.6
 license: GPL-2.0
 
 files:
   - download:
       url: http://www.netfilter.org/projects/iptables/files/iptables-${version}.tar.bz2
-      sha1: 6df99e90cb4d59032ab2050ebb426fe065249bd3
+      sha1: 95c866895a9b11387c2a633561c905148c9d0276
 
 depends:
   - devel/glibc

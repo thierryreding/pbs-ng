@@ -1,5 +1,5 @@
 description: GNU readline library
-version: 8.0
+version: 8.1
 license: GPL-3.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/readline/readline-${version}.tar.gz
-      sha1: d58041c2143595dc001d2777ae9a200be30198b0
+      sha1: 48c5e0c3a212449e206e21ba82856accac842c6f
 
 packages:
   readline:

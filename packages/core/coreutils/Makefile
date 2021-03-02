@@ -2,6 +2,7 @@ include $(TOP_SRCDIR)/packages/autotools.mk
 
 $(srcdir)/stamp-patch: | $(srcdir)
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/recursive-variable.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/getdents.patch
 	cd $(srcdir) && autoreconf --force --install
 	touch $@
 

@@ -1,11 +1,11 @@
 description: A tool to help find memory-management problems in programs
-version: 3.15.0
+version: 3.16.1
 license: GPL-2.0
 
 files:
   - download:
       url: ftp://sourceware.org/pub/valgrind/valgrind-${version}.tar.bz2
-      sha1: 4cc014e2390c4bcecb11aa00b37aa52d352db97f
+      sha1: 192bfe53802abb7f23edbb8aad61158a60c34f8a
 
 depends:
   - devel/glibc

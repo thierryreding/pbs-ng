@@ -1,5 +1,5 @@
 description: X.Org X server
-version: 1.20.5
+version: 1.20.10
 license: custom
 
 depends:
@@ -25,7 +25,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/xserver/xorg-server-${version}.tar.bz2
-      sha1: fea6fd34c7f48b3c69fbecd8fb294eaa1498e69c
+      sha1: e698b30adb781dfe0e7bee0aa489ea9df404a5db
 
 packages:
   xorg-server:

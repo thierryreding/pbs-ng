@@ -1,5 +1,6 @@
 ARCH = $(arch)
 ARCH_LONG = $(arch.generation)
+ENDIAN = little
 
 VENDOR = unknown
 OS = linux

@@ -1,0 +1,18 @@
+description: Watchdog daemon
+version: 5.15
+license: GPL-3.0
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://prdownloads.sourceforge.net/watchdog/${version}/watchdog-${version}.tar.gz
+      sha1:
+
+packages:
+  watchdog:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

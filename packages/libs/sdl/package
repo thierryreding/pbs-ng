@@ -1,15 +1,16 @@
 description: Simple DirectMedia Layer
-version: 2.0.10
+version: 2.0.12
 license: MIT
 
 depends:
+  - build-tools/cmake
   - devel/glibc
   - libs/mesa
 
 files:
   - download:
       url: https://www.libsdl.org/release/SDL2-${version}.tar.gz
-      sha1: fb31312ea1d4b45db839796ae2336dfe3d5884e5
+      sha1: e8ba91bf5eb438dbcf1fedf0530a1bcbe30d3bb6
 
 packages:
   libsdl:

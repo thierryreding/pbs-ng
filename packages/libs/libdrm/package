@@ -1,5 +1,5 @@
 description: Userspace interface to kernel DRM services
-version: 2.4.100
+version: 2.4.104
 license: custom
 
 depends:
@@ -10,8 +10,8 @@ depends:
 
 files:
   - download:
-      url: http://dri.freedesktop.org/libdrm/libdrm-${version}.tar.bz2
-      sha1: 9f526909aba08b5658cfba3f7fde9385cad6f3b5
+      url: http://dri.freedesktop.org/libdrm/libdrm-${version}.tar.xz
+      sha1: c96d3c5236195cd4c0621ef843c30b959b328b75
 
 options:
   kms:
@@ -70,8 +70,11 @@ packages:
   libdrm-utils:
     files:
       - /usr/bin/kms-*
+      - /usr/bin/kmsctl
+      - /usr/bin/kmstest
       - /usr/bin/modeprint
       - /usr/bin/modetest
+      - /usr/bin/nouveau-*
       - /usr/bin/proptest
       - /usr/bin/tegra-*
       - /usr/bin/vbltest

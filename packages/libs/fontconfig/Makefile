@@ -1,4 +1,7 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
+include $(TOP_SRCDIR)/packages/meson.mk
 
-conf-args += \
-	--with-sysroot=$(SYSROOT)
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/destdir-fix.patch
+	touch $@
+
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch

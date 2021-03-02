@@ -1,17 +1,20 @@
 description: SPIR-V Headers
-version: git
+version: 1.5.4.raytracing.fixed
 license: custom
 
 depends:
+  - build-tools/cmake
   - devel/glibc
 
 files:
-  - source:
-      url: git+https://github.com/KhronosGroup/SPIRV-Headers.git
+  - download:
+      url: https://github.com/KhronosGroup/SPIRV-Headers/archive/${version}.tar.gz
+      sha1: 49657f53dd391ab9dad0cb1ce47001d673a2c7ab
 
 packages:
   spirv-headers-dev:
     files:
       - /usr/include
+      - /usr/lib/cmake
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

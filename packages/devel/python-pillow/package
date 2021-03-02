@@ -1,0 +1,20 @@
+description: Python Imaging Library (PIL) fork
+version: 7.2.0
+license: BSD
+
+files:
+  - download:
+      url: https://files.pythonhosted.org/packages/3e/02/b09732ca4b14405ff159c470a612979acfc6e8645dc32f83ea0129709f7a/Pillow-${version}.tar.gz
+      sha1: aa3ea4f9df720f210f9f7c4dde75b247bf76ef61
+
+depends:
+  - build-tools/python-crossenv
+  - build-tools/python-setuptools
+  - devel/python
+
+packages:
+  python-pillow:
+    files:
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,5 +1,5 @@
 description: finger tracking and seamless MT protocol handling library
-version: 1.1.5
+version: 1.1.6
 license: MIT
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://bitmath.org/code/mtdev/mtdev-${version}.tar.bz2
-      sha1: 15267fbde0ed466f8474db1bbdf2d6989846f415
+      sha1: 1459f8b977b615c8e569b53ba119c980af2fa688
 
 packages:
   libmtdev:

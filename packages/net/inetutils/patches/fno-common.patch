@@ -1,0 +1,38 @@
+diff --git a/ftpd/extern.h b/ftpd/extern.h
+index ab33cf3889e1..91dbbeea45b2 100644
+--- a/ftpd/extern.h
++++ b/ftpd/extern.h
+@@ -90,7 +90,7 @@ extern void user (const char *);
+ extern char *sgetsave (const char *);
+ 
+ /* Exported from ftpd.c.  */
+-jmp_buf errcatch;
++extern jmp_buf errcatch;
+ extern struct sockaddr_storage data_dest;
+ extern socklen_t data_dest_len;
+ extern struct sockaddr_storage his_addr;
+diff --git a/ftpd/ftpd.c b/ftpd/ftpd.c
+index 5db88d0b8ab4..dae15316a5a4 100644
+--- a/ftpd/ftpd.c
++++ b/ftpd/ftpd.c
+@@ -123,6 +123,7 @@ extern int fclose (FILE *);
+ #endif
+ 
+ /* Exported to ftpcmd.h.  */
++jmp_buf errcatch;
+ struct sockaddr_storage data_dest;	/* Data port.  */
+ socklen_t data_dest_len;
+ struct sockaddr_storage his_addr;	/* Peer address.  */
+diff --git a/telnetd/utility.c b/telnetd/utility.c
+index e7ffb8edab18..46bf91e48820 100644
+--- a/telnetd/utility.c
++++ b/telnetd/utility.c
+@@ -63,7 +63,7 @@ static int ncc;
+ static char ptyibuf[BUFSIZ], *ptyip;
+ static int pcc;
+ 
+-int not42;
++extern int not42;
+ 
+ static int
+ readstream (int p, char *ibuf, int bufsize)

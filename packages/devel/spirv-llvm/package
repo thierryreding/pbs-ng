@@ -3,11 +3,13 @@ version: 10.0.0
 license: custom
 
 depends:
+  - build-tools/cmake
   - devel/llvm
 
 files:
-  - source:
-      url: git+https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/v${version}/spirv-llvm-translator-${version}.tar.gz
+  - download:
+      url: https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/v${version}/spirv-llvm-translator-${version}.tar.gz
+      sha1: 5cf0641ec14cf49cd440d2364d1de666ba62f789
 
 packages:
   spirv-llvm:

@@ -1,25 +1,22 @@
 diff --git a/Make.Rules b/Make.Rules
-index 8347b2699082..271bcbc18ae7 100644
+index cc6f95b6e5b9..d19fa811fe70 100644
 --- a/Make.Rules
 +++ b/Make.Rules
-@@ -49,9 +49,9 @@ KERNEL_HEADERS := $(topdir)/libcap/include/uapi
- IPATH += -fPIC -I$(KERNEL_HEADERS) -I$(topdir)/libcap/include
- 
- CC := gcc
--CFLAGS := -O2 -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
-+CFLAGS := -O2 -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 $(EXTRA_CFLAGS)
- BUILD_CC := $(CC)
--BUILD_CFLAGS := $(CFLAGS) $(IPATH)
-+BUILD_CFLAGS := $(IPATH)
- AR := ar
- RANLIB := ranlib
- DEBUG = -g #-DDEBUG
-@@ -60,7 +60,7 @@ WARNINGS=-Wall -Wwrite-strings \
+@@ -57,7 +57,7 @@ IPATH += -fPIC -I$(KERNEL_HEADERS) -I$(topdir)/libcap/include
+ CC := $(CROSS_COMPILE)gcc
+ DEFINES := -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
+ COPTS ?= -O2
+-CFLAGS ?= $(COPTS) $(DEFINES)
++CFLAGS ?= $(COPTS) $(DEFINES) $(EXTRA_CFLAGS)
+ BUILD_CC ?= $(CC)
+ BUILD_COPTS ?= -O2
+ BUILD_CFLAGS ?= $(BUILD_COPTS) $(DEFINES) $(IPATH)
+@@ -69,7 +69,7 @@ WARNINGS=-Wall -Wwrite-strings \
          -Wstrict-prototypes -Wmissing-prototypes \
          -Wnested-externs -Winline -Wshadow
  LD=$(CC) -Wl,-x -shared
--LDFLAGS := #-g
-+LDFLAGS := $(EXTRA_LDFLAGS) #-g
- BUILD_GPERF := $(shell which gperf >/dev/null 2>/dev/null && echo yes)
- 
- SYSTEM_HEADERS = /usr/include
+-LDFLAGS ?= #-g
++LDFLAGS ?= $(EXTRA_LDFLAGS) #-g
+ LIBCAPLIB := -L$(topdir)/libcap -lcap
+ PSXLINKFLAGS :=  -lpthread -Wl,-wrap,pthread_create
+ LIBPSXLIB := -L$(topdir)/libcap -lpsx $(PSXLINKFLAGS)

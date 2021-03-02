@@ -1,11 +1,11 @@
 description: a library that implements Perl 5-style regular expressions
-version: 8.43
+version: 8.44
 license: BSD
 
 files:
   - download:
-      url: ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${version}.tar.bz2
-      sha1: 0d4585ee6426ab0db9c0c8f1c8c6da968170174d
+      url: https://ftp.pcre.org/pub/pcre/pcre-${version}.tar.bz2
+      sha1: 8179b083053fce9b4a766513fa1f14807aabee42
 
 depends:
   - devel/glibc

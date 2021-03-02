@@ -1,0 +1,14 @@
+description: A cross-compiling tool for Python extension modules
+version: 0.7
+license: MIT
+
+files:
+  - download:
+      url: https://files.pythonhosted.org/packages/3b/e3/c7ef17e81e7a48369e35398cd77878be8d6692fc5888d340acea633f8d65/crossenv-${version}.tar.gz
+      sha1: 8840a449773a989a1120240f8dd1169f851fafc3
+
+depends:
+  - build-tools/python
+  - devel/python
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

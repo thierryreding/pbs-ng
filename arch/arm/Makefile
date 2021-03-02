@@ -8,10 +8,12 @@ endif
 
 ifeq ($(arch.endian),little)
   ARCH_LONG := $(ARCH_LONG)l
+  ENDIAN := little
 endif
 
 ifeq ($(arch.endian),big)
   ARCH_LONG := $(ARCH_LONG)b
+  ENDIAN := big
 endif
 
 ifeq ($(arch.abi),eabi)

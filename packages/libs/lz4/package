@@ -1,0 +1,25 @@
+description: extremely fast compression algorithm
+version: 1.9.3
+license: BSD, GPL-2.0-only
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/lz4/lz4/archive/v${version}.tar.gz
+      sha1: 5a19554ef404a609123b756ddcbbb677df838f05
+
+packages:
+  lz4:
+    files:
+      - /usr/lib/*.so.*
+
+  lz4-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,10 +1,10 @@
 description: X.Org autotools macros
-version: 1.19.2
+version: 1.19.3
 license: custom
 
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/util/util-macros-${version}.tar.bz2
-      sha1: e8b3a6f2bfde22440fca0974da53da18821a4ee6
+      sha1: 4097f75e327b9579d1bd657fa8b01b55238ad8f5
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,0 +1,18 @@
+diff --git a/conf.d/link_confs.py b/conf.d/link_confs.py
+index 0c42efb57a8c..faabdd6b0251 100644
+--- a/conf.d/link_confs.py
++++ b/conf.d/link_confs.py
+@@ -11,7 +11,12 @@ if __name__=='__main__':
+     parser.add_argument('links', nargs='+')
+     args = parser.parse_args()
+ 
+-    confpath = os.path.join(os.environ['MESON_INSTALL_DESTDIR_PREFIX'], args.confpath)
++    destdir = os.environ.get('DESTDIR', '')
++
++    if not os.path.isabs(args.confpath):
++        confpath = os.path.join(destdir, args.confpath)
++    else:
++        confpath = destdir + args.confpath
+ 
+     if not os.path.exists(confpath):
+         os.makedirs(confpath)

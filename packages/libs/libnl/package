@@ -1,0 +1,37 @@
+description: Library for applications dealing with netlink sockets
+version: 3.5.0
+license: GPL
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/thom311/libnl/archive/libnl${major}_${minor}_${micro}.tar.gz
+      sha1: 153fa111f70b73199d014b03c9a5c71a4211a970
+
+packages:
+  libnl:
+    files:
+      - /usr/lib/*.so.*
+      - /usr/lib/libnl/cli/cls/*.so
+      - /usr/lib/libnl/cli/qdisc/*.so
+
+  libnl-utils:
+    files:
+      - /usr/bin
+
+  libnl-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/libnl/cli/cls/*.a
+      - /usr/lib/libnl/cli/qdisc/*.a
+      - /usr/lib/pkgconfig
+
+  libnl-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,11 +1,11 @@
 description: PCI bus configuraiton space access library and tools
-version: 3.6.2
+version: 3.7.0
 license: GPL-2.0
 
 files:
   - download:
       url: https://www.kernel.org/pub/software/utils/pciutils/pciutils-${version}.tar.xz
-      sha1: 0d75516406916cbde1e19040c05751bba2ec7833
+      sha1: f7d6860ffe405b4ebb23b013866a64c9f80c2fa3
 
 depends:
   - devel/glibc

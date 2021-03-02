@@ -4,6 +4,7 @@ license: MIT
 
 depends:
   - build-tools/clang
+  - build-tools/cmake
   - devel/glibc
 
 files:

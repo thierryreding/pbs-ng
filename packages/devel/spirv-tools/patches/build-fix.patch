@@ -1,0 +1,14 @@
+diff --git a/source/operand.cpp b/source/operand.cpp
+index d4b64a8b827d..412bfd39284c 100644
+--- a/source/operand.cpp
++++ b/source/operand.cpp
+@@ -32,8 +32,8 @@
+ // TODO(dneto): Make one set of tables, but with version tags on a
+ // per-item basis. https://github.com/KhronosGroup/SPIRV-Tools/issues/1195
+ 
+-#include "operand.kinds-unified1.inc"
+ #include "spirv-tools/libspirv.h"
++#include "operand.kinds-unified1.inc"
+ 
+ static const spv_operand_table_t kOperandTable = {
+     ARRAY_SIZE(pygen_variable_OperandInfoTable),

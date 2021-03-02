@@ -3,6 +3,7 @@ version: git
 license: custom
 
 depends:
+  - build-tools/cmake
   - devel/spirv-llvm
   - libs/libclcxx
   - libs/mesa

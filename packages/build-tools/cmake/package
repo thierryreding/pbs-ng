@@ -1,10 +1,10 @@
 description: A cross-platform open-source make system
-version: 3.15.4
+version: 3.19.5
 license: custom
 
 files:
   - download:
       url: https://cmake.org/files/v${major}.${minor}/cmake-${version}.tar.gz
-      sha1: 0bef17d6067df2672edf63d20c8ec9289a82648d
+      sha1: b8b9b9ccd54ceb35dd0e9a4348696d8a127fcd88
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

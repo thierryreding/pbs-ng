@@ -1,0 +1,21 @@
+description: NVIDIA Jetson L4T support files
+version: 1.0
+licens: custom
+
+depends:
+  - base/filesystem
+
+files:
+  - download:
+      url: https://nvidia.com/nvidia-l4t-jetson-${version}.tar.bz2
+      sha1: 2d075a0e0c340eb1935a454237144b393025f7dd
+
+packages:
+  nvidia-l4t-jetson:
+    files:
+      - /etc
+      - /usr/lib
+      - /usr/lib/xorg
+      - /usr/local/cuda
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

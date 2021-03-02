@@ -1,5 +1,5 @@
 description: libkmod
-version: 26
+version: 28
 license: GPL-2.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
 - download:
     url: https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-${version}.tar.xz
-    sha1: 275916e64eb5a94276680bc356c5c6a8d484cc98
+    sha1: 0acec2b6aea3e6eb71f0b549b0ff0abcac5da004
 
 packages:
   kmod:

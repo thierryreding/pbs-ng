@@ -1,5 +1,5 @@
 description: system and service manager
-version: 243
+version: 247
 license: GPL-2.0 LGPL-2.1 MIT
 
 depends:
@@ -13,11 +13,12 @@ depends:
   - libs/libcap
   - libs/libgcrypt
   - libs/xz
+  - libs/zlib
 
 files:
   - download:
       url: https://github.com/systemd/systemd/archive/v${version}.tar.gz
-      sha1: 096305e5cff9a4889e2692c2ba39aa218fc7f50a
+      sha1: f2617fc44024f51c011e8670dcfa356a2712d9c8
 
 packages:
   systemd:

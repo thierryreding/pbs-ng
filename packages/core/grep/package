@@ -1,11 +1,11 @@
 description: A string search utility
-version: 3.3
+version: 3.6
 license: GPL-3.0
 
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/grep/grep-${version}.tar.xz
-      sha1: e0befe21e7d9caa8e5e98385c96355d890f83123
+      sha1: f7e03879b0348e7a00c28f2f50194792a8aace23
 
 packages:
   grep:

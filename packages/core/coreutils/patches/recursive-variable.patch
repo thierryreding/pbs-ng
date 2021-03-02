@@ -2,7 +2,7 @@ diff --git a/src/local.mk b/src/local.mk
 index 36dfa4e3023f..c5898cca1c03 100644
 --- a/src/local.mk
 +++ b/src/local.mk
-@@ -665,4 +665,4 @@ cu_install_program = @INSTALL_PROGRAM@
+@@ -659,4 +659,4 @@ cu_install_program = @INSTALL_PROGRAM@
  else
  cu_install_program = src/ginstall
  endif

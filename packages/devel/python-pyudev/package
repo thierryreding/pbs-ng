@@ -10,6 +10,7 @@ files:
 depends:
   - build-tools/python-setuptools
   - devel/python
+  - devel/python-six
 
 packages:
   python-pyudev:

@@ -1,0 +1,10 @@
+description: Python 2 and 3 compatibility utilities
+version: 1.15.0
+license: MIT
+
+files:
+  - download:
+      url: https://files.pythonhosted.org/packages/6b/34/415834bfdafca3c5f451532e8a8d9ba89a21c9743a0c59fbd0205c7f9426/six-${version}.tar.gz
+      sha1: a785c20658b3676333c749436f088394c12b0c26
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

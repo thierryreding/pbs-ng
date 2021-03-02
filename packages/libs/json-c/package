@@ -1,14 +1,15 @@
 description: A JSON implementation in C
-version: 0.13.1-20180305
+version: 0.15-20200726
 license: LGPL-2.1 MPL-1.1
 
 depends:
+  - build-tools/cmake
   - devel/glibc
 
 files:
   - download:
       url: https://github.com/json-c/json-c/archive/json-c-${version}.tar.gz
-      sha1: d4c667ab94e7051b1e78aa727f0d937caba971e9
+      sha1: dd6473818fe66f16e747ae0df626a2e1559343b9
 
 packages:
   libjson-c-dev:

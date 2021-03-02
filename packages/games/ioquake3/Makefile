@@ -3,6 +3,10 @@ include $(TOP_SRCDIR)/packages/common.mk
 $(builddir):
 	mkdir -p $@
 
+env = env -i PATH='$(PATH)' \
+	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
+	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)'
+
 common-args += \
 	COPYDIR='$(DESTDIR)$(PREFIX)/lib/ioquake3' \
 	DEFAULT_BASEDIR='$(PREFIX)/lib/ioquake3' \
@@ -14,9 +18,12 @@ common-args += \
 	ARCH=$(ARCH) \
 	NO_STRIP=1
 
+#	PKG_CONFIG_LIBDIR='$(PKG_CONFIG_LIBDIR)' \
+
 build-args += \
 	$(common-args) \
 	CC='$(CROSS_COMPILE)gcc' \
+	PKG_CONFIG='pkg-config' \
 	CFLAGS='$(CFLAGS)' \
 	LDFLAGS='$(LDFLAGS)' \
 	-j $(JOBS)

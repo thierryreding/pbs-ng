@@ -1,11 +1,11 @@
 description: library for handling OpenGL function pointer management
-version: 1.5.3
+version: 1.5.5
 license: MIT
 
 files:
   - download:
       url: https://github.com/anholt/libepoxy/releases/download/${version}/libepoxy-${version}.tar.xz
-      sha1: e00d0bf270a99ded2a2f4abe7874b765cd338d1f
+      sha1: 4036d242ad89b8b999b820d2c5093a380fe99d0b
 
 depends:
   - libs/mesa

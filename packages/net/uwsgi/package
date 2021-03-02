@@ -1,5 +1,5 @@
 description: A fast, self-healing and developer/sysadmin-friendly application container server coded in pure C
-version: 2.0.18
+version: 2.0.19.1
 license: GPL-2.0
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: https://projects.unbit.it/downloads/uwsgi-${version}.tar.gz
-      sha1: e7e402dd5b5c68a995585284c4529da9a686a0a9
+      sha1: 55997102649b74d1657c3f69fbbd19d78905be07
 
 packages:
   uwsgi:

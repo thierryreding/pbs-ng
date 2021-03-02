@@ -1,14 +1,15 @@
 description: JPEG codec library
-version: 2.0.2
+version: 2.0.6
 license: custom
 
 depends:
+  - build-tools/cmake
   - devel/glibc
 
 files:
   - download:
       url: http://prdownloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-${version}.tar.gz
-      sha1: 1cff52d50b81755d0bdcf9055eb22157f39a1695
+      sha1: 5406c7676d7df89fb4da791ad5af51202910fb25
 
 packages:
   libjpeg:

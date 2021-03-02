@@ -3,14 +3,14 @@ index 74c570a..59c8405 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -2,7 +2,7 @@
- # (c) 1998--2016 Martin Mares <mj@ucw.cz>
+ # (c) 1998--2020 Martin Mares <mj@ucw.cz>
  
  OPT=-O2
 -CFLAGS=$(OPT) -Wall -W -Wno-parentheses -Wstrict-prototypes -Wmissing-prototypes
 +CFLAGS=$(OPT) -Wall -W -Wno-parentheses -Wstrict-prototypes -Wmissing-prototypes $(EXTRA_CFLAGS)
  
- VERSION=3.5.2
- DATE=2016-10-03
+ VERSION=3.6.4
+ DATE=2020-01-25
 @@ -44,7 +44,6 @@ PKGCFDIR=$(LIBDIR)/pkgconfig
  # Commands
  INSTALL=install
@@ -19,16 +19,16 @@ index 74c570a..59c8405 100644
  CC=$(CROSS_COMPILE)gcc
  AR=$(CROSS_COMPILE)ar
  RANLIB=$(CROSS_COMPILE)ranlib
-@@ -111,7 +110,7 @@ distclean: clean
+@@ -119,7 +118,7 @@ distclean: clean
  install: all
  # -c is ignored on Linux, but required on FreeBSD
- 	$(DIRINSTALL) -m 755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(IDSDIR) $(DESTDIR)$(MANDIR)/man8 $(DESTDIR)$(MANDIR)/man7
+ 	$(DIRINSTALL) -m 755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(IDSDIR) $(DESTDIR)$(MANDIR)/man8 $(DESTDIR)$(MANDIR)/man7 $(DESTDIR)/$(MANDIR)/man5
 -	$(INSTALL) -c -m 755 $(STRIP) lspci setpci $(DESTDIR)$(SBINDIR)
 +	$(INSTALL) -c -m 755 lspci setpci $(DESTDIR)$(SBINDIR)
  	$(INSTALL) -c -m 755 update-pciids $(DESTDIR)$(SBINDIR)
  	$(INSTALL) -c -m 644 $(PCI_IDS) $(DESTDIR)$(IDSDIR)
  	$(INSTALL) -c -m 644 lspci.8 setpci.8 update-pciids.8 $(DESTDIR)$(MANDIR)/man8
-@@ -130,7 +129,7 @@ endif
+@@ -139,7 +138,7 @@ endif
  
  install-pcilib: lib/$(PCILIB)
  	$(DIRINSTALL) -m 755 $(DESTDIR)$(LIBDIR)

@@ -1,11 +1,11 @@
 description: A useful diagnostic, instructional and debugging tool
-version: 5.3
+version: 5.10
 license: custom
 
 files:
   - download:
       url: https://strace.io/files/${version}/strace-${version}.tar.xz
-      sha1: 86810613dd9ce1b2ccccb09a01074a74e098f0a5
+      sha1: 8b5ced312f379806406a0ee6551fbe373c55e738
 
 packages:
   strace:

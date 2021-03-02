@@ -1,5 +1,5 @@
 description: OpenGL Utility Toolkit
-version: 3.0.0
+version: 3.2.1
 license: MIT
 
 depends:
@@ -11,7 +11,7 @@ depends:
 files:
   - download:
       url: http://prdownloads.sourceforge.net/freeglut/freeglut-${version}.tar.gz
-      sha1: fca52242f9344627a30f11487ee42002e6b0dacd
+      sha1: 7a62e0d2caad92ff745bc5037592b2753f0b2f20
 
 packages:
   libglut:

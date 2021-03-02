@@ -1,4 +1,5 @@
 ARCH = arm64
+ENDIAN = little
 VENDOR = unknown
 OS = linux
 LIBC = gnu

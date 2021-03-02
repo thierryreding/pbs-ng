@@ -1,10 +1,10 @@
 description: Small build system with a focus on speed
-version: 1.9.0
+version: 1.10.2
 license: Apache-2.0
 
 files:
   - download:
       url: https://github.com/ninja-build/ninja/archive/v${version}.tar.gz
-      sha1: d130e8cb7ed883125af978ec165199065e830d6a
+      sha1: 8d2e8c1c070c27fb9dc46b4a6345bbb1de7ccbaf
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

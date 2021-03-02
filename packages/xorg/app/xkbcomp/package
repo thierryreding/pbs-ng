@@ -1,5 +1,5 @@
 description: X Keyboard description compiler
-version: 1.4.2
+version: 1.4.4
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/app/xkbcomp-${version}.tar.bz2
-      sha1: 9a39cf7a562c152465e04fc7cf1002c59f883870
+      sha1: 9c173c9153d623de4503ddba99ccff91a4fdfc59
 
 packages:
   xkbcomp:

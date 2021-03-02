@@ -1,5 +1,5 @@
 description: An open-source implementation of the Secure Sockets Layer (SSL) and Transport Layer Security (TLS) protocols
-version: 3.0.2
+version: 3.3.1
 license: Apache-1.0, BSD-4-clause, ISC
 
 depends:
@@ -11,7 +11,7 @@ provides:
 files:
   - download:
       url: https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${version}.tar.gz
-      sha1: 3d025eb32b0304b5b1c317bb59add037680e3298
+      sha1: b86b9f566efe3b3a43cf4796af1ab719b4d0f63f
 
 packages:
   libressl:

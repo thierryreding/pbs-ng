@@ -1,0 +1,18 @@
+description: OpenGL bindings for Python
+version: 3.1.5
+license: BSD
+
+files:
+  - download:
+      url: https://files.pythonhosted.org/packages/b8/73/31c8177f3d236e9a5424f7267659c70ccea604dab0585bfcd55828397746/PyOpenGL-${version}.tar.gz
+      sha1: 16b2ca0502e2455d8212a5a8a5c901ae679dcd87
+
+depends:
+  - devel/python
+
+packages:
+  python-opengl:
+    files:
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
