@@ -1,0 +1,37 @@
+description: fast real-time compression algorithm
+version: 1.4.8
+license: BSD
+
+depends:
+  - devel/glibc
+  - libs/bzip2
+  - libs/lz4
+  - libs/zlib
+
+files:
+  - download:
+      url: https://github.com/facebook/zstd/archive/v${version}.tar.gz
+      sha1: e3027d788b964429c773fab05e000061dc6eb3f6
+
+packages:
+  zstd:
+    files:
+      - /usr/bin
+
+  zstd-man:
+    files:
+      - /usr/share/man
+
+  libzstd:
+    files:
+      - /usr/lib/*.so.*
+
+  libzstd-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
