@@ -1,0 +1,29 @@
+description: Tag Image File Format library
+version: 4.2.0
+license: custom
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: http://download.osgeo.org/libtiff/tiff-${version}.tar.gz
+      sha1: 400ff865beb34499633dd1095fe438995e6da707
+
+packages:
+  libtiff:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+
+  libtiff-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libtiff-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
