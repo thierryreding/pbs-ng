@@ -1,0 +1,29 @@
+package: an image loading library
+version: 2.42.6
+license: LGPL
+
+files:
+  - download:
+      url: https://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/${major}.${minor}/gdk-pixbuf-${version}.tar.xz
+      sha1: 320ed10a4cb74a0770de91a9e5741767ebdef2bf
+
+depends:
+  - libs/glib
+  - libs/libjpeg-turbo
+  - libs/libpng
+  - libs/libtiff
+  - libs/shared-mime-info
+
+packages:
+  gtk3:
+    files:
+      - /usr/lib/*.so.*
+
+  gtk3-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
