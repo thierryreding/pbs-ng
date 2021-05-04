@@ -1,0 +1,30 @@
+description: loads and enumerates PKCS#11 modules
+version: 0.23.22
+license: BSD
+
+depends:
+  - core/coreutils
+  - core/systemd
+
+files:
+  - download:
+      url: https://github.com/p11-glue/p11-kit/releases/download/${version}/p11-kit-${version}.tar.xz
+      sha1: 339e5163ed50a9984a74739b9207ea8cd77fa7e2
+
+packages:
+  p11-kit:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+      - /usr/lib/p11-kit
+      - /usr/lib/pkcs11
+      - /usr/lib/systemd
+
+  p11kit-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
