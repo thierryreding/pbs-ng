@@ -1,0 +1,41 @@
+package: library providing a secure layer over a reliable transport layer
+version: 3.7.1
+license: GPL-3.0, LGPL-2.1
+
+files:
+  - download:
+      url: https://www.gnupg.org/ftp/gcrypt/gnutls/v${major}.${minor}/gnutls-${version}.tar.xz
+      sha1: 5de5d25534ee5910ea9ee6aaeeb6af1af4350c1e
+
+depends:
+  - libs/libtasn1
+  - libs/nettle
+  - libs/p11-kit
+
+packages:
+  gnutls:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+
+  gnutls-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  gnutls-doc:
+    files:
+      - /usr/share/doc
+      - /usr/share/info
+
+  gnutls-locale:
+    files:
+      - /usr/share/locale
+
+  gnutls-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
