@@ -1,0 +1,25 @@
+description: a YAML parser and emitter in C++
+version: 0.6.3
+license: MIT
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-${version}.tar.gz
+      sha1: 98d98632b3a62fdf1172442f8ad8190fc11cbef7
+
+packages:
+  yaml-cpp:
+    files:
+      - /usr/lib/*.so.*
+
+  yaml-cpp-dev:
+    files:
+      - /usr/include
+      - /usr/lib/cmake
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
