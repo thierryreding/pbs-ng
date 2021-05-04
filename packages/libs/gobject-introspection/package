@@ -1,0 +1,25 @@
+package: introspection system for GObject-based libraries
+version: 1.68.0
+license: LGPL-2.1
+
+files:
+  - download:
+      url: https://ftp.gnome.org/pub/gnome/sources/gobject-introspection/${major}.${minor}/gobject-introspection-${version}.tar.xz
+      sha1: 0672668f6275316acf485894bd07857a69ea41fd
+
+depends:
+  - devel/glibc
+
+packages:
+  gobject-introspection:
+    files:
+      - /usr/lib/*.so.*
+
+  gobject-introspection-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
