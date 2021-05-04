@@ -1,0 +1,19 @@
+description: seamless operability between C++11 and Python
+version: 2.6.2
+license: custom
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/pybind/pybind11/archive/v${version}.tar.gz
+      sha1: e340be2d61439deaf7bdd4bd273bb8c51b713f26
+
+packages:
+  pybind11:
+    files:
+      - /usr/include/pybind11
+      - /usr/share/cmake
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
