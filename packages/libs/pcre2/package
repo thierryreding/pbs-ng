@@ -1,0 +1,35 @@
+description: a library that implements Perl 5-style regular expressions
+version: 10.36
+license: BSD
+
+files:
+  - download:
+      url: https://ftp.pcre.org/pub/pcre/pcre2-${version}.tar.bz2
+      sha1: 65958cfc799c1474a272938f5690dff5f10db216
+
+depends:
+  - devel/glibc
+  - libs/bzip2
+  - libs/zlib
+
+packages:
+  libpcre2:
+    files:
+      - /usr/lib/*.so.*
+
+  libpcre2-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libpcre2-man:
+    files:
+      - /usr/share/man/man3
+
+  libpcre2-doc:
+    files:
+      - /usr/share/doc
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
