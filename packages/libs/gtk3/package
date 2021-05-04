@@ -1,0 +1,27 @@
+package: common C routines used by GTK+ and other libraries
+version: 3.24.29
+license: LGPL
+
+files:
+  - download:
+      url: https://ftp.gnome.org/pub/gnome/sources/gtk+/${major}.${minor}/gtk+-${version}.tar.xz
+      sha1: 2faab763eeeea30c7b81d1a4749594ed39dc9cbe
+
+depends:
+  - libs/cairo
+  - libs/gdk-pixbuf
+  - libs/gobject-introspection
+
+packages:
+  gtk3:
+    files:
+      - /usr/lib/*.so.*
+
+  gtk3-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
