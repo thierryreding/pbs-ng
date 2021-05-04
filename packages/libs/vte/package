@@ -1,0 +1,27 @@
+package: common C routines used by GTK+ and other libraries
+version: 0.62.3
+license: LGPL-2.1
+
+files:
+  - download:
+      url: https://ftp.gnome.org/pub/gnome/sources/vte/${major}.${minor}/vte-${version}.tar.xz
+      sha1: 810df80b14bc240f72a8cae000b85518ec3299a8
+
+depends:
+  - libs/gnutls
+  - libs/pcre2
+  - libs/gtk3
+
+packages:
+  libvte:
+    files:
+      - /usr/lib/*.so.*
+
+  libvte-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
