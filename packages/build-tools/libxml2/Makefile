@@ -1,5 +1,4 @@
 include $(TOP_SRCDIR)/packages/build-tools/autotools.mk
 
 conf-args += \
-	--disable-documentation \
-	--without-python
+	--with-python=$(BUILD_TOOLS)
