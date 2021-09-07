@@ -1,0 +1,16 @@
+description: X keyboard configuration files
+version: 1.1.2
+license: custom
+
+files:
+  - download:
+      url: http://www.x.org/releases/individual/data/xbitmaps-${version}.tar.bz2
+      sha1: 1cb0e485a66280e9a64b48426140b8a0de9cf169
+
+packages:
+  xbitmaps:
+    files:
+      - /usr/include
+      - /usr/share/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
