@@ -1,4 +1,1 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
-
-conf-args += \
-	--with-sysroot=$(SYSROOT)
+include $(TOP_SRCDIR)/packages/meson.mk
