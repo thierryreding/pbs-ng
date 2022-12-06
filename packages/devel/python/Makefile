@@ -34,6 +34,7 @@ conf-args = \
 	--sysconfdir=/etc
 
 conf-args += \
+	--with-build-python=$(BUILD_TOOLS)/bin/python \
 	--without-ensurepip \
 	--with-system-libmpdec \
 	--with-system-expat \

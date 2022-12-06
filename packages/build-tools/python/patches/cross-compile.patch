@@ -2,7 +2,7 @@ diff --git a/Include/pyport.h b/Include/pyport.h
 index 6ab0ae400792..06fad5ec70bd 100644
 --- a/Include/pyport.h
 +++ b/Include/pyport.h
-@@ -737,15 +737,6 @@ extern char * _getpty(int *, int, mode_t, int);
+@@ -592,15 +592,6 @@ extern char * _getpty(int *, int, mode_t, int);
  #define LONG_BIT (8 * SIZEOF_LONG)
  #endif
  
@@ -22,7 +22,7 @@ diff --git a/setup.py b/setup.py
 index 43e807f20d98..b14285d44c72 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -371,6 +371,7 @@ class PyBuildExt(build_ext):
+@@ -299,6 +299,7 @@ class PyBuildExt(build_ext):
      def __init__(self, dist):
          build_ext.__init__(self, dist)
          self.srcdir = None
@@ -30,7 +30,7 @@ index 43e807f20d98..b14285d44c72 100644
          self.lib_dirs = None
          self.inc_dirs = None
          self.config_h_vars = None
-@@ -821,6 +822,18 @@ class PyBuildExt(build_ext):
+@@ -843,6 +844,18 @@ class PyBuildExt(build_ext):
                          add_dir_to_list(dir_list, directory)
  
      def configure_compiler(self):
@@ -49,7 +49,7 @@ index 43e807f20d98..b14285d44c72 100644
          # Ensure that /usr/local is always used, but the local build
          # directories (i.e. '.' and 'Include') must be first.  See issue
          # 10520.
-@@ -829,7 +842,11 @@ class PyBuildExt(build_ext):
+@@ -851,7 +864,11 @@ class PyBuildExt(build_ext):
              add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
          # only change this for cross builds for 3.3, issues on Mageia
          if CROSS_COMPILING:
