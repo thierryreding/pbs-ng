@@ -1,12 +1,11 @@
 description: An unladen web framework for building APIs and app backends
-version: 2.0.0
+version: 3.0.1
 license: Apache-2.0
 
 files:
   - download:
       url: https://github.com/falconry/falcon/archive/${version}.tar.gz
-      sha1: d57771851766a5141f67e4949f101d166726d54d
-
+      sha1: 0ce4e0d89e7802fc7f2907fb49c342cb068c088f
 
 depends:
   - devel/python
