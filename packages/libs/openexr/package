@@ -1,14 +1,15 @@
 description: reference implementation of the EXR file format
-version: 2.5.5
+version: 3.1.1
 license: custom
 
 depends:
   - devel/glibc
+  - libs/imath
 
 files:
   - download:
       url: https://github.com/AcademySoftwareFoundation/openexr/archive/v${version}.tar.gz
-      sha1: f55bb2051b409fef1c983cbfa37c72be79038568
+      sha1: 1aa1b9206f92beda828209bc057ac1016879aa93
 
 packages:
   openexr:
@@ -20,6 +21,7 @@ packages:
     files:
       - /usr/include
       - /usr/lib/*.so
+      - /usr/lib/cmake
       - /usr/lib/pkgconfig
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
