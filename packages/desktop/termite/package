@@ -1,0 +1,18 @@
+description: keyboard-centric VTE-based terminal
+version: 15
+license: custom
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/thestinger/termite/archive/v${version}.tar.gz
+      sha1: 9a55ff967f4fcf18fdb1580e9c53b52ba9e5fbd1
+
+packages:
+  termite:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
