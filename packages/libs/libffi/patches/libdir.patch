@@ -2,7 +2,7 @@ diff --git a/Makefile.am b/Makefile.am
 index 9a73b70d345b..cfae0cc8c220 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -34,7 +34,7 @@ MAKEOVERRIDES=
+@@ -35,7 +35,7 @@ MAKEOVERRIDES=
  pkgconfigdir = $(libdir)/pkgconfig
  pkgconfig_DATA = libffi.pc
  
