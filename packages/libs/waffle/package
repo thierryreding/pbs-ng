@@ -1,14 +1,14 @@
 description: cross-platform C library for OpenGL API and window system selection
-version: 1.6.0
+version: 1.7.0
 license: custom
 
 files:
   - download:
-      url: http://www.waffle-gl.org/files/release/waffle-${version}/waffle-${version}.tar.xz
-      sha1: feb803364d6cf2fdc409a607fff25e112c80a8d7
+      url: https://mesa.pages.freedesktop.org/waffle/files/release/waffle-${version}/waffle-${version}.tar.xz
+      sha1: d84642c2d85a626826abcab5af004cffc805fdd3
 
 depends:
-  - build-tools/cmake
+  - build-tools/meson
   - libs/mesa
 
 packages:
