@@ -1,0 +1,25 @@
+description: GNU multiple precision arithmetic library
+version: 6.2.1
+license: LGPL-3.0
+
+files:
+  - download:
+      url: https://gmplib.org/download/gmp/gmp-${version}.tar.xz
+      sha1: 0578d48607ec0e272177d175fd1807c30b00fdf2
+
+depends:
+  - devel/glibc
+
+packages:
+  libgmp:
+    files:
+      - /usr/lib/*.so.*
+
+  libgmp-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
