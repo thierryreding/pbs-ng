@@ -1,17 +1,13 @@
-description: SPIR-V Headers
-version: git
-license: custom
+include: packages/devel/spirv-headers/package.include
 
 depends:
+  - build-tools/cmake
   - devel/glibc
-
-files:
-  - source:
-      url: git+https://github.com/KhronosGroup/SPIRV-Headers.git
 
 packages:
   spirv-headers-dev:
     files:
       - /usr/include
+      - /usr/lib/cmake
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
