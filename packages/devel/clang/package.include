@@ -1,10 +1,10 @@
 description: C language family frontend for LLVM
-version: 10.0.0
+version: 15.0.6
 license: custom
 
 files:
   - download:
-      url: https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/llvm-project-${version}.tar.xz
-      sha1: e36d6c2e5a2db5609e8a69d22afabe7b1e6f81d3
+      url: https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/llvm-project-${version}.src.tar.xz
+      sha1: 0def887ec873f43c760aad2d2bb87f971c54d3b9
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

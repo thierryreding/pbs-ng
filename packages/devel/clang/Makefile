@@ -2,14 +2,10 @@ include $(TOP_SRCDIR)/packages/cmake.mk
 
 srcdir := $(srcdir)/clang
 
-$(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-compile.patch
-	touch $@
-
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch
+# will exhaust memory and get OOM-killed if run too many parallel jobs
+JOBS := 8
 
 cmake-args += \
-	-DLLVM_CONFIG=$(BUILD_TOOLS)/bin/$(HOST)-llvm-config \
 	-DLLVM_TABLEGEN_EXE=$(BUILD_TOOLS)/bin/llvm-tblgen \
 	-DCLANG_TABLEGEN=$(BUILD_TOOLS)/bin/clang-tblgen \
 	-DCMAKE_CROSSCOMPILING=True \

@@ -2,6 +2,7 @@ include: packages/devel/clang/package.include
 
 depends:
   - build-tools/clang
+  - build-tools/cmake
   - devel/llvm
 
 packages:
