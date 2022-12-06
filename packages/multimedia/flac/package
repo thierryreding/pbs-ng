@@ -1,0 +1,25 @@
+description: Free Lossless Audio Codec
+version: 1.4.2
+license: BSD
+
+depends:
+  - multimedia/libogg
+
+files:
+  - download:
+      url: http://downloads.xiph.org/releases/flac/flac-${version}.tar.xz
+      sha1: 4297c4f7c8665705f46886403755061dd0a30289
+
+packages:
+  flac:
+    files:
+      - /usr/lib/*.so.*
+
+  flac-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
