@@ -1,0 +1,39 @@
+description: library for reading, writing and processing images in a wide variety of file formats
+version: 2.2.0
+license: BSD-3-Clause
+
+depends:
+  - libs/expat
+  - libs/freeglut
+  - libs/glew
+  - libs/lcms2
+  - libs/libglvnd
+  - libs/minizip-ng
+  - libs/openexr
+  - libs/pybind11
+  - libs/pystring
+  - libs/yaml-cpp
+
+files:
+  - download:
+      url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/v${version}.tar.gz
+      sha1: c5343ed34041344c37bc359bce4cf56f33d72780
+
+packages:
+  opencolorio:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+
+  opencolorio-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  opencolorio-python:
+    files:
+      - /usr/lib/python*
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
