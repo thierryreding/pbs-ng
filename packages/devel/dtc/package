@@ -1,5 +1,5 @@
 description: Device Tree Compiler
-version: 1.5.1
+version: 1.6.1
 license: GPL-2.0
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://www.kernel.org/pub/software/utils/dtc/dtc-${version}.tar.xz
-      sha1: 55c7b70a5ad8f026ec317c5cbe3852597a022ad0
+      sha1: 6273fa9cdd51e7fd83d0467e21c788e3a5d3cd5d
 
 packages:
   dtc:
