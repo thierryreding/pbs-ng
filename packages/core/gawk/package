@@ -1,0 +1,33 @@
+description: GNU version of awk
+version: 5.1.1
+license: GPL-3.0
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://ftp.gnu.org/gnu/gawk/gawk-${version}.tar.xz
+      sha1: 87dfc1a72c2da51b4ebdafae221ba1d4a5a7b07e
+
+packages:
+  gawk:
+    files:
+      - /usr/bin
+      - /usr/lib/gawk
+      - /usr/libexec/awk
+
+  gawk-doc:
+    files:
+      - /usr/share/info
+      - /usr/share/awk
+
+  gawk-man:
+    files:
+      - /usr/share/man
+
+  gawk-locale:
+    files:
+      - /usr/share/locale
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
