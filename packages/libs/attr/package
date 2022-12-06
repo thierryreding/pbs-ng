@@ -1,5 +1,5 @@
 description: POSIX 1003.1e capabilities
-version: 2.4.48
+version: 2.5.1
 license: LGPL-2.1
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://download.savannah.gnu.org/releases/attr/attr-${version}.tar.gz
-      sha1: d7c88cb5db51c5e255a511b0a15e832fcdda5b4f
+      sha1: 72fea2dee5f481bfe7c9da84a2a1ace063a6c82d
 
 packages:
   libattr:
