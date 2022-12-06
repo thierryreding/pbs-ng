@@ -1,22 +1,23 @@
 include: packages/libs/wayland/package.include
 
 depends:
-- build-tools/wayland
-- libs/expat
-- libs/libffi
-- libs/libxml2
+  - build-tools/meson
+  - build-tools/wayland
+  - libs/expat
+  - libs/libffi
+  - libs/libxml2
 
 packages:
   wayland:
     files:
-    - /usr/lib/*.so.*
+      - /usr/lib/*.so.*
 
   wayland-dev:
     files:
-    - /usr/include
-    - /usr/lib/*.a
-    - /usr/lib/*.so
-    - /usr/lib/pkgconfig
-    - /usr/share/wayland
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+      - /usr/share/wayland
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

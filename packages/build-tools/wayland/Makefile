@@ -1,4 +1,4 @@
-include $(TOP_SRCDIR)/packages/build-tools/autotools.mk
+include $(TOP_SRCDIR)/packages/build-tools/meson.mk
 
 conf-args += \
-	--disable-documentation
+	-Ddocumentation=false
