@@ -1,5 +1,5 @@
 description: system and service manager
-version: 243
+version: 252
 license: GPL-2.0 LGPL-2.1 MIT
 
 depends:
@@ -7,17 +7,21 @@ depends:
   - build-tools/gperf
   - build-tools/intltool
   - build-tools/meson
+  - build-tools/python-jinja
   - core/util-linux
   - devel/glibc
   - kernel/kmod
   - libs/libcap
   - libs/libgcrypt
+  - libs/openssl
+  - libs/pam
   - libs/xz
+  - libs/zlib
 
 files:
   - download:
       url: https://github.com/systemd/systemd/archive/v${version}.tar.gz
-      sha1: 096305e5cff9a4889e2692c2ba39aa218fc7f50a
+      sha1: 7c961dc6e8bb950825b85129f59dc80f4536cabb
 
 packages:
   systemd:
