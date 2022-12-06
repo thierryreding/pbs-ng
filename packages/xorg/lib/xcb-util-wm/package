@@ -1,0 +1,25 @@
+description: utility libraries for XC binding - client and window-manager helpers for ICCCM
+version: 0.4.1
+license: custom
+
+depends:
+  - xorg/lib/xcb-util
+
+files:
+- download:
+    url: http://xcb.freedesktop.org/dist/xcb-util-wm-${version}.tar.bz2
+    sha1: 7006c52b961c123355320bfc30477cdf90c8bbb7
+
+packages:
+  xcb-util-wm:
+    files:
+      - /usr/lib/*.so.*
+
+  xcb-util-wm-dev:
+    files:
+      - /usr/include/xcb
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
