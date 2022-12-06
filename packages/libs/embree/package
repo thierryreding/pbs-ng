@@ -1,0 +1,18 @@
+description:
+version: 3.12.2
+license: Apache
+
+depends:
+  - libs/tbb
+
+files:
+  - download:
+      url: https://github.com/embree/embree/archive/v${version}.tar.gz
+      sha1: 1ffde27c9725383aa28867397a0b080bedce98fe
+
+packages:
+  embree:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
