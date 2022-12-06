@@ -1,0 +1,25 @@
+description: optimized inner loop runtime compiler
+version: 0.4.32
+license: BSD, custom
+
+files:
+  - download:
+      url: https://gstreamer.freedesktop.org/src/orc/orc-${version}.tar.xz
+      sha1: 1a0ff7f917913d6fabbc9ecea56496361ff7f3bf
+
+depends:
+  - devel/glibc
+
+packages:
+  orc:
+    files:
+      - /usr/lib/*.so.*
+
+  orc-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
