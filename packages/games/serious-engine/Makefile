@@ -5,6 +5,9 @@ srcdir := $(srcdir)/Sources
 $(builddir)/tools: | $(builddir)
 	mkdir -p $@
 
+env += \
+	SDL2DIR=$(SYSROOT)$(PREFIX)
+
 $(builddir)/tools/ecc: | $(builddir)/tools
 	cd $(builddir)/tools && \
 		$(env) cmake $(srcdir)
