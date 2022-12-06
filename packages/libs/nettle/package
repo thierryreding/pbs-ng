@@ -1,14 +1,14 @@
 description: low-level cryptographic library
-version: 3.5.1
+version: 3.8.1
 license: GPL-2.0
 
 depends:
-  - devel/glibc
+  - libs/gmp
 
 files:
   - download:
       url: https://ftp.gnu.org/gnu/nettle/nettle-${version}.tar.gz
-      sha1: 077a71eef4a62acc4480ff7e2051f806b1724ea2
+      sha1: 1be40366f8db2d5bb65e45883d6d76a96b39eb73
 
 packages:
   nettle:
