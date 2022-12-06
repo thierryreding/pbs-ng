@@ -1,0 +1,25 @@
+package: ASN.1 library used in GNUTLS
+version: 4.18.0
+license: GPL-3.0, LGPL
+
+files:
+  - download:
+      url: https://ftp.gnu.org/gnu/libtasn1/libtasn1-${version}.tar.gz
+      sha1: 1665249ce66e64958e8c61d5bdc6c1e9f3623888
+
+depends:
+  - devel/glibc
+
+packages:
+  libtasn1:
+    files:
+      - /usr/lib/*.so.*
+
+  libtasn1-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
