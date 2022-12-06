@@ -1,0 +1,26 @@
+description: COLLADA document library
+version: 1.6.68
+license: MIT
+
+depends:
+  - libs/libxml2
+  - libs/pcre
+  - libs/zlib
+
+files:
+  - download:
+      url: https://github.com/KhronosGroup/OpenCOLLADA/archive/v${version}.tar.gz
+      sha1: 228625c1ddb8dc1bdb620d0a6532215effbff018
+
+packages:
+  opencollada:
+    files:
+      - /usr/lib/opencollada/*.so
+
+  opencollada-dev:
+    files:
+      - /usr/include
+      - /usr/lib/opencollada/*.a
+      - /usr/lib/opencollada/cmake
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
