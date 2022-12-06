@@ -1,0 +1,93 @@
+#!/usr/bin/python
+
+import argparse, configparser, pathlib, sys
+
+class Command:
+    pass
+
+class Command:
+    @classmethod
+    def setup(cls, parser):
+        if hasattr(cls, 'subcommands'):
+            sub_parsers = parser.add_subparsers(title = 'subcommands')
+
+            for subcommand in cls.subcommands:
+                sub_parser = sub_parsers.add_parser(subcommand.name, help = subcommand.help)
+                sub_parser.set_defaults(run = subcommand.run)
+                subcommand.setup(sub_parser)
+
+    @classmethod
+    def run(cls, config, args):
+        pass
+
+class CommandShow(Command):
+    name = 'show'
+    help = 'show configuration'
+
+    @classmethod
+    def setup(cls, parser):
+        super().setup(parser)
+
+    @classmethod
+    def run(cls, config, args):
+        for name, section in config.items():
+            print('[%s]' % name)
+
+            for key, value in section.items():
+                print('%s = %s' % (key, value))
+
+            print()
+
+class CommandSet(Command):
+    name = 'set'
+    help = 'set property value'
+
+    @classmethod
+    def setup(cls, parser):
+        parser.add_argument('option', type = str)
+        parser.add_argument('value', type = str, nargs = '?')
+
+        super().setup(parser)
+
+    @classmethod
+    def run(cls, config, args):
+        *sections, option = args.option.split('.')
+        section = config
+
+        for name in sections:
+            section = section[name]
+
+        if args.value:
+            section[option] = args.value
+        else:
+            del section[option]
+
+        with open(args.file, 'w') as fobj:
+            config.write(fobj)
+
+commands = [
+        CommandShow,
+        CommandSet,
+    ]
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--file', '-f', type = pathlib.Path)
+
+    cmd_parsers = parser.add_subparsers(title = 'commands')
+
+    for cmd in commands:
+        cmd_parser = cmd_parsers.add_parser(cmd.name, help = cmd.help)
+        cmd_parser.set_defaults(run = cmd.run)
+        cmd.setup(cmd_parser)
+
+    args = parser.parse_args()
+
+    if not hasattr(args, 'run'):
+        parser.print_help()
+        sys.exit(1)
+
+    config = configparser.ConfigParser()
+    config.read(args.file)
+
+    args.run(config, args)
