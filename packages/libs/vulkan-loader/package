@@ -1,0 +1,25 @@
+description: Vulkan loader
+version: 1.2.202
+license: Apache-2.0
+
+depends:
+  - build-tools/cmake
+  - devel/glibc
+  - libs/vulkan-headers
+
+files:
+  - download:
+      url: https://github.com/KhronosGroup/Vulkan-Loader/archive/refs/tags/v${version}.tar.gz
+      sha1: 5a1758501b89caf0d48e9f3e12a2a4edd13f5b8d
+
+packages:
+  libvulkan:
+    files:
+      - /usr/lib/*.so.*
+
+  libvulkan-dev:
+    files:
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
