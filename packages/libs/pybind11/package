@@ -1,14 +1,14 @@
 description: seamless operability between C++11 and Python
-version: 2.6.2
+version: 2.10.1
 license: custom
 
 depends:
-  - devel/glibc
+  - libs/boost
 
 files:
   - download:
       url: https://github.com/pybind/pybind11/archive/v${version}.tar.gz
-      sha1: e340be2d61439deaf7bdd4bd273bb8c51b713f26
+      sha1: 604c8a487d9535407c1045d3461bf38faa6414e2
 
 packages:
   pybind11:
