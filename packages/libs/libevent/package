@@ -1,11 +1,4 @@
-description: an event notification library
-version: 2.1.11
-license: BSD-3-Clause
-
-files:
-  - download:
-      url: https://github.com/libevent/libevent/archive/release-${version}-stable.tar.gz
-      sha1: 43cd4462b63c1fe9f155a1579817e12377d44580
+include: packages/libs/libevent/package.include
 
 depends:
   - devel/glibc
