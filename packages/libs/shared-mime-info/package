@@ -1,0 +1,23 @@
+package: freedesktop.org shared MIME info
+version: 2.2
+license: GPL-2.0
+
+files:
+  - download:
+      url: https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/${version}/shared-mime-info-${version}.tar.bz2
+      sha1: 539363021e753b13b70990ced4ef38a4dc0543b1
+
+depends:
+  - build-tools/itstool
+  - build-tools/xmlto
+  - libs/glib
+  - libs/libxml2
+
+packages:
+  shared-mime-info:
+    files:
+      - /usr/bin
+      - /usr/share/mime
+      - /usr/share/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
