@@ -1,0 +1,18 @@
+description: Khronos OpenCL headers
+version: 2020.12.18
+license: Apache-2.0
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/KhronosGroup/OpenCL-Headers/archive/refs/tags/v${version}.tar.gz
+      sha1: 11bb1a594bec203b78184d934257e91c9e68084a
+
+packages:
+  opencl-headers:
+    files:
+      - /usr/include
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
