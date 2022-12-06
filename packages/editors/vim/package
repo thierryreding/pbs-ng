@@ -1,11 +1,11 @@
 description: Vi Improved, a highly configurable, improved version of the vi text editor
-version: 8.1
+version: 9.0
 license: custom
 
 files:
   - download:
       url: ftp://ftp.vim.org/pub/vim/unix/vim-${version}.tar.bz2
-      sha1: cbca219d11990d866976da309d7ce5b76be48b96
+      sha1: ff061751df99a5baff557c60a2ab5344f9f9e70d
 
 depends:
   - devel/glibc
