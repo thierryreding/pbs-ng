@@ -4,7 +4,7 @@ license: custom
 
 depends:
   - devel/glibc
-  - libs/libressl
+  - libs/openssl
 
 files:
   - download:

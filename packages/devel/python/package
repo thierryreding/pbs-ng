@@ -5,8 +5,8 @@ depends:
   - libs/bzip2
   - libs/expat
   - libs/libffi
-  - libs/libressl
   - libs/mpdecimal
+  - libs/openssl
   - libs/xz
 
 packages:

@@ -1,5 +1,5 @@
 description: The Open Source toolkit for Secure Socket Layer and Transport Layer Security
-version: 1.1.0f
+version: 3.0.7
 license: BSD
 
 depends:
@@ -11,8 +11,8 @@ provides:
 
 files:
   - download:
-      url: ftp://ftp.openssl.org/source/openssl-${version}.tar.gz
-      sha1: 9e3e02bc8b4965477a7a1d33be1249299a9deb15
+      url: https://www.openssl.org/source/openssl-${version}.tar.gz
+      sha1: f20736d6aae36bcbfa9aba0d358c71601833bf27
 
 packages:
   openssl:
