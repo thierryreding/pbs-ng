@@ -1,5 +1,5 @@
 description: PAM (Pluggable Authentication Modules) library
-version: 1.4.0
+version: 1.5.2
 license: GPL-2.0
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: https://github.com/linux-pam/linux-pam/releases/download/v${version}/Linux-PAM-${version}.tar.xz
-      sha1: e26c6594c14680da42ea2875b60664ec159670bf
+      sha1: 8d20308cbf17823e9b88b01c2c70df3e1ad9d654
 
 packages:
   pam:
