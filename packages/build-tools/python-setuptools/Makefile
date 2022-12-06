@@ -3,11 +3,7 @@ include $(TOP_SRCDIR)/packages/build-tools/common.mk
 $(builddir):
 	mkdir -p $@
 
-$(builddir)/stamp-configure: | $(builddir)
-	cd $(srcdir) && python3 bootstrap.py
-	touch $@
-
-$(builddir)/stamp-build: $(builddir)/stamp-configure
+$(builddir)/stamp-build: | $(builddir)
 	cd $(srcdir) && python3 setup.py build
 	touch $@
 
