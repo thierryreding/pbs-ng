@@ -1,0 +1,22 @@
+diff --git a/lib/angelscript/projects/cmake/CMakeLists.txt b/lib/angelscript/projects/cmake/CMakeLists.txt
+index 42883d5e3abf..41acb20875d6 100644
+--- a/lib/angelscript/projects/cmake/CMakeLists.txt
++++ b/lib/angelscript/projects/cmake/CMakeLists.txt
+@@ -144,16 +144,13 @@ if(${ARCHFLAGS} MATCHES "^arm")
+     if (NOT USE_AS_MAX_PORTABILITY)
+         if(CMAKE_ASM_COMPILER_WORKS)
+             set(ANGELSCRIPT_SOURCE ${ANGELSCRIPT_SOURCE} ../../source/as_callfunc_arm.cpp ../../source/as_callfunc_arm_gcc.S)
+-            if (NOT APPLE)
+-                set_property(SOURCE ../../source/as_callfunc_arm_gcc.S APPEND PROPERTY COMPILE_FLAGS " -Wa,-mimplicit-it=always")
+-            endif()
+         else()
+             message(FATAL ERROR "ARM target requires a working assembler")
+         endif()
+     endif()
+ endif()
+ 
+-if(${ARCHFLAGS} MATCHES "^aarch64")
++if(${ARCHFLAGS} MATCHES "^arm64")
+     enable_language(ASM)
+     ADD_DEFINITIONS(-DAS_MAX_PORTABILITY)
+ endif()

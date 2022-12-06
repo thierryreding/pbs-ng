@@ -1,18 +1,20 @@
 description: Kart racing game featuring Tux and his friends
-version: 0.9.3
+version: 1.4
 license: GPL-2.0
 
 files:
   - download:
-      url: http://prdownloads.sourceforge.net/supertuxkart/supertuxkart-${version}-src.tar.xz
-      sha1: 2650ba20976472f10122a8600cc239507a9b6f24
+      url: https://github.com/supertuxkart/stk-code/releases/download/${version}/SuperTuxKart-${version}-src.tar.xz
+      sha1: 183b01650593969625a4781467c887a4f4e9cc1a
 
 depends:
+  - build-tools/cmake
   - libs/sdl
 
 packages:
   supertuxkart:
     files:
       - /usr/bin
+      - /usr/share
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
