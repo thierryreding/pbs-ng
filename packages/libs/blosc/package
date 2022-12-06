@@ -1,0 +1,27 @@
+description: OpenVDB - sparse volume data structure and tools
+version: 1.21.0
+license: custom
+
+depends:
+  - libs/lz4
+  - libs/zlib
+  - libs/zstd
+
+files:
+  - download:
+      url: https://github.com/Blosc/c-blosc/archive/v${version}.tar.gz
+      sha1: e3e0e55cea527347c9e74ea33fa6f2f9482277ab
+
+packages:
+  blosc:
+    files:
+      - /usr/lib/*.so.*
+
+  blosc-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

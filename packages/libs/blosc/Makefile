@@ -1,0 +1,6 @@
+include $(TOP_SRCDIR)/packages/cmake.mk
+
+cmake-args += \
+	-DPREFER_EXTERNAL_LZ4=ON \
+	-DPREFER_EXTERNAL_ZLIB=ON \
+	-DPREFER_EXTERNAL_ZSTD=ON
