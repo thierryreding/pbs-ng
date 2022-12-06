@@ -1,0 +1,41 @@
+description: multimedia graph framework - bad plugins
+version: 1.20.2
+license: LGPL
+
+files:
+  - download:
+      url: https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${version}.tar.xz
+      sha1: aee89a63071b681ee74cc3e50c4e031e978c09e5
+
+depends:
+  - libs/cairo
+  - libs/curl
+  - libs/libdrm
+  - libs/libwebp
+  - libs/libxml2
+  - libs/mesa
+  - libs/nettle
+  - libs/openexr
+  - libs/openssl
+  - libs/pango
+  - multimedia/gst-plugins-good
+  - multimedia/libva
+  - multimedia/openal
+  - multimedia/opus
+
+packages:
+  gst-plugins-bad:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+      - /usr/lib/gstreamer-${major}.0/*.so
+      - /usr/share/gstreamer-${major}.0
+
+  gst-plugins-bad-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/gstreamer-${major}.0/include
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
