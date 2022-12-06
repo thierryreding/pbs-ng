@@ -1,0 +1,47 @@
+description: multimedia graph framework - base plugins
+version: 1.20.2
+license: LGPL
+
+files:
+  - download:
+      url: https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${version}.tar.xz
+      sha1: f9b15502997936ac7460b3c414dfb5dd9c835339
+
+depends:
+  - libs/glib
+  - libs/gdk-pixbuf
+  - libs/graphene
+  - libs/libdrm
+  - libs/libgudev
+  - libs/libpng
+  - libs/libjpeg-turbo
+  - libs/mesa
+  - libs/orc
+  - libs/pango
+  - libs/sdl
+  - libs/wayland
+  - libs/wayland-protocols
+  - multimedia/alsa-lib
+  - multimedia/gstreamer
+  - multimedia/libtheora
+  - multimedia/libvorbis
+  - multimedia/opus
+  - xorg/lib/xcb
+  - xorg/lib/xext
+  - xorg/lib/xv
+
+packages:
+  gst-plugins-base:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+      - /usr/lib/gstreamer-${major}.0/*.so
+
+  gst-plugins-base-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/gstreamer-${major}.0/include
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
