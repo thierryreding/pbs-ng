@@ -1,11 +1,11 @@
 description: a free, open-source, and cross-platform media player
-version: 0.30.0
+version: 0.34.0
 license: GPL-3.0-or-later
 
 files:
   - download:
       url: https://github.com/mpv-player/mpv/archive/v${version}.tar.gz
-      sha1: 94da9cc423339a8d4f583542a4e7c5f794b82e7b
+      sha1: a4118264ecbb99722f1bb272af10d3d7aa067d22
 
 depends:
   - devel/glibc
