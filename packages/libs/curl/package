@@ -1,14 +1,15 @@
 description: A URL retrieval utility and library
-version: 7.66.0
+version: 7.85.0
 license: MIT
 
 depends:
-  - devel/glibc
+  - libs/libidn2
+  - libs/openssl
 
 files:
   - download:
       url: https://curl.haxx.se/download/curl-${version}.tar.xz
-      sha1: c4b5137302c74839bfa2211da72d960d0d5fedba
+      sha1: 5c1940ff51f6b2137b91ffe672b70d4491a23ea6
 
 packages:
   curl:
