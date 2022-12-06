@@ -1,0 +1,25 @@
+description: discrete Fourier transform C library
+version: 3.3.9
+license: GPL
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: http://www.fftw.org/fftw-${version}.tar.gz
+      sha1: bf17b485417f0f6a896b8514a3813439fda075fc
+
+packages:
+  libfftw:
+    files:
+      - /usr/lib/*.so.*
+
+  libfftw-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
