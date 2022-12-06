@@ -33,6 +33,11 @@ libssp-soname = $(notdir $(call soname,$(libssp)))
 libstdcxx = $(realpath $(shell $(CC) -print-file-name=libstdc++.so))
 libstdcxx-soname = $(notdir $(call soname,$(libstdcxx)))
 
+libgomp = $(abspath $(shell $(CC) -print-file-name=libgomp.so))
+libgomp-static = $(abspath $(shell $(CC) -print-file-name=libgomp.a))
+libgomp-target = $(realpath $(libgomp))
+libgomp-soname = $(call soname,$(libgomp-target))
+
 $(DESTDIR)$(PREFIX)/lib:
 	install -d $@ -m 755
 
@@ -58,6 +63,11 @@ $(builddir)/stamp-install: $(DESTDIR)$(PREFIX)/lib | $(builddir)
 	cp -dp $(libatomic-target) $(DESTDIR)$(PREFIX)/lib
 	cp -dp $(libatomic-soname) $(DESTDIR)$(PREFIX)/lib
 	cp -dp $(libatomic-static) $(DESTDIR)$(PREFIX)/lib
+	# libgomp
+	cp -dp $(libgomp) $(DESTDIR)$(PREFIX)/lib
+	cp -dp $(libgomp-target) $(DESTDIR)$(PREFIX)/lib
+	cp -dp $(libgomp-soname) $(DESTDIR)$(PREFIX)/lib
+	cp -dp $(libgomp-static) $(DESTDIR)$(PREFIX)/lib
 
 install: $(builddir)/stamp-install
 
