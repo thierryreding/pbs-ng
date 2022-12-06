@@ -3,33 +3,40 @@ include $(TOP_SRCDIR)/packages/common.mk
 $(builddir):
 	mkdir -p $@
 
-cross-vars = \
-	OS ARCH CPU ENDIAN HOST SYSROOT
+ifeq ($(ARCH),arm64)
+  ARCH = aarch64
+endif
 
-cross-flags = \
+meson-vars = \
+	OS ARCH CPU ENDIAN HOST SYSROOT PREFIX BUILD_TOOLS
+
+meson-flags = \
 	CPPFLAGS CFLAGS CXXFLAGS LDFLAGS
 
-$(foreach var,$(cross-flags),$(eval flags_$(var) = $$($(var))))
-$(foreach var,$(cross-flags),$(eval flags_$(var) = $(patsubst %,'%',$(flags_$(var)))))
-$(foreach var,$(cross-flags),$(eval flags_$(var) = $(subst $(space),$(comma) ,$(flags_$(var)))))
+$(foreach var,$(meson-flags),$(eval flags_$(var) = $$($(var))))
+$(foreach var,$(meson-flags),$(eval flags_$(var) = $(patsubst %,'%',$(flags_$(var)))))
+$(foreach var,$(meson-flags),$(eval flags_$(var) = $(subst $(space),$(comma) ,$(flags_$(var)))))
 
-$(foreach var,$(cross-vars),$(eval expressions += -e "s|@$(var)@|$$($(var))|"))
-$(foreach var,$(cross-flags),$(eval expressions += -e "s|@$(var)@|$(flags_$(var))|"))
+$(foreach var,$(meson-vars),$(eval expressions += -e "s|@$(var)@|$$($(var))|g"))
+$(foreach var,$(meson-flags),$(eval expressions += -e "s|@$(var)@|$(flags_$(var))|g"))
 
-$(builddir)/cross-compile.txt: $(TOP_SRCDIR)/support/cross-compile.meson | $(builddir)
+$(builddir)/native.ini: $(TOP_SRCDIR)/support/meson-native.ini | $(builddir)
+	sed $(expressions) $< > $@
+
+$(builddir)/cross.ini:: $(TOP_SRCDIR)/support/meson-cross.ini | $(builddir)
 	sed $(expressions) $< > $@
 
 env = \
-	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
-	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)' \
 	DESTDIR=$(DESTDIR)
 
 conf-args = \
-	--prefix $(PREFIX) \
-	--libexecdir $(PREFIX)/lib
+	--native-file $(builddir)/native.ini \
+	--cross-file $(builddir)/cross.ini \
+	--libexecdir $(PREFIX)/lib \
+	--prefix $(PREFIX)
 
-$(builddir)/stamp-configure: $(builddir)/cross-compile.txt
-	$(env) meson --cross-file $< $(conf-args) $(srcdir) $(builddir)
+$(builddir)/stamp-configure: $(builddir)/native.ini $(builddir)/cross.ini
+	$(env) meson setup $(conf-args) $(srcdir) $(builddir)
 	touch $@
 
 $(builddir)/stamp-build: $(builddir)/stamp-configure

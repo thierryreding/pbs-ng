@@ -1,0 +1,71 @@
+From d5795a2dd2b2668906125503c0a30c1621114405 Mon Sep 17 00:00:00 2001
+From: Thierry Reding <treding@nvidia.com>
+Date: Fri, 11 Feb 2022 15:43:25 +0100
+Subject: [PATCH] clike compilers: Add default sysroot include directory
+
+When building against a sysroot, meson currently fails to detect that
+the /usr/include directory within that sysroot is a default search
+directory. This causes the directory to be added with -isystem to the
+compiler command-line which in turn causes include lookup failures.
+
+A minimal test case to reproduce this behaviour is:
+
+  $ echo -e "#include <iostream>\nint main() { return 0; }" > foo.cpp
+  $ g++ --sysroot / -isystem /usr/include -o foo foo.cpp
+  In file included from /usr/include/c++/11.1.0/ext/string_conversions.h:41,
+                   from /usr/include/c++/11.1.0/bits/basic_string.h:6594,
+                   from /usr/include/c++/11.1.0/string:55,
+                   from /usr/include/c++/11.1.0/bits/locale_classes.h:40,
+                   from /usr/include/c++/11.1.0/bits/ios_base.h:41,
+                   from /usr/include/c++/11.1.0/ios:42,
+                   from /usr/include/c++/11.1.0/ostream:38,
+                   from /usr/include/c++/11.1.0/iostream:39,
+                   from foo.cpp:1:
+  /usr/include/c++/11.1.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+     75 | #include_next <stdlib.h>
+      |               ^~~~~~~~~~
+  compilation terminated.
+
+Omitting the -isystem /usr/include option avoids that error because it
+doesn't mess up the include directory search order.
+
+Fix this by adding the sysroot's /usr/include directory to the list of
+default search directories when a sysroot is detected. This ensures that
+any occurrences of it are filtered out and the include directory search
+order is left alone.
+---
+ mesonbuild/compilers/mixins/clike.py | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/mesonbuild/compilers/mixins/clike.py b/mesonbuild/compilers/mixins/clike.py
+index 8736c6d97e4b..600fda3503fc 100644
+--- a/mesonbuild/compilers/mixins/clike.py
++++ b/mesonbuild/compilers/mixins/clike.py
+@@ -100,6 +100,24 @@ class CLikeCompilerArgs(arglist.CompilerArgs):
+                 new.insert(group_start, '-Wl,--start-group')
+         # Remove system/default include paths added with -isystem
+         default_dirs = self.compiler.get_default_include_dirs()
++        sys_root = None
++
++        for i, each in enumerate(new):
++            if each.startswith('--sysroot'):
++                if each == '--sysroot':
++                    try:
++                        sys_root = new[i + 1]
++                    except IndexError:
++                        mlog.warn('--sysroot passed to', self.language, 'compiler without argument')
++                    break
++
++                if each.startswith('--sysroot='):
++                    sys_root = each[10:]
++                    break
++
++        if sys_root:
++            default_dirs.append(os.path.join(sys_root, 'usr', 'include'))
++
+         if default_dirs:
+             real_default_dirs = [os.path.realpath(i) for i in default_dirs]
+             bad_idx_list = []  # type: T.List[int]
+-- 
+2.38.1
+

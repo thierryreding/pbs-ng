@@ -1,5 +1,13 @@
 include $(TOP_SRCDIR)/packages/build-tools/common.mk
 
+ifeq ($(realpath $(srcdir)),$(srcdir))
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/sysroot-default-include-dir.patch
+	touch $@
+
+$(builddir)/stamp-build: $(srcdir)/stamp-patch
+endif
+
 $(builddir):
 	mkdir -p $@
 
