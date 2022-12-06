@@ -1,7 +1,7 @@
 include $(TOP_SRCDIR)/packages/autotools.mk
 
 $(srcdir)/configure:
-	cd $(srcdir) && $(conf-env) ./autogen.sh
+	cd $(srcdir) && autoreconf --force --install
 
 $(builddir)/config.cache: | $(builddir)
 	echo '# generated for $(HOST)' > $@
