@@ -10,10 +10,10 @@ $(builddir):
 build-args = \
 	prefix=$(PREFIX) \
 	lib=lib \
-	BUILD_CC='gcc' \
-	CC='$(CROSS_COMPILE)gcc' \
+	CROSS_COMPILE='$(CROSS_COMPILE)' \
 	EXTRA_CFLAGS='--sysroot $(SYSROOT)' \
 	EXTRA_LDFLAGS='--sysroot $(SYSROOT)' \
+	BUILD_CC='gcc' \
 	RAISE_SETFCAP=no \
 	PAM_CAP=no
 

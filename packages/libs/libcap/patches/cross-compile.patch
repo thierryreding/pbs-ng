@@ -1,25 +1,17 @@
 diff --git a/Make.Rules b/Make.Rules
-index 8347b2699082..271bcbc18ae7 100644
+index cd4dd013f38f..2ed2eb1d55d3 100644
 --- a/Make.Rules
 +++ b/Make.Rules
-@@ -49,9 +49,9 @@ KERNEL_HEADERS := $(topdir)/libcap/include/uapi
- IPATH += -fPIC -I$(KERNEL_HEADERS) -I$(topdir)/libcap/include
+@@ -81,10 +81,10 @@ WARNINGS=-Wall -Wwrite-strings -Wpointer-arith -Wcast-qual -Wcast-align \
+ 	-Wstrict-prototypes -Wmissing-prototypes -Wnested-externs       \
+ 	-Winline -Wshadow -Wunreachable-code
+ COPTS ?= -O2
+-CFLAGS ?= $(COPTS) $(DEBUG)
++CFLAGS ?= $(COPTS) $(DEBUG) $(EXTRA_CFLAGS)
+ CFLAGS += $(WARNINGS)
+ CPPFLAGS += -Dlinux $(DEFINES) $(LIBCAP_INCLUDES)
+-LDFLAGS ?= # -g
++LDFLAGS ?= $(EXTRA_LDFLAGS) # -g
  
- CC := gcc
--CFLAGS := -O2 -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
-+CFLAGS := -O2 -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 $(EXTRA_CFLAGS)
- BUILD_CC := $(CC)
--BUILD_CFLAGS := $(CFLAGS) $(IPATH)
-+BUILD_CFLAGS := $(IPATH)
- AR := ar
- RANLIB := ranlib
- DEBUG = -g #-DDEBUG
-@@ -60,7 +60,7 @@ WARNINGS=-Wall -Wwrite-strings \
-         -Wstrict-prototypes -Wmissing-prototypes \
-         -Wnested-externs -Winline -Wshadow
- LD=$(CC) -Wl,-x -shared
--LDFLAGS := #-g
-+LDFLAGS := $(EXTRA_LDFLAGS) #-g
- BUILD_GPERF := $(shell which gperf >/dev/null 2>/dev/null && echo yes)
- 
- SYSTEM_HEADERS = /usr/include
+ BUILD_CC ?= $(CC)
+ BUILD_LD ?= $(BUILD_CC) -Wl,-x -shared
