@@ -1,0 +1,30 @@
+description: Utility programs for creating patch files
+version: 3.8
+license: GPL-3.0
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://ftp.gnu.org/gnu/diffutils/diffutils-${version}.tar.xz
+      sha1: 3a726894b2cf71a790913f236ec790d830c6aef8
+
+packages:
+  diffutils:
+    files:
+      - /usr/bin
+
+  diffutils-doc:
+    files:
+      - /usr/share/info
+
+  diffutils-locale:
+    files:
+      - /usr/share/locale
+
+  diffutils-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
