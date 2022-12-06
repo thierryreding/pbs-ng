@@ -1,0 +1,26 @@
+description: a thin layer of grahic data types
+version: 1.10.6
+license: MIT
+
+files:
+  - download:
+      url: https://github.com/ebassi/graphene/releases/download/${version}/graphene-${version}.tar.xz
+      sha1: 0bce9014096441fb771db0bc66587d7440190fa5
+
+depends:
+  - libs/glib
+
+packages:
+  graphene:
+    files:
+      - /usr/lib/*.so.*
+
+  graphene-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/*.a
+      - /usr/lib/graphene-${major}.0/include
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
