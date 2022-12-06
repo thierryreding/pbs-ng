@@ -12,9 +12,13 @@ $(srcdir)/stamp-patch: | $(srcdir)
 conf-args = \
 	--prefix=$(BUILD_TOOLS)
 
+conf-vars = \
+	CFLAGS='-I$(BUILD_TOOLS)/include' \
+	LDFLAGS='-L$(BUILD_TOOLS)/lib'
+
 $(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
 	cd $(builddir) && \
-		$(env) $(srcdir)/configure $(conf-args)
+		$(env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@
 
 build-args = \
