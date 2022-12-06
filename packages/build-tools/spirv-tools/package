@@ -1,0 +1,6 @@
+include: packages/devel/spirv-tools/package.include
+
+depends:
+  - build-tools/spirv-headers
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

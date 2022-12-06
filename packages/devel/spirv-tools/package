@@ -1,14 +1,9 @@
-description: SPIR-V Tools
-version: git
-license: Apache-2.0
+include: packages/devel/spirv-tools/package.include
 
 depends:
+  - build-tools/cmake
   - devel/glibc
   - devel/spirv-headers
-
-files:
-  - source:
-      url: git+https://github.com/KhronosGroup/SPIRV-Tools.git
 
 packages:
   spirv-tools:
