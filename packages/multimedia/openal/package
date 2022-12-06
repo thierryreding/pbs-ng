@@ -1,16 +1,17 @@
 description: Cross-platform 3D audio library, software implementation
-version: 1.19.1
+version: 1.22.2
 license: LGPL
 
 depends:
+  - build-tools/cmake
   - devel/glibc
   - libs/sdl-sound
   - multimedia/ffmpeg
 
 files:
   - download:
-      url: https://github.com/kcat/openal-soft/archive/openal-soft-${version}.tar.gz
-      sha1: 436ee636215555a351ac2ec3ea06611ad63d4bc7
+      url: https://github.com/kcat/openal-soft/archive/refs/tags/${version}.tar.gz
+      sha1: 7667fdc370e633c8bc362e8c44b90055d0de247f
 
 packages:
   libopenal:
