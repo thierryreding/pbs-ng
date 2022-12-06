@@ -1,77 +1,71 @@
 include $(TOP_SRCDIR)/packages/meson.mk
 
-ifneq ($(package.option.kms),y)
-  conf-args += -Dlibkms=false
-else
-  conf-args += -Dlibkms=true
-endif
-
 ifneq ($(package.option.intel),y)
-  conf-args += -Dintel=false
+  conf-args += -Dintel=disabled
 else
-  conf-args += -Dintel=true
+  conf-args += -Dintel=enabled
 endif
 
 ifneq ($(package.option.radeon),y)
-  conf-args += -Dradeon=false
+  conf-args += -Dradeon=disabled
 else
-  conf-args += -Dradeon=true
+  conf-args += -Dradeon=enabled
 endif
 
 ifneq ($(package.option.amdgpu),y)
-  conf-args += -Damdgpu=false
+  conf-args += -Damdgpu=disabled
 else
-  conf-args += -Damdgpu=true
+  conf-args += -Damdgpu=enabled
 endif
 
 ifneq ($(package.option.nouveau),y)
-  conf-args += -Dnouveau=false
+  conf-args += -Dnouveau=disabled
 else
-  conf-args += -Dnouveau=true
+  conf-args += -Dnouveau=enabled
 endif
 
 ifneq ($(package.option.vmwgfx),y)
-  conf-args += -Dvmwgfx=false
+  conf-args += -Dvmwgfx=disabled
 else
-  conf-args += -Dvmwgfx=true
+  conf-args += -Dvmwgfx=enabled
 endif
 
 ifneq ($(package.option.omap),y)
-  conf-args += -Domap=false
+  conf-args += -Domap=disabled
 else
-  conf-args += -Domap=true
+  conf-args += -Domap=enabled
 endif
 
 ifneq ($(package.option.exynos),y)
-  conf-args += -Dexynos=false
+  conf-args += -Dexynos=disabled
 else
-  conf-args += -Dexynos=true
+  conf-args += -Dexynos=enabled
 endif
 
 ifneq ($(package.option.freedreno),y)
-  conf-args += -Dfreedreno=false
+  conf-args += -Dfreedreno=disabled
 else
-  conf-args += -Dfreedreno=true
+  conf-args += -Dfreedreno=enabled
 endif
 
 ifneq ($(package.option.tegra),y)
-  conf-args += -Dtegra=false
+  conf-args += -Dtegra=disabled
 else
-  conf-args += -Dtegra=true
+  conf-args += -Dtegra=enabled
 endif
 
 ifneq ($(package.option.vc4),y)
-  conf-args += -Dvc4=false
+  conf-args += -Dvc4=disabled
 else
-  conf-args += -Dvc4=true
+  conf-args += -Dvc4=enabled
 endif
 
 ifneq ($(package.option.etnaviv),y)
-  conf-args += -Detnaviv=false
+  conf-args += -Detnaviv=disabled
 else
-  conf-args += -Detnaviv=true
+  conf-args += -Detnaviv=enabled
 endif
 
 conf-args += \
 	-Dinstall-test-programs=true \
-	-Dvalgrind=false
+	-Dvalgrind=disabled
