@@ -1,11 +1,13 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
+include $(TOP_SRCDIR)/packages/meson.mk
+
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/post-install.patch
+	touch $@
+
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch
 
 conf-args += \
-	--with-systemdsystemunitdir=$(PREFIX)/lib/systemd/system \
-	--libexec=$(PREFIX)/lib/dbus-1.0 \
-	--enable-systemd \
-	--disable-rpath \
-	--without-x
+	-Dlauncher-permissions=disabled
 
 SYSUSERS = $(DESTDIR)$(PREFIX)/lib/sysusers.d
 

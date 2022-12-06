@@ -1,0 +1,66 @@
+diff --git a/meson.build b/meson.build
+index 33294e2e6b11..6bd77f019f04 100644
+--- a/meson.build
++++ b/meson.build
+@@ -895,6 +895,13 @@ if relocation and not (get_option('libdir') in [ 'lib', 'lib64', ])
+     endif
+ endif
+ 
++# dbus-daemon-launcher has ownership/permissions configured by default,
++# let's check if we need to enable it
++launcher_permissions = true
++if get_option('launcher-permissions').disabled()
++    launcher_permissions = false
++endif
++
+ #### Directory to source sysconfdir configuration from
+ 
+ # On Windows this is relative to where we put the bus setup, in
+@@ -1107,6 +1114,7 @@ subdir('cmake')
+ 
+ meson.add_install_script('meson_post_install.py',
+     '@0@'.format(relocation),
++    '@0@'.format(launcher_permissions),
+ )
+ 
+ pkgconfig.generate(
+diff --git a/meson_options.txt b/meson_options.txt
+index 68f91f1994d0..dddb9a87b52f 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -170,6 +170,13 @@ option(
+   description: 'Make pkg-config metadata relocatable'
+ )
+ 
++option(
++  'launcher-permissions',
++  type: 'feature',
++  value: 'auto',
++  description: 'Change ownership/permissions on dbus-daemon-launcher executable'
++)
++
+ # Deliberately not named runstatedir to avoid colliding with
+ # https://github.com/mesonbuild/meson/issues/4141
+ option(
+diff --git a/meson_post_install.py b/meson_post_install.py
+index 30cb7bdffaab..98fcf77171a6 100755
+--- a/meson_post_install.py
++++ b/meson_post_install.py
+@@ -59,6 +59,7 @@ def to_destdir(path):
+ abs_libexecdir = destdir_prefix / get_option('libexecdir')
+ 
+ relocation = sys.argv[1].lower() == 'true'
++launcher_permissions = sys.argv[2].lower() == 'true'
+ 
+ def post_install_relocation():
+     # Edit pkg-config file to replace the prefix
+@@ -83,6 +84,9 @@ def post_install_relocation():
+             pcfile.write(line)
+ 
+ def post_install_exe():
++    if not launcher_permissions:
++        return
++
+     # Setuid, chmod and chown for dbus-daemon-launch-helper
+     daemon_launch_helper = get_target('dbus-daemon-launch-helper')
+     if daemon_launch_helper:
