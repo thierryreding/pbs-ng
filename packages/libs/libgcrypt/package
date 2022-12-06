@@ -1,5 +1,5 @@
 description: General purpose cryptographic library based on the code from GnuPG
-version: 1.8.5
+version: 1.10.1
 license: GPL
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-${version}.tar.bz2
-      sha1: 2d8781e92f88706707a1e76fb628b499ad538a30
+      sha1: de2cc32e7538efa376de7bf5d3eafa85626fb95f
 
 packages:
   libgcrypt:
