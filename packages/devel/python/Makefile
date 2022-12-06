@@ -1,6 +1,13 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
+ifeq ($(ARCH),arm64)
+  ARCH = aarch64
+endif
+
+MULTIARCH = $(ARCH)-$(OS)-$(LIBC)$(ABI)
+
 MAJOR = $(word 1,$(subst ., ,$(package.version)))
+MINOR = $(word 2,$(subst ., ,$(package.version)))
 
 $(builddir):
 	mkdir -p $@
@@ -14,6 +21,10 @@ $(builddir)/config.cache: $(srcdir)/stamp-patch | $(builddir)
 	echo 'ac_cv_buggy_getaddrinfo=no' >> $@
 	echo 'ac_cv_file__dev_ptmx=yes' >> $@
 	echo 'ac_cv_file__dev_ptc=no' >> $@
+
+$(CURDIR)/export.mk:
+	echo "PYTHON_MAJOR := $(MAJOR)"  > $@
+	echo "PYTHON_MINOR := $(MINOR)" >> $@
 
 conf-args = \
 	--config-cache \
@@ -35,7 +46,7 @@ conf-vars = \
 	CXXFLAGS='$(CXXFLAGS)' \
 	LDFLAGS='$(LDFLAGS)'
 
-$(builddir)/stamp-configure: $(builddir)/config.cache | $(builddir)
+$(builddir)/stamp-configure: $(builddir)/config.cache $(CURDIR)/export.mk | $(builddir)
 	cd $(builddir) && \
 		$(conf-env) $(srcdir)/configure $(conf-args) $(conf-vars)
 	touch $@
@@ -58,6 +69,14 @@ $(builddir)/stamp-install: $(builddir)/stamp-build
 		$(MAKE) $(install-args) install
 	ln -sf python$(MAJOR) $(DESTDIR)$(PREFIX)/bin/python
 	touch $@
+
+# install sysconfigdata file for cross-compilation of modules
+SYSCONFIGDATA = _sysconfigdata__$(OS)_$(MULTIARCH).py
+
+$(BUILD_TOOLS)/lib/python$(MAJOR).$(MINOR)/$(SYSCONFIGDATA): $(builddir)/build/lib.$(OS)-$(ARCH)-$(MAJOR).$(MINOR)/$(SYSCONFIGDATA)
+	cp $< $@
+
+$(builddir)/stamp-install: $(BUILD_TOOLS)/lib/python$(MAJOR).$(MINOR)/$(SYSCONFIGDATA)
 
 install: $(builddir)/stamp-install
 
