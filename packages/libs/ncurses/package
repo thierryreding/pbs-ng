@@ -1,5 +1,5 @@
 description: System V Release 4.0 curses emulation library
-version: 6.1
+version: 6.3
 license: MIT
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/ncurses/ncurses-${version}.tar.gz
-      sha1: 57acf6bc24cacd651d82541929f726f4def780cc
+      sha1: 38fb1462d13b04bb900adf07918725c4b7ed0682
 
 packages:
   ncurses:
