@@ -1,8 +1,7 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
 common-args = \
-	prefix='$(PREFIX)' \
-	sbindir='$$(prefix)/bin'
+	PREFIX='$(PREFIX)'
 
 build-args = \
 	CC='$(CROSS_COMPILE)gcc' \

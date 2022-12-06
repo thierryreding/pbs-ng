@@ -1,5 +1,5 @@
 description: heterogeneous set of I2C tools for Linux
-version: 4.1
+version: 4.3
 license: GPL
 
 depends:
@@ -8,11 +8,32 @@ depends:
 files:
   - download:
       url: https://kernel.org/pub/software/utils/i2c-tools/i2c-tools-${version}.tar.xz
-      sha1: d383d1ae86bd695b505dd1251ac399e3cdc1b05f
+      sha1: 7b41de001dd3b98d98688477f81be844c42907e4
 
 packages:
   i2c-tools:
     files:
       - /usr/bin
+      - /usr/lib/*.so.*
+      - /usr/sbin
+
+  i2c-tools-man:
+    files:
+      - /usr/share/man/man1
+      - /usr/share/man/man8
+
+  libi2c:
+    files:
+      - /usr/lib/*.so.*
+
+  libi2c-man:
+    files:
+      - /usr/share/man/man3
+
+  libi2c-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
