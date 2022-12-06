@@ -1,5 +1,5 @@
 description: A shell utility for manipulating IDE drive/driver parameters
-version: 9.58
+version: 9.65
 license: BSD
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://downloads.sourceforge.net/sourceforge/hdparm/hdparm-${version}.tar.gz
-      sha1: b3425a141f1c0fe9f53b18631437129c2155ee45
+      sha1: 3bc0916493f2f485c6371ec0fd16418d0e1fa636
 
 packages:
   hdparm:
