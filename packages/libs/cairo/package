@@ -1,11 +1,12 @@
 description: Cairo vector graphics library
-version: 1.16.0
+version: 1.17.6
 license: LGPL-2.1 MPL-1.1
 
 depends:
   - devel/glibc
   - libs/fontconfig
   - libs/freetype
+  - libs/glib
   - libs/libpng
   - libs/pixman
   - xorg/lib/xext
@@ -13,8 +14,8 @@ depends:
 
 files:
   - download:
-      url: http://cairographics.org/releases/cairo-${version}.tar.xz
-      sha1: 00e81842ae5e81bb0343108884eb5205be0eac14
+      url: https://gitlab.freedesktop.org/cairo/cairo/-/archive/${version}/cairo-${version}.tar.bz2
+      sha1: 51f2e2e5525665c0b25bea18826d2283a76801a9
 
 packages:
   libcairo-dev:

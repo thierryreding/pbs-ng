@@ -1,18 +1,4 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
+include $(TOP_SRCDIR)/packages/meson.mk
 
-ifeq ($(realpath $(srcdir)),$(srcdir))
-$(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && autoreconf --force --install
-	touch $@
-
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
-else
-$(builddir)/stamp-prepare: | $(builddir)
-	cd $(srcdir) && autoreconf --force --install
-	touch $@
-
-$(builddir)/stamp-configure: $(builddir)/stamp-prepare
-endif
-
-conf-args += \
-	--with-sysroot=$(SYSROOT)
+$(builddir)/cross.ini::
+	$(TOP_SRCDIR)/scripts/initool --file $@ set properties.ipc_rmid_deferred_release true
