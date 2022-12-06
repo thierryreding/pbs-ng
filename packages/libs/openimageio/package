@@ -1,0 +1,45 @@
+description: library for reading, writing and processing images in a wide variety of file formats
+version: 2.4.5.0
+license: BSD-3-Clause
+
+depends:
+  - libs/boost
+  - libs/libtiff
+  - libs/opencolorio
+  - libs/openexr
+  - libs/openvdb
+  - libs/pybind11
+  - libs/tbb
+
+files:
+  - download:
+      url: https://github.com/OpenImageIO/oiio/archive/v${version}.tar.gz
+      sha1: 923f26ed3ddd5f426d20db592966563d90149caa
+
+packages:
+  openimageio:
+    files:
+      - /usr/bin
+      - /usr/share/fonts
+
+  openimageio-doc:
+    files:
+      - /usr/share/doc
+
+  libopenimageio:
+    files:
+      - /usr/lib/*.so.*
+
+  libopenimageio-python:
+    files:
+      - /usr/lib/python*
+
+  libopenimageio-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+      - /usr/lib/pkgconfig
+      - /usr/share/cmake
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
