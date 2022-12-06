@@ -1,5 +1,5 @@
 description: text layout and rendering library
-version: 1.44.6
+version: 1.50.1
 license: LGPL-2.1
 
 depends:
@@ -11,7 +11,7 @@ depends:
 files:
   - download:
       url: http://ftp.gnome.org/pub/GNOME/sources/pango/${major}.${minor}/pango-${version}.tar.xz
-      sha1: 6d1067d29b314bc41fe34c9bd83867eac6df5bad
+      sha1: e3363767d283a2a524f8c000e1716b100afed79d
 
 packages:
   libpango-dev:
