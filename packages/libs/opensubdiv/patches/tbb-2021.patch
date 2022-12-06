@@ -1,0 +1,25 @@
+diff --git a/opensubdiv/osd/tbbEvaluator.cpp b/opensubdiv/osd/tbbEvaluator.cpp
+index c98db9f6d301..322cbbb42f3c 100644
+--- a/opensubdiv/osd/tbbEvaluator.cpp
++++ b/opensubdiv/osd/tbbEvaluator.cpp
+@@ -25,8 +25,6 @@
+ #include "../osd/tbbEvaluator.h"
+ #include "../osd/tbbKernel.h"
+ 
+-#include <tbb/task_scheduler_init.h>
+-
+ namespace OpenSubdiv {
+ namespace OPENSUBDIV_VERSION {
+ 
+@@ -215,11 +213,6 @@ TbbEvaluator::Synchronize(void *) {
+ /* static */
+ void
+ TbbEvaluator::SetNumThreads(int numThreads) {
+-    if (numThreads == -1) {
+-        tbb::task_scheduler_init init;
+-    } else {
+-        tbb::task_scheduler_init init(numThreads);
+-    }
+ }
+ 
+ }  // end namespace Osd

@@ -1,0 +1,17 @@
+include: packages/libs/opensubdiv/package.include
+
+depends:
+  - libs/glfw
+
+packages:
+  opensubdiv:
+    files:
+      - /usr/lib/*.so.*
+
+  opensubdiv-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
