@@ -1,0 +1,18 @@
+include: packages/libs/boost/package.include
+
+depends:
+  - devel/glibc
+
+packages:
+  boost:
+    files:
+      - /usr/lib/*.so.*
+
+  boost-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
