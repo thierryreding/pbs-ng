@@ -3,6 +3,7 @@ version: 1.8.0
 license: LGPL-2.1-only
 
 depends:
+  - build-tools/cmake
   - libs/libjpeg-turbo
 
 files:
