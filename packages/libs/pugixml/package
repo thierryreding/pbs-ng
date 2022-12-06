@@ -1,0 +1,26 @@
+description: light-weight C++ XML processing library
+version: 1.11
+license: MIT
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/zeux/pugixml/releases/download/v${version}/pugixml-${version}.tar.gz
+      sha1: 170a3ab84b58a06ebfef1d72161cd9133bb92c36
+
+packages:
+  pugixml:
+    files:
+      - /usr/lib/*.so.*
+
+  pugixml-dev:
+    files:
+      - /usr/include
+      - /usr/lib/cmake
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
