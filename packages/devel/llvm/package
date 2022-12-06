@@ -1,8 +1,11 @@
 include: packages/devel/llvm/package.include
 
 depends:
+  - build-tools/cmake
   - build-tools/llvm
   - devel/glibc
+  - libs/ncurses
+  - libs/zstd
 
 packages:
   llvm:

@@ -12,7 +12,11 @@ ifeq ($(ARCH),arm)
   TARGET = ARM
 endif
 
+# will exhaust memory and get OOM-killed if run too many parallel jobs
+JOBS := 8
+
 cmake-args += \
+	-DLLVM_CONFIG_PATH=$(BUILD_TOOLS)/bin/llvm-config \
 	-DLLVM_TABLEGEN=$(BUILD_TOOLS)/bin/llvm-tblgen \
 	-DLLVM_DEFAULT_TARGET_TRIPLE=$(HOST) \
 	-DLLVM_TARGETS_TO_BUILD=$(TARGET) \
@@ -22,9 +26,3 @@ cmake-args += \
 	-DLLVM_ENABLE_RTTI=ON \
 	-DCMAKE_CROSSCOMPILING=True \
 	-DCMAKE_BUILD_TYPE=Release
-
-$(BUILD_TOOLS)/bin/$(HOST)-llvm-config: $(TOP_SRCDIR)/$(PKGDIR)/llvm-config.in
-	$(SED) 's|@SYSROOT@|$(SYSROOT)|;s|@PREFIX@|$(PREFIX)|;s|@VERSION@|$(package.version)|;s|@SOURCE_ROOT@|$(srcdir)|' $< > $@
-	chmod a+x $@
-
-$(builddir)/stamp-install: $(BUILD_TOOLS)/bin/$(HOST)-llvm-config
