@@ -1,0 +1,10 @@
+description: SPIR-V/LLVM bi-directional translator
+version: 15.0.0
+license: custom
+
+files:
+  - download:
+      url: https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/v${version}/spirv-llvm-translator-${version}.tar.gz
+      sha1: f288e95377bc94e5fdbe5ed4f2dfdd16ef02289a
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

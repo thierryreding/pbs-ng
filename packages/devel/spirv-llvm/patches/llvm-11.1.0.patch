@@ -1,0 +1,12 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ecebb4cb245e..79c792ce3a05 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,6 +1,6 @@
+ cmake_minimum_required(VERSION 3.3)
+ 
+-set (BASE_LLVM_VERSION 11.0.0)
++set (BASE_LLVM_VERSION 11.1.0)
+ set(LLVM_SPIRV_VERSION ${BASE_LLVM_VERSION}.0)
+ 
+ option(LLVM_SPIRV_INCLUDE_TESTS

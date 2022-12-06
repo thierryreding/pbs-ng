@@ -1,23 +1,19 @@
-description: SPIR-V/LLVM bi-directional translator
-version: 10.0.0
-license: custom
+include: packages/devel/spirv-llvm/package.include
 
 depends:
+  - build-tools/cmake
   - devel/llvm
-
-files:
-  - source:
-      url: git+https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/v${version}/spirv-llvm-translator-${version}.tar.gz
 
 packages:
   spirv-llvm:
     files:
       - /usr/bin
-      - /usr/lib/*.so
+      - /usr/lib/*.so.*
 
   spirv-llvm-dev:
     files:
       - /usr/include
+      - /usr/lib/*.so
       - /usr/lib/pkgconfig
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
