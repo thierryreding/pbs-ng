@@ -1,8 +1,9 @@
 description: an open-source implementation of the OpenGL specification
-version: 19.2.2
+version: 22.2.4
 license: custom
 
 depends:
+  - build-tools/meson
   - build-tools/python-mako
   - devel/clang
   - devel/llvm
@@ -11,7 +12,9 @@ depends:
   - libs/libclc
   - libs/libdrm
   - libs/libelf
+  - libs/libglvnd
   - libs/libunwind
+  - libs/zstd
   - xorg/proto/xorgproto
   - xorg/lib/xext
   - xorg/lib/xdamage
@@ -30,7 +33,7 @@ depends:
 files:
   - download:
       url: https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz
-      sha1: 6ddc41e71d894dd406a3ca482f1cfda44566a5f8
+      sha1: b131bcdd82effbbdaacfff07097bf5f0444d490c
 
 options:
   debug:
@@ -129,20 +132,20 @@ options:
         description: Android platform
         default: no
 
-      wayland:
-        description: Wayland platform
-        default: no
-
       x11:
         description: X11 platform
         default: no
 
-      drm:
-        description: DRM platform
+      wayland:
+        description: Wayland platform
         default: no
 
-      surfaceless:
-        description: surfaceless platform
+      haiku:
+        description: Haiku platform
+        default: no
+
+      windows:
+        description: Windows platform
         default: no
 
 packages:
@@ -154,6 +157,7 @@ packages:
       - /usr/lib/gbm/*.so
       - /usr/lib/vdpau/*
       - /usr/lib/*.so.*
+      - /usr/share
 
   mesa-dev:
     files:
