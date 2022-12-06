@@ -1,5 +1,5 @@
 description: generic NVIDIA Tegra board
-version: 2019.09
+version: 2022.10
 license: GPL-2.0
 
 depends:
@@ -38,6 +38,9 @@ options:
 
       tegra194:
         description: NVIDIA Tegra194
+
+      tegra234:
+        description: NVIDIA Tegra234
 
 packages:
   board-nvidia-tegra:
