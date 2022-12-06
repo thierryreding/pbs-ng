@@ -1,0 +1,13 @@
+description: Super-fast templating language that borrows the best ideas from the existing templating languages
+version: 3.0.3
+license: BSD
+
+files:
+  - download:
+      url: https://files.pythonhosted.org/packages/91/a5/429efc6246119e1e3fbf562c00187d04e83e54619249eb732bb423efa6c6/Jinja2-${version}.tar.gz
+      sha1: befcc9b2a983507ae54bd7f0d39dc495b92c452c
+
+depends:
+  - build-tools/python
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
