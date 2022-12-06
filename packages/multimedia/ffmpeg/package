@@ -1,11 +1,11 @@
 description: complete solution to record, convert and stream audio and video
-version: 4.2.1
+version: 5.1.1
 license: GPL-3.0-or-later
 
 files:
   - download:
       url: https://ffmpeg.org/releases/ffmpeg-${version}.tar.xz
-      sha1: c386b7330259d9eec0bdefb39e05bf9145e3d850
+      sha1: aeda76be4d6682889c67878f6b08524936e6bd7e
 
 depends:
   - devel/glibc
