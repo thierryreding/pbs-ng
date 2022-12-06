@@ -1,11 +1,11 @@
 description: Advanced Linux Sound Architecture - core libraries
-version: 1.1.9
+version: 1.2.7.2
 license: LGPL
 
 files:
   - download:
       url: ftp://ftp.alsa-project.org/pub/lib/alsa-lib-${version}.tar.bz2
-      sha1: 2404e1c377428908c5188076d5652a2a1ecd028e
+      sha1: 839e6b32dcfed7a335e150cd8be6071cd2c1ffbd
 
 depends:
   - devel/glibc
