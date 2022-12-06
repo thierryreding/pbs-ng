@@ -1,0 +1,23 @@
+description: open-source JPEG 2000 codec written in C
+version: 2.4.0
+license: BSD-2-clause
+
+files:
+  - download:
+      url: https://github.com/uclouvain/openjpeg/archive/v${version}.tar.gz
+      sha1: bbbf4dc4d9ce95286843cd39ac2febd3fd516c9d
+
+packages:
+  openjpeg:
+    files:
+      - /usr/lib/*.so.*
+
+  openjpeg-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/openjpeg-${major}.${minor}
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
