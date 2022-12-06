@@ -1,0 +1,30 @@
+description: an audio sample rate conversion library
+version: 0.2.2
+license: BSD-2-Clause
+
+depends:
+  - multimedia/alsa-lib
+  - multimedia/libsndfile
+
+files:
+  - download:
+      url: https://github.com/libsndfile/libsamplerate/releases/download/${version}/libsamplerate-${version}.tar.xz
+      sha1: 93eacb671d2d09e317f5ccd49967cf747cb4d937
+
+packages:
+  libsamplerate:
+    files:
+      - /usr/lib/*.so.*
+
+  libsamplerate-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libsamplerate-doc:
+    files:
+      - /usr/share/doc
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
