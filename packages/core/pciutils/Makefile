@@ -16,6 +16,7 @@ build-args = \
 	HOST='$(HOST)' \
 	SHARED=yes \
 	ZLIB=yes \
+	STRIP= \
 	DNS=no
 
 $(builddir)/stamp-build: $(srcdir)/stamp-patch | $(builddir)
@@ -28,7 +29,8 @@ install-args = \
 	SBINDIR='$(PREFIX)/bin' \
 	DESTDIR='$(DESTDIR)' \
 	PREFIX='$(PREFIX)' \
-	SHARED=yes
+	SHARED=yes \
+	STRIP=
 
 install-targets = \
 	install-lib \
