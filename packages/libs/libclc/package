@@ -1,15 +1,18 @@
 description: library requirements of the OpenCL C programming language
-version: 10.0.0
+version: 15.0.2
 license: MIT
 
 depends:
   - build-tools/clang
-  - devel/glibc
+  - build-tools/cmake
+  - build-tools/spirv-tools
+  - build-tools/spirv-llvm
+  - devel/spirv-llvm
 
 files:
   - download:
-      url: https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/llvm-project-${version}.tar.xz
-      sha1: e36d6c2e5a2db5609e8a69d22afabe7b1e6f81d3
+      url: https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/libclc-${version}.src.tar.xz
+      sha1: 692dc85ad371f1bac574d1a4894637a31ffcf5e0
 
 packages:
   libclc:
