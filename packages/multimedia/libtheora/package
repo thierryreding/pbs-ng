@@ -1,0 +1,25 @@
+description: Theora codec library
+version: 1.1.1
+license: BSD
+
+depends:
+  - multimedia/libogg
+
+files:
+  - download:
+      url: http://downloads.xiph.org/releases/theora/libtheora-${version}.tar.xz
+      sha1: 800aa48cf9e59d546c18ecdac1d06d7643cbb2d3
+
+packages:
+  libtheora:
+    files:
+      - /usr/lib/*.so.*
+
+  libtheora-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

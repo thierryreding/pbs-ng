@@ -1,0 +1,32 @@
+diff --git a/Makefile.am b/Makefile.am
+index d833491e92eb..c094e293d5ff 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,6 +1,7 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+ AUTOMAKE_OPTIONS = foreign 1.6 dist-zip dist-bzip2
++ACLOCAL_AMFLAGS = -I m4
+ 
+ if THEORA_ENABLE_EXAMPLES
+ EXAMPLES_DIR = examples
+diff --git a/configure.ac b/configure.ac
+index 8260bdf76296..e2f2ea9557a2 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -311,12 +311,9 @@ then
+ fi
+ 
+ dnl check for SDL
+-HAVE_SDL=no
+-
+-AM_PATH_SDL(,[
+-  HAVE_SDL=yes
+-  SDL_LIBS=`$SDL_CONFIG --libs`
+-],AC_MSG_WARN([*** Unable to find SDL -- Not compiling example players ***]))
++if test "x$HAVE_PKG_CONFIG" = "xyes"; then
++	PKG_CHECK_MODULES(SDL, sdl, HAVE_SDL=yes, HAVE_SDL=no)
++fi
+ 
+ dnl check for OSS
+ HAVE_OSS=no
