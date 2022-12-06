@@ -1,0 +1,24 @@
+description: open framework for storing and sharing scene data
+version: 1.8.3
+license: custom
+
+depends:
+  - devel/glibc
+  - libs/openexr
+
+files:
+  - download:
+      url: https://github.com/alembic/alembic/archive/${version}.tar.gz
+      sha1: ec50862b607ec6922fb8db76d5f4a74a16232d4d
+
+packages:
+  alembic:
+    files:
+      - /usr/lib/*.so.*
+
+  alembic-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
