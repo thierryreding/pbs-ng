@@ -1,1 +1,1 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
+include $(TOP_SRCDIR)/packages/meson.mk
