@@ -7,4 +7,5 @@ $(builddir)/stamp-patch: | $(builddir)
 $(builddir)/stamp-configure: $(builddir)/stamp-patch
 
 conf-args += \
-	--with-sysroot=$(SYSROOT)
+	--with-sysroot=$(SYSROOT) \
+	--enable-everything
