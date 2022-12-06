@@ -1,11 +1,11 @@
 description: A collection of common network programs
-version: 1.9.4
+version: 2.4
 license: GPL-3.0
 
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/inetutils/inetutils-${version}.tar.xz
-      sha1: 5e515cc9da142cb73bb1beda137b4c2dcf2b528c
+      sha1: df64dd4ea0e752a839dd51dd8a6a001c9c7d1e96
 
 packages:
   inetutils:
