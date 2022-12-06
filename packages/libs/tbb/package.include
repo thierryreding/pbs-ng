@@ -1,0 +1,10 @@
+description: thread building blocks
+version: 2021.7.0
+license: Apache
+
+files:
+  - download:
+      url: https://github.com/oneapi-src/oneTBB/archive/v${version}.tar.gz
+      sha1: e4be99dc35948052296105d2ae7da6d34e01ba2d
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
