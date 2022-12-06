@@ -21,6 +21,11 @@ cpu:
       defaults:
         version: armv8-a
 
+    cortex-a78:
+      description: ARM Cortex-A78
+      defaults:
+        version: armv8-a
+
     denver:
       description: NVIDIA Denver
       defaults:
