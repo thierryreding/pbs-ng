@@ -1,0 +1,29 @@
+description: a C library for reading and writing sound files containing sampled audio data
+version: 1.1.0
+license: LGPL-2.1
+
+depends:
+  - multimedia/alsa-lib
+  - multimedia/flac
+  - multimedia/libogg
+  - multimedia/libvorbis
+  - multimedia/opus
+
+files:
+  - download:
+      url: https://github.com/libsndfile/libsndfile/releases/download/${version}/libsndfile-${version}.tar.xz
+      sha1: ba290fdec0cc0a34e0a7b7499a8094816b3fe840
+
+packages:
+  libsndfile:
+    files:
+      - /usr/lib/*.so.*
+
+  libsndfile-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
