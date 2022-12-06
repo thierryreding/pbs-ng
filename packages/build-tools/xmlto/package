@@ -1,0 +1,10 @@
+description: convert XML to many other formats
+version: 0.0.28
+license: GPL
+
+files:
+  - download:
+      url: https://releases.pagure.org/xmlto/xmlto-${version}.tar.bz2
+      sha1: aa63af9a86ab6ed0c92ea8b177dc808c18902c73
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
