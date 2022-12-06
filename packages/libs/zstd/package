@@ -1,5 +1,5 @@
 description: fast real-time compression algorithm
-version: 1.4.8
+version: 1.5.0
 license: BSD
 
 depends:
@@ -11,7 +11,7 @@ depends:
 files:
   - download:
       url: https://github.com/facebook/zstd/archive/v${version}.tar.gz
-      sha1: e3027d788b964429c773fab05e000061dc6eb3f6
+      sha1: 3299248fcd44d7f21ba2f1f198c1173eeb3c4f32
 
 packages:
   zstd:
