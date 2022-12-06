@@ -1,5 +1,5 @@
 description: Tag Image File Format library
-version: 4.2.0
+version: 4.4.0
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://download.osgeo.org/libtiff/tiff-${version}.tar.gz
-      sha1: 400ff865beb34499633dd1095fe438995e6da707
+      sha1: e11d05db71d243a62800b4bf4479eb4859714405
 
 packages:
   libtiff:
