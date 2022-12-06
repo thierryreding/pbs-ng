@@ -40,6 +40,12 @@ $(builddir)/stamp-install: $(builddir)/stamp-build | $(builddir)
 		$(MAKE) -j $(JOBS) DESTDIR=$(DESTDIR) install
 	touch $@
 
-install: $(builddir)/stamp-install
+$(DESTDIR)/etc/ld.so.conf.d:
+	mkdir -p $@
+
+$(DESTDIR)/etc/ld.so.conf:
+	echo "include /etc/ld.so.conf.d/*.conf" > $@
+
+install: $(builddir)/stamp-install $(DESTDIR)/etc/ld.so.conf | $(DESTDIR)/etc/ld.so.conf.d
 
 .PHONY: install
