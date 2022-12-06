@@ -1,5 +1,5 @@
 description: Linux key management utilities
-version: 1.6.1
+version: 1.6.3
 license: GPL-2.0-only LGPL-2.1
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/keyutils-${version}.tar.gz
-      sha1: 8ddc9fcb65e0bdccc3184e0c2b64be004112cfa6
+      sha1: 7e5112d68eef5677e474d062282a0e1d1f19904c
 
 packages:
   libkeyutils:
