@@ -1,0 +1,18 @@
+description: a simple, yet elegant HTTP library
+version: 2.25.1
+license: Apache-2.0
+
+files:
+  - download:
+      url: https://github.com/psf/requests/archive/v${version}.tar.gz
+      sha1: 804fdbaf3dbc57f49a66cef920e9d4a5ce3460eb
+
+depends:
+  - devel/python
+
+packages:
+  python-requests:
+    files:
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
