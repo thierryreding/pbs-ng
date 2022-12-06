@@ -1,0 +1,48 @@
+description: a fully integrated 3D graphics creation suite
+version: 3.3.1
+license: GPL
+
+depends:
+  - build-tools/boost
+  - build-tools/tbb
+  - devel/python
+  - devel/python-numpy
+  - devel/python-requests
+  - libs/alembic
+  # XXX only on x86
+  #- libs/embree
+  - libs/fftw
+  - libs/freetype
+  - libs/glew
+  - libs/gmp
+  - libs/libjpeg-turbo
+  - libs/libpng
+  - libs/opencollada
+  # XXX build seems broken when this is enabled
+  - libs/opencolorio
+  # XXX only on x86 (requires ISPC)
+  #- libs/openimagedenoise
+  - libs/openimageio
+  - libs/openjpeg
+  - libs/opensubdiv
+  # XXX doesn't build yet
+  - libs/openvdb
+  - libs/potrace
+  - libs/pugixml
+  - libs/sdl
+  - libs/tbb
+  - libs/zlib
+  - multimedia/openal
+
+files:
+  - download:
+      url: https://download.blender.org/source/blender-${version}.tar.xz
+      sha1: 794f85f61a73a0574e7739a864b5fbe7391aef1f
+
+packages:
+  blender:
+    files:
+      - /usr/bin
+      - /usr/share
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

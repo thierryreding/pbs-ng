@@ -1,0 +1,292 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f315fa872366..3f052b3eab3b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -144,6 +144,24 @@ endif()
+ 
+ get_blender_version()
+ 
++#-----------------------------------------------------------------------------
++# Import generators for cross-compilation builds
++if(CMAKE_CROSSCOMPILING)
++  add_executable(datatoc IMPORTED)
++  set_property(TARGET datatoc PROPERTY IMPORTED_LOCATION "${DATATOC_PATH}")
++
++  add_executable(datatoc_icon IMPORTED)
++  set_property(TARGET datatoc_icon PROPERTY IMPORTED_LOCATION "${DATATOC_ICON_PATH}")
++
++  add_executable(makesdna IMPORTED)
++  set_property(TARGET makesdna PROPERTY IMPORTED_LOCATION "${MAKESDNA_PATH}")
++
++  add_executable(makesrna IMPORTED)
++  set_property(TARGET makesrna PROPERTY IMPORTED_LOCATION "${MAKESRNA_PATH}")
++
++  add_executable(msgfmt IMPORTED)
++  set_property(TARGET msgfmt PROPERTY IMPORTED_LOCATION "${MSGFMT_PATH}")
++endif()
+ 
+ #-----------------------------------------------------------------------------
+ # Options
+diff --git a/source/blender/blentranslation/msgfmt/CMakeLists.txt b/source/blender/blentranslation/msgfmt/CMakeLists.txt
+index 4b8f0878c75f..fe689801b231 100644
+--- a/source/blender/blentranslation/msgfmt/CMakeLists.txt
++++ b/source/blender/blentranslation/msgfmt/CMakeLists.txt
+@@ -21,31 +21,33 @@
+ # -----------------------------------------------------------------------------
+ # Build msgfmt executable
+ 
+-blender_include_dirs(
+-  ../../../../intern/guardedalloc
+-  ../../blenlib
+-)
++if(NOT CMAKE_CROSSCOMPILING)
++  blender_include_dirs(
++    ../../../../intern/guardedalloc
++    ../../blenlib
++  )
+ 
+-set(SRC
+-  msgfmt.c
+-)
++  set(SRC
++    msgfmt.c
++  )
+ 
+-setup_libdirs()
+-add_cc_flags_custom_test(msgfmt)
++  setup_libdirs()
++  add_cc_flags_custom_test(msgfmt)
+ 
+-if(WIN32)
+-  string(APPEND CMAKE_EXE_LINKER_FLAGS_DEBUG " /nodefaultlib:MSVCRT.lib")
+-endif()
++  if(WIN32)
++    string(APPEND CMAKE_EXE_LINKER_FLAGS_DEBUG " /nodefaultlib:MSVCRT.lib")
++  endif()
+ 
+-add_executable(msgfmt ${SRC})
+-setup_platform_linker_flags(msgfmt)
++  add_executable(msgfmt ${SRC})
++  setup_platform_linker_flags(msgfmt)
+ 
+-target_link_libraries(msgfmt bf_blenlib)
+-target_link_libraries(msgfmt bf_intern_guardedalloc)
++  target_link_libraries(msgfmt bf_blenlib)
++  target_link_libraries(msgfmt bf_intern_guardedalloc)
+ 
+-if(WIN32)
+-  target_link_libraries(msgfmt bf_intern_utfconv)
+-endif()
++  if(WIN32)
++    target_link_libraries(msgfmt bf_intern_utfconv)
++  endif()
+ 
+-target_link_libraries(msgfmt ${ZLIB_LIBRARIES})
+-target_link_libraries(msgfmt ${PLATFORM_LINKLIBS})
++  target_link_libraries(msgfmt ${ZLIB_LIBRARIES})
++  target_link_libraries(msgfmt ${PLATFORM_LINKLIBS})
++endif()
+diff --git a/source/blender/datatoc/CMakeLists.txt b/source/blender/datatoc/CMakeLists.txt
+index 8411a1a468ee..a02bf9f746f9 100644
+--- a/source/blender/datatoc/CMakeLists.txt
++++ b/source/blender/datatoc/CMakeLists.txt
+@@ -16,54 +16,54 @@
+ # ***** END GPL LICENSE BLOCK *****
+ 
+ 
++if(NOT CMAKE_CROSSCOMPILING)
+ # -----------------------------------------------------------------------------
+ # Build datatoc executable
+-set(SRC
+-  datatoc.c
+-)
+-
+-# SRC_DNA_INC is defined in the parent dir
+-add_executable(datatoc ${SRC})
++  set(SRC
++    datatoc.c
++  )
+ 
++  # SRC_DNA_INC is defined in the parent dir
++  add_executable(datatoc ${SRC})
+ 
+ # -----------------------------------------------------------------------------
+ # Build datatoc_icon executable
+ 
+-if(NOT WITH_HEADLESS)
+-
+-  set(SRC
+-    datatoc_icon.c
+-  )
+-  setup_platform_linker_flags(datatoc)
+-  if(WIN32)
+-    include_directories(
+-      ../blenlib
+-      ../../../intern/utfconv
++  if(NOT WITH_HEADLESS)
++    set(SRC
++      datatoc_icon.c
+     )
++    setup_platform_linker_flags(datatoc)
++    if(WIN32)
++      include_directories(
++        ../blenlib
++        ../../../intern/utfconv
++      )
+ 
+-    # for winstuff_dir.c
+-    add_definitions(-DUSE_STANDALONE)
++      # for winstuff_dir.c
++      add_definitions(-DUSE_STANDALONE)
+ 
+-    list(APPEND SRC
+-      ../blenlib/intern/winstuff_dir.c
+-      ../../../intern/utfconv/utfconv.c
+-    )
++      list(APPEND SRC
++        ../blenlib/intern/winstuff_dir.c
++        ../../../intern/utfconv/utfconv.c
++      )
+ 
+-  endif()
++    endif()
+ 
+-  include_directories(${PNG_INCLUDE_DIRS})
+-  if(NOT APPLE)
+-    # APPLE platform uses full paths for linking libraries.
+-    link_directories(${PNG_LIBPATH} ${ZLIB_LIBPATH})
+-  endif()
++    include_directories(${PNG_INCLUDE_DIRS})
++    if(NOT APPLE)
++      # APPLE platform uses full paths for linking libraries.
++      link_directories(${PNG_LIBPATH} ${ZLIB_LIBPATH})
++    endif()
+ 
+-  add_executable(datatoc_icon ${SRC})
+-  setup_platform_linker_flags(datatoc_icon)
++    add_executable(datatoc_icon ${SRC})
++    setup_platform_linker_flags(datatoc_icon)
+ 
+-  target_link_libraries(datatoc_icon ${PNG_LIBRARIES} ${ZLIB_LIBRARIES})
+-  # PNG library uses pow() and floow(), so seems -lm is required for proper
+-  # working binary.
+-  if(UNIX AND NOT APPLE)
+-    target_link_libraries(datatoc_icon m)
++    target_link_libraries(datatoc_icon ${PNG_LIBRARIES} ${ZLIB_LIBRARIES})
++    # PNG library uses pow() and floow(), so seems -lm is required for proper
++    # working binary.
++    if(UNIX AND NOT APPLE)
++      target_link_libraries(datatoc_icon m)
++    endif()
+   endif()
+ endif()
+diff --git a/source/blender/makesdna/intern/CMakeLists.txt b/source/blender/makesdna/intern/CMakeLists.txt
+index db34cf83fa98..1903abdf3ed1 100644
+--- a/source/blender/makesdna/intern/CMakeLists.txt
++++ b/source/blender/makesdna/intern/CMakeLists.txt
+@@ -33,30 +33,32 @@ blender_include_dirs(
+ 
+ # -----------------------------------------------------------------------------
+ # Build makesdna executable
+-set(SRC
+-  dna_utils.c
+-  makesdna.c
+-  ../../blenlib/intern/BLI_assert.c
+-  ../../blenlib/intern/BLI_ghash.c
+-  ../../blenlib/intern/BLI_ghash_utils.c
+-  ../../blenlib/intern/BLI_memarena.c
+-  ../../blenlib/intern/BLI_mempool.c
+-  ../../blenlib/intern/hash_mm2a.c  # needed by 'BLI_ghash_utils.c', not used directly.
+-  ../../../../intern/guardedalloc/intern/leak_detector.cc
+-  ../../../../intern/guardedalloc/intern/mallocn.c
+-  ../../../../intern/guardedalloc/intern/mallocn_guarded_impl.c
+-  ../../../../intern/guardedalloc/intern/mallocn_lockfree_impl.c
+-)
+-
+-# SRC_DNA_INC is defined in the parent dir
+-
+-add_cc_flags_custom_test(makesdna)
+-
+-add_executable(makesdna ${SRC} ${SRC_DNA_INC})
+-setup_platform_linker_flags(makesdna)
+-
+-if(WIN32 AND NOT UNIX)
+-  target_link_libraries(makesdna ${PTHREADS_LIBRARIES})
++if(NOT CMAKE_CROSSCOMPILING)
++  set(SRC
++    dna_utils.c
++    makesdna.c
++    ../../blenlib/intern/BLI_assert.c
++    ../../blenlib/intern/BLI_ghash.c
++    ../../blenlib/intern/BLI_ghash_utils.c
++    ../../blenlib/intern/BLI_memarena.c
++    ../../blenlib/intern/BLI_mempool.c
++    ../../blenlib/intern/hash_mm2a.c  # needed by 'BLI_ghash_utils.c', not used directly.
++    ../../../../intern/guardedalloc/intern/leak_detector.cc
++    ../../../../intern/guardedalloc/intern/mallocn.c
++    ../../../../intern/guardedalloc/intern/mallocn_guarded_impl.c
++    ../../../../intern/guardedalloc/intern/mallocn_lockfree_impl.c
++  )
++
++  # SRC_DNA_INC is defined in the parent dir
++
++  add_cc_flags_custom_test(makesdna)
++
++  add_executable(makesdna ${SRC} ${SRC_DNA_INC})
++  setup_platform_linker_flags(makesdna)
++
++  if(WIN32 AND NOT UNIX)
++    target_link_libraries(makesdna ${PTHREADS_LIBRARIES})
++  endif()
+ endif()
+ 
+ # Output dna.c
+diff --git a/source/blender/makesrna/intern/CMakeLists.txt b/source/blender/makesrna/intern/CMakeLists.txt
+index 4fafa3568793..1794fd54a7d5 100644
+--- a/source/blender/makesrna/intern/CMakeLists.txt
++++ b/source/blender/makesrna/intern/CMakeLists.txt
+@@ -370,7 +370,6 @@ if(WITH_GMP)
+   add_definitions(-DWITH_GMP)
+ endif()
+ 
+-# Build makesrna executable
+ blender_include_dirs(
+   .
+   ..
+@@ -400,16 +399,19 @@ blender_include_dirs(
+   ../../../../intern/mantaflow/extern
+ )
+ 
+-add_cc_flags_custom_test(makesrna)
++# Build makesrna executable
++if(NOT CMAKE_CROSSCOMPILING)
++  add_cc_flags_custom_test(makesrna)
+ 
+-add_executable(makesrna ${SRC} ${SRC_RNA_INC} ${SRC_DNA_INC})
+-setup_platform_linker_flags(makesrna)
++  add_executable(makesrna ${SRC} ${SRC_RNA_INC} ${SRC_DNA_INC})
++  setup_platform_linker_flags(makesrna)
+ 
+-target_link_libraries(makesrna bf_dna)
+-target_link_libraries(makesrna bf_dna_blenlib)
++  target_link_libraries(makesrna bf_dna)
++  target_link_libraries(makesrna bf_dna_blenlib)
+ 
+-if(WIN32 AND NOT UNIX)
+-  target_link_libraries(makesrna ${PTHREADS_LIBRARIES})
++  if(WIN32 AND NOT UNIX)
++    target_link_libraries(makesrna ${PTHREADS_LIBRARIES})
++  endif()
+ endif()
+ 
+ # Output rna_*_gen.c
+@@ -459,5 +461,9 @@ add_definitions(${GL_DEFINITIONS})
+ 
+ blender_add_lib(bf_rna "${SRC}" "${INC}" "${INC_SYS}" "${LIB}")
+ 
++if(CMAKE_CROSSCOMPILING)
++  add_dependencies(bf_rna bf_dna)
++endif()
++
+ # Needed so we can use dna_type_offsets.h for defaults initialization.
+ add_dependencies(bf_blenkernel bf_dna)
