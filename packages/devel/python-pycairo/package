@@ -1,0 +1,19 @@
+description: Python 3.x bindings for cairo
+version: 1.20.1
+license: LGPL
+
+files:
+  - download:
+      url: https://github.com/pygobject/pycairo/archive/refs/tags/v${version}.tar.gz
+      sha1: 177770bfed5757330452ed7dc30fe690fcc4159b
+
+depends:
+  - build-tools/python-setuptools
+  - devel/python
+
+packages:
+  python-pycairo:
+    files:
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
