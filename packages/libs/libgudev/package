@@ -1,13 +1,14 @@
 description: GObject bindings for libudev
-version: 232
+version: 237
 license: LGPL-2.1
 
 files:
   - download:
       url: http://ftp.gnome.org/pub/gnome/sources/libgudev/${version}/libgudev-${version}.tar.xz
-      sha1: e8dc1c516a86e73e98d5c55c5570820073f0456c
+      sha1: 3ec66c925b9d22c385c3907c7ca3f2bb6c705d2c
 
 depends:
+  - build-tools/meson
   - core/systemd
   - libs/glib
 
