@@ -1,0 +1,19 @@
+commit 0055c882acc184d79560a9628893f2284209ffc9
+Author: Thierry Reding <treding@nvidia.com>
+Date:   Tue Nov 29 14:38:54 2022 +0100
+
+    udev-libdir
+
+diff --git a/tools/nfsrahead/Makefile.am b/tools/nfsrahead/Makefile.am
+index b0512179ce01..44b5f28f3137 100644
+--- a/tools/nfsrahead/Makefile.am
++++ b/tools/nfsrahead/Makefile.am
+@@ -8,7 +8,7 @@ nfsrahead_LDADD = ../../support/nfs/libnfsconf.la
+ man5_MANS = nfsrahead.man
+ EXTRA_DIST = $(man5_MANS)
+ 
+-udev_rulesdir = /usr/lib/udev/rules.d/
++udev_rulesdir = ${libdir}/udev/rules.d/
+ udev_rules_DATA = 99-nfs.rules
+ 
+ 99-nfs.rules: 99-nfs.rules.in $(builddefs)

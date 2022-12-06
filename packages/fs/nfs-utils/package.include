@@ -1,10 +1,10 @@
 description: support programs for Network File Systems
-version: 2.5.1
+version: 2.6.2
 license: GPL-2.0
 
 files:
   - download:
       url: http://prdownloads.sourceforge.net/nfs/nfs-utils/nfs-utils-${version}.tar.bz2
-      sha1: deada26c29319d632ef331c011e90cae9082af97
+      sha1: 872d80381099c42ea9e2a6728297cbfd97802af2
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
