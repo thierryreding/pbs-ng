@@ -1,11 +1,11 @@
 description: Minimalistic user-space library oriented to netlink developers
-version: 1.0.4
+version: 1.0.5
 license: GPL-2.0
 
 files:
   - download:
       url: http://www.netfilter.org/projects/libmnl/files/libmnl-${version}.tar.bz2
-      sha1: 2db40dea612e88c62fd321906be40ab5f8f1685a
+      sha1: 63c6456b77f7978a7b37e62c1b38346b2ef2d91c
 
 depends:
   - devel/glibc
