@@ -1,0 +1,104 @@
+#!/usr/bin/env python
+
+import argparse, elftools.elf.elffile, glob, os, sys
+
+class ldsoConf:
+    def __init__(self, path = '/etc/ld.so.conf'):
+        self.path = path
+
+    def __iter__(self):
+        yield ldsoConf.parse(self.path)
+
+    @staticmethod
+    def parse(path):
+        with open(path, 'r') as fobj:
+            for line in fobj:
+                line = line.strip()
+
+                # skip empty lines and comments
+                if not line or line.startswith('#'):
+                    continue
+
+                if line.startswith('include'):
+                    pathname = line.lstrip('include ')
+                    files = glob.glob(pathname)
+
+                    for file in files:
+                        yield from ldsoConf.parse(file)
+
+                    continue
+
+                yield line
+
+def parse_elf(filename, root, library_paths, dependencies, breadth_first = True):
+    wordsize = 32
+    deps = []
+
+    with open(filename, 'rb') as fobj:
+        elf = elftools.elf.elffile.ELFFile(fobj)
+        wordsize = elf.elfclass
+
+        for section in elf.iter_sections(type = 'SHT_DYNAMIC'):
+            for tag in section.iter_tags(type = 'DT_NEEDED'):
+                if tag.needed not in dependencies:
+                    deps.append(tag.needed)
+
+    for base in deps:
+        if base not in dependencies:
+            for library_path in library_paths:
+                path = os.path.join(root, library_path, base)
+                path = os.path.abspath(path)
+
+                if os.path.exists(path):
+                    dependencies[base] = {
+                            'address': 0xdeadbeef,
+                            'path': path
+                        }
+
+                    if not breadth_first:
+                        parse_elf(path, root, library_paths, dependencies,
+                                  breadth_first)
+
+                    break
+            else:
+                dependencies[base] = {
+                        'address': 0x00000000,
+                        'path': None
+                    }
+
+    if breadth_first:
+        for base in deps:
+            if base in dependencies and dependencies[base]['path']:
+                parse_elf(dependencies[base]['path'], root, library_paths,
+                          dependencies, breadth_first)
+
+    return wordsize
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('files', nargs = '*')
+    parser.add_argument('--root', default = os.sep)
+
+    args = parser.parse_args()
+
+    library_paths = [
+            os.path.join('usr', 'lib'),
+            os.path.join('lib')
+        ]
+
+    for path in ldsoConf.parse('/etc/ld.so.conf'):
+        library_paths.append(path)
+
+    for filename in args.files:
+        dependencies = {}
+        wordsize = parse_elf(filename, args.root, library_paths, dependencies)
+        prec = wordsize // 4 + 2
+
+        print('%s:' % filename)
+
+        for key, value in dependencies.items():
+            if value['path']:
+                print('\t%s => %s (%#0*x)' % (key, value['path'], prec,
+                                              value['address']))
+            else:
+                print('\t%s => not found' % key)

@@ -1,0 +1,40 @@
+#!/bin/sh
+
+exec @LDD@ --root @SYSROOT@ "$@"
+
+root="@SYSROOT@"
+files=""
+
+while test $# -gt 0; do
+	if test "x$prev" != "x"; then
+		eval "$prev=$1"
+		shift; prev=
+		continue
+	fi
+
+	case $1 in
+		--root)
+			prev=root
+			shift
+			;;
+
+		-* | --*)
+			shift
+			;;
+
+		*)
+			files="$files $1"
+			shift
+			;;
+	esac
+done
+
+for file in $files; do
+	echo "$file:"
+
+	readelf -d "$file" | grep -E '\(NEEDED\)' | \
+		sed -r -e 's/^.*Shared library:[[:space:]]+\[([^]]+)\].*/\1/;' | \
+	while read lib; do
+		echo -e "\t$root/usr/lib/$lib (0xdeadbeef)"
+	done
+done

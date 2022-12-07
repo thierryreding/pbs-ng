@@ -46,6 +46,11 @@ $(DESTDIR)/etc/ld.so.conf.d:
 $(DESTDIR)/etc/ld.so.conf:
 	echo "include /etc/ld.so.conf.d/*.conf" > $@
 
+$(BUILD_TOOLS)/bin/$(CROSS_COMPILE)ldd: $(TOP_SRCDIR)/support/ldd-sysroot.in
+	sed -e 's|@LDD@|$(TOP_SRCDIR)/support/ldd|g' -e 's|@SYSROOT@|$(SYSROOT)|g' $< > $@
+	chmod a+x $@
+
 install: $(builddir)/stamp-install $(DESTDIR)/etc/ld.so.conf | $(DESTDIR)/etc/ld.so.conf.d
+install: $(BUILD_TOOLS)/bin/$(CROSS_COMPILE)ldd
 
 .PHONY: install
