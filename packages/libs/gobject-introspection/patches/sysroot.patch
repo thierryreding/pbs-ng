@@ -1,0 +1,54 @@
+diff --git a/gir/meson.build b/gir/meson.build
+index dc39b47543e7..533e7d2aa97d 100644
+--- a/gir/meson.build
++++ b/gir/meson.build
+@@ -78,6 +78,11 @@ endif
+ if get_option('gi_cross_ldd_wrapper') != ''
+   scanner_command += ['--use-ldd-wrapper=' + get_option('gi_cross_ldd_wrapper')]
+ endif
++
++if meson.has_external_property('sys_root')
++  scanner_command += [ '--sysroot', meson.get_external_property('sys_root') ]
++endif
++
+ # Take a glob and print to newlines
+ globber = '''
+ from glob import glob
+diff --git a/giscanner/dumper.py b/giscanner/dumper.py
+index 74a494b8b53b..6868c4bfa1d7 100644
+--- a/giscanner/dumper.py
++++ b/giscanner/dumper.py
+@@ -185,6 +185,10 @@ class DumpCompiler(object):
+     def _compile(self, *sources):
+         cflags = pkgconfig.cflags(self._packages,
+                                   msvc_syntax=self._compiler.check_is_msvc())
++
++        if self._options.sysroot:
++            cflags.extend(['--sysroot', self._options.sysroot])
++
+         cflags.extend(self._options.cflags)
+         return self._compiler.compile(cflags,
+                                       self._options.cpp_includes,
+@@ -226,6 +230,9 @@ class DumpCompiler(object):
+             for cflag in shlex.split(os.environ.get('CFLAGS', '')):
+                 args.append(cflag)
+ 
++            if self._options.sysroot:
++                args.extend(['--sysroot', self._options.sysroot])
++
+         # Make sure to list the library to be introspected first since it's
+         # likely to be uninstalled yet and we want the uninstalled RPATHs have
+         # priority (or we might run with installed library that is older)
+diff --git a/giscanner/scannermain.py b/giscanner/scannermain.py
+index 1d39ab841180..a8f5eec2f795 100644
+--- a/giscanner/scannermain.py
++++ b/giscanner/scannermain.py
+@@ -73,6 +73,8 @@ def get_preprocessor_option_group(parser):
+     group.add_option("", "--cflags-end",
+                      help="End preprocessor/compiler flags",
+                      action="callback", callback=process_cflags_end)
++    group.add_option("", "--sysroot", help="path to sysroot",
++                     action="store", default=None)
+     group.add_option("-I", help="Pre-processor include file",
+                      dest="cpp_includes", default=[], type="string",
+                      action="callback", callback=process_cpp_includes)

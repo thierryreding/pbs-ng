@@ -1,14 +1,13 @@
-package: introspection system for GObject-based libraries
-version: 1.68.0
-license: LGPL-2.1
-
-files:
-  - download:
-      url: https://ftp.gnome.org/pub/gnome/sources/gobject-introspection/${major}.${minor}/gobject-introspection-${version}.tar.xz
-      sha1: 0672668f6275316acf485894bd07857a69ea41fd
+include: packages/libs/gobject-introspection/package.include
 
 depends:
-  - devel/glibc
+  - build-tools/gobject-introspection
+  - build-tools/meson
+  - build-tools/qemu
+  - devel/python
+  - libs/cairo
+  - libs/glib
+  - libs/libffi
 
 packages:
   gobject-introspection:
