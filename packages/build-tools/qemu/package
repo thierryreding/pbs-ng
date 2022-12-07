@@ -1,0 +1,14 @@
+description: generic and open source machine emulator and virtualizer
+version: 7.1.0
+license: GPL-2.0
+
+files:
+  - download:
+      url: https://download.qemu.org/qemu-${version}.tar.xz
+      sha1: 232d4a794b8140b7d38f3d71f65c41ef3c608deb
+
+depends:
+  - build-tools/glib
+  - build-tools/pixman
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

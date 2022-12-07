@@ -1,0 +1,5 @@
+#!/bin/sh
+
+topdir="$(cd ${0%/*}; pwd)"
+
+exec "$topdir/qemu-@ARCH@" -L @SYSROOT@ "$@"
