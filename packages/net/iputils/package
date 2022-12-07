@@ -1,5 +1,5 @@
 description: network monitoring tools, including ping
-version: 20190709
+version: 20221126
 license: GPL-2.0
 
 depends:
@@ -9,8 +9,8 @@ depends:
 
 files:
   - download:
-      url: https://github.com/iputils/iputils/archive/s${version}/iputils-s${version}.tar.gz
-      sha1: 9a2d85a6b2656ed3669f49e737588e3262f02ff8
+      url: https://github.com/iputils/iputils/archive/refs/tags/${version}.tar.gz
+      sha1: 306cd6cc158810180c7eacc94746006abde682a3
 
 packages:
   iputils:
