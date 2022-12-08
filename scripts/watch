@@ -1,0 +1,159 @@
+#!/usr/bin/env python
+
+import argparse, crayons, http.client, logging, os, packaging.version, sys
+import requests
+
+from packaging.version import Version
+
+topdir = os.path.join(os.path.dirname(sys.argv[0]), os.pardir)
+srctree = os.path.realpath(topdir)
+scripts_dir = os.path.join(srctree, 'scripts')
+sys.path.insert(1, scripts_dir)
+
+import pbs, pbs.db
+
+pbs.srctree = srctree
+
+def enable_http_debugging():
+    import urllib
+
+    # install new handler for HTTPS URLs
+    https_old_init = urllib.request.HTTPSHandler.__init__
+
+    def https_new_init(self, debuglevel=None, context=None, check_hostname=None):
+        debuglevel = debuglevel if debuglevel is not None else http.client.HTTPSConnection.debuglevel
+        https_old_init(self, debuglevel, context, check_hostname)
+
+    urllib.request.HTTPSHandler.__init__ = https_new_init
+
+    # install new handler for HTTP URLs
+    http_old_init = urllib.request.HTTPHandler.__init__
+
+    def http_new_init(self, debuglevel=None):
+        debuglevel = debuglevel if debuglevel is not None else http.client.HTTPSConnection.debuglevel
+        http_old_init(self, debuglevel)
+
+    urllib.request.HTTPHandler.__init__ = http_new_init
+
+    logging.basicConfig()
+    logging.getLogger().setLevel(logging.DEBUG)
+    logger = logging.getLogger('requests.packages.urllib3')
+    logger.setLevel(logging.DEBUG)
+    logger.propagate = True
+
+    # enable debug messages for HTTP/HTTPS client connections
+    http.client.HTTPConnection.debuglevel = 1
+
+def watch_package(package, verbose = False):
+    #print('watching %s...' % package.full_name)
+
+    # skip packages that have no version defined
+    if not package.version:
+        return
+
+    if True:
+        for file in package.files:
+            if isinstance(file, pbs.db.DownloadSourceFile) and file.watcher['url']:
+                print('checking %s for %s...' % (file.watcher['url'], file.url))
+                watcher = pbs.IndexWatcher(file.watcher['url'],
+                                           pattern = file.url)
+            else:
+                print('checking %s...' % file.url)
+                watcher = pbs.PackageWatcher.open(file.url)
+
+            # no watchers implemented for this at the moment
+            if isinstance(file, pbs.db.VCSSourceFile):
+                print('%s' % crayons.magenta('  skipped', bold = True))
+                continue
+
+            results = watcher.watch(verbose)
+
+            if not results:
+                print('%s: no versions found' % (crayons.red('ERROR', bold = True)))
+                continue
+
+            current = Version(package.version)
+            latest = results[0]
+
+            if latest > current:
+                print('  new version available: %s (current: %s)' % (crayons.green(latest, bold = True),
+                                                                     crayons.red(current)))
+            else:
+                if latest == current:
+                    print('  up-to-date: %s' % (crayons.yellow(latest, bold = True)))
+                else:
+                    print('  mismatch: %s -> %s' % (crayons.red(latest, bold = True),
+                                                    crayons.yellow(current, bold = True)))
+    else:
+        package.watch(verbose)
+
+def watch_database(packages, verbose = False):
+    db = pbs.db.Database()
+    db.load(pbs.srctree)
+
+    if not packages:
+        for package in db.walk():
+            watch_package(package, verbose)
+    else:
+        for name in packages:
+            package = db.find_package(name)
+            if not package:
+                print('%s: cannot find package %s' % (crayons.red('ERROR', bold = True),
+                                                      name))
+                continue
+
+            watch_package(package, verbose)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('urls', metavar = 'URL', nargs = '*',
+                        help = 'list of specific URLs to watch')
+    parser.add_argument('--database', action = 'store_true',
+                        help = 'watch all packages in database')
+    parser.add_argument('--verbose', '-v', action = 'store_true',
+                        help = 'increase verbosity')
+
+    args = parser.parse_args()
+
+    if args.verbose:
+        enable_http_debugging()
+
+    if args.database:
+        watch_database(args.urls, args.verbose)
+        sys.exit(0)
+
+    if args.urls:
+        urls = args.urls
+    else:
+        urls = [
+                #'https://download.gnome.org/sources/glib/${major}.${minor}/glib-${version}.tar.xz',
+                #'https://download.gnome.org/sources/cairo/${major}.${minor}/cairo-${version}.tar.xz',
+                #'ftp://xmlsoft.org/libxml2/libxml2-${version}.tar.gz',
+                #'https://github.com/numpy/numpy/releases/download/v${version}/numpy-${version}.tar.gz',
+                #'https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/llvm-project-${version}.src.tar.gz',
+                #'https://github.com/systemd/systemd/archive/v${version}.tar.gz',
+                #'https://strace.io/files/${version}/strace-${version}.tar.xz',
+                #'https://github.com/pygobject/pycairo/archive/refs/tags/v${version}.tar.gz',
+                #'http://ftp.gnu.org/pub/gnu/glibc/glibc-${version}.tar.xz',
+                #'https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/v${version}/spirv-llvm-translator-${version}.tar.gz',
+                #'https://pypi.python.org/packages/source/m/mako/Mako-${version}.tar.gz',
+                #'https://pypi.python.org/packages/source/p/pyudev/pyudev-${version}.tar.gz',
+                #'https://github.com/libsndfile/libsamplerate/releases/download/${version}/libsamplerate-${version}.tar.xz',
+                #'https://github.com/westes/flex/releases/download/v${version}/flex-${version}.tar.gz',
+                #'https://github.com/KhronosGroup/OpenCL-Headers/archive/v${version}.tar.gz',
+                #'https://github.com/libevent/libevent/archive/release-${version}-stable.tar.gz',
+                #'https://github.com/libevent/libevent/releases/download/release-${version}-stable.tar.gz',
+                #'https://github.com/libexpat/libexpat/releases/download/R_${major}_${minor}_${micro}/expat-${version}.tar.xz',
+                #'https://pypi.python.org/packages/source/s/setuptools/setuptools-${version}.tar.gz',
+                'https://pypi.python.org/packages/source/j/jinja2/Jinja2-${version}.tar.gz',
+            ]
+
+    for url in urls:
+        watcher = pbs.PackageWatcher.open(url)
+
+        print('checking %s...' % url, watcher)
+
+        versions = watcher.watch(args.verbose)
+
+        for version in versions:
+            print('  found:', version)

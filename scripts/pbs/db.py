@@ -358,6 +358,13 @@ class Section():
 
         return section
 
+    def walk(self):
+        for section in self.sections:
+            yield from section.walk()
+
+        for package in self.packages:
+            yield package
+
     def dump(self, indent = 0):
         iprint(indent, 'Section:', self.name)
 
@@ -463,6 +470,9 @@ class SourceFile():
     def dump(self, indent):
         pass
 
+    def watch(self, verbose = False):
+        pass
+
 class DownloadSourceFile(SourceFile):
     def __init__(self, source):
         SourceFile.__init__(self, source)
@@ -481,6 +491,13 @@ class DownloadSourceFile(SourceFile):
             self.sha1 = yaml['sha1']
         else:
             self.sha1 = None
+
+        self.watcher = {
+                'url': None
+            }
+
+        if 'watch' in yaml and 'url' in yaml['watch']:
+            self.watcher['url'] = yaml['watch']['url']
 
         url = self.source.subst(self.url)
         self.filename = os.path.basename(url)
@@ -697,61 +714,19 @@ class DownloadSourceFile(SourceFile):
     def watch(self, verbose = False):
         pbs.log.begin('%s... ' % self.url, indent = 1)
 
-        keywords = {
-                'version': '([\d\.]+)',
-                'major': '(\d+)',
-                'minor': '(\d+)',
-                'micro': '(\d+)'
-            }
+        if self.watcher['url']:
+            watcher = pbs.IndexWatcher(self.watcher['url'], self.url)
+        else:
+            watcher = pbs.PackageWatcher.open(self.url)
 
-        template = string.Template(self.url)
-        regex = template.substitute(keywords)
+        results = watcher.watch(verbose)
 
-        (scheme, netloc, path, *unused) = urllib.parse.urlparse(regex)
-        (params, query, fragment) = unused
-
-        if netloc == 'prdownloads.sourceforge.net':
-            pbs.log.skip('skipped')
+        if not results:
+            pbs.log.error('failed to find any versions')
             return
-
-        # initialize with the base URL
-        urls = [ scheme + '://' + netloc ]
-        path = path.split('/')[1:]
-
-        # iterate over each component (skipping the first because it's empty)
-        for component in path:
-            bases = []
-
-            for base in urls:
-                if re.findall('\(.*\)', component):
-                    try:
-                        matches = resolve(scheme, base, component)
-                    except Exception as e:
-                        # XXX print error uncolorized?
-                        pbs.log.fail('failed (%s)' % e)
-                        return
-
-                    for match in matches:
-                        bases.append(base + '/' + match)
-                else:
-                    bases.append(base + '/' + component)
-
-            urls = bases
-
-        if not urls:
-            pbs.log.fail('failed')
-            return
-
-        regex = re.compile(regex)
-        versions = []
-
-        for url in urls:
-            match = regex.match(url)
-            version = match.group(match.lastindex)
-            versions.append(Version(version))
 
         current = Version(self.source.version)
-        latest = max(versions)
+        latest = results[0] # XXX max(results)?
 
         if latest <= current:
             pbs.log.done('up-to-date')
@@ -826,6 +801,7 @@ class VCSSourceFile(SourceFile):
 
         if 'url' in yaml:
             scheme, netloc, path, *unused = urllib.parse.urlparse(yaml['url'])
+            params, query, fragment = unused
 
             if '+' in scheme:
                 system, protocol = scheme.split('+')
@@ -843,6 +819,7 @@ class VCSSourceFile(SourceFile):
             if not self.repository:
                 raise Exception('unknown source repository type:', scheme)
 
+            self.url = yaml['url']
         else:
             pbs.log.error('missing URL for source repository:', yaml)
 
@@ -852,7 +829,7 @@ class VCSSourceFile(SourceFile):
     def extract(self, directory):
         self.repository.fetch(directory)
 
-    def watch(self):
+    def watch(self, verbose = False):
         pbs.log.begin('%s... ' % self.repository, indent = 1)
         pbs.log.skip('skipped')
 
@@ -1016,7 +993,13 @@ class Source():
                 self.packages.append(package)
 
     def subst(self, template):
-        keywords = { 'version': self.version }
+        _version = self.version.translate(str.maketrans('.', '_'))
+
+        keywords = {
+                'version': self.version,
+                'version_': _version,
+                '_version': _version,
+            }
         version = self.version.split('.')
 
         if len(version) > 0:
@@ -1114,14 +1097,14 @@ class Source():
 
         return m.hexdigest()
 
-    def watch(self):
+    def watch(self, verbose = False):
         pbs.log.begin('checking %s for updates...' % self.full_name)
 
-        if self.files:
+        if self.version and self.files:
             print()
 
             for source in self.files:
-                source.watch()
+                source.watch(verbose)
         else:
             pbs.log.skip('skipped')
 
@@ -1218,6 +1201,10 @@ class Database():
 
         self.architectures = Database.load_architectures(directory)
         self.packages = Database.load_packages(directory)
+
+    def walk(self):
+        for section in self.packages.sections:
+            yield from section.walk()
 
     def find_package(self, name):
         directory = os.path.dirname(name)

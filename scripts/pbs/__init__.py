@@ -3,6 +3,11 @@ import shutil
 import sys
 import textwrap
 
+import pbs.watch
+
+PackageWatcher = pbs.watch.PackageWatcher
+IndexWatcher = pbs.watch.IndexWatcher
+
 srctree = os.path.realpath(os.path.dirname(sys.argv[0]))
 objtree = os.getcwd()
 
