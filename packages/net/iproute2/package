@@ -4,7 +4,6 @@ license: GPL-2.0
 
 depends:
   - devel/glibc
-  - libs/db
   - net/iptables
 
 files:
