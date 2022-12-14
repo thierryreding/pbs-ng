@@ -1,0 +1,10 @@
+description: XML-XCB protocol descriptions
+version: 1.15.2
+license: custom
+
+files:
+  - download:
+      url: https://xorg.freedesktop.org/releases/individual/proto/xcb-proto-${version}.tar.xz
+      sha1: d2499a55bf736c22bc6faeba1afe53e77f97e16f
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

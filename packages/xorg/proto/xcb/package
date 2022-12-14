@@ -1,20 +1,13 @@
-description: XML-XCB protocol descriptions
-version: 1.14.1
-license: custom
+include: packages/xorg/proto/xcb/package.include
 
 depends:
   - devel/glibc
 
-files:
-  - download:
-      url: http://xorg.freedesktop.org/releases/individual/proto/xcb-proto-${version}.tar.xz
-      sha1: 836d5b2dd00ff21bd038e92764fda9a256a1b022
-
 packages:
   xcbproto-dev:
     files:
-      - /usr/lib/pkgconfig
       - /usr/lib/python*
+      - /usr/share/pkgconfig
       - /usr/share/xcb
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
