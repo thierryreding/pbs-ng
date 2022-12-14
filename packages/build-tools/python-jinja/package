@@ -1,11 +1,11 @@
 description: Super-fast templating language that borrows the best ideas from the existing templating languages
-version: 3.0.3
+version: 3.1.2
 license: BSD
 
 files:
   - download:
-      url: https://files.pythonhosted.org/packages/91/a5/429efc6246119e1e3fbf562c00187d04e83e54619249eb732bb423efa6c6/Jinja2-${version}.tar.gz
-      sha1: befcc9b2a983507ae54bd7f0d39dc495b92c452c
+      url: https://pypi.python.org/packages/source/j/jinja2/Jinja2-${version}.tar.gz
+      sha1: 560f248ccb0b98256c5b50c86a002c2c1e57edb6
 
 depends:
   - build-tools/python
