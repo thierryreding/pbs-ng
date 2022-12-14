@@ -7,7 +7,7 @@ depends:
 
 files:
   - download:
-      url: http://downloads.sourceforge.net/sourceforge/hdparm/hdparm-${version}.tar.gz
+      url: https://sourceforge.net/projects/hdparm/files/hdparm/hdparm-${version}.tar.gz
       sha1: 3bc0916493f2f485c6371ec0fd16418d0e1fa636
 
 packages:
