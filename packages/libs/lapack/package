@@ -1,0 +1,18 @@
+include: packages/libs/lapack/package.include
+
+depends:
+  - devel/glibc
+
+packages:
+  lapack:
+    files:
+      - /usr/lib/*.so.*
+
+  lapack-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

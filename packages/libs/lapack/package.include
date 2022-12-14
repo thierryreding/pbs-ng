@@ -1,0 +1,10 @@
+description: Linear Algebra PACKage
+version: 3.11.0
+license: BSD
+
+files:
+  - download:
+      url: https://github.com/Reference-LAPACK/lapack/archive/refs/tags/v${version}.tar.gz
+      sha1: 5ce88a2b3df11d132b43442cab6a385f85a9f667
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
