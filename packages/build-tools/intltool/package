@@ -6,5 +6,7 @@ files:
   - download:
       url: http://edge.launchpad.net/intltool/trunk/${version}/+download/intltool-${version}.tar.gz
       sha1: a0c3bcb99d1bcfc5db70f8d848232a47c47da090
+      watch:
+        url: https://launchpad.net/intltool/+download
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
