@@ -4,7 +4,7 @@ license: custom
 
 files:
   - download:
-      url: https://github.com/pypa/setuptools/archive/v${version}.tar.gz
-      sha1: ea1b5328b511c7d88fb489ce397d1b69574fb9c2
+      url: https://pypi.python.org/packages/source/s/setuptools/setuptools-${version}.tar.gz
+      sha1: 2875e8f9a12d8a971461b36e2d1bd64a3497e0f2
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
