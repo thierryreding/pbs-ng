@@ -2,6 +2,7 @@ include: packages/devel/python-numpy/package.include
 
 depends:
   - devel/python-cython
+  - libs/lapack
 
 packages:
   python-numpy:
