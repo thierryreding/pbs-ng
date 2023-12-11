@@ -1,11 +1,11 @@
 description: VDPAU info tool
-version: 1.0
+version: 1.5
 license: custom
 
 files:
   - download:
-      url: http://people.freedesktop.org/~aplattner/vdpau/vdpauinfo-${version}.tar.gz
-      sha1: eba0ab858ad8c06841276c658512167a175911fa
+      url: https://gitlab.freedesktop.org/vdpau/vdpauinfo/-/archive/${version}/vdpauinfo-${version}.tar.bz2
+      sha1: a597f62cb77361d47111d8378b71c9ae92f58e96
 
 depends:
   - multimedia/libvdpau
