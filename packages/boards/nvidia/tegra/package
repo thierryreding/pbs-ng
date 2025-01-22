@@ -6,10 +6,10 @@ depends:
   - base/filesystem
   - base/mkinitrd
   - core/systemd
-  - desktop/weston
+  #- desktop/weston
   - kernel/linux-firmware
-  - net/openssh
-  - xorg/xserver
+  #- net/openssh
+  #- xorg/xserver
 
 options:
   soc:
@@ -42,9 +42,13 @@ options:
       tegra234:
         description: NVIDIA Tegra234
 
+      tegra264:
+        description: NVIDIA Tegra264
+
 packages:
   board-nvidia-tegra:
     files:
+      - /boot
       - /etc
       - /usr/lib/mkinitrd
 
