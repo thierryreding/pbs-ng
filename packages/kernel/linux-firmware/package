@@ -1,5 +1,4 @@
 description: firmware files for Linux
-version:
 license: GPL-2.0, GPL-3.0, custom
 
 depends:

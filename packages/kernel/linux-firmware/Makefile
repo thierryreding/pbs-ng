@@ -9,6 +9,7 @@ install-args = \
 
 $(builddir)/stamp-install: | $(builddir)
 	cd $(srcdir) && $(MAKE) $(install-args) install
+	cd $(srcdir) && $(MAKE) $(install-args) dedup
 	touch $@
 
 install: $(builddir)/stamp-install

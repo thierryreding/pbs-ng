@@ -96,6 +96,8 @@ check_program curl
 check_program cpio
 check_program mksquashfs
 check_program fakeroot
+# used by linux-firmware installer
+check_program rdfind
 
 #
 # check for header files
