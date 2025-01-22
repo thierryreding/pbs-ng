@@ -2,6 +2,13 @@ description: initial ramdisk generator
 version: 2017.08
 license: GPL-2.0
 
+depends:
+  - core/coreutils
+  - core/run-parts
+  - core/e2fsprogs
+  - fs/nfs-utils
+  - shells/bash
+
 packages:
   mkinitrd:
     files:
