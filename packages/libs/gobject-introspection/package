@@ -5,8 +5,7 @@ depends:
   - build-tools/meson
   - build-tools/qemu
   - devel/python
-  - libs/cairo
-  - libs/glib
+  - libs/glib-bootstrap
   - libs/libffi
 
 packages:

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+dir=${0%/*}
+
+exec "${dir}/g-ir-scanner.real" --use-ldd-wrapper=@HOST@-ldd --sysroot=@SYSROOT@ "$@"

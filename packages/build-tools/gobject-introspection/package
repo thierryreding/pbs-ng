@@ -1,8 +1,10 @@
 include: packages/libs/gobject-introspection/package.include
 
 depends:
-  - build-tools/glib
+  - build-tools/glib-bootstrap
   - build-tools/meson
   - build-tools/python
+  - build-tools/python-packaging
+  - build-tools/python-setuptools
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

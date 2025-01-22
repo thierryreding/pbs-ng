@@ -1,10 +1,10 @@
 package: introspection system for GObject-based libraries
-version: 1.74.0
+version: 1.82.0
 license: LGPL-2.1
 
 files:
   - download:
       url: https://ftp.gnome.org/pub/gnome/sources/gobject-introspection/${major}.${minor}/gobject-introspection-${version}.tar.xz
-      sha1: e5af80651b2a39aa89bcbf7523e3f62cb7b7d3ca
+      sha1: f731a1ef49963dd56309bfd4ad1c44ccd7a4d5eb
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

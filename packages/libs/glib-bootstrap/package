@@ -1,8 +1,8 @@
 include: packages/libs/glib/package.include
 
 depends:
+  - build-tools/meson
   - devel/glibc
-  - libs/gobject-introspection
   - libs/libffi
   - libs/pcre2
 

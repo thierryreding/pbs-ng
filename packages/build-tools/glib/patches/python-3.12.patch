@@ -1,0 +1,20 @@
+diff --git a/gio/gdbus-2.0/codegen/utils.py b/gio/gdbus-2.0/codegen/utils.py
+index 02046108dae4..d755269dcd24 100644
+--- a/gio/gdbus-2.0/codegen/utils.py
++++ b/gio/gdbus-2.0/codegen/utils.py
+@@ -19,8 +19,8 @@
+ #
+ # Author: David Zeuthen <davidz@redhat.com>
+ 
+-import distutils.version
+ import os
++import packaging.version
+ import sys
+ 
+ 
+@@ -166,4 +166,4 @@ def version_cmp_key(key):
+         v = str(key[0])
+     else:
+         v = "0"
+-    return (distutils.version.LooseVersion(v), key[1])
++    return (packaging.version.Version(v), key[1])

@@ -2,7 +2,7 @@ diff --git a/gir/meson.build b/gir/meson.build
 index dc39b47543e7..533e7d2aa97d 100644
 --- a/gir/meson.build
 +++ b/gir/meson.build
-@@ -78,6 +78,11 @@ endif
+@@ -81,6 +81,11 @@ endif
  if get_option('gi_cross_ldd_wrapper') != ''
    scanner_command += ['--use-ldd-wrapper=' + get_option('gi_cross_ldd_wrapper')]
  endif
