@@ -55,5 +55,7 @@ ifeq ($(arch.abi),eabi)
   ARCH_CFLAGS += -mabi=aapcs-linux -mno-thumb-interwork
 endif
 
-ARCH_CXXFLAGS =
+ARCH_CXXFLAGS = -O2 -g
 ARCH_LDFLAGS =
+
+ARCH_LONGDOUBLE_FORMAT = IEEE_DOUBLE_LE

@@ -1,32 +1,14 @@
 include $(TOP_SRCDIR)/packages/common.mk
+include $(TOP_SRCDIR)/packages/meson-support.mk
+
+MESON = meson
+NINJA = ninja
 
 $(builddir):
 	mkdir -p $@
 
-ifeq ($(ARCH),arm64)
-  ARCH = aarch64
-endif
-
-meson-vars = \
-	OS ARCH CPU ENDIAN HOST SYSROOT PREFIX BUILD_TOOLS
-
-meson-flags = \
-	CPPFLAGS CFLAGS CXXFLAGS LDFLAGS
-
-$(foreach var,$(meson-flags),$(eval flags_$(var) = $$($(var))))
-$(foreach var,$(meson-flags),$(eval flags_$(var) = $(patsubst %,'%',$(flags_$(var)))))
-$(foreach var,$(meson-flags),$(eval flags_$(var) = $(subst $(space),$(comma) ,$(flags_$(var)))))
-
-$(foreach var,$(meson-vars),$(eval expressions += -e "s|@$(var)@|$$($(var))|g"))
-$(foreach var,$(meson-flags),$(eval expressions += -e "s|@$(var)@|$(flags_$(var))|g"))
-
-$(builddir)/native.ini: $(TOP_SRCDIR)/support/meson-native.ini | $(builddir)
-	sed $(expressions) $< > $@
-
-$(builddir)/cross.ini:: $(TOP_SRCDIR)/support/meson-cross.ini | $(builddir)
-	sed $(expressions) $< > $@
-
 env = \
+	QEMU_LD_PREFIX=$(SYSROOT) \
 	DESTDIR=$(DESTDIR)
 
 conf-args = \
@@ -36,15 +18,15 @@ conf-args = \
 	--prefix $(PREFIX)
 
 $(builddir)/stamp-configure: $(builddir)/native.ini $(builddir)/cross.ini
-	$(env) meson setup $(conf-args) $(srcdir) $(builddir)
+	$(env) $(MESON) setup $(conf-args) $(srcdir) $(builddir)
 	touch $@
 
 $(builddir)/stamp-build: $(builddir)/stamp-configure
-	$(env) ninja -C $(builddir)
+	$(env) $(NINJA) -C $(builddir) $(build-args)
 	touch $@
 
 $(builddir)/stamp-install: $(builddir)/stamp-build
-	$(env) $(FAKEROOT) ninja -C $(builddir) install
+	$(env) $(FAKEROOT) $(NINJA) -C $(builddir) install
 
 install: $(builddir)/stamp-install
 
