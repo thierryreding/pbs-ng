@@ -1,0 +1,13 @@
+description: Core utilities for Python packages
+version: 24.2
+license: custom
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/p/packaging/packaging-${version}.tar.gz
+      sha1: b001ecb7812d07963211a32e86041af9cc581aff
+
+depends:
+  - build-tools/python
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
