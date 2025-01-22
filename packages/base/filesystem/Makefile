@@ -43,6 +43,7 @@ $(builddir)/stamp-install: | $(builddir) $(DESTDIR)
 
 	cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/nsswitch.conf $(DESTDIR)/etc/nsswitch.conf
 	cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/os-release $(DESTDIR)/etc/os-release
+	cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/protocols $(DESTDIR)/etc/protocols
 	cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/securetty $(DESTDIR)/etc/securetty
 	cp $(TOP_SRCDIR)/$(PKGDIR)/files/etc/shells $(DESTDIR)/etc/shells
 
