@@ -9,4 +9,5 @@ cmake-args += \
 	-DLLVM_TABLEGEN_EXE=$(BUILD_TOOLS)/bin/llvm-tblgen \
 	-DCLANG_TABLEGEN=$(BUILD_TOOLS)/bin/clang-tblgen \
 	-DCMAKE_CROSSCOMPILING=True \
-	-DCMAKE_BUILD_TYPE=Release
+	-DCMAKE_BUILD_TYPE=Release \
+	-DLLVM_INCLUDE_TESTS=OFF

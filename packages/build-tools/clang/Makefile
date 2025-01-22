@@ -6,7 +6,8 @@ srcdir := $(srcdir)/clang
 JOBS := 8
 
 cmake-args += \
-	-DCMAKE_BUILD_TYPE=Release
+	-DCMAKE_BUILD_TYPE=Release \
+	-DLLVM_INCLUDE_TESTS=OFF
 
 $(BUILD_TOOLS)/bin/clang-tblgen: $(builddir)/bin/clang-tblgen
 	cp $< $@
