@@ -8,10 +8,14 @@ from packaging.version import Version
 import pbs
 
 def retrieve_url(url):
+    headers = {
+        'User-Agent': f'Platform Build System/{pbs.VERSION}'
+    }
+
     scheme, *_ = urllib.parse.urlparse(url)
 
     if scheme == 'http' or scheme == 'https':
-        response = requests.get(url)
+        response = requests.get(url, headers = headers)
         if not response.ok:
             raise Exception('failed to get %s' % url)
 

@@ -3,6 +3,8 @@ import shutil
 import sys
 import textwrap
 
+VERSION = '2025.05'
+
 import pbs.watch
 
 PackageWatcher = pbs.watch.PackageWatcher
