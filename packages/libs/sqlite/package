@@ -1,0 +1,30 @@
+description: a C library that implements an SQL database engine
+version: 3.51.2
+license: custom
+
+depends:
+  - devel/glibc
+  - libs/readline
+
+files:
+  - download:
+      url: https://github.com/sqlite/sqlite/archive/refs/tags/version-${version}.tar.gz
+      sha1: 834b828f48c9a1ddc7fde40fd720dbe95a0c241a
+      filename: sqlite-${version}.tar.gz
+      watch:
+        url: anitya://4877
+
+packages:
+  sqlite:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+
+  sqlite-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: ft=yaml

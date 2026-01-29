@@ -2,6 +2,10 @@ include: packages/fs/nfs-utils/package.include
 
 depends:
   - build-tools/libevent
+  - build-tools/libnl
   - build-tools/libtirpc
+  - build-tools/libxml2
+  - build-tools/readline
+  - build-tools/util-linux
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

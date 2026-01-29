@@ -2,11 +2,14 @@ include: packages/fs/nfs-utils/package.include
 
 depends:
   - build-tools/nfs-utils
+  - core/util-linux
   - libs/device-mapper
   - libs/keyutils
   - libs/libevent
+  - libs/libnl
   - libs/libtirpc
-  - libs/nfsidmap
+  - libs/libxml2
+  - libs/sqlite
 
 packages:
   nfs-utils:

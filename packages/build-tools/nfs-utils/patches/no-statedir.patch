@@ -8,7 +8,7 @@ diff --git a/Makefile.am b/Makefile.am
 index 00220842e2d0..f36ba72f2ec0 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -20,18 +20,3 @@ EXTRA_DIST = \
+@@ -21,18 +21,3 @@ EXTRA_DIST = \
  	aclocal/ipv6.m4
  
  ACLOCAL_AMFLAGS = -I aclocal

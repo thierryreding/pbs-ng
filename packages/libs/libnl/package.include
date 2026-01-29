@@ -1,0 +1,12 @@
+description: Library for applications dealing with netlink sockets
+version: 3.12.0
+license: GPL
+
+files:
+  - download:
+      url: https://github.com/thom311/libnl/archive/libnl${_version}.tar.gz
+      sha1: 394160938866795f6dbdc1c9423a72612fb6109a
+      watch:
+        url: anitya://1684
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

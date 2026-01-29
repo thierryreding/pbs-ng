@@ -1,0 +1,12 @@
+description: GNU readline library
+version: 8.3
+license: GPL-3.0
+
+files:
+  - download:
+      url: https://ftp.gnu.org/pub/gnu/readline/readline-${version}.tar.gz
+      sha1: 2c05ae9350b695f69d70b47f17f092611de2081f
+      watch:
+        url: anitya://4173
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

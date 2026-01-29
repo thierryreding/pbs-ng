@@ -3,6 +3,7 @@ include $(TOP_SRCDIR)/packages/autotools.mk
 major = $(word 1, $(subst ., ,$(package.version)))
 
 conf-args += \
+	--with-default-terminfo-dir=$(PREFIX)/share/terminfo \
 	--with-pkg-config-libdir=$(PREFIX)/lib/pkgconfig \
 	--with-termlib=tinfo \
 	--with-ticlib=tic \

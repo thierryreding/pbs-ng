@@ -19,9 +19,5 @@ conf-args += \
 	--enable-libmount-mount \
 	--enable-mountconfig \
 	--without-tcp-wrappers \
+	--disable-rpath \
 	--disable-gss
-
-# needs sqlite3
-conf-args += \
-	--disable-nfsdcltrack \
-	--disable-nfsdcld

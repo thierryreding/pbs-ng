@@ -1,11 +1,5 @@
-commit ca48ceaabe2932d1180e6928695e86f8a57feb2b
-Author: Thierry Reding <treding@nvidia.com>
-Date:   Tue Nov 29 14:17:36 2022 +0100
-
-    out-of-tree
-
 diff --git a/support/export/Makefile.am b/support/export/Makefile.am
-index eec737f66149..8c12ec006738 100644
+index 7338e1c7e719..bd05e063609d 100644
 --- a/support/export/Makefile.am
 +++ b/support/export/Makefile.am
 @@ -9,6 +9,8 @@ GENFILES	= $(GENFILES_CLNT) $(GENFILES_SVC) $(GENFILES_XDR) $(GENFILES_H)
@@ -17,15 +11,28 @@ index eec737f66149..8c12ec006738 100644
  noinst_LIBRARIES = libexport.a
  libexport_a_SOURCES = client.c export.c hostname.c \
  		      xtab.c mount_clnt.c mount_xdr.c \
-@@ -26,7 +28,7 @@ dist-hook:
+@@ -28,7 +30,7 @@ dist-hook:
  if CONFIG_RPCGEN
  RPCGEN		= $(top_builddir)/tools/rpcgen/rpcgen
  $(RPCGEN):
 -	make -C $(top_srcdir)/tools/rpcgen all
-+	make -C ../../tools/rpcgen all
++	make -C $(top_builddir)/tools/rpcgen all
  else
  RPCGEN = @RPCGEN_PATH@
  endif
+diff --git a/support/junction/Makefile.am b/support/junction/Makefile.am
+index be6958b8c196..5ca33ed46684 100644
+--- a/support/junction/Makefile.am
++++ b/support/junction/Makefile.am
+@@ -23,6 +23,8 @@
+ ##      http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+ ##
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ noinst_HEADERS		= junction-internal.h
+ 
+ noinst_LTLIBRARIES	= libjunction.la
 diff --git a/support/misc/Makefile.am b/support/misc/Makefile.am
 index f9993e3ac897..3757fea643e3 100644
 --- a/support/misc/Makefile.am
@@ -39,7 +46,7 @@ index f9993e3ac897..3757fea643e3 100644
  libmisc_a_SOURCES = tcpwrapper.c from_local.c mountpoint.c file.c \
  		    nfsd_path.c workqueue.c xstat.c
 diff --git a/support/nfs/Makefile.am b/support/nfs/Makefile.am
-index 67e3a8e134c8..b448d2abbfec 100644
+index 2e1577cc12df..b38a4164f61f 100644
 --- a/support/nfs/Makefile.am
 +++ b/support/nfs/Makefile.am
 @@ -1,5 +1,7 @@
@@ -77,16 +84,28 @@ index 8f5874ef26b8..e74121b1bbd9 100644
  noinst_LIBRARIES = libnsm.a
  libnsm_a_SOURCES = $(GENFILES) file.c rpc.c
  
+diff --git a/support/reexport/Makefile.am b/support/reexport/Makefile.am
+index fbd66a201770..8fbb0c8def65 100644
+--- a/support/reexport/Makefile.am
++++ b/support/reexport/Makefile.am
+@@ -1,5 +1,7 @@
+ ## Process this file with automake to produce Makefile.in
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ noinst_LIBRARIES = libreexport.a
+ libreexport_a_SOURCES = reexport.c
+ 
 diff --git a/systemd/Makefile.am b/systemd/Makefile.am
-index 7b5ab84bd793..cc8b36a2ed56 100644
+index b4483222cc6b..3e113bddaa30 100644
 --- a/systemd/Makefile.am
 +++ b/systemd/Makefile.am
-@@ -2,7 +2,7 @@
- 
+@@ -3,7 +3,7 @@
  MAINTAINERCLEANFILES = Makefile.in
  
--modprobe_files = 50-nfs.conf
-+modprobe_files = $(srcdir)/50-nfs.conf
+ udev_rulesdir = /usr/lib/udev/rules.d/
+-udev_files = 60-nfs.rules
++udev_files = $(srcdir)/60-nfs.rules
  
  unit_files =  \
      nfs-client.target \
@@ -152,7 +171,7 @@ index d513edb27c8f..ff49a230cbd3 100644
  
  MAINTAINERCLEANFILES=Makefile.in
 diff --git a/tools/nfsrahead/Makefile.am b/tools/nfsrahead/Makefile.am
-index 845ea0d576b4..b0512179ce01 100644
+index 7e08233a74f5..578e3d640649 100644
 --- a/tools/nfsrahead/Makefile.am
 +++ b/tools/nfsrahead/Makefile.am
 @@ -1,3 +1,5 @@
@@ -160,7 +179,7 @@ index 845ea0d576b4..b0512179ce01 100644
 +
  libexec_PROGRAMS = nfsrahead
  nfsrahead_SOURCES = main.c
- nfsrahead_LDFLAGS= -lmount
+ nfsrahead_LDFLAGS= $(LIBMOUNT_LIBS)
 diff --git a/tools/rpcctl/Makefile.am b/tools/rpcctl/Makefile.am
 index 33fb431fe7d4..bb70d6fe4dc0 100644
 --- a/tools/rpcctl/Makefile.am
@@ -241,7 +260,7 @@ index 56c8a4bb4ee2..6bd743f1ad7c 100644
  
  blkmapd_SOURCES = \
 diff --git a/utils/exportfs/Makefile.am b/utils/exportfs/Makefile.am
-index 96524c729359..0abe1eb52e2d 100644
+index 7f8ce9faf2b4..42db980043ed 100644
 --- a/utils/exportfs/Makefile.am
 +++ b/utils/exportfs/Makefile.am
 @@ -4,6 +4,8 @@ man5_MANS	= exports.man
@@ -280,7 +299,7 @@ index e09e8c53821d..dd3f454901d8 100644
  RPCPREFIX	= rpc.
  KPREFIX		= @kprefix@
 diff --git a/utils/mount/Makefile.am b/utils/mount/Makefile.am
-index 3101f7abd7f4..88aefc3815a8 100644
+index 5ff1148c833f..093bfee10ef7 100644
 --- a/utils/mount/Makefile.am
 +++ b/utils/mount/Makefile.am
 @@ -9,6 +9,8 @@
@@ -293,7 +312,7 @@ index 3101f7abd7f4..88aefc3815a8 100644
  EXTRA_DIST = nfsmount.conf $(man8_MANS) $(man5_MANS)
  mount_common = error.c network.c token.c \
 diff --git a/utils/mountd/Makefile.am b/utils/mountd/Makefile.am
-index 13b25c90f06e..3151d89fd46d 100644
+index 197ef29b4fe4..899d833a3449 100644
 --- a/utils/mountd/Makefile.am
 +++ b/utils/mountd/Makefile.am
 @@ -8,6 +8,8 @@ endif
@@ -344,6 +363,18 @@ index 769e4a455fcf..941236fb8132 100644
  sbin_PROGRAMS	= nfsdcltrack
  
  noinst_HEADERS	= sqlite.h
+diff --git a/utils/nfsdctl/Makefile.am b/utils/nfsdctl/Makefile.am
+index 89c7ecd6f30b..c2b182dbc14a 100644
+--- a/utils/nfsdctl/Makefile.am
++++ b/utils/nfsdctl/Makefile.am
+@@ -1,5 +1,7 @@
+ ## Process this file with automake to produce Makefile.in
+ 
++AM_CPPFLAGS = -I$(top_srcdir)/support/include
++
+ man8_MANS       = nfsdctl.8
+ EXTRA_DIST      = $(man8_MANS)
+ 
 diff --git a/utils/nfsidmap/Makefile.am b/utils/nfsidmap/Makefile.am
 index e5d7d04c1799..ed81794b5bac 100644
 --- a/utils/nfsidmap/Makefile.am
@@ -357,6 +388,19 @@ index e5d7d04c1799..ed81794b5bac 100644
  
  nfsidmap_SOURCES = nfsidmap.c
  nfsidmap_LDADD = -lkeyutils \
+diff --git a/utils/nfsref/Makefile.am b/utils/nfsref/Makefile.am
+index 2409dd00cfa1..3f03bf2f2ace 100644
+--- a/utils/nfsref/Makefile.am
++++ b/utils/nfsref/Makefile.am
+@@ -23,6 +23,8 @@
+ ##	http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+ ##
+ 
++AM_CFLAGS = -I$(top_srcdir)/support/include
++
+ noinst_HEADERS		= nfsref.h
+ 
+ sbin_PROGRAMS		= nfsref
 diff --git a/utils/showmount/Makefile.am b/utils/showmount/Makefile.am
 index d0a16b2b048a..482fe1a33ca8 100644
 --- a/utils/showmount/Makefile.am

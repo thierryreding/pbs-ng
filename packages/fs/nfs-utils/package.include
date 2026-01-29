@@ -1,11 +1,11 @@
 description: support programs for Network File Systems
-version: 2.6.2
+version: 2.8.4
 license: GPL-2.0
 
 files:
   - download:
-      url: http://prdownloads.sourceforge.net/nfs/nfs-utils/nfs-utils-${version}.tar.bz2
-      sha1: 872d80381099c42ea9e2a6728297cbfd97802af2
+      url: https://www.kernel.org/pub/linux/utils/nfs-utils/${version}/nfs-utils-${version}.tar.xz
+      sha1: c7736e290374f10f56488743688f2512eb5d0437
       watch:
         url: anitya://2081
 
