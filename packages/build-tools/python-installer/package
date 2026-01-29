@@ -1,0 +1,15 @@
+description: a library for installing Python wheels
+version: 0.7.0
+license: MIT
+
+depends:
+  - build-tools/python
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/i/installer/installer-${version}.tar.gz
+      sha1: 59bbffec808610077fe3ad183b9734b68ca5bc2d
+      watch:
+        url: anitya://197662
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
