@@ -1,0 +1,36 @@
+description: password and account management tool suite with support for shadow files and PAM
+version: 4.15.0
+license: BSD-3-Clause
+
+files:
+  - download:
+      url: https://github.com/shadow-maint/shadow/releases/download/${version}/shadow-${version}.tar.xz
+      sha1: cb918a7412f5b57d268e3b1964111c9cdb84bb56
+      watch:
+        url: anitya://4802
+
+depends:
+  - devel/glibc
+  - libs/libcap
+  - libs/libxcrypt
+  - libs/pam
+
+packages:
+  shadow:
+    files:
+      - /etc
+      - /usr/bin
+      - /usr/lib/*.so.*
+      - /usr/sbin
+
+  shadow-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+
+  shadow-locale:
+    files:
+      - /usr/share/locale
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
