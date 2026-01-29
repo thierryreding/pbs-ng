@@ -1,0 +1,33 @@
+description: encoding detector library
+version: 0.0.8
+license: MPL
+
+files:
+  - download:
+      url: https://www.freedesktop.org/software/uchardet/releases/uchardet-${version}.tar.xz
+      sha1: fdc11673bfb0939f48825bf811b64af709339c80
+      watch:
+        url: anitya://9265
+
+depends:
+  - devel/glibc
+
+packages:
+  uchardet:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+
+  uchardet-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+      - /usr/lib/pkgconfig
+
+  uchardet-doc:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

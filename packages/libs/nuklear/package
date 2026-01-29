@@ -1,0 +1,20 @@
+description: reusable library for GPU-accelerated image/video processing primitives and shaders
+version: 4.12.8
+license: MIT
+
+files:
+  - download:
+      url: https://github.com/Immediate-Mode-UI/Nuklear/archive/refs/tags/${version}.tar.gz
+      sha1: 2f12665542cadbd0caf1e00f0d1354ca7cec36d1
+      watch:
+        url: anitya://388192
+
+depends:
+  - devel/glibc
+
+packages:
+  libnuklear-dev:
+    files:
+      - /usr/include
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

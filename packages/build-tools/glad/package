@@ -1,0 +1,12 @@
+description: multi-language Vulkan/GL/GLES/EGL/GLX/WGL loader-generator based on the official specs
+version: 2.0.8
+license: MIT
+
+files:
+  - download:
+      url: https://github.com/Dav1dde/glad/archive/refs/tags/v${version}.tar.gz
+      sha1: 7e7bc30cd86cfdc24f04198cb6ebaccfb45c61ff
+      watch:
+        url: anitya://300234
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

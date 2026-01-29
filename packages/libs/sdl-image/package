@@ -1,0 +1,29 @@
+description: image decoding for many popular formats for Simple Directmedia Layer
+version: 2.8.8
+license: ZLIB
+
+depends:
+  - libs/libtiff
+  - libs/sdl
+  - multimedia/libavif
+
+files:
+  - download:
+      url: https://github.com/libsdl-org/SDL_image/releases/download/release-${version}/SDL2_image-${version}.tar.gz
+      sha1: 06b88ab4c996e29dea234934858c084921c9dacd
+      watch:
+        url: anitya://382729
+
+packages:
+  libsdl-image:
+    files:
+      - /usr/lib/*.so.*
+
+  libsdl-image-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
