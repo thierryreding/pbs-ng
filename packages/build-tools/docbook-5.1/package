@@ -1,0 +1,16 @@
+description:
+version: 5.1
+license:
+
+files:
+  - download:
+      url: https://docbook.org/xml/${version}/docbook-v${version}-os.zip
+      sha1: 31ee986a9f173b782f9d45b93165de46288c63f5
+      strip: false
+      watch:
+        url: anitya://227335
+
+depends:
+  - build-tools/libxml2
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,0 +1,16 @@
+description:
+version: 4.1.2
+license:
+
+files:
+  - download:
+      url: https://docbook.org/xml/${version}/docbkx${major}${minor}${micro}.zip
+      sha1: b9ae7a41056bfaf885581812d60651b7b5531519
+      strip: false
+      watch:
+        url: ignore://
+
+depends:
+  - build-tools/libxml2
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

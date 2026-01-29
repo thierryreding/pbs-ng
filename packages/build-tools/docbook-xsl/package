@@ -1,0 +1,20 @@
+description: XML stylesheets for DocBook XML transformations
+version: 1.79.2
+license: custom
+
+files:
+  - download:
+      url: https://github.com/docbook/xslt10-stylesheets/releases/download/release%2F${version}/docbook-xsl-${version}.tar.gz
+      sha1: ffbc43e040bc3c10bd2c4d45bffcdb97d106145c
+      strip: false
+      watch:
+        url: anitya://12785
+
+  - download:
+      url: https://github.com/docbook/xslt10-stylesheets/releases/download/release%2F${version}/docbook-xsl-nons-${version}.tar.gz
+      sha1: c66b68d5891e76a1f143a01fc11efc70caf4cd78
+      strip: false
+      watch:
+        url: anitya://12785
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

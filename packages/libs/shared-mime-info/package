@@ -10,6 +10,8 @@ files:
         url: anitya://5524
 
 depends:
+  - build-tools/docbook-4.1
+  - build-tools/docbook-xsl
   - build-tools/itstool
   - build-tools/xmlto
   - libs/glib
