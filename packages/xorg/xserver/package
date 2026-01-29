@@ -26,6 +26,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/xserver/xorg-server-${version}.tar.bz2
       sha1: fea6fd34c7f48b3c69fbecd8fb294eaa1498e69c
+      watch:
+        url: anitya://5250
 
 packages:
   xorg-server:

@@ -10,6 +10,8 @@ files:
   - download:
       url: https://github.com/libsndfile/libsamplerate/releases/download/${version}/libsamplerate-${version}.tar.xz
       sha1: 93eacb671d2d09e317f5ccd49967cf747cb4d937
+      watch:
+        url: anitya://1716
 
 packages:
   libsamplerate:

@@ -6,6 +6,8 @@ files:
   - download:
       url: https://pypi.python.org/packages/source/j/jinja2/Jinja2-${version}.tar.gz
       sha1: 560f248ccb0b98256c5b50c86a002c2c1e57edb6
+      watch:
+        url: anitya://3894
 
 depends:
   - build-tools/python

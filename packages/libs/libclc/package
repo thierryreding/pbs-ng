@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/libclc-${version}.src.tar.xz
       sha1: 7fd28cf9aeb931d2ea850289c5d5b894f03afad4
+      watch:
+        url: anitya://376264
 
 depends:
   - build-tools/clang

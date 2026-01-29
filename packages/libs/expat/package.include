@@ -6,5 +6,7 @@ files:
   - download:
       url: https://github.com/libexpat/libexpat/releases/download/R_${major}_${minor}_${micro}/expat-${version}.tar.xz
       sha1: 5178e13c1e34f4643d5118d5758babfe0e836fe2
+      watch:
+        url: anitya://770
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

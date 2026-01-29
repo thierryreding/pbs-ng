@@ -9,6 +9,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libpciaccess-${version}.tar.bz2
       sha1: ffaa13f2df5f822da1089b55223b217c142ef919
+      watch:
+        url: anitya://1703
 
 packages:
   libpciaccess:

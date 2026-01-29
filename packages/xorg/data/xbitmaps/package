@@ -6,6 +6,8 @@ files:
   - download:
       url: http://www.x.org/releases/individual/data/xbitmaps-${version}.tar.bz2
       sha1: 1cb0e485a66280e9a64b48426140b8a0de9cf169
+      watch:
+        url: anitya://13645
 
 packages:
   xbitmaps:

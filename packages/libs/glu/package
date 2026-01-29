@@ -6,6 +6,8 @@ files:
   - download:
       url: ftp://ftp.freedesktop.org/pub/mesa/glu/glu-${version}.tar.bz2
       sha1: c2814bbaf1e60e28a75ec80f4646047c0da742bd
+      watch:
+        url: anitya://13518
 
 depends:
   - libs/mesa

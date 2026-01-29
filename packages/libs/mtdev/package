@@ -9,6 +9,8 @@ files:
   - download:
       url: http://bitmath.org/code/mtdev/mtdev-${version}.tar.bz2
       sha1: 1459f8b977b615c8e569b53ba119c980af2fa688
+      watch:
+        url: anitya://8868
 
 packages:
   libmtdev:

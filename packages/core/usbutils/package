@@ -6,6 +6,8 @@ files:
   - download:
       url: https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-${version}.tar.xz
       sha1: 02fb81d84d194df6e735989656980b5e3c0a193d
+      watch:
+        url: anitya://5061
 
 depends:
   - core/systemd

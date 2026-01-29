@@ -6,6 +6,8 @@ files:
   - download:
       url: https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${version}.tar.xz
       sha1: ab4f9af209d9e1ad86f95407ee4402247853d232
+      watch:
+        url: anitya://1263
 
 depends:
   - devel/python

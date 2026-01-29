@@ -6,6 +6,8 @@ files:
   - download:
       url: http://www.netfilter.org/projects/libmnl/files/libmnl-${version}.tar.bz2
       sha1: 63c6456b77f7978a7b37e62c1b38346b2ef2d91c
+      watch:
+        url: anitya://1663
 
 depends:
   - devel/glibc

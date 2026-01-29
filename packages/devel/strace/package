@@ -6,6 +6,8 @@ files:
   - download:
       url: https://strace.io/files/${version}/strace-${version}.tar.xz
       sha1: dc34c0d7c3ab0d0adb227f751c016da2c415eb2e
+      watch:
+        url: anitya://4897
 
 packages:
   strace:

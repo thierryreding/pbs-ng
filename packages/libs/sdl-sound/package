@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/icculus/SDL_sound/archive/refs/tags/v${version}.tar.gz
       sha1: 53b035d88f7348a8c373da71254c9e7b947de5f5
+      watch:
+        url: anitya://10262
 
 packages:
   libsdl-sound:

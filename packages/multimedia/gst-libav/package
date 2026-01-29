@@ -6,6 +6,8 @@ files:
   - download:
       url: https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-${version}.tar.xz
       sha1: f25f781885c250012861ec20c3ef2306b37b873f
+      watch:
+        url: anitya://21848
 
 depends:
   - multimedia/gst-plugins-base

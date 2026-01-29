@@ -9,6 +9,8 @@ files:
   - download:
       url: http://download.osgeo.org/libtiff/tiff-${version}.tar.gz
       sha1: e11d05db71d243a62800b4bf4479eb4859714405
+      watch:
+        url: anitya://1738
 
 packages:
   libtiff:

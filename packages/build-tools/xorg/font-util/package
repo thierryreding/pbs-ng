@@ -6,5 +6,7 @@ files:
   - download:
       url: https://xorg.freedesktop.org/releases/individual/font/font-util-${version}.tar.bz2
       sha1: 1b36275c174b64a9c16da5c902c91546789a67ef
+      watch:
+        url: anitya://383949
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

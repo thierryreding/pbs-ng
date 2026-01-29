@@ -8,6 +8,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/driver/xf86-video-nouveau-${version}.tar.bz2
       sha1: ed699a59ea509550f60019eef1e092ed0ccdea08
+      watch:
+        url: anitya://5229
 
 packages:
   xf86-video-nouveau:

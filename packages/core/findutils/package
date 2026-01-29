@@ -9,6 +9,8 @@ files:
   - download:
       url: http://ftp.gnu.org/gnu/findutils/findutils-${version}.tar.gz
       sha1: f18e8aaee3f3d4173a1f598001003be8706d28b0
+      watch:
+        url: anitya://812
 
 packages:
   findutils:

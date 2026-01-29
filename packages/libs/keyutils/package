@@ -9,6 +9,8 @@ files:
   - download:
       url: https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/keyutils-${version}.tar.gz
       sha1: 7e5112d68eef5677e474d062282a0e1d1f19904c
+      watch:
+        url: anitya://17740
 
 packages:
   libkeyutils:

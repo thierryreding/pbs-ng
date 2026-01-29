@@ -13,6 +13,8 @@ files:
   - download:
       url: http://xkbcommon.org/download/libxkbcommon-${version}.tar.xz
       sha1: 62942d410b3c9666dd5e09d1864a78851d6cb193
+      watch:
+        url: anitya://1780
 
 packages:
   libxkbcommon:

@@ -10,6 +10,8 @@ files:
   - download:
       url: https://ftp.gnu.org/pub/gnu/bash/bash-${version}.tar.gz
       sha1: d116b469b9e6ea5264a74661d3a4c797da7f997b
+      watch:
+        url: anitya://166
 
 packages:
   bash:

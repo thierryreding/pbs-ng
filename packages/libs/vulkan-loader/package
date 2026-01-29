@@ -11,6 +11,8 @@ files:
   - download:
       url: https://github.com/KhronosGroup/Vulkan-Loader/archive/refs/tags/v${version}.tar.gz
       sha1: 5a1758501b89caf0d48e9f3e12a2a4edd13f5b8d
+      watch:
+        url: anitya://230557
 
 packages:
   libvulkan:

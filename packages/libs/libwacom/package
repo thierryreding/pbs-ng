@@ -10,6 +10,8 @@ files:
   - download:
       url: http://sourceforge.net/projects/linuxwacom/files/libwacom/libwacom-${version}.tar.bz2
       sha1: 6782d32af328bc984d7c4f65062f04a9172d342c
+      watch:
+        url: anitya://16887
 
 packages:
   libwacom:

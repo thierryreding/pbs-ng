@@ -10,6 +10,8 @@ files:
   - download:
       url: https://download.savannah.nongnu.org/releases/libunwind/libunwind-${version}.tar.gz
       sha1: 1e4d5e4b9502bfbe7609a4a64b83eb040be3f741
+      watch:
+        url: anitya://1748
 
 packages:
   libunwind:

@@ -6,5 +6,7 @@ files:
   - download:
       url: https://github.com/oneapi-src/oneTBB/archive/v${version}.tar.gz
       sha1: e4be99dc35948052296105d2ae7da6d34e01ba2d
+      watch:
+        url: anitya://227581
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

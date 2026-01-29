@@ -6,5 +6,7 @@ files:
 - download:
     url: https://gitlab.freedesktop.org/wayland/wayland/-/releases/${version}/downloads/wayland-${version}.tar.xz
     sha1: 59f381d656e09f34135b7222fbf57e05ae7262e6
+    watch:
+      url: anitya://10061
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

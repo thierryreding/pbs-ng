@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/libass/libass/releases/download/${version}/libass-${version}.tar.xz
       sha1: d7b9698b368569551cb9c8d2007f74c8753775f7
+      watch:
+        url: anitya://1560
 
 depends:
   - devel/glibc

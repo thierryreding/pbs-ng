@@ -6,5 +6,7 @@ files:
   - download:
       url: https://github.com/ninja-build/ninja/archive/v${version}.tar.gz
       sha1: 938723cdfc7a6f7c8f84c83b9a2cecdf1e5e1ad3
+      watch:
+        url: anitya://2089
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

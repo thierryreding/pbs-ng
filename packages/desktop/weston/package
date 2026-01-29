@@ -20,6 +20,8 @@ files:
   - download:
       url: https://gitlab.freedesktop.org/wayland/weston/-/releases/${version}/downloads/weston-${version}.tar.xz
       sha1: 87cc339503f01317a0ca8d986b1b211c8aae99bb
+      watch:
+        url: anitya://13745
 
 packages:
   weston:

@@ -6,6 +6,8 @@ files:
   - download:
       url: https://www.x.org/releases/individual/font/font-util-${version}.tar.bz2
       sha1: 1b36275c174b64a9c16da5c902c91546789a67ef
+      watch:
+        url: anitya://383949
 
 packages:
   font-util:

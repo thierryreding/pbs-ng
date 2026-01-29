@@ -6,5 +6,7 @@ files:
   - download:
       url: https://files.pythonhosted.org/packages/af/b6/42cd322ae555aa770d49e31b8c5c28a243ba1bbb57ad927e1a5f5b064811/Mako-${version}.tar.gz
       sha1: 61acbccc1131a1a439ef091b49f201df8f002bed
+      watch:
+        url: anitya://3915
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

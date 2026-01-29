@@ -6,6 +6,8 @@ files:
   - download:
       url: https://mirrors.kernel.org/sourceware/lvm2/LVM2.${version}.tgz
       sha1: a99cfcbcb2cf665824acde03775dccc9ef54a836
+      watch:
+        url: anitya://5354
 
 depends:
   - devel/glibc

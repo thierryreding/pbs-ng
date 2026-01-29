@@ -10,6 +10,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-${version}.tar.bz2
       sha1: 487f314b6dbc17e93d0fe1e3741392156a9ca895
+      watch:
+        url: anitya://1781
 
 packages:
   libxkbfile:

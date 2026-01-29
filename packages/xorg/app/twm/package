@@ -14,6 +14,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/app/twm-${version}.tar.bz2
       sha1: f632a47620dfe6d75b003839d269b14fa22b262e
+      watch:
+        url: anitya://231987
 
 packages:
   twm:

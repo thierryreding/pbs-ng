@@ -9,6 +9,8 @@ files:
   - download:
       url: http://www.freedesktop.org/software/libevdev/libevdev-${version}.tar.xz
       sha1: 38c493d6ac5d25b3967c149242a57ad4915c54ed
+      watch:
+        url: anitya://20540
 
 packages:
   libevdev:

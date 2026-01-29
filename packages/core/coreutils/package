@@ -9,6 +9,8 @@ files:
   - download:
       url: http://ftp.gnu.org/gnu/coreutils/coreutils-${version}.tar.xz
       sha1: aa7bf0be95eef29d98eb5c76d4455698b3b705b3
+      watch:
+        url: anitya://343
 
 packages:
   coreutils:

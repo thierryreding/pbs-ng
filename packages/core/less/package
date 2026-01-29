@@ -11,7 +11,7 @@ files:
       url: https://www.greenwoodsoftware.com/less/less-${version}.tar.gz
       sha1: 94493a15bed80574cefc30153a10ceebab6824a0
       watch:
-        url: https://www.greenwoodsoftware.com/less/download.html
+        url: anitya://1550
 
 packages:
   less:

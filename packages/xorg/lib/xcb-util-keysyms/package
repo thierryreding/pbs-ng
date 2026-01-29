@@ -10,6 +10,8 @@ files:
 - download:
     url: http://xcb.freedesktop.org/dist/xcb-util-keysyms-${version}.tar.bz2
     sha1: ff02ee8ac22c53848af50c0a6a6b00feb002c1cb
+      watch:
+        url: anitya://5168
 
 packages:
   xcb-util-keysyms:

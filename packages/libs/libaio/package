@@ -9,6 +9,8 @@ files:
   - download:
       url: https://releases.pagure.org/libaio/libaio-${version}.tar.gz
       sha1: 86727941e0d3084ce264b8a6878961812bc212b8
+      watch:
+        url: anitya://1557
 
 packages:
   libaio:

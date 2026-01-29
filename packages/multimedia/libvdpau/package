@@ -6,6 +6,8 @@ files:
   - download:
       url: https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/${version}/libvdpau-${version}.tar.bz2
       sha1: 7c30763796f6abe178dab49268e818378b7c3d4a
+      watch:
+        url: anitya://1755
 
 depends:
   - devel/glibc

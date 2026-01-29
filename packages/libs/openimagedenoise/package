@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/OpenImageDenoise/oidn/releases/download/v${version}/oidn-${version}.src.tar.gz
       sha1: 9ace7a8f29324c4f388d29af6d76bbdd85458d82
+      watch:
+        url: anitya://19531
 
 packages:
   openimagedenoise:

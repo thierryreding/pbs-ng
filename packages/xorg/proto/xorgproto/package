@@ -10,6 +10,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/proto/xorgproto-${version}.tar.bz2
       sha1: 2dedbe3e4daccf0c3d675759ed82161a3e4cf1b5
+      watch:
+        url: anitya://17190
 
 packages:
   xorgproto-dev:

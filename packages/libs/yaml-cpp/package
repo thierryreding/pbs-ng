@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-${version}.tar.gz
       sha1: 8a4126f1e21d374dac8dfc8524ffea101a160f2f
+      watch:
+        url: anitya://5284
 
 packages:
   yaml-cpp:

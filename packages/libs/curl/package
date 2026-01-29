@@ -10,6 +10,8 @@ files:
   - download:
       url: https://curl.haxx.se/download/curl-${version}.tar.xz
       sha1: 5c1940ff51f6b2137b91ffe672b70d4491a23ea6
+      watch:
+        url: anitya://381
 
 packages:
   curl:

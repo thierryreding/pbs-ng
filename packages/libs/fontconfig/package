@@ -13,6 +13,8 @@ files:
   - download:
       url: http://fontconfig.org/release/fontconfig-${version}.tar.gz
       sha1: 23d73ec85fe1eb56bb83b7e401bc8e52eef46a8a
+      watch:
+        url: anitya://827
 
 packages:
   libfontconfig:

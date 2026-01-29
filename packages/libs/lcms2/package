@@ -9,6 +9,8 @@ files:
   - download:
       url: https://prdownloads.sourceforge.net/lcms/lcms/${version}/lcms2-${version}.tar.gz
       sha1: 3d0c0276fcd3930b80c424512ec0b1ed54ec1497
+      watch:
+        url: anitya://9815
 
 packages:
   lcms2:

@@ -18,6 +18,8 @@ files:
   - download:
       url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/v${version}.tar.gz
       sha1: c5343ed34041344c37bc359bce4cf56f33d72780
+      watch:
+        url: anitya://9631
 
 packages:
   opencolorio:

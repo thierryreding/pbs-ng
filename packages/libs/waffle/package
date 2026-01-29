@@ -6,6 +6,8 @@ files:
   - download:
       url: https://mesa.pages.freedesktop.org/waffle/files/release/waffle-${version}/waffle-${version}.tar.xz
       sha1: d84642c2d85a626826abcab5af004cffc805fdd3
+      watch:
+        url: anitya://21633
 
 depends:
   - build-tools/meson

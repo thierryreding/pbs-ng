@@ -12,6 +12,8 @@ files:
   - download:
       url: https://github.com/facebook/zstd/archive/v${version}.tar.gz
       sha1: 3299248fcd44d7f21ba2f1f198c1173eeb3c4f32
+      watch:
+        url: anitya://12083
 
 packages:
   zstd:

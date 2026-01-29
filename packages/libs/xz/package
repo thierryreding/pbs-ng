@@ -6,6 +6,8 @@ files:
   - download:
       url: http://tukaani.org/xz/xz-${version}.tar.xz
       sha1: cd2db279df5716d18e961695921d7f6de629c6e9
+      watch:
+        url: anitya://5277
 
 packages:
   liblzma-dev:

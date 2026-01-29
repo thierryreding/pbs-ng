@@ -12,6 +12,8 @@ files:
   - download:
       url: https://www.libsdl.org/release/SDL2-${version}.tar.gz
       sha1: 788380a96075119a2ab1e5b53f2fee74fa957fa2
+      watch:
+        url: anitya://4779
 
 packages:
   libsdl:

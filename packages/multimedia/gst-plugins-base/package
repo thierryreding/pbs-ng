@@ -6,6 +6,8 @@ files:
   - download:
       url: https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${version}.tar.xz
       sha1: f9b15502997936ac7460b3c414dfb5dd9c835339
+      watch:
+        url: anitya://21850
 
 depends:
   - libs/glib

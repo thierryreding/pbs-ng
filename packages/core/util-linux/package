@@ -11,6 +11,8 @@ files:
   - download:
       url: http://www.kernel.org/pub/linux/utils/util-linux/v${major}.${minor}/util-linux-${version}.tar.xz
       sha1: f62a7b6fe64ce7f4569b57d7d2d0875b39f79836
+      watch:
+        url: anitya://8179
 
 packages:
   util-linux:

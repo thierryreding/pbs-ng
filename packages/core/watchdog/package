@@ -9,6 +9,8 @@ files:
   - download:
       url: https://prdownloads.sourceforge.net/watchdog/${version}/watchdog-${version}.tar.gz
       sha1:
+      watch:
+        url: anitya://15950
 
 packages:
   watchdog:

@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/AcademySoftwareFoundation/Imath/archive/v${version}.tar.gz
       sha1: 77387691af82113dc3080edee302c07b1d40622f
+      watch:
+        url: anitya://223366
 
 packages:
   imath:

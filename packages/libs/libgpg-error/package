@@ -9,6 +9,8 @@ files:
   - download:
       url: ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-${version}.tar.bz2
       sha1: a6e5efdd72e848aab4064e5ef4c6835ba344bcf1
+      watch:
+        url: anitya://1628
 
 packages:
   libgpg-error:

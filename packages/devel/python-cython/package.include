@@ -6,5 +6,7 @@ files:
   - download:
       url: https://files.pythonhosted.org/packages/09/45/10c39337ba73c38a798165f97e4798827a532eaac71071842cbe0ee13dc5/Cython-${version}.tar.gz
       sha1: bda825a34f18c11889562466264e29a8cb0e8806
+      watch:
+        url: anitya://36699
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

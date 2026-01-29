@@ -6,5 +6,7 @@ files:
   - download:
       url: https://github.com/libevent/libevent/archive/release-${version}-stable.tar.gz
       sha1: eba253ac0dcdd6572c6631b0c579471d88d3dc8d
+      watch:
+        url: anitya://1606
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

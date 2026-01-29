@@ -10,6 +10,8 @@ files:
   - download:
       url: https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-${version}.tar.xz
       sha1: 09c80c5d48aba04d9bf6d184b68b817ed5818b41
+      watch:
+        url: anitya://1392
 
 packages:
   iproute2:

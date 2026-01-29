@@ -22,6 +22,8 @@ files:
   - download:
       url: https://github.com/systemd/systemd/archive/v${version}.tar.gz
       sha1: 7c961dc6e8bb950825b85129f59dc80f4536cabb
+      watch:
+        url: anitya://5440
 
 packages:
   systemd:

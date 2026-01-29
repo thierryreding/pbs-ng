@@ -9,6 +9,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/app/xrandr-${version}.tar.bz2
       sha1: f402b2ed85817c2e111afafd6f5d0657328be2fa
+      watch:
+        url: anitya://385141
 
 packages:
   xrandr:

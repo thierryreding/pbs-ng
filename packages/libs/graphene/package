@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/ebassi/graphene/releases/download/${version}/graphene-${version}.tar.xz
       sha1: 0bce9014096441fb771db0bc66587d7440190fa5
+      watch:
+        url: anitya://12758
 
 depends:
   - libs/glib

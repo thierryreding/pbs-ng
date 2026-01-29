@@ -6,6 +6,8 @@ files:
   - download:
       url: http://ftp.gnu.org/gnu/libidn/libidn2-${version}.tar.gz
       sha1: e4b8ab8b705c8b0dd187af894f81f4667fb5a3ef
+      watch:
+        url: anitya://5597
 
 depends:
   - devel/glibc

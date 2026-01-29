@@ -9,6 +9,8 @@ files:
   - download:
       url: https://ftp.gnu.org/gnu/nettle/nettle-${version}.tar.gz
       sha1: 1be40366f8db2d5bb65e45883d6d76a96b39eb73
+      watch:
+        url: anitya://2073
 
 packages:
   nettle:

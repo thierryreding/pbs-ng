@@ -6,5 +6,7 @@ files:
   - download:
       url: http://python.org/ftp/python/${version}/Python-${version}.tar.xz
       sha1: 474838615eab658fc15c87d4bee6bf85a02b424d
+      watch:
+        url: anitya://13254
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

@@ -6,6 +6,8 @@ files:
   - download:
       url: https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${version}.tar.xz
       sha1: a5fd08a986ba60fedbca2894d65e30d07de09262
+      watch:
+        url: anitya://21852
 
 depends:
   - multimedia/gst-plugins-base

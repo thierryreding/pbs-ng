@@ -9,6 +9,8 @@ files:
 - download:
     url: http://xcb.freedesktop.org/dist/libpthread-stubs-${version}.tar.bz2
     sha1: c42503a2ae0067b2238b2f3fefc86656baa4dd8e
+      watch:
+        url: anitya://13519
 
 packages:
   libpthread-stubs:

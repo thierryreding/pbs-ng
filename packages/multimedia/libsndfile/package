@@ -13,6 +13,8 @@ files:
   - download:
       url: https://github.com/libsndfile/libsndfile/releases/download/${version}/libsndfile-${version}.tar.xz
       sha1: ba290fdec0cc0a34e0a7b7499a8094816b3fe840
+      watch:
+        url: anitya://13277
 
 packages:
   libsndfile:

@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/thestinger/termite/archive/v${version}.tar.gz
       sha1: 9a55ff967f4fcf18fdb1580e9c53b52ba9e5fbd1
+      watch:
+        url: anitya://11226
 
 packages:
   termite:

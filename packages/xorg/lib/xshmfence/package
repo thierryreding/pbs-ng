@@ -10,6 +10,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libxshmfence-${version}.tar.bz2
       sha1: 3472218fc0e8ee8183533d22dbcd4bbe90bf3ab8
+      watch:
+        url: anitya://1792
 
 packages:
   libxshmfence:

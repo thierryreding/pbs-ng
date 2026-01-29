@@ -9,6 +9,8 @@ files:
   - download:
       url: http://downloads.xiph.org/releases/vorbis/libvorbis-${version}.tar.xz
       sha1: 0a2dd71a999656b8091506839e8007a61a8fda1f
+      watch:
+        url: anitya://1758
 
 packages:
   libvorbis:

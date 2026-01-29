@@ -10,6 +10,8 @@ files:
   - download:
       url: https://github.com/p11-glue/p11-kit/releases/download/${version}/p11-kit-${version}.tar.xz
       sha1: 339e5163ed50a9984a74739b9207ea8cd77fa7e2
+      watch:
+        url: anitya://2582
 
 packages:
   p11-kit:

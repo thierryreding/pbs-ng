@@ -10,6 +10,8 @@ files:
   - download:
       url: http://prdownloads.sourceforge.net/libpng/libpng-${version}.tar.xz
       sha1: 3ab93fabbf4c27e1c4724371df408d9a1bd3f656
+      watch:
+        url: anitya://1705
 
 packages:
   libpng:

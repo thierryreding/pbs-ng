@@ -10,6 +10,8 @@ files:
   - download:
       url: https://www.kernel.org/pub/software/utils/dtc/dtc-${version}.tar.xz
       sha1: 6273fa9cdd51e7fd83d0467e21c788e3a5d3cd5d
+      watch:
+        url: anitya://16911
 
 packages:
   dtc:

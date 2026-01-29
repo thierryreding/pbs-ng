@@ -11,6 +11,8 @@ files:
   - download:
       url: https://github.com/KhronosGroup/OpenCOLLADA/archive/v${version}.tar.gz
       sha1: 228625c1ddb8dc1bdb620d0a6532215effbff018
+      watch:
+        url: anitya://17055
 
 packages:
   opencollada:

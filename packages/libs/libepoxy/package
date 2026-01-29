@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/anholt/libepoxy/releases/download/${version}/libepoxy-${version}.tar.xz
       sha1: 531d98d849ead728a0fc7722df5487a3d9108829
+      watch:
+        url: anitya://6090
 
 depends:
   - libs/mesa

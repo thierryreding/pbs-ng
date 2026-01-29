@@ -9,6 +9,8 @@ files:
   - download:
       url: https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v${version}/libglvnd-${version}.tar.bz2
       sha1: 7e8b44b2b8b52904a77612abb85be54bebaadc5e
+      watch:
+        url: anitya://12098
 
 packages:
   libglvnd:

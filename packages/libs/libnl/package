@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/thom311/libnl/archive/libnl${major}_${minor}_${micro}.tar.gz
       sha1: 153fa111f70b73199d014b03c9a5c71a4211a970
+      watch:
+        url: anitya://1684
 
 packages:
   libnl:

@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/libfuse/libfuse/archive/fuse-${version}.tar.gz
       sha1: f76082dbc8424ee6dd26b2d9582cb7ec5cbb9eee
+      watch:
+        url: anitya://861
 
 depends:
   - devel/glibc

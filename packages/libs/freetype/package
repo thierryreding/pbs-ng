@@ -9,6 +9,8 @@ files:
   - download:
       url: https://download.savannah.gnu.org/releases/freetype/freetype-${version}.tar.xz
       sha1: 5133eed28a7624ffabbf6d00aa3f68b841d62d80
+      watch:
+        url: anitya://854
 
 packages:
   libfreetype:

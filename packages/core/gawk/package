@@ -6,6 +6,8 @@ files:
   - download:
       url: https://ftp.gnu.org/gnu/gawk/gawk-${version}.tar.xz
       sha1: 1ec9f46427e7a2778b6f497a8d08b412b5fcaee5
+      watch:
+        url: anitya://868
 
 depends:
   - devel/glibc

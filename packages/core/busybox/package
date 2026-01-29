@@ -6,6 +6,8 @@ files:
   - download:
       url: http://busybox.net/downloads/busybox-${version}.tar.bz2
       sha1: 36a1766206c8148bc06aca4e1f134016d40912d0
+      watch:
+        url: anitya://230
 
 depends:
   - devel/glibc

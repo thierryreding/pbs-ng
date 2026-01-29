@@ -6,6 +6,8 @@ files:
   - download:
       url: http://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-${version}.tar.bz2
       sha1: f521cd49ab04f54778779dddc68e1771de2e8fbb
+      watch:
+        url: anitya://5191
 
 packages:
   xkeyboard-config:

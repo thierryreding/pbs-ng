@@ -9,6 +9,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXau-${version}.tar.bz2
       sha1: ef9b1ad00f958c8b6e30a1bbc11fdfac311c9733
+      watch:
+        url: anitya://1765
 
 packages:
   libxau:

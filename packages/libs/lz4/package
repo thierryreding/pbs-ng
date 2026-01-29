@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/lz4/lz4/archive/v${version}.tar.gz
       sha1: 5a19554ef404a609123b756ddcbbb677df838f05
+      watch:
+        url: anitya://1865
 
 packages:
   lz4:

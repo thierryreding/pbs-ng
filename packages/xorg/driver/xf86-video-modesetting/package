@@ -8,6 +8,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/driver/xf86-video-modesetting-${version}.tar.bz2
       sha1: 49da63b1b9ca945300b1dc4fbf9aa7f1423f04f4
+      watch:
+        url: anitya://5227
 
 packages:
   xf86-video-modesetting:

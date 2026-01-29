@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/pybind/pybind11/archive/v${version}.tar.gz
       sha1: 604c8a487d9535407c1045d3461bf38faa6414e2
+      watch:
+        url: anitya://13384
 
 packages:
   pybind11:

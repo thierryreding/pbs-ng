@@ -6,6 +6,8 @@ files:
   - download:
       url: https://ftp.gnome.org/pub/gnome/sources/vte/${major}.${minor}/vte-${version}.tar.xz
       sha1: 810df80b14bc240f72a8cae000b85518ec3299a8
+      watch:
+        url: anitya://10895
 
 depends:
   - libs/gnutls

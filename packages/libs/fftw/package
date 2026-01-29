@@ -9,6 +9,8 @@ files:
   - download:
       url: http://www.fftw.org/fftw-${version}.tar.gz
       sha1: bf17b485417f0f6a896b8514a3813439fda075fc
+      watch:
+        url: anitya://803
 
 packages:
   libfftw:

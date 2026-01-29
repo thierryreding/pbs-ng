@@ -6,6 +6,8 @@ files:
   - download:
       url: https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-${version}.tar.bz2
       sha1: 4c4a18dc42b64625124f62610923c6614a25d806
+      watch:
+        url: anitya://9998
 
 depends:
   - devel/glibc

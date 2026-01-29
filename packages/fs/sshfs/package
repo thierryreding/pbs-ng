@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/libfuse/sshfs/archive/sshfs-${version}.tar.gz
       sha1: 31b95be3a697e80e93b8a0d711b9688890beac50
+      watch:
+        url: anitya://11058
 
 depends:
   - libs/glib

@@ -6,6 +6,8 @@ files:
   - download:
       url: https://www.kernel.org/pub/software/utils/pciutils/pciutils-${version}.tar.xz
       sha1: aca2e5a9fedc1bd35ff28024c9bd5dbf16fb74fc
+      watch:
+        url: anitya://2605
 
 depends:
   - devel/glibc

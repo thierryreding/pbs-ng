@@ -6,6 +6,8 @@ files:
   - download:
       url: https://ftp.gnu.org/gnu/libtasn1/libtasn1-${version}.tar.gz
       sha1: 1665249ce66e64958e8c61d5bdc6c1e9f3623888
+      watch:
+        url: anitya://1734
 
 depends:
   - devel/glibc

@@ -6,6 +6,8 @@ files:
   - download:
       url: https://archive.mozilla.org/pub/opus/opus-${version}.tar.gz
       sha1: ed226536537861c9f0f1ef7ca79dffc225bc181b
+      watch:
+        url: anitya://11081
 
 depends:
   - devel/glibc

@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/PhilipHazel/pcre2/releases/download/pcre2-${version}/pcre2-${version}.tar.bz2
       sha1: 9cf3ec88cd68dc76354eb0568738c47b57377042
+      watch:
+        url: anitya://5832
 
 depends:
   - devel/glibc

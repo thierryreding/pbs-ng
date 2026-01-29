@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/psf/requests/archive/v${version}.tar.gz
       sha1: 804fdbaf3dbc57f49a66cef920e9d4a5ce3460eb
+      watch:
+        url: anitya://4004
 
 depends:
   - devel/python

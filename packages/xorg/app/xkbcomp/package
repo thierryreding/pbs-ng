@@ -10,6 +10,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/app/xkbcomp-${version}.tar.bz2
       sha1: 9a39cf7a562c152465e04fc7cf1002c59f883870
+      watch:
+        url: anitya://385111
 
 packages:
   xkbcomp:

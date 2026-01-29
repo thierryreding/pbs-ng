@@ -9,6 +9,8 @@ files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/readline/readline-${version}.tar.gz
       sha1: 97ad98be243a857b639c0f3da2fe7d81c6d1d36e
+      watch:
+        url: anitya://4173
 
 packages:
   readline:

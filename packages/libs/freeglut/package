@@ -12,6 +12,8 @@ files:
   - download:
       url: http://prdownloads.sourceforge.net/freeglut/freeglut-${version}.tar.gz
       sha1: 7a62e0d2caad92ff745bc5037592b2753f0b2f20
+      watch:
+        url: anitya://846
 
 packages:
   libglut:

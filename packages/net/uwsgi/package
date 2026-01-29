@@ -11,6 +11,8 @@ files:
   - download:
       url: https://projects.unbit.it/downloads/uwsgi-${version}.tar.gz
       sha1: e7e402dd5b5c68a995585284c4529da9a686a0a9
+      watch:
+        url: anitya://6881
 
 packages:
   uwsgi:

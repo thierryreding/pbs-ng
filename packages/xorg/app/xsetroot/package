@@ -12,6 +12,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/app/xsetroot-${version}.tar.bz2
       sha1: 42ab81761823b44974feab86477007c49dbace50
+      watch:
+        url: anitya://385147
 
 packages:
   xsetroot:

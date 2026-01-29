@@ -6,6 +6,8 @@ files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/inetutils/inetutils-${version}.tar.xz
       sha1: df64dd4ea0e752a839dd51dd8a6a001c9c7d1e96
+      watch:
+        url: anitya://13805
 
 packages:
   inetutils:

@@ -10,6 +10,8 @@ files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/glibc/glibc-${version}.tar.xz
       sha1: 1477f605f419c439c03ef90e7851c0856ea679ea
+      watch:
+        url: anitya://5401
 
 packages:
   glibc-bin:

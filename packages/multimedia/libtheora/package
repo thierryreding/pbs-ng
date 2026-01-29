@@ -9,6 +9,8 @@ files:
   - download:
       url: http://downloads.xiph.org/releases/theora/libtheora-${version}.tar.xz
       sha1: 800aa48cf9e59d546c18ecdac1d06d7643cbb2d3
+      watch:
+        url: anitya://11793
 
 packages:
   libtheora:

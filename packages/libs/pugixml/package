@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/zeux/pugixml/releases/download/v${version}/pugixml-${version}.tar.gz
       sha1: 170a3ab84b58a06ebfef1d72161cd9133bb92c36
+      watch:
+        url: anitya://3728
 
 packages:
   pugixml:

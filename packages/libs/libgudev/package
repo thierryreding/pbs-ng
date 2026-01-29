@@ -6,6 +6,8 @@ files:
   - download:
       url: http://ftp.gnome.org/pub/gnome/sources/libgudev/${version}/libgudev-${version}.tar.xz
       sha1: 3ec66c925b9d22c385c3907c7ca3f2bb6c705d2c
+      watch:
+        url: anitya://7735
 
 depends:
   - build-tools/meson

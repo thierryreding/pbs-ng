@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/pygobject/pycairo/archive/refs/tags/v${version}.tar.gz
       sha1: 177770bfed5757330452ed7dc30fe690fcc4159b
+      watch:
+        url: anitya://13166
 
 depends:
   - build-tools/python-setuptools

@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/uclouvain/openjpeg/archive/v${version}.tar.gz
       sha1: bbbf4dc4d9ce95286843cd39ac2febd3fd516c9d
+      watch:
+        url: anitya://2550
 
 packages:
   openjpeg:

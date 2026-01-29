@@ -6,6 +6,8 @@ files:
   - download:
       url: http://prdownloads.sourceforge.net/glew/glew/${version}/glew-${version}.tgz
       sha1: 18eca05460d0b61709fc115e632b6fe320718b44
+      watch:
+        url: anitya://7878
 
 packages:
   libglew:

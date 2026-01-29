@@ -12,6 +12,8 @@ files:
   - download:
       url: https://github.com/kcat/openal-soft/archive/refs/tags/${version}.tar.gz
       sha1: 7667fdc370e633c8bc362e8c44b90055d0de247f
+      watch:
+        url: anitya://8172
 
 packages:
   libopenal:

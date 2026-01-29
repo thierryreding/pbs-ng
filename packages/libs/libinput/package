@@ -14,6 +14,8 @@ files:
   - download:
       url: http://www.freedesktop.org/software/libinput/libinput-${version}.tar.xz
       sha1: 0a8106063861c7f91681babb949b9eb839e858c0
+      watch:
+        url: anitya://5781
 
 packages:
   libinput:

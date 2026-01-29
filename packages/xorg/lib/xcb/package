@@ -12,6 +12,8 @@ files:
 - download:
     url: http://xorg.freedesktop.org/releases/individual/lib/libxcb-${version}.tar.xz
     sha1: e218be6043162d2f758643dbda8caccd53107388
+      watch:
+        url: anitya://1767
 
 packages:
   libxcb:

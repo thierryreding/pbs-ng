@@ -9,6 +9,8 @@ files:
   - download:
       url: https://www.freedesktop.org/software/harfbuzz/release/harfbuzz-${version}.tar.xz
       sha1: caeec8262fbd90a77b62c928b6c033a1b104546b
+      watch:
+        url: anitya://1299
 
 packages:
   libharfbuzz:

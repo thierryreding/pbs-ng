@@ -6,6 +6,8 @@ files:
   - download:
       url: https://ftp.gnome.org/pub/gnome/sources/gtk+/${major}.${minor}/gtk+-${version}.tar.xz
       sha1: 2faab763eeeea30c7b81d1a4749594ed39dc9cbe
+      watch:
+        url: anitya://311549
 
 depends:
   - libs/cairo

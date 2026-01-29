@@ -6,6 +6,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libSM-${version}.tar.bz2
       sha1: 437d7b13fa2eba325df3a106f177df46ccec6546
+      watch:
+        url: anitya://1726
 
 packages:
   libsm:

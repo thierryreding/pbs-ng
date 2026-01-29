@@ -6,6 +6,8 @@ files:
   - download:
       url: ftp://sourceware.org/pub/valgrind/valgrind-${version}.tar.bz2
       sha1: 294c341b421b4d9534e42e8125f509c148f48c17
+      watch:
+        url: anitya://13639
 
 depends:
   - devel/glibc

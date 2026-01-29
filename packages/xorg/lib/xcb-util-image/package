@@ -9,6 +9,8 @@ files:
 - download:
     url: http://xcb.freedesktop.org/dist/xcb-util-image-${version}.tar.bz2
     sha1: c9c9361781911a47b28f74fc6ebe0abd1273fae4
+      watch:
+        url: anitya://5167
 
 packages:
   xcb-util-image:

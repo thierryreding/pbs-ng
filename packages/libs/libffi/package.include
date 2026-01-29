@@ -6,5 +6,7 @@ files:
   - download:
       url: ftp://sourceware.org/pub/libffi/libffi-${version}.tar.gz
       sha1: 86c5eddb9312d1d41e280d92678bc0cf177086e8
+      watch:
+        url: anitya://1611
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

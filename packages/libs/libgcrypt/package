@@ -10,6 +10,8 @@ files:
   - download:
       url: ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-${version}.tar.bz2
       sha1: de2cc32e7538efa376de7bf5d3eafa85626fb95f
+      watch:
+        url: anitya://1623
 
 packages:
   libgcrypt:

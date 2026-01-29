@@ -8,6 +8,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXScrnSaver-${version}.tar.bz2
       sha1: 70c791c5755a298ecf1a0823e239a24fa4b2b42f
+      watch:
+        url: anitya://1791
 
 packages:
   libxscrnsaver:

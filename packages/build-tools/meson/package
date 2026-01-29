@@ -11,5 +11,7 @@ files:
   - download:
       url: https://github.com/mesonbuild/meson/archive/${version}.tar.gz
       sha1: ec2eb59fa1731ddcf2d98f676fdd19b98fce791a
+      watch:
+        url: anitya://6472
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/embree/embree/archive/v${version}.tar.gz
       sha1: 1ffde27c9725383aa28867397a0b080bedce98fe
+      watch:
+        url: anitya://11813
 
 packages:
   embree:

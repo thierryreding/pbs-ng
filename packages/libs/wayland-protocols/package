@@ -6,6 +6,8 @@ files:
   - download:
       url: https://wayland.freedesktop.org/releases/wayland-protocols-${version}.tar.xz
       sha1: 275298332d124e40e345aa82bc8f48ef8cad3480
+      watch:
+        url: anitya://13997
 
 packages:
   wayland-protocols:

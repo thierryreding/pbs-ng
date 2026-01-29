@@ -10,6 +10,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/driver/xf86-input-evdev-${version}.tar.bz2
       sha1: 1f599c8f95f7d39af83aa2a59039432f35ab8c55
+      watch:
+        url: anitya://5217
 
 packages:
   xf86-input-evdev:

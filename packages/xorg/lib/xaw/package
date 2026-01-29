@@ -11,6 +11,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXaw-${version}.tar.bz2
       sha1: 15f891fb88aae966b3064dcc1510790a0ebc75a0
+      watch:
+        url: anitya://1766
 
 packages:
   libxaw:

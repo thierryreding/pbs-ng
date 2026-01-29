@@ -10,6 +10,8 @@ files:
   - download:
       url: http://prdownloads.sourceforge.net/procps-ng/procps-ng-${version}.tar.xz
       sha1: 2929bc64f0cf7b2db997eef79b7187658e47230d
+      watch:
+        url: anitya://3708
 
 packages:
   procps-ng:

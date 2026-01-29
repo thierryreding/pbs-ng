@@ -9,6 +9,8 @@ files:
   - download:
       url: https://kernel.org/pub/software/utils/i2c-tools/i2c-tools-${version}.tar.xz
       sha1: 7b41de001dd3b98d98688477f81be844c42907e4
+      watch:
+        url: anitya://9272
 
 packages:
   i2c-tools:

@@ -8,6 +8,8 @@ files:
   - download:
       url: http://people.freedesktop.org/~tagr/xf86-video-opentegra-${version}.tar.xz
       sha1: 4e8d3468db8d6ea5c975d6672cf63d677b59bc20
+      watch:
+        url: ignore://
 
 packages:
   xf86-video-opentegra:

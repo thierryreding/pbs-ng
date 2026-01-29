@@ -10,6 +10,8 @@ files:
   - download:
       url: ftp://ftp.invisible-island.net/pub/xterm/xterm-${version}.tgz
       sha1: 6d72a128ca89b05d58041618d10c1c7d89e42258
+      watch:
+        url: anitya://5272
 
 packages:
   xterm:

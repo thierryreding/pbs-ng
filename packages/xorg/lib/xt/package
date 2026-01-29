@@ -10,6 +10,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXt-${version}.tar.bz2
       sha1: f6b5ed799bc2e8d721e5407a09c2a8f570963f1b
+      watch:
+        url: anitya://1793
 
 packages:
   libxt:

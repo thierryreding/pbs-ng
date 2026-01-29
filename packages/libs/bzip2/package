@@ -9,6 +9,8 @@ files:
   - download:
       url: https://sourceware.org/pub/bzip2/bzip2-${version}.tar.gz
       sha1: bf7badf7e248e0ecf465d33c2f5aeec774209227
+      watch:
+        url: anitya://237
 
 packages:
   libbz2:

@@ -6,6 +6,8 @@ files:
   - download:
       url: https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${version}.tar.xz
       sha1: aee89a63071b681ee74cc3e50c4e031e978c09e5
+      watch:
+        url: anitya://21849
 
 depends:
   - libs/cairo

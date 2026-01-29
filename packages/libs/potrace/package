@@ -9,6 +9,8 @@ files:
   - download:
       url: https://sourceforge.net/projects/potrace/files/${version}/potrace-${version}.tar.gz/download
       sha1: 256b4fb858c66bc38117afde7c722016d2e265f3
+      watch:
+        url: anitya://3691
 
 packages:
   potrace:

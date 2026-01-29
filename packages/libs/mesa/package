@@ -34,6 +34,8 @@ files:
   - download:
       url: https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz
       sha1: b131bcdd82effbbdaacfff07097bf5f0444d490c
+      watch:
+        url: anitya://1970
 
 options:
   debug:

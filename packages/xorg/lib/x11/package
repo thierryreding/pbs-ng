@@ -11,6 +11,8 @@ files:
 - download:
     url: http://xorg.freedesktop.org/releases/individual/lib/libX11-${version}.tar.bz2
     sha1: 62456536411f2540fbd4a3f59ed8af94967124c2
+      watch:
+        url: anitya://1764
 
 packages:
   libx11:

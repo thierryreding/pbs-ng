@@ -6,6 +6,8 @@ files:
   - download:
       url: https://pypi.python.org/packages/source/p/packaging/packaging-${version}.tar.gz
       sha1: b001ecb7812d07963211a32e86041af9cc581aff
+      watch:
+        url: anitya://60461
 
 depends:
   - build-tools/python

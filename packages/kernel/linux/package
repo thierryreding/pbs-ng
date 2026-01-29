@@ -9,6 +9,8 @@ files:
 - download:
     url: https://www.kernel.org/pub/linux/kernel/v${major}.x/linux-${version}.tar.xz
     sha1: 1c7c965dd880baee75c7652cd4517bd2653857c4
+      watch:
+        url: anitya://358810
 
 packages:
   linux-headers:

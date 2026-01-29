@@ -6,6 +6,8 @@ files:
   - download:
       url: https://www.netfilter.org/projects/libnftnl/files/libnftnl-${version}.tar.bz2
       sha1: ba4f824a4e700441aa8475d4ef7f2138e2871c5e
+      watch:
+        url: anitya://1681
 
 depends:
   - devel/glibc

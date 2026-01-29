@@ -6,6 +6,8 @@ files:
   - download:
       url: https://ftp.pcre.org/pub/pcre/pcre-${version}.tar.bz2
       sha1: 8463cc88b737e2c3ce7f041922a6ff0c5abbed34
+      watch:
+        url: anitya://2610
 
 depends:
   - devel/glibc

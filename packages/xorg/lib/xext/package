@@ -9,6 +9,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXext-${version}.tar.bz2
       sha1: 14e2451162e8766173b5b14c73e94a22b1fcab55
+      watch:
+        url: anitya://1774
 
 packages:
   libxext:

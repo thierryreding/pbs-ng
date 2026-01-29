@@ -9,6 +9,8 @@ files:
   - download:
       url: http://downloads.xiph.org/releases/ogg/libogg-${version}.tar.xz
       sha1: 5a368421a636f7faa4c2f662857cb507dffd7c99
+      watch:
+        url: anitya://1694
 
 packages:
   libogg:

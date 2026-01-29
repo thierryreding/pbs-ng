@@ -6,6 +6,8 @@ files:
   - download:
       url: ftp://ftp.iana.org/tz/releases/tzdata${version}.tar.gz
       sha1: 0b11e82445ca959be35f7a955c1cd92a91875313
+      watch:
+        url: anitya://5021
 
 packages:
   tzdata:

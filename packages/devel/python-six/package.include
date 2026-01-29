@@ -6,5 +6,7 @@ files:
   - download:
       url: https://files.pythonhosted.org/packages/71/39/171f1c67cd00715f190ba0b100d606d440a28c93c7714febeca8b79af85e/six-${version}.tar.gz
       sha1: 06fa0bb50f2a4e2917fd14c21e9d2d5508ce0163
+      watch:
+        url: anitya://4027
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

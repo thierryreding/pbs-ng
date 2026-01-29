@@ -9,6 +9,8 @@ files:
 - download:
     url: http://xorg.freedesktop.org/releases/individual/lib/xtrans-${version}.tar.bz2
     sha1: 7c490026efb450798e02b040c05eba5212291c08
+      watch:
+        url: anitya://13441
 
 packages:
   xtrans:

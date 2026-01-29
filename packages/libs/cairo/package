@@ -16,6 +16,8 @@ files:
   - download:
       url: https://gitlab.freedesktop.org/cairo/cairo/-/archive/${version}/cairo-${version}.tar.bz2
       sha1: 51f2e2e5525665c0b25bea18826d2283a76801a9
+      watch:
+        url: anitya://247
 
 packages:
   libcairo-dev:

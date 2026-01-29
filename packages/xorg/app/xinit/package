@@ -6,6 +6,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/app/xinit-${version}.tar.bz2
       sha1: d874a2eecf2c30291e327851b151fdab8183260c
+      watch:
+        url: anitya://5258
 
 packages:
   xinit:

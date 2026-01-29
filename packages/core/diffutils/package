@@ -9,6 +9,8 @@ files:
   - download:
       url: https://ftp.gnu.org/gnu/diffutils/diffutils-${version}.tar.xz
       sha1: 3a726894b2cf71a790913f236ec790d830c6aef8
+      watch:
+        url: anitya://436
 
 packages:
   diffutils:

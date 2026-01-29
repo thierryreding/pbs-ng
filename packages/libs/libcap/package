@@ -9,6 +9,8 @@ files:
   - download:
       url: https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-${version}.tar.xz
       sha1: cb4ec7d2b43a96c6c64991363239939528e495da
+      watch:
+        url: anitya://1569
 
 packages:
   libcap:

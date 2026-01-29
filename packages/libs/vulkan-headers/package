@@ -10,6 +10,8 @@ files:
   - download:
       url: https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/v${version}.tar.gz
       sha1: cc8802668c2fa889908001b1bd1e894711b9f98a
+      watch:
+        url: anitya://88835
 
 packages:
   vulkan-headers:

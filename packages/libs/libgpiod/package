@@ -9,6 +9,8 @@ files:
   - download:
       url: https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/snapshot/libgpiod-${version}.tar.gz
       sha1: 9be40cfaa5ef71ec619a8ad754c14d3a4511ad48
+      watch:
+        url: anitya://20640
 
 packages:
   libgpiod:

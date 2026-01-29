@@ -11,6 +11,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXmu-${version}.tar.bz2
       sha1: 7ff54ce38379fb795aebed38f6be404ee0dfeec6
+      watch:
+        url: anitya://1785
 
 packages:
   libxmu:

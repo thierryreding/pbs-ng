@@ -6,5 +6,7 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/pixman-${version}.tar.gz
       sha1: 7063429f9952fd8c4fcbc887c3210b35adb6a6c7
+      watch:
+        url: anitya://3648
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

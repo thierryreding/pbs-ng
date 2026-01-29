@@ -9,6 +9,8 @@ files:
   - download:
       url: https://sourceforge.net/projects/hdparm/files/hdparm/hdparm-${version}.tar.gz
       sha1: 3bc0916493f2f485c6371ec0fd16418d0e1fa636
+      watch:
+        url: anitya://1304
 
 packages:
   hdparm:

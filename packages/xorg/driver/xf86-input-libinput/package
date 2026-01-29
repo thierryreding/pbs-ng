@@ -10,6 +10,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/driver/xf86-input-libinput-${version}.tar.bz2
       sha1: efa9dbe08ee827949aff0bd752f8270237247c56
+      watch:
+        url: anitya://5782
 
 packages:
   xf86-input-libinput:

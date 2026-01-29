@@ -6,6 +6,8 @@ files:
   - download:
       url: https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v${version}/e2fsprogs-${version}.tar.xz
       sha1: 9ff30a21d653e75728127ab165bda1749f157be0
+      watch:
+        url: anitya://646
 
 depends:
   - devel/glibc

@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/imageworks/pystring/archive/refs/tags/v${version}.tar.gz
       sha1: 633df41d94261d69aee0254d4128193ff3683c49
+      watch:
+        url: anitya://374775
 
 packages:
   pystring:

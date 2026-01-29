@@ -6,6 +6,8 @@ files:
   - download:
       url: https://download.qemu.org/qemu-${version}.tar.xz
       sha1: 232d4a794b8140b7d38f3d71f65c41ef3c608deb
+      watch:
+        url: anitya://13607
 
 depends:
   - build-tools/glib

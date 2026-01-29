@@ -10,6 +10,8 @@ files:
   - download:
       url: https://github.com/AcademySoftwareFoundation/openvdb/archive/v${version}.tar.gz
       sha1: fddf04220fd2805b4ad5884a70613c45b559de27
+      watch:
+        url: anitya://21124
 
 packages:
   openvdb:

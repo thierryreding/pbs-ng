@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/falconry/falcon/archive/${version}.tar.gz
       sha1: 0ce4e0d89e7802fc7f2907fb49c342cb068c088f
+      watch:
+        url: anitya://3860
 
 depends:
   - devel/python

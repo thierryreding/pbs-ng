@@ -6,6 +6,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXvMC-${version}.tar.bz2
       sha1: 4871f92a83faa86aff5c630a2d6016c67bf11b97
+      watch:
+        url: anitya://1796
 
 depends:
   - xorg/lib/xv

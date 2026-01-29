@@ -9,6 +9,8 @@ files:
   - download:
       url: https://github.com/KhronosGroup/OpenCL-Headers/archive/refs/tags/v${version}.tar.gz
       sha1: 11bb1a594bec203b78184d934257e91c9e68084a
+      watch:
+        url: anitya://223257
 
 packages:
   opencl-headers:

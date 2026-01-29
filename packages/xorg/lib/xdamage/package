@@ -10,6 +10,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libXdamage-${version}.tar.bz2
       sha1: 719ae6ab8c1b972c6386b654976c479255af5572
+      watch:
+        url: anitya://1771
 
 packages:
   libxdamage:

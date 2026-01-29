@@ -11,6 +11,8 @@ files:
   - download:
       url: https://sourceware.org/elfutils/ftp/${version}/elfutils-${version}.tar.bz2
       sha1: 650d52024be684dabf18a5261a69836a16f84f72
+      watch:
+        url: anitya://5679
 
 packages:
   libelf:

@@ -6,6 +6,8 @@ files:
   - download:
       url: http://www.citi.umich.edu/projects/nfsv4/linux/libnfsidmap/libnfsidmap-${version}.tar.gz
       sha1: f52e143d33a3a8a8138be41a90f2cc956f1acea2
+      watch:
+        url: ignore://
 
 depends:
   - devel/glibc

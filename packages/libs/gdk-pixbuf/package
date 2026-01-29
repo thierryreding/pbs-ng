@@ -6,6 +6,8 @@ files:
   - download:
       url: https://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/${major}.${minor}/gdk-pixbuf-${version}.tar.xz
       sha1: 320ed10a4cb74a0770de91a9e5741767ebdef2bf
+      watch:
+        url: anitya://9533
 
 depends:
   - libs/glib

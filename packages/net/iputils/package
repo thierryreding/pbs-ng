@@ -11,6 +11,8 @@ files:
   - download:
       url: https://github.com/iputils/iputils/archive/refs/tags/${version}.tar.gz
       sha1: 306cd6cc158810180c7eacc94746006abde682a3
+      watch:
+        url: anitya://1395
 
 packages:
   iputils:

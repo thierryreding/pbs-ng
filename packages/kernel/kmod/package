@@ -9,6 +9,8 @@ files:
 - download:
     url: https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-${version}.tar.xz
     sha1: e99d5a51c79d9ff3660722025f75770e1f4bf4b1
+      watch:
+        url: anitya://1517
 
 packages:
   kmod:

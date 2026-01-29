@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/intel/libva/releases/download/${version}/libva-${version}.tar.bz2
       sha1: 2adb2c023371dd68fe0d23e58afcf0b072b79828
+      watch:
+        url: anitya://1752
 
 depends:
   - libs/libdrm

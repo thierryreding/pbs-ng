@@ -6,6 +6,8 @@ files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/gdb/gdb-${version}.tar.xz
       sha1: 2edabd9f5766b84889b07b366b4438e93e994005
+      watch:
+        url: anitya://11798
 
 depends:
   - libs/ncurses

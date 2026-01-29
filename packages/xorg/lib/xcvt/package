@@ -10,6 +10,8 @@ files:
 - download:
     url: http://xorg.freedesktop.org/releases/individual/lib/libxcvt-${version}.tar.xz
     sha1: a57569c7a119afb39c9c2314480d74c5a5854dc3
+      watch:
+        url: anitya://235147
 
 packages:
   libxcvt:

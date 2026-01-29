@@ -6,5 +6,7 @@ files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/gettext/gettext-${version}.tar.gz
       sha1: 3faf57a14ada2a9772360beb6659374cc20ca8c8
+      watch:
+        url: anitya://898
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

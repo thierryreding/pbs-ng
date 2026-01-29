@@ -6,6 +6,8 @@ files:
   - download:
       url: ftp://ftp.alsa-project.org/pub/lib/alsa-lib-${version}.tar.bz2
       sha1: 839e6b32dcfed7a335e150cd8be6071cd2c1ffbd
+      watch:
+        url: anitya://38
 
 depends:
   - devel/glibc

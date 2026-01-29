@@ -15,6 +15,8 @@ files:
   - download:
       url: https://github.com/OpenImageIO/oiio/archive/v${version}.tar.gz
       sha1: 923f26ed3ddd5f426d20db592966563d90149caa
+      watch:
+        url: anitya://2548
 
 packages:
   openimageio:

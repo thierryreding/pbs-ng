@@ -10,6 +10,8 @@ files:
   - download:
       url: https://xorg.freedesktop.org/releases/individual/lib/libXxf86vm-${version}.tar.gz
       sha1: 7ab340428ec501d6ebe3d307028c7a39f5b38495
+      watch:
+        url: anitya://1799
 
 packages:
   libxxf86vm:

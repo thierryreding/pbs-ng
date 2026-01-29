@@ -6,6 +6,8 @@ files:
   - download:
       url: https://github.com/zlib-ng/minizip-ng/archive/${version}/minizip-ng-${version}.tar.gz
       sha1: 5c8f76fbc836cfa4e7012a7d749fe01ad0c3b5b9
+      watch:
+        url: anitya://301509
 
 depends:
   - libs/bzip2

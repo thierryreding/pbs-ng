@@ -6,5 +6,7 @@ files:
   - download:
       url: https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/llvm-project-${version}.src.tar.xz
       sha1: 2f8b0b813c8431b33af20c8581151d58f79144c1
+      watch:
+        url: anitya://1830
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

@@ -12,6 +12,8 @@ files:
   - download:
       url: http://dri.freedesktop.org/libdrm/libdrm-${version}.tar.xz
       sha1: eb7db45e34586d3ec048fd2e9b704016793ca957
+      watch:
+        url: anitya://1596
 
 options:
   intel:

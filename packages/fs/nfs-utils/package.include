@@ -6,5 +6,7 @@ files:
   - download:
       url: http://prdownloads.sourceforge.net/nfs/nfs-utils/nfs-utils-${version}.tar.bz2
       sha1: 872d80381099c42ea9e2a6728297cbfd97802af2
+      watch:
+        url: anitya://2081
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

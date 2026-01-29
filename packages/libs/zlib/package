@@ -6,6 +6,8 @@ files:
   - download:
       url: http://prdownloads.sourceforge.net/libpng/zlib/${version}/zlib-${version}.tar.xz
       sha1: e1cb0d5c92da8e9a8c2635dfa249c341dfd00322
+      watch:
+        url: anitya://5303
 
 packages:
   zlib:

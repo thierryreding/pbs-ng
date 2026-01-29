@@ -10,6 +10,8 @@ files:
   - download:
       url: http://xorg.freedesktop.org/releases/individual/lib/libfontenc-${version}.tar.bz2
       sha1: d4f232b0b07487b984e13422ce4130b61a8b9edb
+      watch:
+        url: anitya://1613
 
 packages:
   libfontenc:

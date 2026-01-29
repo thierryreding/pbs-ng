@@ -12,6 +12,8 @@ files:
   - download:
       url: http://dbus.freedesktop.org/releases/dbus/dbus-${version}.tar.xz
       sha1: 5cb3f74b408f97e91247a8e82366a60028bf2ecb
+      watch:
+        url: anitya://5356
 
 packages:
   dbus:

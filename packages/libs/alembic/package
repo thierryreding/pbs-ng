@@ -10,6 +10,8 @@ files:
   - download:
       url: https://github.com/alembic/alembic/archive/${version}.tar.gz
       sha1: ec50862b607ec6922fb8db76d5f4a74a16232d4d
+      watch:
+        url: anitya://13980
 
 packages:
   alembic:

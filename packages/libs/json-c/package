@@ -10,6 +10,8 @@ files:
   - download:
       url: https://github.com/json-c/json-c/archive/json-c-${version}.tar.gz
       sha1: dd6473818fe66f16e747ae0df626a2e1559343b9
+      watch:
+        url: anitya://1477
 
 packages:
   libjson-c-dev:

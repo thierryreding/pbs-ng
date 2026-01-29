@@ -9,6 +9,8 @@ files:
   - download:
       url: http://download.savannah.gnu.org/releases/attr/attr-${version}.tar.gz
       sha1: 72fea2dee5f481bfe7c9da84a2a1ace063a6c82d
+      watch:
+        url: anitya://137
 
 packages:
   libattr:

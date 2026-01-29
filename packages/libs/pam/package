@@ -11,6 +11,8 @@ files:
   - download:
       url: https://github.com/linux-pam/linux-pam/releases/download/v${version}/Linux-PAM-${version}.tar.xz
       sha1: 8d20308cbf17823e9b88b01c2c70df3e1ad9d654
+      watch:
+        url: anitya://12244
 
 packages:
   pam:

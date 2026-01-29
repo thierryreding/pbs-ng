@@ -6,6 +6,8 @@ files:
   - download:
       url: https://ffmpeg.org/releases/ffmpeg-${version}.tar.xz
       sha1: aeda76be4d6682889c67878f6b08524936e6bd7e
+      watch:
+        url: anitya://5405
 
 depends:
   - devel/glibc

@@ -11,6 +11,8 @@ files:
   - download:
       url: https://prdownloads.sourceforge.net/xmlrpc-c/Xmlrpc-c%20Super%20Stable/${version}/xmlrpc-c-${version}.tgz
       sha1: 6f7501c07ceb7769ee724251ddf516156f033df8
+      watch:
+        url: anitya://9024
 
 packages:
   libxmlrpc-c:
