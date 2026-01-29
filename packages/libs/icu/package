@@ -1,0 +1,19 @@
+include: packages/libs/icu/package.include
+
+depends:
+  - build-tools/icu
+  - devel/glibc
+
+packages:
+  libicu:
+    files:
+      - /usr/lib/*.so.*
+
+  libicu-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: ft=yaml

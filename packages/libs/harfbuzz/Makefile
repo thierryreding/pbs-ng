@@ -1,11 +1,10 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
+include $(TOP_SRCDIR)/packages/meson.mk
 
-$(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/ltmain-sysroot.patch
-	touch $@
+env += \
+	PKG_CONFIG_FDO_SYSROOT_RULES=1
 
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch
-
+# gobject-introspection builds currently don't work
 conf-args += \
-	--with-sysroot=$(SYSROOT) \
-	--without-icu
+	-Dintrospection=disabled \
+	-Dgobject=enabled \
+	-Ddocs=disabled

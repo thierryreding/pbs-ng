@@ -1,16 +1,21 @@
 description: OpenType text shaping engine
-version: 2.6.7
+version: 12.3.2
 license: MIT
-
-depends:
-  - devel/glibc
 
 files:
   - download:
-      url: https://www.freedesktop.org/software/harfbuzz/release/harfbuzz-${version}.tar.xz
-      sha1: caeec8262fbd90a77b62c928b6c033a1b104546b
+      url: https://github.com/harfbuzz/harfbuzz/releases/download/${version}/harfbuzz-${version}.tar.xz
+      sha1: b5329f7e300b7a37fc7ef0c78f0b8a8d91619029
       watch:
         url: anitya://1299
+
+depends:
+  - libs/cairo
+  - libs/fontconfig
+  - libs/freetype
+  - libs/glib
+  - libs/gobject-introspection
+  - libs/icu
 
 packages:
   libharfbuzz:
