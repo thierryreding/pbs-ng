@@ -1,11 +1,11 @@
 description: GNU internationalization library
-version: 0.23.1
+version: 1.0
 license: GPL
 
 files:
   - download:
-      url: http://ftp.gnu.org/pub/gnu/gettext/gettext-${version}.tar.gz
-      sha1: 3faf57a14ada2a9772360beb6659374cc20ca8c8
+      url: https://ftp.gnu.org/pub/gnu/gettext/gettext-${version}.tar.lz
+      sha1: f64799b0dd295e8a8debb21df37dad852e402185
       watch:
         url: anitya://898
 
