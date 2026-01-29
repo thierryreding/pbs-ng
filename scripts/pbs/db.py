@@ -715,14 +715,23 @@ class DownloadSourceFile(SourceFile):
         pbs.log.begin('%s... ' % self.url, indent = 1)
 
         if self.watcher['url']:
-            watcher = pbs.IndexWatcher(self.watcher['url'], self.url)
+            for watcher in [ pbs.IgnoreWatcher, pbs.AnityaWatcher ]:
+                if watcher.match(self.watcher['url']):
+                    watcher = watcher(self.watcher['url'], pattern = self.url)
+                    break
+            else:
+                raise Exception('failed to find watcher')
         else:
             watcher = pbs.PackageWatcher.open(self.url)
 
-        results = watcher.watch(verbose)
+        results = watcher.watch(verbose = verbose)
 
         if not results:
-            pbs.log.error('failed to find any versions')
+            if results is not None:
+                pbs.log.error('failed to find any versions')
+            else:
+                pbs.log.skip('ignored')
+
             return
 
         current = Version(self.source.version)
