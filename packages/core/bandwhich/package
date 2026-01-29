@@ -1,0 +1,20 @@
+description: terminal bandwidth utilization tool
+version: 0.20.0
+license:
+
+files:
+  - download:
+      url: https://github.com/imsnif/bandwhich/archive/refs/tags/${version}.tar.gz
+      sha1: 357c691219831a68524f009f58efc6011e8c0d68
+      watch:
+        url: anitya://236376
+
+depends:
+  - build-tools/rustup
+
+packages:
+  bandwhich:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

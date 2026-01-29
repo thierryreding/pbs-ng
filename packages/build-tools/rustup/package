@@ -1,0 +1,12 @@
+description: Rust toolchain installer
+version: 1.28.2
+license: Apache-2.0, MIT
+
+files:
+  - download:
+      url: https://github.com/rust-lang/rustup/archive/refs/tags/${version}.tar.gz
+      sha1: 3253482cf1876d22dbf017e601d19ed159dd8910
+      watch:
+        url: anitya://141472
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
