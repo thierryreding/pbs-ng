@@ -1,5 +1,5 @@
 description: run scripts or programs in a directory
-version: 4.11.2
+version: 5.23.2
 license: GPL
 
 depends:
@@ -8,9 +8,12 @@ depends:
 files:
   - download:
       url: http://ftp.debian.org/debian/pool/main/d/debianutils/debianutils_${version}.tar.xz
-      sha1: 61b3d7619552398ac658b92876a1af85444bb063
+      sha1: 7432fd03bb106c03e2c6e34ffc042a5f83ae7652
       watch:
         url: anitya://21341
+
+patches:
+  - conditional-docs.patch
 
 packages:
   run-parts:

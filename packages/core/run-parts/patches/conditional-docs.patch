@@ -1,0 +1,13 @@
+diff --git a/Makefile.am b/Makefile.am
+index 86ac499a1d7d..d43344423323 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,6 +1,8 @@
+ AUTOMAKE_OPTIONS = foreign
+ 
++if TRANSLATE_DOCS
+ SUBDIRS = po4a
++endif
+ 
+ EXTRA_DIST = CHANGELOG CONTRIBUTING .gitlab-ci.yml
+ 
