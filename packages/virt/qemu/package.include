@@ -1,0 +1,12 @@
+description: generic and open source machine emulator and virtualizer
+version: 10.2.0
+license: GPL-2.0
+
+files:
+  - download:
+      url: https://download.qemu.org/qemu-${version}.tar.xz
+      sha1: ba8b166cd961c26cc71041ae432a4c11fafa9a36
+      watch:
+        url: anitya://13607
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

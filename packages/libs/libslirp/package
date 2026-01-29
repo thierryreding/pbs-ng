@@ -1,0 +1,29 @@
+description: general purpose TCP-IP emulator
+version: 4.9.1
+license: MIT
+
+files:
+  - download:
+      url: https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v${version}/libslirp-v${version}.tar.bz2
+      filename: libslirp-${version}.tar.bz2
+      sha1: f4d94ea1ac0581748d1ac17d67dcc16158c59b1b
+      watch:
+        url: anitya://96796
+
+depends:
+  - build-tools/meson
+  - libs/glib
+
+
+packages:
+  libslirp:
+    files:
+      - /usr/lib/*.so.*
+
+  libslirp-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

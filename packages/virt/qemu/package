@@ -1,0 +1,25 @@
+include: packages/virt/qemu/package.include
+
+depends:
+  - devel/dtc
+  - libs/curl
+  - libs/glib
+  - libs/libepoxy
+  - libs/libslirp
+  - libs/libtasn1
+  - libs/mesa
+  - libs/nettle
+  - libs/pixman
+  - libs/zstd
+  - multimedia/alsa-lib
+
+packages:
+  qemu:
+    files:
+      - /usr/bin
+      - /usr/lib/qemu
+      - /usr/share/applications
+      - /usr/share/icons
+      - /usr/share/qemu
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
