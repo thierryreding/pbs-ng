@@ -1,0 +1,27 @@
+description: regular expression library
+version: 6.9.10
+license: BSD
+
+files:
+  - download:
+      url: https://github.com/kkos/oniguruma/releases/download/v${version}/onig-${version}.tar.gz
+      sha1: bcada943679fa8cecfe359e57d785da9430dcdbc
+      watch:
+        url: anitya://11184
+
+depends:
+  - devel/glibc
+
+packages:
+  libonig:
+    files:
+      - /usr/lib/*.so.*
+
+  libonig-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/*.a
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

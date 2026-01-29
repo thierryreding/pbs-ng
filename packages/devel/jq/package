@@ -1,0 +1,32 @@
+description: command-line JSON processor
+version: 1.8.1
+license: MIT
+
+files:
+  - download:
+      url: https://github.com/jqlang/jq/releases/download/jq-${version}/jq-${version}.tar.gz
+      sha1: ac8ee9d92fd58805a90e1853df7c35887236d8a8
+      watch:
+        url: anitya://13252
+
+depends:
+  - devel/glibc
+  - libs/oniguruma
+
+packages:
+  jq:
+    files:
+      - /usr/bin
+
+  libjq:
+    files:
+      - /usr/lib/*.so.*
+
+  libjq-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
