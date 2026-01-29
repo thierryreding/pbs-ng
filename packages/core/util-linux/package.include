@@ -1,0 +1,12 @@
+description: Miscellaneous system utilities for Linux
+version: 2.41.3
+license: GPL-2.0
+
+files:
+  - download:
+      url: https://www.kernel.org/pub/linux/utils/util-linux/v${major}.${minor}/util-linux-${version}.tar.xz
+      sha1: 4060091cdb5f1c495afb4bf55e2173138db2f791
+      watch:
+        url: anitya://8179
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
