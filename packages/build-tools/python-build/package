@@ -1,0 +1,15 @@
+description: a simple, correct Python build frontend
+version: 1.0.3
+license: MIT
+
+depends:
+  - build-tools/python
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/b/build/build-${version}.tar.gz
+      sha1: 4c74cb8956563e672e00f954eabf064c5761a3bc
+      watch:
+        url: anitya://132276
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
