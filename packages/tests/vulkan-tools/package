@@ -1,0 +1,20 @@
+description: Vulkan Development Tools
+version: 1.4.341
+license: Apache-2.0
+
+depends:
+  - libs/vulkan-loader
+
+files:
+  - download:
+      url: https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/v${version}.tar.gz
+      sha1: 6121914ae092528b54e5265949a3aab40fa0a583
+      watch:
+        url: anitya://242111
+
+packages:
+  vulkan-tools:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
