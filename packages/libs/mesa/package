@@ -1,11 +1,13 @@
 description: an open-source implementation of the OpenGL specification
-version: 22.2.4
+version: 25.3.4
 license: custom
 
 depends:
   - build-tools/meson
   - build-tools/python-mako
+  - build-tools/python-pyyaml
   - devel/clang
+  - devel/directx-headers
   - devel/llvm
   - devel/spirv-tools
   - libs/expat
@@ -32,8 +34,8 @@ depends:
 
 files:
   - download:
-      url: https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz
-      sha1: b131bcdd82effbbdaacfff07097bf5f0444d490c
+      url: https://archive.mesa3d.org/mesa-${version}.tar.xz
+      sha1: f93e4c168554dfc2932a7b0753376577bd840f2b
       watch:
         url: anitya://1970
 
@@ -46,12 +48,52 @@ options:
     description: gallium drivers
     default: no
     options:
-      pl111:
-        description: PL111 gallium driver
+      asahi:
+        description: asahi gallium driver
         default: no
 
-      radeonsi:
-        description: Radeon gallium driver
+      crocus:
+        description: crocus gallium driver
+        default: no
+
+      d3d12:
+        description: d3d12 gallium driver
+        default: no
+
+      ethosu:
+        description: d3d12 gallium driver
+        default: no
+
+      etnaviv:
+        description: etnaviv gallium driver
+        default: no
+
+      freedreno:
+        description: freedreno gallium driver
+        default: no
+
+      i915:
+        description: i915 gallium driver
+        default: no
+
+      iris:
+        description: iris gallium driver
+        default: no
+
+      lima:
+        description: lima gallium driver
+        default: no
+
+      llvmpipe:
+        description: LLVM pipe gallium driver
+        default: no
+
+      nouveau:
+        description: Nouveau gallium driver
+        default: no
+
+      panfrost:
+        description: panfrost gallium driver
         default: no
 
       r300:
@@ -62,52 +104,40 @@ options:
         description: R600 gallium driver
         default: no
 
-      nouveau:
-        description: Nouveau gallium driver
+      radeonsi:
+        description: Radeon gallium driver
         default: no
 
-      freedreno:
-        description: freedreno gallium driver
+      rocket:
+        description: Rockchip NPU gallium driver
         default: no
 
-      swrast:
+      softpipe:
         description: softpipe gallium driver
         default: no
 
-      vc4:
-        description: VC4 gallium driver
-        default: no
-
-      vc5:
-        description: VC5 gallium driver
-        default: no
-
-      etnaviv:
-        description: etnaviv gallium driver
-        default: no
-
-      imx:
-        description: i.MX gallium driver
+      svga:
+        description: SVGA gallium driver
         default: no
 
       tegra:
         description: Tegra gallium driver
         default: no
 
-      i915:
-        description: i915 gallium driver
+      v3d:
+        description: V3D gallium driver
         default: no
 
-      svga:
-        description: svga gallium driver
+      vc4:
+        description: VC4 gallium driver
         default: no
 
       virgl:
         description: virgl gallium driver
         default: no
 
-      swr:
-        description: swr gallium driver
+      zink:
+        description: zink gallium driver
         default: no
 
   opencl:
@@ -118,12 +148,64 @@ options:
     description: Vulkan drivers
     default: no
     options:
+      amd:
+        description: AMD Vulkan driver
+        default: no
+
+      asahi:
+        description: asahi Vulkan driver
+        default: no
+
+      broadcom:
+        description: Broadcom Vulkan driver
+        default: no
+
+      freedreno:
+        description: freedreno Vulkan driver
+        default: no
+
+      gfxstream:
+        description: freedreno Vulkan driver
+        default: no
+
+      imagination:
+        description: Imagination Vulkan driver
+        default: no
+
       intel:
         description: Intel Vulkan driver
         default: no
 
-      amd:
-        description: AMD Vulkan driver
+      intel-haswell:
+        description: Intel Vulkan driver (Haswell)
+        default: no
+
+      kosmickrisp:
+        description: Metal 4 Vulkan driver (Apple Silicon)
+        default: no
+
+      microsoft:
+        description: Microsoft Vulkan driver
+        default: no
+
+      nouveau:
+        description: Nouveau Vulkan driver (nvk)
+        default: no
+
+      panfrost:
+        description: panfrost Vulkan driver
+        default: no
+
+      swrast:
+        description: software rasterizer Vulkan driver
+        default: no
+
+      tegra:
+        description: Tegra Vulkan driver
+        default: no
+
+      virtio:
+        description: VirtIO Vulkan driver
         default: no
 
   platforms:

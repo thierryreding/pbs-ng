@@ -1,0 +1,11 @@
+include: packages/devel/python-pyyaml/package.include
+
+depends:
+  - devel/python
+
+packages:
+  python-pyyaml:
+    files:
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

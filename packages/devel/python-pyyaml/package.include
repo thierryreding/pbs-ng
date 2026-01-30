@@ -1,0 +1,12 @@
+description: YAML parser and emitter for Python
+version: 6.0.3
+license: MIT
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/p/pyyaml/pyyaml-${version}.tar.gz
+      sha1: bac7451cfac326eedb6abc994b91bae952c6f65d
+      watch:
+        url: anitya://4123
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
