@@ -1,0 +1,31 @@
+description: minimal seat management daemon, and a universal seat management library
+version: 0.9.2
+license: MIT
+
+files:
+  - download:
+      url: https://git.sr.ht/~kennylevinsen/seatd/archive/${version}.tar.gz
+      sha1: 76c5bbe12878ebe0b1e50f090141d70ff0530ddc
+      watch:
+        url: anitya://234932
+
+depends:
+  - devel/glibc
+
+packages:
+  seatd:
+    files:
+      - /usr/bin
+
+  libseatd:
+    files:
+      - /usr/lib/*.so.*
+
+  libseatd-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/*.a
+      - /usr/lib/pkgconfig
+
+# vim: ft=yaml
