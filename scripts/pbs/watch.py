@@ -3,7 +3,7 @@
 import bs4, crayons, os, packaging.version, re, requests, string, sys
 import urllib.parse, urllib.request
 
-from packaging.version import Version
+from pbs.version import InvalidVersion, Version
 
 import pbs
 
@@ -110,7 +110,7 @@ class IndexWatcher(PackageWatcher):
         for version in result:
             try:
                 versions.append(Version(version))
-            except packaging.version.InvalidVersion as e:
+            except InvalidVersion as e:
                 print('%s: failed to parse version: %s' % (crayons.red('ERROR', bold = True), e))
 
         return sorted(versions, reverse = True)
@@ -173,7 +173,7 @@ class AnityaWatcher(PackageWatcher):
             try:
                 version = Version(release)
                 versions.append(version)
-            except pbs.version.InvalidVersion:
+            except InvalidVersion:
                 # ignore versions that cannot be parsed
                 pass
 

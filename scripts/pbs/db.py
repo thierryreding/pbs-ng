@@ -18,11 +18,7 @@ import urllib.request
 import yaml
 import zipfile
 
-try:
-    from packaging.version import Version
-except:
-    print('WARNING: packaging.version not found, version matching may be inaccurate')
-    from distutils.version import LooseVersion as Version
+from pbs.version import Version
 
 def iprint(indent, *args):
     print(' ' * indent, end='')
