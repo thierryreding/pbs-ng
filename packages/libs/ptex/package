@@ -1,0 +1,30 @@
+description: per-face texture mapping for production rendering
+version: 2.5.1
+license: BSD
+
+depends:
+  - build-tools/cmake
+  - devel/glibc
+  - libs/zlib
+
+files:
+  - download:
+      url: https://github.com/wdas/ptex/archive/refs/tags/v2.4.2.tar.gz
+      sha1: 8c73c89a9a83f7c22fe60a8f346bb40b7b8e1ede
+      watch:
+        url: anitya://138280
+
+packages:
+  ptex:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+
+  ptex-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/share/cmake
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,11 +1,11 @@
 description: open-source subdivision surface library
-version: 3.4.4
+version: 3.7.0
 license: Apache-2.0
 
 files:
   - download:
-      url: https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v${major}_${minor}_${micro}.tar.gz
-      sha1: 48af8d79cd4b44eb18ad9cb5595903bd5e2e6b79
+      url: https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v${_version}.tar.gz
+      sha1: 571ea3b84eb994030b99491516ecb326ab878687
       watch:
         url: anitya://96394
 

@@ -1,7 +1,9 @@
 include: packages/libs/opensubdiv/package.include
 
 depends:
+  - build-tools/python
   - libs/glfw
+  - libs/ptex
 
 packages:
   opensubdiv:
