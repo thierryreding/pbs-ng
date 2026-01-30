@@ -1,5 +1,9 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/glibc-2.43.patch
+	touch $@
+
 build-args = \
 	CC='$(CROSS_COMPILE)gcc' \
 	EXTRA_CPPFLAGS='$(CPPFLAGS)' \
@@ -8,7 +12,7 @@ build-args = \
 	NO_PYTHON=1 \
 	-j $(JOBS)
 
-$(srcdir)/stamp-build:
+$(srcdir)/stamp-build: $(srcdir)/stamp-patch
 	cd $(srcdir) && $(env) $(MAKE) $(build-args)
 
 install-args = \
