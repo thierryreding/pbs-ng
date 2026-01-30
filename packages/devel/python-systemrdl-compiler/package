@@ -1,0 +1,20 @@
+description: parse and elaborate front-end for SystemRDL 2.0
+version: 1.27.3
+license: MIT
+
+depends:
+  - devel/python
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/s/systemrdl-compiler/systemrdl-compiler-${version}.tar.gz
+      sha1: 22b52f255b391d85027805ec12233052ecb4753b
+      watch:
+        url: anitya://36317
+
+packages:
+  python-systemrdl-compiler:
+    files:
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
