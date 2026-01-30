@@ -1,0 +1,20 @@
+description: application to stress a computer system in various selectable ways
+version: 0.20.00
+license: GPL-2.0
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/ColinIanKing/stress-ng/archive/refs/tags/V${version}.tar.gz
+      sha1: e4a9d8246390a7224f1a4c573116f2fcff8f9bcc
+      watch:
+        url: anitya://12538
+
+packages:
+  stress-ng:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
