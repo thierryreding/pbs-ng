@@ -1,0 +1,29 @@
+description: XCB cursor library
+version: 0.1.5
+license: custom
+
+depends:
+  - xorg/lib/xcb
+  - xorg/lib/xcb-util-image
+  - xorg/lib/xcb-util-renderutil
+
+files:
+  - download:
+      url: https://xorg.freedesktop.org/archive/individual/lib/xcb-util-cursor-${version}.tar.xz
+      sha1: efa6642e2585e29abadcb16b492111be80f6b89f
+      watch:
+        url: anitya://5166
+
+packages:
+  xcb-util-cursor:
+    files:
+      - /usr/lib/*.so.*
+
+  xcb-util-cursor-dev:
+    files:
+      - /usr/include/xcb
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

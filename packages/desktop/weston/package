@@ -1,10 +1,13 @@
 description: Reference implementation of a Wayland compositor
-version: 10.0.1
+version: 14.0.2
 license: MIT
 
 depends:
   - core/dbus
+  - desktop/seatd
   - libs/cairo
+  - libs/lcms2
+  - libs/libdisplay-info
   - libs/libinput
   - libs/libjpeg-turbo
   - libs/libxkbcommon
@@ -15,11 +18,12 @@ depends:
   - libs/wayland
   - libs/wayland-protocols
   - xorg/lib/xcursor
+  - xorg/lib/xcb-util-cursor
 
 files:
   - download:
       url: https://gitlab.freedesktop.org/wayland/weston/-/releases/${version}/downloads/weston-${version}.tar.xz
-      sha1: 87cc339503f01317a0ca8d986b1b211c8aae99bb
+      sha1: e9c652e5e863eda5e9516b12fcda38b1636836e7
       watch:
         url: anitya://13745
 

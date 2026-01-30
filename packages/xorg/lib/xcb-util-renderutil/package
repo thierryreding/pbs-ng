@@ -1,0 +1,27 @@
+description: utility libraries for XC Binding - Convenience functions for the Render extension
+version: 0.3.10
+license: custom
+
+depends:
+  - xorg/lib/xcb
+
+files:
+  - download:
+      url: https://xorg.freedesktop.org/archive/individual/lib/xcb-util-renderutil-${version}.tar.xz
+      sha1: 574653197fae818a0d70464aecff6294047ed6c5
+      watch:
+        url: anitya://5169
+
+packages:
+  xcb-util-renderutil:
+    files:
+      - /usr/lib/*.so.*
+
+  xcb-util-renderutil-dev:
+    files:
+      - /usr/include/xcb
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

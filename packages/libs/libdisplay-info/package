@@ -1,0 +1,27 @@
+description: EDID and DisplayID library
+version: 0.3.0
+license: MIT
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/${version}/downloads/libdisplay-info-${version}.tar.xz
+      sha1: 87c1c2e9ece3c012e69633c778f7be5265187302
+      watch:
+        url: anitya://326668
+
+packages:
+  libdisplay-info:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+
+  libdisplay-info-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
