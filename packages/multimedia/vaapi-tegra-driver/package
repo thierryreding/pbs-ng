@@ -1,0 +1,13 @@
+description: VA-API implementation for NVIDIA Tegra SoCs
+license: MIT
+
+depends:
+  - libs/libdrm
+  - multimedia/libva
+
+packages:
+  vaapi-driver-tegra:
+    files:
+      - /usr/lib/dri/*.so
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
