@@ -9,7 +9,7 @@ import pbs
 
 def retrieve_url(url):
     headers = {
-        'User-Agent': f'Platform Build System/{pbs.VERSION}'
+        'User-Agent': pbs.USER_AGENT
     }
 
     scheme, *_ = urllib.parse.urlparse(url)

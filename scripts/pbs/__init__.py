@@ -4,6 +4,7 @@ import sys
 import textwrap
 
 VERSION = '2025.05'
+USER_AGENT = f'Platform Build System/${VERSION}'
 
 import pbs.watch
 

@@ -510,7 +510,12 @@ class DownloadSourceFile(SourceFile):
         # before it can be determined whether or not the file was already
         # downloaded.
         try:
-            src = urllib.request.urlopen(url)
+            headers = {
+                'User-Agent': pbs.USER_AGENT
+            }
+
+            request = urllib.request.Request(url, headers = headers)
+            src = urllib.request.urlopen(request)
         except urllib.error.URLError as e:
             print('failed to open %s:' % url, e)
             return
