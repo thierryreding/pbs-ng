@@ -1,7 +1,7 @@
-From d5795a2dd2b2668906125503c0a30c1621114405 Mon Sep 17 00:00:00 2001
+From 95d74a8cb823e6cfaa5a61ecd6ef6b29192e726a Mon Sep 17 00:00:00 2001
 From: Thierry Reding <treding@nvidia.com>
 Date: Fri, 11 Feb 2022 15:43:25 +0100
-Subject: [PATCH] clike compilers: Add default sysroot include directory
+Subject: [PATCH 1/2] clike compilers: Add default sysroot include directory
 
 When building against a sysroot, meson currently fails to detect that
 the /usr/include directory within that sysroot is a default search
@@ -38,10 +38,10 @@ order is left alone.
  1 file changed, 18 insertions(+)
 
 diff --git a/mesonbuild/compilers/mixins/clike.py b/mesonbuild/compilers/mixins/clike.py
-index 8736c6d97e4b..600fda3503fc 100644
+index ef189124a716..940d97adfaa9 100644
 --- a/mesonbuild/compilers/mixins/clike.py
 +++ b/mesonbuild/compilers/mixins/clike.py
-@@ -100,6 +100,24 @@ class CLikeCompilerArgs(arglist.CompilerArgs):
+@@ -90,6 +90,24 @@ class CLikeCompilerArgs(arglist.CompilerArgs):
                  new.insert(group_start, '-Wl,--start-group')
          # Remove system/default include paths added with -isystem
          default_dirs = self.compiler.get_default_include_dirs()
@@ -53,7 +53,7 @@ index 8736c6d97e4b..600fda3503fc 100644
 +                    try:
 +                        sys_root = new[i + 1]
 +                    except IndexError:
-+                        mlog.warn('--sysroot passed to', self.language, 'compiler without argument')
++                        mlog.warning('--sysroot passed to', self.compiler.language, 'compiler without argument')
 +                    break
 +
 +                if each.startswith('--sysroot='):
@@ -64,8 +64,8 @@ index 8736c6d97e4b..600fda3503fc 100644
 +            default_dirs.append(os.path.join(sys_root, 'usr', 'include'))
 +
          if default_dirs:
-             real_default_dirs = [os.path.realpath(i) for i in default_dirs]
-             bad_idx_list = []  # type: T.List[int]
+             real_default_dirs = [self._cached_realpath(i) for i in default_dirs]
+             bad_idx_list: T.List[int] = []
 -- 
-2.38.1
+2.52.0
 

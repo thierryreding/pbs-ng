@@ -1,0 +1,28 @@
+From 43076648934c1063524ade63de266f3bc9f2f96f Mon Sep 17 00:00:00 2001
+From: Thierry Reding <treding@nvidia.com>
+Date: Fri, 1 Dec 2023 14:28:27 +0100
+Subject: [PATCH 2/2] gnome: Add sysroot support
+
+---
+ mesonbuild/modules/gnome.py | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/mesonbuild/modules/gnome.py b/mesonbuild/modules/gnome.py
+index 275b988c3907..0b8bb4093d73 100644
+--- a/mesonbuild/modules/gnome.py
++++ b/mesonbuild/modules/gnome.py
+@@ -1201,6 +1201,11 @@ class GnomeModule(ExtensionModule):
+         scan_command += ['--warn-all']
+         scan_command += ['--output', '@OUTPUT@']
+         scan_command += [f'--c-include={h}' for h in kwargs['header']]
++
++        sysroot = state.environment.properties[MachineChoice.HOST].get_sys_root()
++        if sysroot:
++            scan_command += ['--sysroot', sysroot]
++
+         scan_command += kwargs['extra_args']
+         scan_command += ['-I' + srcdir, '-I' + builddir]
+         scan_command += state.get_include_args(girtargets_inc_dirs)
+-- 
+2.52.0
+
