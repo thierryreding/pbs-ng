@@ -76,7 +76,7 @@ else:
             execute(args)
         except KeyboardInterrupt:
             print('')
-            print('keyboard interrupt')
+            print('keyboard interrupt!')
             continue
 
     readline.write_history_file('.history')
