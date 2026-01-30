@@ -1,0 +1,21 @@
+description: composable command line interface toolkit
+version: 8.1.7
+license: BSD-3-Clause
+
+depends:
+  - build-tools/python-build
+  - devel/python
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/c/click/click-${version}.tar.gz
+      sha1: f3f991c23aa4185c69430cf3ff378017d918223d
+      watch:
+        url: anitya://3802
+
+packages:
+  python-click:
+    files:
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

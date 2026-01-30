@@ -1,0 +1,21 @@
+description: composable command line interface toolkit
+version: 0.14.0
+license: MIT
+
+depends:
+  - build-tools/python-build
+  - devel/python
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/h/h11/h11-${version}.tar.gz
+      sha1: 8a1f457163f390aeb32e5b9ded199937906c9449
+      watch:
+        url: anitya://17549
+
+packages:
+  python-h11:
+    files:
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

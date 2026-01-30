@@ -1,0 +1,25 @@
+description: an ASGI web server for Python
+version: 0.24.0
+license: BSD-3-Clause
+
+depends:
+  - build-tools/python-build
+  - devel/glibc
+  - devel/python
+  - python/click
+  - python/h11
+
+files:
+  - download:
+      url: https://github.com/encode/uvicorn/archive/refs/tags/${version}.tar.gz
+      sha1: df6adfae11f1254f6a9ad7b18c15ff1eca4f42f3
+      watch:
+        url: anitya://28526
+
+packages:
+  uvicorn:
+    files:
+      - /usr/bin
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
