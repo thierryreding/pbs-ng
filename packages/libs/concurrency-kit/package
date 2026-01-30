@@ -1,0 +1,31 @@
+description: concurrency primitives, safe memory reclamation mechanisms and non-blocking (including lock-free) data structures designed to aid in the research, design and implementation of high performance concurrent systems developed in C99+
+version: 0.7.2
+license: custom
+
+files:
+  - download:
+      url: https://github.com/concurrencykit/ck/archive/refs/tags/0.7.1.tar.gz
+      sha1: dc54973bd384f8a54a3022a9380c485c353dbcb4
+      watch:
+        url: anitya://292814
+
+depends:
+  - devel/glibc
+
+packages:
+  concurrency-kit:
+    files:
+      - /usr/lib/*.so.*
+
+  concurrency-kit-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  concurrency-kit-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

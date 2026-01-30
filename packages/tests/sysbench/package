@@ -1,0 +1,26 @@
+description: scriptable database and system performance benchmark
+version: 1.0.20
+license: GPL-2.0
+
+depends:
+  - libs/concurrency-kit
+  - libs/luajit
+
+files:
+  - download:
+      url: https://github.com/akopytov/sysbench/archive/refs/tags/${version}.tar.gz
+      sha1: c1ab31bc1d7b4e022c895a6b9d26c9cb60faebcc
+      watch:
+        url: anitya://4926
+
+packages:
+  sysbench:
+    files:
+      - /usr/bin
+      - /usr/share/sysbench
+
+  sysbench-doc:
+    files:
+      - /usr/share/doc/sysbench
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

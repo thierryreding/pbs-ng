@@ -1,0 +1,53 @@
+diff --git a/configure b/configure
+index 340e05ce3b01..f8315aff3736 100755
+--- a/configure
++++ b/configure
+@@ -646,15 +646,16 @@ if test "$PROFILE"; then
+ fi
+ 
+ printf "Finding suitable compiler........"
+-if test ! -x "${CC}"; then
+-	CC=`pathsearch "${CC:-cc}"`
+-	if test -z "$CC" -o ! -x "$CC"; then
+-		CC=`pathsearch "${CC:-gcc}"`
++if test "x${COMPILER}" = "x"; then
++	if test ! -x "${CC}"; then
++		CC=`pathsearch "${CC:-cc}"`
++		if test -z "$CC" -o ! -x "$CC"; then
++			CC=`pathsearch "${CC:-gcc}"`
++		fi
+ 	fi
+-fi
+-assert "$CC" "not found"
++	assert "$CC" "not found"
+ 
+-cat << EOF > .1.c
++	cat << EOF > .1.c
+ #include <stdio.h>
+ int main(void) {
+ #if defined(_WIN32)
+@@ -682,15 +683,16 @@ int main(void) {
+ }
+ EOF
+ 
+-$CC -o .1 .1.c
+-COMPILER=`./.1 2> /dev/null`
+-r=$?
+-rm -f .1.c .1
++	$CC -o .1 .1.c
++	COMPILER=`./.1 2> /dev/null`
++	r=$?
++	rm -f .1.c .1
+ 
+-if test "$r" -ne 0; then
+-	assert "" "update compiler"
+-else
+-	echo "success [$CC]"
++	if test "$r" -ne 0; then
++		assert "" "update compiler"
++	else
++		echo "success [$CC]"
++	fi
+ fi
+ 
+ if test "$COMPILER" = "suncc"; then

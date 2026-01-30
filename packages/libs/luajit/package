@@ -1,0 +1,32 @@
+description: Just-In-Time compiler for the Lua programming language
+version: 2.1
+license: MIT
+
+depends:
+  - devel/glibc
+
+files:
+  - source:
+      url: git+https://github.com/LuaJIT/LuaJIT.git#v${version}
+
+packages:
+  luajit:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+      - /usr/lib/lua
+      - /usr/share/lua
+      - /usr/share/luajit-${major}.${minor}
+
+  luajit-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  luajit-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
