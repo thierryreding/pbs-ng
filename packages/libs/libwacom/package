@@ -1,15 +1,19 @@
 description: Library to identify Wacom tablets and their features
-version: 0.29
+version: 2.17.0
 license: MIT
 
 depends:
+  - build-tools/meson
+  - devel/python-libevdev
+  - devel/python-pytest
+  - devel/python-pyudev
   - libs/glib
   - libs/libgudev
 
 files:
   - download:
-      url: http://sourceforge.net/projects/linuxwacom/files/libwacom/libwacom-${version}.tar.bz2
-      sha1: 6782d32af328bc984d7c4f65062f04a9172d342c
+      url: https://github.com/linuxwacom/libwacom/releases/download/libwacom-${version}/libwacom-${version}.tar.xz
+      sha1: 760caffd39ae209ba1b73ce0bac7cfb7758b19f4
       watch:
         url: anitya://16887
 

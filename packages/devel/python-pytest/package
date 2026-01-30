@@ -1,0 +1,21 @@
+description: simple powerful testing with Python
+version: 8.3.4
+license: MIT
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/p/pytest/pytest-${version}.tar.gz
+      sha1: 22630c3b10eebc5625e1929a5af4ef0d01ba650a
+      watch:
+        url: anitya://3765
+
+depends:
+  - build-tools/python-setuptools
+  - devel/python
+
+packages:
+  python-pytest:
+    files:
+      - /usr/lib
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

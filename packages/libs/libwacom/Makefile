@@ -1,4 +1,4 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
+include $(TOP_SRCDIR)/packages/meson.mk
 
 conf-args += \
-	--with-sysroot=$(SYSROOT)
+	-Dtests=disabled
