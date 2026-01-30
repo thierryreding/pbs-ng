@@ -1,11 +1,11 @@
 description: C++ libraries
-version: 1.75.0
+version: 1.90.0
 license: custom
 
 files:
   - download:
-      url: https://dl.bintray.com/boostorg/release/${version}/source/boost_${major}_${minor}_${micro}.tar.bz2
-      sha1: 6109efd3bdd8b9220d7d85b5e125f7f28721b9a9
+      url: https://archives.boost.io/release/${version}/source/boost_${version_}.tar.bz2
+      sha1: a1d6405b423de1f0e88920337ab3334dcef9e1ec
       watch:
         url: anitya://6854
 

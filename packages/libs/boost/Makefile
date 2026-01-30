@@ -1,7 +1,7 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
 conf-args = \
-	--prefix=$(prefix)
+	--prefix=$(PREFIX)
 
 $(srcdir)/stamp-configure: | $(srcdir)
 	cd $(srcdir) && ./bootstrap.sh $(conf-args)
