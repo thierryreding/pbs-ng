@@ -1,16 +1,18 @@
 description: Mesa demos and tools
-version: 8.4.0
+version: 9.0.0
 license: custom
 
 depends:
   - libs/freeglut
   - libs/glew
+  - libs/gtk3
+  - libs/libdecor
   - libs/mesa
 
 files:
   - download:
-      url: ftp://ftp.freedesktop.org/pub/mesa/demos/mesa-demos-${version}.tar.bz2
-      sha1: 57ba892e919fa22ce3db9f25e7331a6fa33c652c
+      url: https://mesa.freedesktop.org/archive/demos/mesa-demos-${version}.tar.xz
+      sha1: fad7fab5acae45312fccbe19f33218ce34980654
       watch:
         url: anitya://16781
 

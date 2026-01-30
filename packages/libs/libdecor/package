@@ -1,0 +1,33 @@
+description: client-side decorations library for Wayland clients
+version: 0.2.5
+license: MIT
+
+depends:
+  - build-tools/meson
+  - core/dbus
+  - libs/cairo
+  - libs/gtk3
+  - libs/libxkbcommon
+  - libs/wayland
+  - libs/wayland-protocols
+
+files:
+  - download:
+      url: https://gitlab.freedesktop.org/libdecor/libdecor/-/releases/${version}/downloads/libdecor-${version}.tar.xz
+      sha1: 94734a7f9fec6997d0cc67ebdf77892f026392bf
+      watch:
+        url: anitya://312806
+
+packages:
+  libdecor:
+    files:
+      - /usr/lib/*.so.*
+
+  libdecor-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
