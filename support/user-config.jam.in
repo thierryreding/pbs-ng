@@ -1,0 +1,4 @@
+using gcc : @ARCH@ : @HOST@-g++
+  : <compileflags>--sysroot=@SYSROOT@
+  : <target-os>@OS@
+  ;
