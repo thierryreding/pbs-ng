@@ -1,0 +1,26 @@
+description: utility for controlling network drivers and hardware
+version: 6.7
+license: GPL
+
+depends:
+  - devel/glibc
+  - net/libmnl
+
+files:
+  - download:
+      url: https://mirrors.edge.kernel.org/pub/software/network/ethtool/ethtool-${version}.tar.xz
+      sha1: 423a4f7743ebc719042f74a26e28712d718777db
+      watch:
+        url: anitya://763
+
+packages:
+  ethtool:
+    files:
+      - /usr/share/bash-completion
+      - /usr/bin
+
+  ethtool-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
