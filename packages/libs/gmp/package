@@ -1,16 +1,16 @@
 description: GNU multiple precision arithmetic library
-version: 6.2.1
+version: 6.3.0
 license: LGPL-3.0
+
+depends:
+  - devel/glibc
 
 files:
   - download:
       url: https://gmplib.org/download/gmp/gmp-${version}.tar.xz
-      sha1: 0578d48607ec0e272177d175fd1807c30b00fdf2
+      sha1: b4043dd2964ab1a858109da85c44de224384f352
       watch:
         url: anitya://1186
-
-depends:
-  - devel/glibc
 
 packages:
   libgmp:
