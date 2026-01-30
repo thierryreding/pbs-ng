@@ -1,7 +1,4 @@
-include $(TOP_SRCDIR)/packages/common.mk
-
-$(builddir):
-	mkdir -p $@
+include $(TOP_SRCDIR)/packages/autotools.mk
 
 $(builddir)/configparms: | $(builddir)
 	echo '# generated' > $@
@@ -11,34 +8,14 @@ $(builddir)/configparms: | $(builddir)
 	echo 'rootsbindir=$(PREFIX)/bin' >> $@
 	touch $@
 
-conf-args = \
-	--host=$(HOST) \
-	--prefix=$(PREFIX) \
-	--libdir=$(PREFIX)/lib \
-	--libexecdir=$(PREFIX)/lib \
-	--with-headers=$(SYSROOT)$(PREFIX)/include
+conf-args += \
+	--with-headers=$(SYSROOT)$(PREFIX)/include \
+	--libexecdir=$(PREFIX)/lib
 
-conf-vars = \
-	ASFLAGS='$(ASFLAGS)' \
-	CPPFLAGS='$(CPPFLAGS)' \
-	CXXFLAGS='$(CXXFLAGS)' \
-	CFLAGS='$(CFLAGS)' \
-	LDFLAGS='$(LDFLAGS)'
+conf-vars += \
+	ASFLAGS='$(ASFLAGS)'
 
 $(builddir)/stamp-configure: $(builddir)/configparms
-	cd $(builddir) && \
-		$(srcdir)/configure $(conf-args) $(conf-vars)
-	touch $@
-
-$(builddir)/stamp-build: $(builddir)/stamp-configure | $(builddir)
-	cd $(builddir) && \
-		$(MAKE) -j $(JOBS)
-	touch $@
-
-$(builddir)/stamp-install: $(builddir)/stamp-build | $(builddir)
-	cd $(builddir) && \
-		$(MAKE) -j $(JOBS) DESTDIR=$(DESTDIR) install
-	touch $@
 
 $(DESTDIR)/etc/ld.so.conf.d:
 	mkdir -p $@
@@ -50,7 +27,8 @@ $(BUILD_TOOLS)/bin/$(CROSS_COMPILE)ldd: $(TOP_SRCDIR)/support/ldd-sysroot.in
 	sed -e 's|@LDD@|$(TOP_SRCDIR)/support/ldd|g' -e 's|@SYSROOT@|$(SYSROOT)|g' $< > $@
 	chmod a+x $@
 
-install: $(builddir)/stamp-install $(DESTDIR)/etc/ld.so.conf | $(DESTDIR)/etc/ld.so.conf.d
-install: $(BUILD_TOOLS)/bin/$(CROSS_COMPILE)ldd
+$(builddir)/stamp-post-install: $(builddir)/stamp-install
+$(builddir)/stamp-post-install: $(DESTDIR)/etc/ld.so.conf | $(DESTDIR)/etc/ld.so.conf.d
+$(builddir)/stamp-post-install: $(BUILD_TOOLS)/bin/$(CROSS_COMPILE)ldd
 
-.PHONY: install
+install: $(builddir)/stamp-post-install

@@ -1,15 +1,16 @@
 description: GNU C library
-version: 2.36
+version: 2.43
 license: GPL-2.0, LGPL-2.1
 
 depends:
+  - build-tools/python-elftools # needed for the support/ldd script
   - kernel/linux
   - devel/gcc-libs
 
 files:
   - download:
-      url: http://ftp.gnu.org/pub/gnu/glibc/glibc-${version}.tar.xz
-      sha1: 1477f605f419c439c03ef90e7851c0856ea679ea
+      url: https://ftp.gnu.org/pub/gnu/glibc/glibc-${version}.tar.xz
+      sha1: d6bf2cc5439107b73a013284f7dd130c66b3d4f8
       watch:
         url: anitya://5401
 
