@@ -1,17 +1,18 @@
 description: The GNU debugger
-version: 12.1
+version: 17.1
 license: GPL-3.0
 
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/gdb/gdb-${version}.tar.xz
-      sha1: 2edabd9f5766b84889b07b366b4438e93e994005
+      sha1: c99a59a9f480afb094bc0fbb19ceacdfe3658933
       watch:
         url: anitya://11798
 
 depends:
-  - libs/ncurses
   - libs/gmp
+  - libs/mpfr
+  - libs/ncurses
 
 packages:
   gdb:

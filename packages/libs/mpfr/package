@@ -1,0 +1,26 @@
+description: multiple-precision floating-point library
+version: 4.2.2
+license: GPL-3.0-or-later, LGPL-3.0-or-later
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://www.mpfr.org/mpfr-current/mpfr-${version}.tar.xz
+      sha1: a63a264b273a652e27518443640e69567da498ce
+      watch:
+        url: anitya://2019
+
+packages:
+  libmpfr:
+    files:
+      - /usr/lib/*.so.*
+
+  libmpfr-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
