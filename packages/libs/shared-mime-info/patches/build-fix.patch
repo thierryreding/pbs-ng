@@ -1,0 +1,108 @@
+diff --git a/src/test-subclassing.c b/src/test-subclassing.c
+index dd099e44046d..2c72fb358570 100644
+--- a/src/test-subclassing.c
++++ b/src/test-subclassing.c
+@@ -1,3 +1,4 @@
++#include <libxml/parser.h>
+ #include <libxml/tree.h>
+ #include <stdio.h>
+ #include <string.h>
+diff --git a/src/update-mime-database.cpp b/src/update-mime-database.cpp
+index f3650b1204dc..fc87aba6b414 100644
+--- a/src/update-mime-database.cpp
++++ b/src/update-mime-database.cpp
+@@ -244,7 +244,7 @@ static Type *get_type(const char *name, GError **error)
+ 	xmlNs *ns;
+ 	const char *slash;
+ 	Type *type;
+-	int i;
++	guint i;
+ 
+ 	slash = strchr(name, '/');
+ 	if (!slash || strchr(slash + 1, '/'))
+@@ -1481,11 +1481,9 @@ static void match_value_and_mask(Match *match, xmlNode *node, GError **error)
+ 	}
+ 	else
+ 	{
+-		match->data = parsed_value->str;
++		match->data = g_string_free(parsed_value, FALSE);
+ 		match->data_length = parsed_value->len;
+ 		match->mask = parsed_mask;
+-
+-		g_string_free(parsed_value, FALSE);
+ 	}
+ 
+ 	if (mask)
+@@ -1957,7 +1955,7 @@ static void write_tree_magic(FILE *stream, TreeMagic *magic)
+  */
+ static void delete_old_types(const gchar *mime_dir)
+ {
+-	int i;
++	guint i;
+ 
+ 	for (i = 0; i < G_N_ELEMENTS(media_types); i++)
+ 	{
+@@ -2010,7 +2008,7 @@ static void add_ns(gpointer key, gpointer value, gpointer data)
+ static void write_namespaces(FILE *stream)
+ {
+ 	GPtrArray *lines;
+-	int i;
++	guint i;
+ 	
+ 	lines = g_ptr_array_new();
+ 
+@@ -2069,7 +2067,7 @@ static void add_alias(gpointer key, gpointer value, gpointer data)
+ static void write_aliases(FILE *stream)
+ {
+ 	GPtrArray *lines;
+-	int i;
++	guint i;
+ 	
+ 	lines = g_ptr_array_new();
+ 
+@@ -2100,7 +2098,7 @@ static void add_type(gpointer key, gpointer value, gpointer data)
+ static void write_types(FILE *stream)
+ {
+ 	GPtrArray *lines;
+-	int i;
++	guint i;
+ 	
+ 	lines = g_ptr_array_new();
+ 
+@@ -3075,7 +3073,8 @@ write_magic_cache (FILE        *cache,
+ 		   GHashTable *strings, 
+ 		   guint      *offset)
+ {
+-  guint n_entries, max_extent;
++  guint n_entries;
++  glong max_extent;
+   gint offset2;
+   GList *m;
+   WriteMatchData data;
+@@ -3202,7 +3201,7 @@ write_types_cache (FILE       *cache,
+                    guint      *offset)
+ {
+ 	GPtrArray *lines;
+-	int i;
++	guint i;
+ 	char *mimetype;
+ 	guint mime_offset;
+ 	
+@@ -3782,7 +3781,7 @@ int main(int argc, char **argv)
+ 	{
+ 		FILE *stream;
+ 		char *magic_path;
+-		int i;
++		guint i;
+ 		magic_path = g_strconcat(mime_dir, "/magic.new", nullptr);
+ 		stream = fopen_gerror(magic_path, error);
+ 		if (!stream)
+@@ -3903,7 +3902,7 @@ int main(int argc, char **argv)
+ 	{
+ 		FILE *stream;
+ 		char *path;
+-		int i;
++		guint i;
+ 		path = g_strconcat(mime_dir, "/treemagic.new", nullptr);
+ 		stream = fopen_gerror(path, error);
+ 		if (!stream)
