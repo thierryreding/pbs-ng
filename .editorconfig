@@ -1,0 +1,10 @@
+root = true
+
+[*]
+charset = utf-8
+
+[package]
+indent_style = space
+indent_size = 2
+file_type = yaml
+syntax = yaml
