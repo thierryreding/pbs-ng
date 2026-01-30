@@ -1,0 +1,27 @@
+description: library for manipulationg Unicode strings and C strings
+version: 1.4.1
+license: GPL
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://ftp.gnu.org/gnu/libunistring/libunistring-${version}.tar.gz
+      sha1: f370f2c8a4cd4406140ab770e97d9a5c7dc2468f
+      watch:
+        url: anitya://1747
+
+packages:
+  libunistring:
+    files:
+      - /usr/lib/*.so.*
+
+  libunistring-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

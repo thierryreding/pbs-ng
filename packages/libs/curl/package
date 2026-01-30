@@ -1,15 +1,16 @@
 description: A URL retrieval utility and library
-version: 7.85.0
+version: 8.18.0
 license: MIT
 
 depends:
   - libs/libidn2
+  - libs/libpsl
   - libs/openssl
 
 files:
   - download:
-      url: https://curl.haxx.se/download/curl-${version}.tar.xz
-      sha1: 5c1940ff51f6b2137b91ffe672b70d4491a23ea6
+      url: https://curl.se/download/curl-${version}.tar.xz
+      sha1: 9398135fa7574617789cf2e50cf459b4418cb296
       watch:
         url: anitya://381
 

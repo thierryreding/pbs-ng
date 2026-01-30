@@ -1,0 +1,28 @@
+description: C library for the Public Suffix List
+version: 0.21.5
+license: MIT
+
+depends:
+  - devel/glibc
+  - libs/libunistring
+
+files:
+  - download:
+      url: https://github.com/rockdaboot/libpsl/releases/download/${version}/libpsl-${version}.tar.lz
+      sha1: 9b4f67e420f94fc8506b6a1d5577969ad671b5fb
+      watch:
+        url: anitya://7305
+
+packages:
+  libpsl:
+    files:
+      - /usr/lib/*.so.*
+
+  libpsl-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
