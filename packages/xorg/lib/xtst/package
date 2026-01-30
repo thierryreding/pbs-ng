@@ -1,0 +1,37 @@
+description: X11 Testing - resource extension library
+version: 1.2.5
+license: custom
+
+depends:
+  - xorg/lib/xext
+  - xorg/lib/xfixes
+  - xorg/lib/xi
+
+files:
+  - download:
+      url: https://x.org/releases/individual/lib/libXtst-${version}.tar.xz
+      sha1: 8633c077c22744679e43b23dfd58f76820867a1c
+      watch:
+        url: anitya://1794
+
+packages:
+  libxtst:
+    files:
+      - /usr/lib/*.so.*
+
+  libxtst-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libxtst-doc:
+    files:
+      - /usr/share/doc
+
+  libxtst-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

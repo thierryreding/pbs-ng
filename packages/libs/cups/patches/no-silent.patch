@@ -1,0 +1,12 @@
+diff --git a/Makedefs.in b/Makedefs.in
+index 07010f065657..f571fc8802cf 100644
+--- a/Makedefs.in
++++ b/Makedefs.in
+@@ -263,7 +263,6 @@ USBQUIRKS	=	@USBQUIRKS@
+ # Rules...
+ #
+ 
+-.SILENT:
+ .SUFFIXES:	.a .c .cxx .h .o
+ 
+ .c.o:

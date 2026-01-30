@@ -1,0 +1,33 @@
+package: Accessibility Toolkit
+version: 2.38.0
+license: LGPL-2.1
+
+depends:
+  - libs/glib
+  - libs/gobject-introspection
+
+files:
+  - download:
+      url: https://download.gnome.org/sources/atk/${major}.${minor}/atk-${version}.tar.xz
+      sha1: 6c82895457cb6db6514e492f308bd63167bacfd4
+      watch:
+        url: anitya://130
+
+packages:
+  libatk:
+    files:
+      - /usr/lib/*.so.*
+
+  libatk-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libatk-gir:
+    files:
+      - /usr/lib/girepository-1.0
+      - /usr/share/gir-1.0
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

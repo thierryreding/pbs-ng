@@ -1,18 +1,26 @@
 package: common C routines used by GTK+ and other libraries
-version: 3.24.29
+version: 3.24.43
 license: LGPL
 
 files:
   - download:
       url: https://ftp.gnome.org/pub/gnome/sources/gtk+/${major}.${minor}/gtk+-${version}.tar.xz
-      sha1: 2faab763eeeea30c7b81d1a4749594ed39dc9cbe
+      sha1: 4f94c8dca81b26aaea2d17a15f265e3a7d777ea3
       watch:
         url: anitya://311549
 
 depends:
+  - libs/atk
+  - libs/at-spi2-core
   - libs/cairo
+  - libs/cups
+  - libs/fribidi
   - libs/gdk-pixbuf
   - libs/gobject-introspection
+  - libs/libepoxy
+  - libs/libxkbcommon
+  - libs/pango
+  - xorg/lib/xi
 
 packages:
   gtk3:

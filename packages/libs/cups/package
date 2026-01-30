@@ -1,0 +1,51 @@
+description: standards-based, open source printing system
+version: 2.4.11
+license: Apache-2.0
+
+depends:
+  - core/dbus
+  - libs/openssl
+  - libs/pam
+  - libs/zlib
+
+files:
+  - download:
+      url: https://github.com/OpenPrinting/cups/releases/download/v${version}/cups-${version}-source.tar.gz
+      sha1: 73ce881f3ec1672dd481ebfb19b68c4b083a3d16
+      watch:
+        url: anitya://380
+
+packages:
+  cups:
+    files:
+      - /usr/bin
+      - /usr/sbin
+      - /usr/lib/*.so.*
+      - /usr/lib/cups
+      - /usr/lib/systemd
+
+  cups-data:
+    files:
+      - /usr/share/applications
+      - /usr/share/cups
+      - /usr/share/icons
+
+  cups-doc:
+    files:
+      - /usr/share/doc
+
+  cups-man:
+    files:
+      - /usr/share/man
+
+  cups-locale:
+    files:
+      - /usr/share/locale
+
+  cups-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
