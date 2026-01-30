@@ -49,6 +49,9 @@ if args.command:
     # if a command was given on the command-line, execute it in batch mode
     execute(args.command)
 else:
+    pbs.log.startup = False
+    pbs.isolate()
+
     try:
         readline.read_history_file('.history')
     except FileNotFoundError:

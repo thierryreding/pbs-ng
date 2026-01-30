@@ -14,6 +14,21 @@ PackageWatcher = pbs.watch.PackageWatcher
 srctree = os.path.realpath(os.path.dirname(sys.argv[0]))
 objtree = os.getcwd()
 
+def isolate():
+    from gi.repository import GLib
+    import pydbus
+
+    relpath = os.path.relpath(objtree, srctree)
+    scope = 'pbs-%s' % relpath.replace(os.sep, '-')
+
+    bus = pydbus.SessionBus()
+    systemd = bus.get('.systemd1')
+
+    pids = GLib.Variant.new_array(GLib.VariantType.new('u'), [ GLib.Variant.new_uint32(os.getpid()) ])
+
+    response = systemd.StartTransientUnit('%s.scope' % scope, 'fail', [ ('PIDs', pids) ], [])
+    print('running in scope %s:' % scope, response)
+
 '''
 os.chdir() context manager
 '''
@@ -102,6 +117,7 @@ class Logger():
         return wrapper.wrap(message)
 
     def __init__(self, color = False):
+        self.startup = True
         self.color = color
 
         (columns, lines) = shutil.get_terminal_size()
@@ -189,10 +205,14 @@ class Logger():
         for line in lines:
             print(line)
 
-    def error(self, *args):
-        lines = Logger.wrap(self.error_wrap, *args)
-        for line in lines:
-            print(line)
+    def error(self, *args, startup = False):
+        if self.startup or startup:
+            prefix = self.colorize('red', True, 'ERROR:')
+            print('%s' % prefix, *args)
+        else:
+            lines = Logger.wrap(self.error_wrap, *args)
+            for line in lines:
+                print(line)
 
     def quote(self, *args):
         lines = Logger.wrap(self.quote_wrap, *args)
