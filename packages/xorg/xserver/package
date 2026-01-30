@@ -1,5 +1,5 @@
 description: X.Org X server
-version: 1.20.5
+version: 21.1.14
 license: custom
 
 depends:
@@ -17,6 +17,7 @@ depends:
   - xorg/font/font-util
   - xorg/lib/x11
   - xorg/lib/xcb-util-keysyms
+  - xorg/lib/xcvt
   - xorg/lib/xfont
   - xorg/lib/xkbfile
   - xorg/lib/xtrans
@@ -24,8 +25,8 @@ depends:
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/xserver/xorg-server-${version}.tar.bz2
-      sha1: fea6fd34c7f48b3c69fbecd8fb294eaa1498e69c
+      url: https://xorg.freedesktop.org/releases/individual/xserver/xorg-server-${version}.tar.xz
+      sha1: 63326488b63a1f584f8dc3084d2a52dba93d4e72
       watch:
         url: anitya://5250
 
