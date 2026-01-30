@@ -1,0 +1,56 @@
+diff --git a/DAEValidator/CMakeLists.txt b/DAEValidator/CMakeLists.txt
+index 03ad540ff732..d2e62175392d 100644
+--- a/DAEValidator/CMakeLists.txt
++++ b/DAEValidator/CMakeLists.txt
+@@ -100,7 +100,7 @@ if (WIN32)
+ # C4820: 'bytes' bytes padding added after construct 'member_name'
+ 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP /Wall /WX /wd4505 /wd4514 /wd4592 /wd4710 /wd4711 /wd4820")
+ else ()
+-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Werror")
++	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Werror -Wno-error=dangling-reference")
+ endif ()
+ 
+ add_custom_command(
+diff --git a/DAEValidator/library/src/Dae.cpp b/DAEValidator/library/src/Dae.cpp
+index 9256ee104fa8..db767f4ef592 100644
+--- a/DAEValidator/library/src/Dae.cpp
++++ b/DAEValidator/library/src/Dae.cpp
+@@ -3,6 +3,7 @@
+ #include "PathUtil.h"
+ #include "StringUtil.h"
+ #include "Strings.h"
++#include <cstdint>
+ #include <iostream>
+ #include "no_warning_sstream"
+ 
+@@ -312,4 +313,4 @@ namespace opencollada
+ 			}
+ 		}
+ 	}
+-}
+\ No newline at end of file
++}
+diff --git a/DAEValidator/library/src/DaeValidator.cpp b/DAEValidator/library/src/DaeValidator.cpp
+index 715d90340558..08070823a918 100644
+--- a/DAEValidator/library/src/DaeValidator.cpp
++++ b/DAEValidator/library/src/DaeValidator.cpp
+@@ -4,6 +4,7 @@
+ #include "Strings.h"
+ #include "StringUtil.h"
+ #include <cmath>
++#include <cstdint>
+ #include "no_warning_iomanip"
+ #include "no_warning_iostream"
+ #include <set>
+diff --git a/DAEValidator/library/src/XmlDoc.cpp b/DAEValidator/library/src/XmlDoc.cpp
+index 863166a263d1..20e2f8db6aae 100644
+--- a/DAEValidator/library/src/XmlDoc.cpp
++++ b/DAEValidator/library/src/XmlDoc.cpp
+@@ -1,5 +1,7 @@
+ #include "Macros.h"
+ 
++#include <cstdint>
++
+ #if IS_GNUC_AND_GNUC_VERSION_LT(5,1,1)
+ #include <cstring>
+ #endif
