@@ -1,4 +1,4 @@
-import os.path
+import os.path, pathlib
 import shutil
 import sys
 import textwrap
@@ -11,8 +11,8 @@ IgnoreWatcher = pbs.watch.IgnoreWatcher
 AnityaWatcher = pbs.watch.AnityaWatcher
 PackageWatcher = pbs.watch.PackageWatcher
 
-srctree = os.path.realpath(os.path.dirname(sys.argv[0]))
-objtree = os.getcwd()
+srctree = pathlib.Path(sys.argv[0]).parent.resolve()
+objtree = pathlib.Path.cwd()
 
 def isolate():
     from gi.repository import GLib
