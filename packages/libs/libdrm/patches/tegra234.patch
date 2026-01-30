@@ -1,0 +1,26 @@
+diff --git a/tegra/channel.c b/tegra/channel.c
+index 391362023259..f8f0195169c8 100644
+--- a/tegra/channel.c
++++ b/tegra/channel.c
+@@ -95,6 +95,7 @@ drm_tegra_channel_open(struct drm_tegra *drm,
+ 
+     case 0x18:
+     case 0x19:
++    case 0x23:
+         channel->cond_shift = 10;
+         break;
+ 
+diff --git a/tests/tegra/vic.c b/tests/tegra/vic.c
+index 4163e1846c32..a59022914408 100644
+--- a/tests/tegra/vic.c
++++ b/tests/tegra/vic.c
+@@ -165,6 +165,9 @@ int vic_new(struct drm_tegra *drm, struct drm_tegra_channel *channel,
+ 
+     case 0x19:
+         return vic42_new(drm, channel, vicp);
++
++    case 0x23:
++        return vic42_new(drm, channel, vicp);
+     }
+ 
+     return -ENOTSUP;
