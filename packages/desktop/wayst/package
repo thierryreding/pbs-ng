@@ -1,0 +1,24 @@
+description: simple terminal emulator
+license: MIT
+
+depends:
+  - libs/fontconfig
+  - libs/freetype
+  - libs/libutf8proc
+  - libs/libxkbcommon
+  - libs/mesa
+  - libs/wayland
+  - xorg/lib/x11
+  - xorg/lib/xrandr
+  - xorg/lib/xrender
+
+files:
+  - source:
+      url: git+https://github.com/91861/wayst.git
+
+packages:
+  wayst:
+    files:
+      - /usr/bin
+
+# vim: ft=yaml

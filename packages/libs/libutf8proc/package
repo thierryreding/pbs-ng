@@ -1,0 +1,27 @@
+description: clean C library for processing UTF-8 Unicode data
+version: 2.11.3
+license:
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/JuliaStrings/utf8proc/archive/refs/tags/v${version}.tar.gz
+      sha1: 9e2f5a4abc78b5ef2e73f54de79316d07e379cf0
+      watch:
+        url: anitya://7455
+
+packages:
+  libutf8proc:
+    files:
+      - /usr/lib/*.so.*
+
+  libutf8proc-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: ft=yaml
