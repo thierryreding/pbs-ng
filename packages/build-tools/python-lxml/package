@@ -1,0 +1,18 @@
+description: lxml XML toolkit for Python
+version: 6.0.2
+license: BSD-3-clause
+
+depends:
+  - build-tools/python
+  - build-tools/python-cython
+
+files:
+  #- download:
+  #    url: https://github.com/lxml/lxml/archive/lxml-${version}.tar.gz
+  #    sha1: 6c9e4a02504556c7c00e7824bacaca6aa99dc3d8
+  #    watch:
+  #      url: anitya://3914
+  - source:
+      url: git+https://github.com/lxml/lxml.git
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

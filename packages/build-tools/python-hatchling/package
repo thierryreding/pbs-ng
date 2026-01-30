@@ -1,0 +1,15 @@
+description: modern, extensible Python build backend
+version: 1.19.1
+license: MIT
+
+depends:
+  - build-tools/python
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/h/hatchling/hatchling-${version}.tar.gz
+      sha1: 71e8ebdb8006a6c126211cf35a8bf3af32b86da4
+      watch:
+        url: anitya://185085
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

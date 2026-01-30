@@ -1,0 +1,16 @@
+description: A cross-compiling tool for Python extension modules
+version: 1.6.1
+license: MIT
+
+depends:
+  - build-tools/python
+  - devel/python
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/c/crossenv/crossenv-${version}.tar.gz
+      sha1: 8840a449773a989a1120240f8dd1169f851fafc3
+      watch:
+        url: anitya://77201
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

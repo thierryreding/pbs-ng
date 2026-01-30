@@ -1,0 +1,15 @@
+description: a built-package format for Python
+version: 0.42.0
+license: MIT
+
+depends:
+  - build-tools/python
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/w/wheel/wheel-${version}.tar.gz
+      sha1: cba7e1b72e105ce2163cd1b3c2462a1267b6d8f1
+      watch:
+        url: anitya://11428
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
