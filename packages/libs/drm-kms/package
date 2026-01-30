@@ -1,5 +1,4 @@
 description: Object-oriented DRM/KMS API
-version: git
 license: custom
 
 depends:

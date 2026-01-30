@@ -1,5 +1,4 @@
 description: Open-source 2D/3D userspace for Tegra AR20
-version:
 license: custom
 
 depends:

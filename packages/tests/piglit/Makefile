@@ -1,4 +1,2 @@
 include $(TOP_SRCDIR)/packages/cmake.mk
-
-version:
-	@echo git
+include $(TOP_SRCDIR)/packages/git.mk

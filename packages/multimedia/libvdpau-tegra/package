@@ -1,5 +1,4 @@
 description: VDPAU backend driver for NVIDIA Tegra SoCs
-version: git
 license: MIT
 
 depends:

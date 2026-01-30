@@ -1,5 +1,4 @@
 description: OpenGL test suite
-version: git
 license: custom
 
 depends:

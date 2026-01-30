@@ -1,4 +1,5 @@
 include $(TOP_SRCDIR)/packages/common.mk
+include $(TOP_SRCDIR)/packages/git.mk
 
 $(builddir):
 	mkdir -p $@

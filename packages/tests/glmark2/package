@@ -1,5 +1,4 @@
 description: example GL application using KMS and GBM
-version: git
 license: custom
 
 depends:

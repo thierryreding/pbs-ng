@@ -1,5 +1,4 @@
 description: OpenCL conformance test suite
-version: git
 license: custom
 
 depends:

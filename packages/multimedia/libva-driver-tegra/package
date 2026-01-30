@@ -1,5 +1,4 @@
 description: VA-API implementation for NVIDIA Tegra SoCs
-version: git
 license: MIT
 
 depends:
