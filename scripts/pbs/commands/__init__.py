@@ -9,7 +9,7 @@ def load(directory):
         for filename in files:
             name, ext = os.path.splitext(filename)
             if ext == '.py' and name != '__init__':
-                loader = PathFinder.find_module(name, [curdir])
-                commands[name] = loader.load_module()
+                spec = PathFinder.find_spec(name, [curdir])
+                commands[name] = spec.loader.load_module()
 
     return commands

@@ -455,7 +455,7 @@ class Package():
                                     if not entry.isdir():
                                         os.remove(entry.name)
 
-                                tarball.extract(entry)
+                                tarball.extract(entry, filter = 'fully_trusted')
                             except Exception as e:
                                 pbs.log.begin('%s...' % filename, indent = 1)
                                 pbs.log.fail('failed')

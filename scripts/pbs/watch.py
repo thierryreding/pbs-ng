@@ -33,13 +33,13 @@ def retrieve_url(url):
 
 class PackageWatcher:
     DEFAULT_KEYWORDS = {
-            'version': '((?:\d+)(?:\.\d+)*)',
-            '_version': '((?:\d+)(?:_\d+)*)',
-            'version_': '(?:(?:\d+)(?:_\d+)*)',
-            'major': '(?:\d+)',
-            'minor': '(?:\d+)',
-            'micro': '(?:\d+)',
-            'patch': '(?:\d+)'
+            'version': r'((?:\d+)(?:\.\d+)*(?:[\w-]*))',
+            '_version': r'((?:\d+)(?:_\d+)*)',
+            'version_': r'(?:(?:\d+)(?:_\d+)*)',
+            'major': r'(?:\d+)',
+            'minor': r'(?:\d+)',
+            'micro': r'(?:\d+)',
+            'patch': r'(?:\d+)'
         }
 
     def __init__(self, url, *, keywords = None, pattern = None):

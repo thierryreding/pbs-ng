@@ -675,7 +675,7 @@ class DownloadSourceFile(SourceFile):
                         if link[0] == parts[0]:
                             entry.linkname = os.path.join(*link[1:])
 
-                    tar.extract(entry)
+                    tar.extract(entry, filter = 'fully_trusted')
 
                     progress = file.tell() * 100 / filesize
 
