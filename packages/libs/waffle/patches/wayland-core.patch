@@ -1,0 +1,21 @@
+diff --git a/meson.build b/meson.build
+index 6e91cd2e4231..c90b46f1678f 100644
+--- a/meson.build
++++ b/meson.build
+@@ -104,6 +104,7 @@ else
+   dep_wayland_client = dependency(
+     'wayland-client', version : '>= 1.10', required : get_option('wayland'),
+   )
++  wayland_core_xml = join_paths(dep_wayland_client.get_variable(pkgconfig: 'pkgdatadir'), 'wayland.xml')
+   dep_wayland_egl = dependency(
+     'wayland-egl', version : '>= 9.1', required : get_option('wayland'),
+   )
+@@ -112,8 +113,6 @@ else
+   )
+   if dep_wayland_scanner.found()
+     prog_wayland_scanner = find_program(dep_wayland_scanner.get_variable(pkgconfig: 'wayland_scanner'))
+-    wayland_core_xml = join_paths(dep_wayland_scanner.get_variable(pkgconfig: 'pkgdatadir'),
+-    'wayland.xml')
+   endif
+   dep_wayland_proto = dependency(
+     'wayland-protocols', version  : '>= 1.12', required : get_option('wayland'),

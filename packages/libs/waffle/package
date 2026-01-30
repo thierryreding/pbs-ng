@@ -1,11 +1,11 @@
 description: cross-platform C library for OpenGL API and window system selection
-version: 1.7.0
+version: 1.8.1
 license: custom
 
 files:
   - download:
-      url: https://mesa.pages.freedesktop.org/waffle/files/release/waffle-${version}/waffle-${version}.tar.xz
-      sha1: d84642c2d85a626826abcab5af004cffc805fdd3
+      url: https://waffle.freedesktop.org/files/release/waffle-${version}/waffle-${version}.tar.xz
+      sha1: 630a01eb37cd9604210a1cfe52c2319d4b74bcab
       watch:
         url: anitya://21633
 
