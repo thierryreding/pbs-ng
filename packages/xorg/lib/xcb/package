@@ -1,5 +1,5 @@
 description: X11 client-side library
-version: 1.14
+version: 1.17.0
 license: custom
 
 depends:
@@ -9,9 +9,9 @@ depends:
   - xorg/util/util-macros
 
 files:
-- download:
-    url: http://xorg.freedesktop.org/releases/individual/lib/libxcb-${version}.tar.xz
-    sha1: e218be6043162d2f758643dbda8caccd53107388
+  - download:
+      url: http://xorg.freedesktop.org/releases/individual/lib/libxcb-${version}.tar.xz
+      sha1: ebb3197ac4c75c51c4e7e3278e8406d9441a4d47
       watch:
         url: anitya://1767
 
