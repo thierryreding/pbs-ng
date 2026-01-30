@@ -12,11 +12,7 @@ MINOR = $(word 2,$(subst ., ,$(package.version)))
 $(builddir):
 	mkdir -p $@
 
-$(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-compile.patch
-	touch $@
-
-$(builddir)/config.cache: $(srcdir)/stamp-patch | $(builddir)
+$(builddir)/config.cache: | $(builddir)
 	echo '# generated for $(HOST)' > $@
 	echo 'ac_cv_buggy_getaddrinfo=no' >> $@
 	echo 'ac_cv_file__dev_ptmx=yes' >> $@
@@ -75,7 +71,7 @@ $(builddir)/stamp-install: $(builddir)/stamp-build
 SYSCONFIGDATA = _sysconfigdata__$(OS)_$(MULTIARCH).py
 
 $(BUILD_TOOLS)/lib/python$(MAJOR).$(MINOR)/$(SYSCONFIGDATA): $(builddir)/build/lib.$(OS)-$(ARCH)-$(MAJOR).$(MINOR)/$(SYSCONFIGDATA)
-	cp $< $@
+	$(BUILD_TOOLS)/bin/python $(TOP_SRCDIR)/support/export-sysconfigdata $(SYSROOT) $< $@
 
 $(builddir)/stamp-install: $(BUILD_TOOLS)/lib/python$(MAJOR).$(MINOR)/$(SYSCONFIGDATA)
 
