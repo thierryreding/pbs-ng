@@ -1,0 +1,31 @@
+description: extended crypt library for descrypt, md5crypt, bcrypt, and others
+version: 4.5.2
+license: LGPL-2.1
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/besser82/libxcrypt/releases/download/v${version}/libxcrypt-${version}.tar.xz
+      sha1: e856bc3ab5e4c582fbd40a20dd0022d5a61e3973
+      watch:
+        url: anitya://16436
+
+packages:
+  libxcrypt:
+    files:
+      - /usr/lib/*.so.*
+
+  libxcrypt-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  libxcrypt-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

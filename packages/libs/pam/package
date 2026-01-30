@@ -1,16 +1,18 @@
 description: PAM (Pluggable Authentication Modules) library
-version: 1.5.2
+version: 1.7.2
 license: GPL-2.0
 
 depends:
+  - build-tools/meson
   - devel/flex
   - devel/glibc
   - libs/libtirpc
+  - libs/libxcrypt
 
 files:
   - download:
       url: https://github.com/linux-pam/linux-pam/releases/download/v${version}/Linux-PAM-${version}.tar.xz
-      sha1: 8d20308cbf17823e9b88b01c2c70df3e1ad9d654
+      sha1: 217a98e3501ed1e6d8c34f6c11511c8f748da8e5
       watch:
         url: anitya://12244
 
@@ -21,8 +23,8 @@ packages:
       - /usr/bin
       - /usr/lib/*.so.*
       - /usr/lib/security:
-        - exclude:
-            - '*.la'
+          - exclude:
+              - '*.la'
 
   pam-dev:
     files:
