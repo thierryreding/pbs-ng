@@ -473,12 +473,12 @@ class SourceFile():
 
 class DownloadSourceFile(SourceFile):
     def __init__(self, source):
-        SourceFile.__init__(self, source)
+        super().__init__(source)
         self.filename = None
         self.cached = False
 
     def parse(self, yaml):
-        SourceFile.parse(self, yaml)
+        super().parse(yaml)
 
         if 'url' in yaml:
             self.url = yaml['url']
@@ -748,12 +748,16 @@ class DownloadSourceFile(SourceFile):
             pbs.log.mark('%s' % latest)
 
 class SourceRepository:
+    def __init__(self, source, url):
+        self.source = source
+        self.url = url
+
     def fetch(self, target):
         pass
 
 class SubversionRepository(SourceRepository):
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, source, url):
+        super().__init__(source, url)
 
     def fetch(self, target):
         pbs.log.begin('checking %s out to %s...' % (self.url, target))
@@ -773,8 +777,8 @@ class SubversionRepository(SourceRepository):
         return 'svn: %s' % self.url
 
 class GitRepository(SourceRepository):
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, source, url):
+        super().__init__(source, url)
 
     def fetch(self, target):
         scheme, netloc, path, params, query, fragment, *unused = urllib.parse.urlparse(self.url)
@@ -807,11 +811,11 @@ class GitRepository(SourceRepository):
 
 class VCSSourceFile(SourceFile):
     def __init__(self, source):
-        SourceFile.__init__(self, source)
+        super().__init__(source)
         self.repository = None
 
     def parse(self, yaml):
-        SourceFile.parse(self, yaml)
+        super().parse(yaml)
 
         if 'url' in yaml:
             scheme, netloc, path, *unused = urllib.parse.urlparse(yaml['url'])
@@ -825,10 +829,10 @@ class VCSSourceFile(SourceFile):
             url = urllib.parse.urlunparse([protocol, netloc, path, *unused])
 
             if system == 'svn':
-                self.repository = SubversionRepository(url)
+                self.repository = SubversionRepository(self.source, url)
 
             if system == 'git':
-                self.repository = GitRepository(url)
+                self.repository = GitRepository(self.source, url)
 
             if not self.repository:
                 raise Exception('unknown source repository type:', scheme)
@@ -936,7 +940,7 @@ class Source():
 
             return name
 
-        return super.__getattr__(self, name)
+        return super().__getattr__(self, name)
 
     def parse_source_file(source, yaml):
         for key in yaml.keys():
