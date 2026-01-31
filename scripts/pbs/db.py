@@ -502,6 +502,24 @@ class DownloadSourceFile(SourceFile):
         if 'watch' in yaml and 'url' in yaml['watch']:
             self.watcher['url'] = yaml['watch']['url']
 
+        if 'strip' in yaml:
+            self.strip = yaml['strip']
+
+            if isinstance(self.strip, str):
+                if self.strip == 'false':
+                    self.strip = False
+                elif self.strip == 'true':
+                    self.strip = True
+                else:
+                    pbs.log.error('invalid value for property "strip": %s' % (self.strip))
+                    self.strip = True
+
+            if not isinstance(self.strip, bool):
+                pbs.log.error('invalid type for property "strip": %s' % type(self.strip))
+                self.strip = True
+        else:
+            self.strip = True
+
         if not self.filename:
             url = self.source.subst(self.url)
             filename = os.path.basename(url)
@@ -653,11 +671,13 @@ class DownloadSourceFile(SourceFile):
 
                     first = info
 
-                parts = info.filename.split(os.sep)
-                if len(parts) < 2:
-                    continue
+                if self.strip:
+                    parts = info.filename.split(os.sep)
+                    if len(parts) < 2 or not parts[1]:
+                        continue
 
-                info.filename = os.path.join(*parts[1:])
+                    info.filename = os.path.join(*parts[1:])
+
                 archive.extract(info)
 
                 progress = file.tell() * 100 / filesize
@@ -688,17 +708,18 @@ class DownloadSourceFile(SourceFile):
 
             if not os.path.exists(name):
                 for entry in tar:
-                    parts = entry.name.split(os.sep)
-                    if len(parts) < 2:
-                        continue
+                    if self.strip:
+                        parts = entry.name.split(os.sep)
+                        if len(parts) < 2:
+                            continue
 
-                    entry.name = os.path.join(*parts[1:])
+                        entry.name = os.path.join(*parts[1:])
 
-                    # rewrite hard- and symlink names
-                    if entry.issym() or entry.islnk():
-                        link = entry.linkname.split(os.sep)
-                        if link[0] == parts[0]:
-                            entry.linkname = os.path.join(*link[1:])
+                        # rewrite hard- and symlink names
+                        if entry.issym() or entry.islnk():
+                            link = entry.linkname.split(os.sep)
+                            if link[0] == parts[0]:
+                                entry.linkname = os.path.join(*link[1:])
 
                     tar.extract(entry, filter = 'fully_trusted')
 
