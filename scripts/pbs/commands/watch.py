@@ -6,6 +6,7 @@ summary = ''
 
 def exec(project, *args):
     parser = argparse.ArgumentParser()
+    parser.add_argument('--verbose', '-v', action = 'store_true')
     parser.add_argument('packages', nargs = '*')
     args = parser.parse_args(args[1:])
 
@@ -16,9 +17,9 @@ def exec(project, *args):
                 print('ERROR: package', name, 'not found')
                 continue
 
-            package.watch()
+            package.watch(args.verbose)
     else:
         for package in project.packages:
-            package.watch()
+            package.watch(args.verbose)
 
 # vim: et sts=4 sw=4 ts=4

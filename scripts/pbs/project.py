@@ -557,8 +557,8 @@ class Package():
 
         return digest.hexdigest()
 
-    def watch(self):
-        self.source.watch()
+    def watch(self, verbose = False):
+        self.source.watch(verbose)
 
     def get_version(self):
         pkgtree = os.path.join('packages', *self.name.split('/'))
