@@ -1,4 +1,9 @@
 import argparse
+import libmount
+import pathlib
+import tempfile
+
+import sys
 
 description = 'install package(s)'
 usage = 'install [options] package [package...]'
@@ -10,6 +15,20 @@ def exec(project, *args):
     parser.add_argument('packages', nargs = '*')
     args = parser.parse_args(args[1:])
 
+    path = pathlib.Path(args.root)
+
+    if path.is_file():
+        mountpoint = tempfile.TemporaryDirectory()
+        target = mountpoint.name
+
+        mnt = libmount.Context()
+        mnt.source = args.root
+        mnt.target = target
+        mnt.options = 'loop'
+        mnt.mount()
+    else:
+        target = args.root
+
     if len(args.packages):
         for name in args.packages:
             package = project.find_package(name)
@@ -17,7 +36,14 @@ def exec(project, *args):
                 print('ERROR: package', name, 'not found')
                 continue
 
-            package.install(args.root)
+            package.install(target)
     else:
         for package in project.packages:
-            package.install(args.root)
+            package.install(target)
+
+    if path.is_file():
+        mnt = libmount.Context()
+        mnt.target = target
+        mnt.umount()
+
+        mountpoint.cleanup()
