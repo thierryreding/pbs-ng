@@ -490,6 +490,11 @@ class DownloadSourceFile(SourceFile):
         else:
             self.sha1 = None
 
+        if 'filename' in yaml:
+            self.filename = yaml['filename']
+        else:
+            self.filename = None
+
         self.watcher = {
                 'url': None
             }
@@ -497,8 +502,23 @@ class DownloadSourceFile(SourceFile):
         if 'watch' in yaml and 'url' in yaml['watch']:
             self.watcher['url'] = yaml['watch']['url']
 
-        url = self.source.subst(self.url)
-        self.filename = os.path.basename(url)
+        if not self.filename:
+            url = self.source.subst(self.url)
+            filename = os.path.basename(url)
+
+            basename, extension = os.path.splitext(filename)
+            if basename.endswith('.tar'):
+                basename, _ = os.path.splitext(basename)
+                extension = '.tar' + extension
+
+            # override filename to avoid confusion
+            regex = re.compile('v?%s' % self.source.version)
+            if regex.match(basename):
+                self.filename = '%s-%s' % (self.source.name, self.source.version) + extension
+            else:
+                self.filename = basename + extension
+        else:
+            self.filename = self.source.subst(self.filename)
 
     def exists(self):
         filename = os.path.join('download', self.filename)
@@ -527,17 +547,18 @@ class DownloadSourceFile(SourceFile):
         else:
             headers = src.info()
 
-        if 'Content-Disposition' in headers:
+        if not self.filename and 'Content-Disposition' in headers:
             header = headers['Content-Disposition']
 
             parts = header.split(';')
-            if parts[0] == 'attachment':
+            if parts[0] == 'attachment' or parts[0] == 'inline':
                 if len(parts[1:]) > 1:
-                    print('WARNING: attachment:', ';'.join(parts[1:]))
+                    print('WARNING: %s:' % parts[0], ';'.join(parts[1:]))
 
                 for part in parts[1:]:
                     key, value = part.strip().split('=')
                     if key == 'filename':
+                        value = value.strip('"')
                         self.filename = value
                         self.cached = True
             else:
