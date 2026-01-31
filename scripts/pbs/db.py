@@ -826,6 +826,7 @@ class GitRepository(SourceRepository):
         scheme, netloc, path, params, query, fragment, *unused = urllib.parse.urlparse(self.url)
 
         if fragment:
+            fragment = self.source.subst(fragment)
             branch = [ '--branch', fragment ]
         else:
             branch = []
