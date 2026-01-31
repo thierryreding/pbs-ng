@@ -163,7 +163,8 @@ class Package():
             else:
                 if self.options and isinstance(value, dict):
                     for option in self.options:
-                        option.load(value[option.source.name])
+                        if option.source.name in value:
+                            option.load(value[option.source.name])
 
                     self.value = True
                 else:
