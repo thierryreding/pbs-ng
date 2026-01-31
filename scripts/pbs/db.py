@@ -1072,6 +1072,9 @@ class Source():
         if len(version) > 2:
             keywords['micro'] = version[2]
 
+        if len(version) > 3:
+            keywords['patch'] = version[3]
+
         template = string.Template(template)
         return template.substitute(keywords)
 
