@@ -690,14 +690,14 @@ class Project():
 
         return None
 
-    def select(self, name, configure = False):
+    def select(self, name, configure = False, stack = []):
         source = self.db.find_package(name)
         if not source:
             print('package', name, 'not found')
             return None
 
         for dependency in self.depends.resolve(source, direct = True):
-            if not self.select(dependency.full_name):
+            if not self.select(dependency.full_name, configure, stack):
                 print('package %s depends on non-existent package %s' %
                         (name, dependency.full_name))
 

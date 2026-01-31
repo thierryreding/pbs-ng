@@ -1027,12 +1027,29 @@ class Source():
     def __str__(self):
         return self.name
 
-    def dump_dependency_graph(self, stream = sys.stdout):
+    def dump_dependency_graph(self, db, stream = sys.stdout, depth = 0, chain = []):
+        max_depth = 32
+
         if self.depends:
-            print('Package', self.name, 'depends on')
+            if depth > max_depth:
+                print('%s  ... %s' % ((' ' * (depth * 2)), ', '.join([x.full_name for x in chain])))
+                return
+
+            print('%s%s' % (' ' * (depth * 2), self.full_name), file = stream)
 
             for dependency in self.depends:
-                print(' ', dependency, file = stream)
+                dependency = db.find_package(dependency)
+                circular = dependency in chain
+
+                chain.append(dependency)
+
+                if circular:
+                    deps = ', '.join([x.full_name for x in chain])
+                    pbs.log.error('circular dependency detected:', deps)
+                else:
+                    dependency.dump_dependency_graph(db, stream, depth + 1, chain)
+
+                chain.pop()
 
     def exists(self):
         for source in self.files:
@@ -1282,7 +1299,7 @@ class DependencyGraph():
         node = DependencyGraph.Node(source)
         self.nodes.append(node)
 
-    def resolve(self, node, reverse = True, direct = False):
+    def resolve(self, node, reverse = True, direct = False, chain = []):
         if type(node) == str:
             for n in self.nodes:
                 if n.source.full_name == node:
@@ -1291,6 +1308,13 @@ class DependencyGraph():
             for n in self.nodes:
                 if n.source == node:
                     node = n
+
+        if node in chain:
+            graph = ', '.join([x.source.full_name for x in [*chain, node]])
+            pbs.log.error('circular dependency detected:', graph)
+            return
+
+        chain.append(node)
 
         if not reverse and not direct:
             yield node.source
@@ -1304,6 +1328,8 @@ class DependencyGraph():
 
         if reverse and not direct:
             yield node.source
+
+        chain.pop()
 
     '''
     Resolve dependency graph and return a list of dependencies in the proper
