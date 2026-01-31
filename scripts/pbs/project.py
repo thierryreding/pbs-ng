@@ -406,7 +406,7 @@ class Package():
                     'TOP_SRCDIR=%s' % pbs.srctree,
                     'TOP_OBJDIR=%s' % pbs.objtree,
                     'PKGDIR=%s' % pkgtree,
-                    'FORCE=%s' % ('y' if incremental else 'n'),
+                    'FORCE=%s' % ('y' if incremental or force else 'n'),
                     'install' ]
 
         with subprocess.Popen(command, stdout=subprocess.PIPE,
