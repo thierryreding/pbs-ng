@@ -56,11 +56,13 @@ def resolve(scheme, base, component, verbose = False):
     return result
 
 class ChecksumError(Exception):
-    def __init__(self, source):
+    def __init__(self, source, old, new):
         self.source = source
+        self.old = old
+        self.new = new
 
     def __str__(self):
-        return 'checksum failure for file %s' % self.source.filename
+        return '%s: checksum failure for file %s (%s)' % (self.source.source.full_name, self.source.filename, self.new)
 
 class Value():
     def __init__(self, option, value):
@@ -545,8 +547,9 @@ class DownloadSourceFile(SourceFile):
         if os.path.exists(filename):
             src.close()
 
-            if not self.checksum():
-                raise ChecksumError(self)
+            old, new = self.checksum()
+            if new != old:
+                raise ChecksumError(self, old, new)
 
             return
 
@@ -582,8 +585,9 @@ class DownloadSourceFile(SourceFile):
             pbs.log.begin('downloading %s...' % url)
             pbs.log.end('done')
 
-        if not self.checksum():
-            raise ChecksumError(self)
+        old, new = self.checksum()
+        if new != old:
+            raise ChecksumError(self, old, new)
 
     def checksum(self):
         filename = os.path.join('download', self.filename)
@@ -610,7 +614,7 @@ class DownloadSourceFile(SourceFile):
             pbs.log.begin('verifying %s...' % filename)
             pbs.log.end('done')
 
-        return digest.hexdigest() == self.sha1
+        return self.sha1, digest.hexdigest()
 
     def extract_zip(self, file, filesize):
         with zipfile.ZipFile(file, mode = 'r') as archive:
