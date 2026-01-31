@@ -301,13 +301,21 @@ class Package():
     def depends(self):
         pass
 
-    def fetch(self):
+    def fetch(self, keep_going = False):
         hash = self.source.hash()
 
         if self.states['fetch'] != hash or not self.source.exists():
-            self.source.fetch()
+            try:
+                self.source.fetch()
+            except pbs.db.ChecksumError as e:
+                if not keep_going:
+                    raise e
 
-        self.states['fetch'] = hash
+                hash = None
+                print(e)
+
+        if hash:
+            self.states['fetch'] = hash
 
     def filter(self, info, exclude = None):
         if exclude and exclude(info.name):

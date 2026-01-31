@@ -457,7 +457,7 @@ class SourceFile():
     def parse(self, yaml):
         pass
 
-    def fetch(self):
+    def fetch(self, keep_going = False):
         pass
 
     def extract(self):
@@ -503,7 +503,7 @@ class DownloadSourceFile(SourceFile):
 
         return os.path.exists(filename)
 
-    def fetch(self):
+    def fetch(self, keep_going = False):
         url = self.source.subst(self.url)
 
         # XXX This is suboptimal because it requires a network connection
@@ -1058,9 +1058,9 @@ class Source():
 
         return True
 
-    def fetch(self):
+    def fetch(self, keep_going = False):
         for source in self.files:
-            source.fetch()
+            source.fetch(keep_going = keep_going)
 
     def extract(self, directory):
         for source in self.files:
