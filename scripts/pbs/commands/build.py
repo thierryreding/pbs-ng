@@ -19,8 +19,10 @@ def exec(project, *args):
                 continue
 
             package.build(args.force, args.incremental)
+            project.save()
     else:
         for package in project.packages:
             package.build(args.force, args.incremental)
+            project.save()
 
 # vim: et sts=4 sw=4 ts=4
