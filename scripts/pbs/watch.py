@@ -63,7 +63,7 @@ class IndexWatcher(PackageWatcher):
     def match(url):
         return True
 
-    def watch(self, verbose = False):
+    def watch(self, *, prerelease = False, verbose = False):
         result = []
 
         if verbose:
@@ -109,7 +109,11 @@ class IndexWatcher(PackageWatcher):
 
         for version in result:
             try:
-                versions.append(Version(version))
+                version = Version(version)
+
+                # do not consider prerelease versions unless explicitly requested
+                if prerelease or not version.is_prerelease:
+                    versions.append(version)
             except InvalidVersion as e:
                 print('%s: failed to parse version: %s' % (crayons.red('ERROR', bold = True), e))
 
