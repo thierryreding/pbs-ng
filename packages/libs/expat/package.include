@@ -1,11 +1,11 @@
 description: an XML parser library
-version: 2.5.0
+version: 2.7.4
 license: custom
 
 files:
   - download:
-      url: https://github.com/libexpat/libexpat/releases/download/R_${major}_${minor}_${micro}/expat-${version}.tar.xz
-      sha1: 5178e13c1e34f4643d5118d5758babfe0e836fe2
+      url: https://github.com/libexpat/libexpat/releases/download/R_${version_}/expat-${version}.tar.xz
+      sha1: 70448152f3b2b1e812b83c4e2f7ee77f8dd0b91c
       watch:
         url: anitya://770
 
