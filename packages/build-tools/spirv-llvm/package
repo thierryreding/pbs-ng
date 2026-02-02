@@ -3,5 +3,6 @@ include: packages/devel/spirv-llvm/package.include
 depends:
   - build-tools/cmake
   - build-tools/llvm
+  - build-tools/spirv-tools
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

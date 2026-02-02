@@ -3,6 +3,7 @@ include: packages/devel/spirv-llvm/package.include
 depends:
   - build-tools/cmake
   - devel/llvm
+  - devel/spirv-tools
 
 packages:
   spirv-llvm:
