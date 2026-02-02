@@ -1,13 +1,6 @@
 package: an image loading library
-version: 2.42.6
+version: 2.44.5
 license: LGPL
-
-files:
-  - download:
-      url: https://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/${major}.${minor}/gdk-pixbuf-${version}.tar.xz
-      sha1: 320ed10a4cb74a0770de91a9e5741767ebdef2bf
-      watch:
-        url: anitya://9533
 
 depends:
   - libs/glib
@@ -16,16 +9,28 @@ depends:
   - libs/libtiff
   - libs/shared-mime-info
 
+files:
+  - download:
+      url: https://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/${major}.${minor}/gdk-pixbuf-${version}.tar.xz
+      sha1: 3fd8befef67e0ec9238d82fddc850ef1cf35e591
+      watch:
+        url: anitya://9533
+
 packages:
-  gtk3:
+  libgdk-pixbuf:
     files:
       - /usr/lib/*.so.*
+      - /usr/lib/gdk-pixbuf-2.0
 
-  gtk3-dev:
+  libgdk-pixbuf-dev:
     files:
       - /usr/include
       - /usr/lib/*.a
       - /usr/lib/*.so
       - /usr/lib/pkgconfig
+
+  libgdk-pixbuf-utils:
+    files:
+      - /usr/bin
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
