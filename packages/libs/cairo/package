@@ -1,5 +1,5 @@
 description: Cairo vector graphics library
-version: 1.17.6
+version: 1.18.4
 license: LGPL-2.1 MPL-1.1
 
 depends:
@@ -15,7 +15,7 @@ depends:
 files:
   - download:
       url: https://gitlab.freedesktop.org/cairo/cairo/-/archive/${version}/cairo-${version}.tar.bz2
-      sha1: 51f2e2e5525665c0b25bea18826d2283a76801a9
+      sha1: b43039f55a1f608b44ade55ed0957b40525a71d3
       watch:
         url: anitya://247
 
