@@ -1,18 +1,19 @@
 description: USB device utilities
-version: 014
+version: 019
 license: GPL-2.0
+
+depends:
+  - build-tools/meson
+  - core/systemd
+  - devel/glibc
+  - libs/libusb
 
 files:
   - download:
       url: https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-${version}.tar.xz
-      sha1: 02fb81d84d194df6e735989656980b5e3c0a193d
+      sha1: 3d2dd8720c3668dc2664512c796c5a9f2438eae3
       watch:
         url: anitya://5061
-
-depends:
-  - core/systemd
-  - devel/glibc
-  - libs/libusb
 
 packages:
   usbutils:
