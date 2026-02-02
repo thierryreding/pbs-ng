@@ -1,15 +1,18 @@
 description: multi-platform library for OpenGL ES, Vulkan, window and input
-version: 3.3.3
+version: 3.4
 license: zlib
 
 depends:
   - libs/libglvnd
+  - libs/libxkbcommon
+  - xorg/lib/xcursor
+  - xorg/lib/xi
   - xorg/lib/xinerama
 
 files:
   - download:
       url: https://github.com/glfw/glfw/archive/${version}.tar.gz
-      sha1: cd50e57a25c2fb3c01b52df764698f31b547f96a
+      sha1: c727a19a9bd56dbfd6b13c14688abf5e19e7ebf7
       watch:
         url: anitya://1180
 
@@ -18,7 +21,7 @@ packages:
     files:
       - /usr/lib/*.so.*
 
-  libglfw:
+  libglfw-dev:
     files:
       - /usr/include
       - /usr/lib/*.a
