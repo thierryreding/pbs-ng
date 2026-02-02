@@ -1,0 +1,31 @@
+
+description: open-source implementation of JPEG2000 Part-15 (JPH, HTJ2K)
+version: 0.26.0
+license: BSD-2-Clause
+
+depends:
+  - build-tools/cmake
+  - devel/glibc
+  - libs/libtiff
+
+files:
+  - download:
+      url: https://github.com/aous72/OpenJPH/archive/refs/tags/${version}.tar.gz
+      sha1: 09a1aff2e8079731614cf73fcfd310ed81d70658
+      watch:
+        url: anitya://375199
+
+packages:
+  openjph:
+    files:
+      - /usr/bin
+      - /usr/lib/*.so.*
+
+  openjph-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

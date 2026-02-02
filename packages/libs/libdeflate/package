@@ -1,0 +1,33 @@
+description: heavily optimized library for DEFLATE/zlib/gzip compression and decompression
+version: 1.25
+license: MIT
+
+depends:
+  - build-tools/cmake
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/ebiggers/libdeflate/releases/download/v${version}/libdeflate-${version}.tar.gz
+      sha1: 7e70557d094b54c3ee16f6c012976dc8d685b22a
+      watch:
+        url: anitya://242778
+
+packages:
+  libdeflate:
+    files:
+      - /usr/lib/*.so.*
+
+  libdeflate-tools:
+    files:
+      - /usr/bin
+
+  libdeflate-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

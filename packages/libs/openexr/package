@@ -1,15 +1,17 @@
 description: reference implementation of the EXR file format
-version: 3.1.1
+version: 3.4.4
 license: custom
 
 depends:
   - devel/glibc
   - libs/imath
+  - libs/libdeflate
+  - libs/openjph
 
 files:
   - download:
       url: https://github.com/AcademySoftwareFoundation/openexr/archive/v${version}.tar.gz
-      sha1: 1aa1b9206f92beda828209bc057ac1016879aa93
+      sha1: b5ba7e1aa50d853bc6e45420496d9b65358b5b15
       watch:
         url: anitya://13289
 
