@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import bs4, crayons, os, packaging.version, re, requests, string, sys
+import bs4, crayons, httpx, os, packaging.version, re, requests, string, sys
 import urllib.parse, urllib.request
 
 from pbs.version import InvalidVersion, Version
@@ -30,6 +30,31 @@ def retrieve_url(url):
         content_type = 'text/plain'
 
     return content, content_type
+
+class Client(httpx.Client):
+    def __init__(self, base_url):
+        headers = {
+            'User-Agent': pbs.USER_AGENT
+        }
+        transport = None
+
+        try:
+            import hishel, hishel.httpx
+
+            headers['Cache-Control'] = 'max-age=3600'
+
+            storage = hishel.SyncSqliteStorage(database_path = pbs.srctree / '.cache')
+            transport = httpx.HTTPTransport()
+            transport = hishel.httpx.SyncCacheTransport(next_transport = transport,
+                                                        storage = storage)
+        except Exception as e:
+            raise e
+
+        self.client = httpx.Client(base_url = base_url, headers = headers,
+                                   transport = transport)
+
+    def get(self, *args, **kwargs):
+        return self.client.get(*args, **kwargs)
 
 class PackageWatcher:
     DEFAULT_KEYWORDS = {
