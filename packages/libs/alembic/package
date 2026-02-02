@@ -1,5 +1,5 @@
 description: open framework for storing and sharing scene data
-version: 1.8.3
+version: 1.8.10
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://github.com/alembic/alembic/archive/${version}.tar.gz
-      sha1: ec50862b607ec6922fb8db76d5f4a74a16232d4d
+      sha1: c1477427777a01608d78cfec3bff91eb4898be1e
       watch:
         url: anitya://13980
 
