@@ -1,11 +1,11 @@
 description: library requirements of the OpenCL C programming language
-version: 19.1.4
+version: 21.1.8
 license: MIT
 
 files:
   - download:
       url: https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/libclc-${version}.src.tar.xz
-      sha1: 7fd28cf9aeb931d2ea850289c5d5b894f03afad4
+      sha1: 4740718d294b31ffe9af7d6b4c642a1d4ece5893
       watch:
         url: anitya://376264
 
