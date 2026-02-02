@@ -1,5 +1,5 @@
 description: Khronos OpenCL headers
-version: 2020.12.18
+version: 2024.10.24
 license: Apache-2.0
 
 depends:
@@ -7,8 +7,8 @@ depends:
 
 files:
   - download:
-      url: https://github.com/KhronosGroup/OpenCL-Headers/archive/refs/tags/v${version}.tar.gz
-      sha1: 11bb1a594bec203b78184d934257e91c9e68084a
+      url: https://github.com/KhronosGroup/OpenCL-Headers/archive/v${version}.tar.gz
+      sha1: 9f98fd123de61c2ebbf64125dbc8a093ef006268
       watch:
         url: anitya://223257
 
