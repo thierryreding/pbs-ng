@@ -1,16 +1,16 @@
 description: a simple, yet elegant HTTP library
-version: 2.25.1
+version: 2.32.5
 license: Apache-2.0
+
+depends:
+  - devel/python
 
 files:
   - download:
       url: https://github.com/psf/requests/archive/v${version}.tar.gz
-      sha1: 804fdbaf3dbc57f49a66cef920e9d4a5ce3460eb
+      sha1: d2c82c24a3117ca0474b91220d03d6c5ff2599db
       watch:
         url: anitya://4004
-
-depends:
-  - devel/python
 
 packages:
   python-requests:
