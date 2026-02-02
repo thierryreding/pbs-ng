@@ -1,16 +1,16 @@
 description: utility to show the full path of commands
-version: 2.21
+version: 2.23
 license: GPL-3.0
+
+depends:
+  - devel/glibc
 
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/which/which-${version}.tar.gz
-      sha1: 6b6bec3d2b3d4661c164feb81b9b1d22d1359ded
+      sha1: d3b8442d02e655b3c3de02d91138b0e4e7a82117
       watch:
         url: anitya://5127
-
-depends:
-  - devel/glibc
 
 packages:
   which:
