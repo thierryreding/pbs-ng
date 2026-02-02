@@ -1,11 +1,11 @@
 description: A cross-platform open-source make system
-version: 3.31.1
+version: 4.2.3
 license: custom
 
 files:
   - download:
       url: https://cmake.org/files/v${major}.${minor}/cmake-${version}.tar.gz
-      sha1: 27f7a1232e2c71b07622510c3414f9de4ec82f6a
+      sha1: 86cbe4566dc17829af4302bfc2241435ff881b1b
       watch:
         url: anitya://306
 
