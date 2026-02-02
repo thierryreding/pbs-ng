@@ -1,1 +1,7 @@
 include $(TOP_SRCDIR)/packages/build-tools/autotools.mk
+
+$(srcdir)/stamp-prepare: | $(srcdir)
+	cd $(srcdir) && autoreconf --force --install --verbose
+	touch $@
+
+$(builddir)/stamp-configure: $(srcdir)/stamp-prepare
