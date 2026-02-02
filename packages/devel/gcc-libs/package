@@ -1,5 +1,4 @@
 description: Runtime libraries shipped by GCC
-version:
 
 depends:
   - base/filesystem
