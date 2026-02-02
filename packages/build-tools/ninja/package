@@ -1,11 +1,11 @@
 description: Small build system with a focus on speed
-version: 1.11.1
+version: 1.13.2
 license: Apache-2.0
 
 files:
   - download:
       url: https://github.com/ninja-build/ninja/archive/v${version}.tar.gz
-      sha1: 938723cdfc7a6f7c8f84c83b9a2cecdf1e5e1ad3
+      sha1: 814c89873e905fd07dfb13c3ebbcfbc0dfc277ca
       watch:
         url: anitya://2089
 
