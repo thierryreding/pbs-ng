@@ -1,16 +1,16 @@
 description: FUSE (file system in userspace) library
-version: 3.10.5
+version: 3.18.1
 license: GPL-2.0
+
+depends:
+  - devel/glibc
 
 files:
   - download:
       url: https://github.com/libfuse/libfuse/archive/fuse-${version}.tar.gz
-      sha1: f76082dbc8424ee6dd26b2d9582cb7ec5cbb9eee
+      sha1: 3870cb2286058bd9da08622d6db8121be5530739
       watch:
         url: anitya://861
-
-depends:
-  - devel/glibc
 
 packages:
   libfuse:
