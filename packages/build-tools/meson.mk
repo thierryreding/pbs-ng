@@ -12,7 +12,7 @@ conf-args = \
 	--prefix $(BUILD_TOOLS)
 
 $(builddir)/stamp-configure: | $(builddir)
-	$(env) meson $(conf-args) $(srcdir) $(builddir)
+	$(env) meson setup $(conf-args) $(srcdir) $(builddir)
 	touch $@
 
 $(builddir)/stamp-build: $(builddir)/stamp-configure
