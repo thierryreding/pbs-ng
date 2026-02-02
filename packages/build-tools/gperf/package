@@ -1,11 +1,11 @@
 description: Perfect hash function generator
-version: 3.1
+version: 3.3
 license: GPL-3.0
 
 files:
   - download:
-      url: http://ftp.gnu.org/pub/gnu/gperf/gperf-${version}.tar.gz
-      sha1: e3c0618c2d2e5586eda9498c867d5e4858a3b0e2
+      url: https://ftp.gnu.org/pub/gnu/gperf/gperf-${version}.tar.gz
+      sha1: 0ccc217cba4e3311efb12ddd0cc23cb6a25d5d7c
       watch:
         url: anitya://1237
 
