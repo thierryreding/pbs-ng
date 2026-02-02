@@ -18,7 +18,7 @@ PKG_CONFIG_SYSROOT_DIR := $(SYSROOT)
 
 CROSS_COMPILE = $(HOST)-
 
-builddir = $(CURDIR)/obj-$(HOST)
+builddir ?= $(CURDIR)/obj-$(HOST)
 srcdir = $(CURDIR)/source
 
 JOBS ?= $(NUM_CPUS)
