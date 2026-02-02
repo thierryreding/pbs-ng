@@ -1,11 +1,14 @@
 description: Easily download, build, install, upgrade and uninstall Python packages
-version: 65.6.3
+version: 80.10.2
 license: custom
+
+depends:
+  - build-tools/python
 
 files:
   - download:
       url: https://pypi.python.org/packages/source/s/setuptools/setuptools-${version}.tar.gz
-      sha1: 2875e8f9a12d8a971461b36e2d1bd64a3497e0f2
+      sha1: 6816d09d925d1e7010d3f64f49c283d0cc3c1779
       watch:
         url: anitya://4021
 
