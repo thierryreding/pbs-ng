@@ -1,5 +1,12 @@
 description: firmware files for Linux
 license: GPL-2.0, GPL-3.0, custom
+#version: 20230919
+#
+#files:
+#  - source:
+#      url: git+https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git#${version}
+#      watch:
+#        url: anitya://141464
 
 depends:
   - base/filesystem
