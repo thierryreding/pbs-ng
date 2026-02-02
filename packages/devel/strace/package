@@ -1,11 +1,14 @@
 description: A useful diagnostic, instructional and debugging tool
-version: 6.12
+version: 6.18
 license: custom
+
+depends:
+  - devel/glibc
 
 files:
   - download:
       url: https://strace.io/files/${version}/strace-${version}.tar.xz
-      sha1: ef17e67a01a2ea3f4b6930d491d0a53e84768737
+      sha1: e8f7c82be66c0bfed738465becbf7447ed124677
       watch:
         url: anitya://4897
 
