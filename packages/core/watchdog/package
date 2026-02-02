@@ -1,5 +1,5 @@
 description: Watchdog daemon
-version: 5.15
+version: 5.16
 license: GPL-3.0
 
 depends:
@@ -7,8 +7,8 @@ depends:
 
 files:
   - download:
-      url: https://prdownloads.sourceforge.net/watchdog/${version}/watchdog-${version}.tar.gz
-      sha1:
+      url: https://sourceforge.net/projects/watchdog/files/watchdog/${version}/watchdog-${version}.tar.gz
+      sha1: 22eb80e1d29ba5b8c98d644d8358e2cf6535bcf1
       watch:
         url: anitya://15950
 
