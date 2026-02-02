@@ -1,5 +1,5 @@
 description: a YAML parser and emitter in C++
-version: 0.7.0
+version: 0.8.0
 license: MIT
 
 depends:
@@ -7,8 +7,8 @@ depends:
 
 files:
   - download:
-      url: https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-${version}.tar.gz
-      sha1: 8a4126f1e21d374dac8dfc8524ffea101a160f2f
+      url: https://github.com/jbeder/yaml-cpp/archive/refs/tags/${version}.tar.gz
+      sha1: 3d2184792ce0749ca8efaa7c4b01f6333125b411
       watch:
         url: anitya://5284
 
