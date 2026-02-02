@@ -1,15 +1,16 @@
 package: Base DBus XML interfaces for accessibility, the accessibility registry daemon and atspi library
-version: 2.54.0
+version: 2.58.3
 license: LGPL-2.1
 
 depends:
   - libs/atk
+  - libs/gobject-introspection
   - xorg/lib/xtst
 
 files:
   - download:
       url: https://download.gnome.org/sources/at-spi2-core/${major}.${minor}/at-spi2-core-${version}.tar.xz
-      sha1: 80853857a516b5e533ec82d916f6edd60c618b39
+      sha1: 6c0c59821c23adda09adfcc4a0b4cb362c0dd1bd
       watch:
         url: anitya://7841
 
@@ -24,5 +25,10 @@ packages:
       - /usr/lib/*.a
       - /usr/lib/*.so
       - /usr/lib/pkgconfig
+
+  at-spi2-core-gir:
+    files:
+      - /usr/lib/girepository-1.0
+      - /usr/share/gir-1.0
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
