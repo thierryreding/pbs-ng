@@ -2,6 +2,7 @@ include: packages/libs/libxml2/package.include
 
 depends:
   - devel/glibc
+  - libs/zlib
 
 packages:
   libxml2:
