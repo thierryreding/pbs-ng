@@ -2,14 +2,14 @@ description: XML to PO and back again
 version: 2.0.7
 license: GPL-3.0
 
+depends:
+  - build-tools/libxml2 # for libxml2 Python bindings
+
 files:
   - download:
       url: https://files.itstool.org/itstool/itstool-${version}.tar.bz2
       sha1: 52a7eacfe2b4303ecb0c6f8de1d2c01a951f9727
       watch:
         url: anitya://13109
-
-depends:
-  - build-tools/libxml2 # for libxml2 Python bindings
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
