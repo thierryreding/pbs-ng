@@ -1,11 +1,11 @@
 description: Core utilities for Python packages
-version: 24.2
+version: 26.0
 license: custom
 
 files:
   - download:
       url: https://pypi.python.org/packages/source/p/packaging/packaging-${version}.tar.gz
-      sha1: b001ecb7812d07963211a32e86041af9cc581aff
+      sha1: 16021db61cb341a67194df47d4def1b1d623c449
       watch:
         url: anitya://60461
 
