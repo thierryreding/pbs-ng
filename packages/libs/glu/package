@@ -1,16 +1,16 @@
 description: OpenGL Utility library
-version: 9.0.0
+version: 9.0.3
 license: custom
-
-files:
-  - download:
-      url: ftp://ftp.freedesktop.org/pub/mesa/glu/glu-${version}.tar.bz2
-      sha1: c2814bbaf1e60e28a75ec80f4646047c0da742bd
-      watch:
-        url: anitya://13518
 
 depends:
   - libs/mesa
+
+files:
+  - download:
+      url: https://mesa.freedesktop.org/archive/glu/glu-${version}.tar.xz
+      sha1: 974bda7f4cdc6b2742ab7e85b83ba10c47fb8afa
+      watch:
+        url: anitya://13518
 
 packages:
   libglu:
