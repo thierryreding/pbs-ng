@@ -1,16 +1,16 @@
 description: A tool to help find memory-management problems in programs
-version: 3.19.0
+version: 3.26.0
 license: GPL-2.0
-
-files:
-  - download:
-      url: ftp://sourceware.org/pub/valgrind/valgrind-${version}.tar.bz2
-      sha1: 294c341b421b4d9534e42e8125f509c148f48c17
-      watch:
-        url: anitya://13639
 
 depends:
   - devel/glibc
+
+files:
+  - download:
+      url: https://sourceware.org/pub/valgrind/valgrind-${version}.tar.bz2
+      sha1: c32f135761724db05f018fff67e06c4edf328770
+      watch:
+        url: anitya://13639
 
 packages:
   valgrind:
