@@ -1,5 +1,5 @@
 description: Utility programs for creating patch files
-version: 3.8
+version: 3.10
 license: GPL-3.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://ftp.gnu.org/gnu/diffutils/diffutils-${version}.tar.xz
-      sha1: 3a726894b2cf71a790913f236ec790d830c6aef8
+      sha1: c16a9cf107ad1f0f791b6d00852dc5e961c1c451
       watch:
         url: anitya://436
 
