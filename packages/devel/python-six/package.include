@@ -1,11 +1,11 @@
 description: Python 2 and 3 compatibility utilities
-version: 1.16.0
+version: 1.17.0
 license: MIT
 
 files:
   - download:
-      url: https://files.pythonhosted.org/packages/71/39/171f1c67cd00715f190ba0b100d606d440a28c93c7714febeca8b79af85e/six-${version}.tar.gz
-      sha1: 06fa0bb50f2a4e2917fd14c21e9d2d5508ce0163
+      url: https://pypi.python.org/packages/source/s/six/six-${version}.tar.gz
+      sha1: 8c9bedf28312097645a0e272fec84ac9b1fee76b
       watch:
         url: anitya://4027
 
