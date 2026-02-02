@@ -12,6 +12,8 @@ packages:
   gobject-introspection:
     files:
       - /usr/lib/*.so.*
+      - /usr/lib/gobject-introspection
+      - /usr/share/gobject-introspection-1.0
 
   gobject-introspection-dev:
     files:
@@ -19,5 +21,16 @@ packages:
       - /usr/lib/*.a
       - /usr/lib/*.so
       - /usr/lib/pkgconfig
+      - /usr/share/aclocal
+
+  gobject-introspection-gir:
+    files:
+      - /usr/lib/girepository-1.0
+      - /usr/share/gir-1.0
+
+  gobject-introspection-tools:
+    files:
+      - /usr/bin
+      - /usr/share/man
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,11 +1,11 @@
 package: introspection system for GObject-based libraries
-version: 1.82.0
+version: 1.86.0
 license: LGPL-2.1
 
 files:
   - download:
       url: https://ftp.gnome.org/pub/gnome/sources/gobject-introspection/${major}.${minor}/gobject-introspection-${version}.tar.xz
-      sha1: f731a1ef49963dd56309bfd4ad1c44ccd7a4d5eb
+      sha1: 06f2c7c511f6ae476971106d9456f73a6121ff11
       watch:
         url: anitya://1223
 

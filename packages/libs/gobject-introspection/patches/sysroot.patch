@@ -2,7 +2,7 @@ diff --git a/gir/meson.build b/gir/meson.build
 index dc39b47543e7..533e7d2aa97d 100644
 --- a/gir/meson.build
 +++ b/gir/meson.build
-@@ -78,6 +78,11 @@ endif
+@@ -89,6 +89,11 @@ endif
  if get_option('gi_cross_ldd_wrapper') != ''
    scanner_command += ['--use-ldd-wrapper=' + get_option('gi_cross_ldd_wrapper')]
  endif
@@ -18,7 +18,7 @@ diff --git a/giscanner/dumper.py b/giscanner/dumper.py
 index 74a494b8b53b..6868c4bfa1d7 100644
 --- a/giscanner/dumper.py
 +++ b/giscanner/dumper.py
-@@ -185,6 +185,10 @@ class DumpCompiler(object):
+@@ -186,6 +186,10 @@ class DumpCompiler(object):
      def _compile(self, *sources):
          cflags = pkgconfig.cflags(self._packages,
                                    msvc_syntax=self._compiler.check_is_msvc())
@@ -29,7 +29,7 @@ index 74a494b8b53b..6868c4bfa1d7 100644
          cflags.extend(self._options.cflags)
          return self._compiler.compile(cflags,
                                        self._options.cpp_includes,
-@@ -226,6 +230,9 @@ class DumpCompiler(object):
+@@ -227,6 +231,9 @@ class DumpCompiler(object):
              for cflag in shlex.split(os.environ.get('CFLAGS', '')):
                  args.append(cflag)
  
@@ -43,7 +43,7 @@ diff --git a/giscanner/scannermain.py b/giscanner/scannermain.py
 index 1d39ab841180..a8f5eec2f795 100644
 --- a/giscanner/scannermain.py
 +++ b/giscanner/scannermain.py
-@@ -73,6 +73,8 @@ def get_preprocessor_option_group(parser):
+@@ -123,6 +123,8 @@ def get_preprocessor_option_group(parser):
      group.add_option("", "--cflags-end",
                       help="End preprocessor/compiler flags",
                       action="callback", callback=process_cflags_end)
