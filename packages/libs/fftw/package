@@ -1,5 +1,5 @@
 description: discrete Fourier transform C library
-version: 3.3.9
+version: 3.3.10
 license: GPL
 
 depends:
@@ -7,8 +7,8 @@ depends:
 
 files:
   - download:
-      url: http://www.fftw.org/fftw-${version}.tar.gz
-      sha1: bf17b485417f0f6a896b8514a3813439fda075fc
+      url: https://fftw.org/fftw-${version}.tar.gz
+      sha1: 6abe7321c8c35ef52e56e299e66a9b967baf148a
       watch:
         url: anitya://803
 
