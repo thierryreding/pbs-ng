@@ -1,11 +1,11 @@
 description: time zone and daylight saving time data
-version: 2015f
+version: 2025c
 license: GPL
 
 files:
   - download:
-      url: ftp://ftp.iana.org/tz/releases/tzdata${version}.tar.gz
-      sha1: 0b11e82445ca959be35f7a955c1cd92a91875313
+      url: https://www.iana.org/time-zones/repository/releases/tzdata${version}.tar.gz
+      sha1: 1a51542a6f0b3916fb0e89300dd589f68df30e17
       watch:
         url: anitya://5021
 
