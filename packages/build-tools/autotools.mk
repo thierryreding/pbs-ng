@@ -3,6 +3,9 @@ include $(TOP_SRCDIR)/packages/build-tools/common.mk
 env = \
 	PKG_CONFIG_LIBDIR=$(BUILD_TOOLS)/lib/pkgconfig
 
+CFLAGS = '-I$(BUILD_TOOLS)/include'
+LDFLAGS = '-L$(BUILD_TOOLS)/lib'
+
 $(builddir):
 	mkdir -p $@
 
@@ -13,8 +16,8 @@ conf-args = \
 	--prefix=$(BUILD_TOOLS)
 
 conf-vars = \
-	CFLAGS='-I$(BUILD_TOOLS)/include' \
-	LDFLAGS='-L$(BUILD_TOOLS)/lib'
+	CFLAGS='$(CFLAGS)' \
+	LDFLAGS='$(LDFLAGS)'
 
 $(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
 	cd $(builddir) && \
