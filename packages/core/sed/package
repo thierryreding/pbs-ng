@@ -1,11 +1,14 @@
 description: A string search utility
-version: 4.2.2
+version: 4.9
 license: GPL-3.0
+
+depends:
+  - devel/glibc
 
 files:
   - download:
-      url: http://ftp.gnu.org/pub/gnu/sed/sed-${version}.tar.bz2
-      sha1: f17ab6b1a7bcb2ad4ed125ef78948092d070de8f
+      url: https://ftp.gnu.org/pub/gnu/sed/sed-${version}.tar.xz
+      sha1: 8ded1b543f1f558cbd5d7b713602f6a8ee84bde4
       watch:
         url: anitya://4789
 
