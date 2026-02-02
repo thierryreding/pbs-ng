@@ -1,16 +1,9 @@
 description: Python Imaging Library (PIL) fork
-version: 8.4.0
+version: 10.2.0
 license: BSD
 
-files:
-  - download:
-      url: https://files.pythonhosted.org/packages/7d/2a/2fc11b54e2742db06297f7fa7f420a0e3069fdcf0e4b57dfec33f0b08622/Pillow-${version}.tar.gz
-      sha1: ca8d057aec64ccd0804044bc71c17921afbe2e4e
-      watch:
-        url: anitya://7974
-
 depends:
-  - build-tools/python-setuptools
+  - build-tools/meson
   - devel/python
   - libs/freetype
   - libs/lcms2
@@ -22,6 +15,13 @@ depends:
   #- libs/imagequant
   - libs/zlib
   - xorg/lib/xcb
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/p/pillow/pillow-${version}.tar.gz
+      sha1: 39e009881854e2d8f82fe9e5f86c2c0ef868447e
+      watch:
+        url: anitya://7974
 
 packages:
   python-pillow:
