@@ -1,11 +1,11 @@
 description: compiler for writing C extensions for the Python language
-version: 0.29.25
+version: 3.2.4
 license: Apache-2.0
 
 files:
   - download:
-      url: https://files.pythonhosted.org/packages/09/45/10c39337ba73c38a798165f97e4798827a532eaac71071842cbe0ee13dc5/Cython-${version}.tar.gz
-      sha1: bda825a34f18c11889562466264e29a8cb0e8806
+      url: https://pypi.python.org/packages/source/c/cython/cython-${version}.tar.gz
+      sha1: 4a97aba8bacd090b7cc827ecc6eb36b43514daae
       watch:
         url: anitya://36699
 
