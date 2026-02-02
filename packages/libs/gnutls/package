@@ -1,18 +1,18 @@
 package: library providing a secure layer over a reliable transport layer
-version: 3.7.3
+version: 3.8.11
 license: GPL-3.0, LGPL-2.1
-
-files:
-  - download:
-      url: https://www.gnupg.org/ftp/gcrypt/gnutls/v${major}.${minor}/gnutls-${version}.tar.xz
-      sha1: 552c337be97d2379ae7233ebf55e949010ef7837
-      watch:
-        url: anitya://1221
 
 depends:
   - libs/libtasn1
   - libs/nettle
   - libs/p11-kit
+
+files:
+  - download:
+      url: https://www.gnupg.org/ftp/gcrypt/gnutls/v${major}.${minor}/gnutls-${version}.tar.xz
+      sha1: 3aa3367ee8a95813195d28fd074ea1d6210377d8
+      watch:
+        url: anitya://1221
 
 packages:
   gnutls:
