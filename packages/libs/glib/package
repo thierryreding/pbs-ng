@@ -1,6 +1,7 @@
 include: packages/libs/glib/package.include
 
 depends:
+  - build-tools/meson
   - devel/glibc
   - libs/gobject-introspection
   - libs/libffi
@@ -18,5 +19,10 @@ packages:
       - /usr/lib/*.so
       - /usr/lib/glib-${major}.0/include
       - /usr/lib/pkgconfig
+
+  libglib-gir:
+    files:
+      - /usr/lib/girepository-1.0
+      - /usr/share/gir-1.0
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
