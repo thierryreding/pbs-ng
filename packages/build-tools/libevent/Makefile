@@ -7,6 +7,6 @@ $(srcdir)/stamp-prepare: | $(srcdir)
 $(builddir)/stamp-configure: $(srcdir)/stamp-prepare
 
 $(builddir)/stamp-cleanup: $(builddir)/stamp-install
-	rm $(BUILD_TOOLS)/lib/libevent_core.la
+	rm -f $(BUILD_TOOLS)/lib/libevent_core.la
 
 install: $(builddir)/stamp-cleanup

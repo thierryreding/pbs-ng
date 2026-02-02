@@ -7,8 +7,8 @@ $(srcdir)/stamp-prepare: | $(builddir)
 $(builddir)/stamp-configure: $(srcdir)/stamp-prepare
 
 $(builddir)/stamp-post-install: $(builddir)/stamp-install
-	rm $(BUILD_TOOLS)/lib/libnl-genl-3.la
-	rm $(BUILD_TOOLS)/lib/libnl-3.la
+	rm -f $(BUILD_TOOLS)/lib/libnl-genl-3.la
+	rm -f $(BUILD_TOOLS)/lib/libnl-3.la
 	touch $@
 
 install: $(builddir)/stamp-post-install

@@ -19,7 +19,7 @@ $(builddir)/stamp-install-compat: $(builddir)/stamp-build
 	mkdir -p $(DESTDIR)$(PREFIX)/lib/pkgconfig
 	for lib in form menu ncurses panel; do \
 		echo "INPUT(-l$${lib}w)" > $(DESTDIR)$(PREFIX)/lib/lib$${lib}.so; \
-		ln -s $${lib}w.pc $(DESTDIR)$(PREFIX)/lib/pkgconfig/$${lib}.pc; \
+		ln -sf $${lib}w.pc $(DESTDIR)$(PREFIX)/lib/pkgconfig/$${lib}.pc; \
 	done
 	# don't require -ltinfo when linking with --no-add-needed
 	rm -f $(DESTDIR)$(PREFIX)/lib/libncursesw.so && \
