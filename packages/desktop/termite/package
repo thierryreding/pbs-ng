@@ -1,14 +1,14 @@
 description: keyboard-centric VTE-based terminal
-version: 15
+version: 16.9
 license: custom
 
 depends:
-  - devel/glibc
+  - libs/vte
+  - xorg/lib/x11
 
 files:
-  - download:
-      url: https://github.com/thestinger/termite/archive/v${version}.tar.gz
-      sha1: 9a55ff967f4fcf18fdb1580e9c53b52ba9e5fbd1
+  - source:
+      url: git+https://github.com/thestinger/termite#v${version}
       watch:
         url: anitya://11226
 

@@ -1,12 +1,17 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-build-args = \
+env = \
+	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
+	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)' \
 	CXXFLAGS='--sysroot $(SYSROOT)' \
-	LDFLAGS='--sysroot $(SYSROOT)'
+	LDFLAGS='--sysroot $(SYSROOT)' \
+	CXX=$(CROSS_COMPILE)g++
 
 $(srcdir)/stamp-build: | $(srcdir)
+	cd $(srcdir) && git submodule init && git submodule sync && \
+		git submodule update
 	cd $(srcdir) && \
-		$(env) $(MAKE) -j $(JOBS) $(build-args)
+		$(env) $(MAKE) -j $(JOBS)
 	touch $@
 
 install-args = \
