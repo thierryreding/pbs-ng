@@ -27,7 +27,13 @@ packages:
       - /usr/include
       - /usr/lib/*.a
       - /usr/lib/*.so
+      - /usr/lib/cmake
       - /usr/lib/pkgconfig
+
+  libharfbuzz-gir:
+    files:
+      - /usr/lib/girepository-1.0
+      - /usr/share/gir-1.0
 
   harfbuzz-utils:
     files:
