@@ -1,14 +1,14 @@
 description: libkmod
-version: 30
+version: 34.2
 license: GPL-2.0
 
 depends:
   - devel/glibc
 
 files:
-- download:
-    url: https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-${version}.tar.xz
-    sha1: e99d5a51c79d9ff3660722025f75770e1f4bf4b1
+  - download:
+      url: https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-${version}.tar.xz
+      sha1: 205a88575d727a504db83fee8272727286331465
       watch:
         url: anitya://1517
 
