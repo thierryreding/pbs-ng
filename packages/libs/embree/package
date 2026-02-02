@@ -1,5 +1,5 @@
-description:
-version: 3.12.2
+description: high-performance ray tracing library by Intel
+version: 4.4.0
 license: Apache
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://github.com/embree/embree/archive/v${version}.tar.gz
-      sha1: 1ffde27c9725383aa28867397a0b080bedce98fe
+      sha1: 1c7ba97e71578d37c1a911da43a02f5a910f2d8a
       watch:
         url: anitya://11813
 
