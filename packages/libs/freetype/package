@@ -1,5 +1,5 @@
 description: TrueType font rendering library
-version: 2.12.1
+version: 2.14.1
 license: FreeType, GPL
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://download.savannah.gnu.org/releases/freetype/freetype-${version}.tar.xz
-      sha1: 5133eed28a7624ffabbf6d00aa3f68b841d62d80
+      sha1: 20f7a9a3e2996aab82b0648e82d49a78e8813bab
       watch:
         url: anitya://854
 
