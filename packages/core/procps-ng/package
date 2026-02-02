@@ -1,5 +1,5 @@
 description: Utilities for monitoring the system and its processes
-version: 3.3.15
+version: 4.0.6
 license: GPL-2.0, LGPL-2.0
 
 depends:
@@ -8,8 +8,8 @@ depends:
 
 files:
   - download:
-      url: http://prdownloads.sourceforge.net/procps-ng/procps-ng-${version}.tar.xz
-      sha1: 2929bc64f0cf7b2db997eef79b7187658e47230d
+      url: https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-${version}.tar.xz
+      sha1: 2b859acd7060e9898ac457dbd26dbebf563cc44b
       watch:
         url: anitya://3708
 
