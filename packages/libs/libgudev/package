@@ -1,18 +1,19 @@
 description: GObject bindings for libudev
-version: 237
+version: 238
 license: LGPL-2.1
-
-files:
-  - download:
-      url: http://ftp.gnome.org/pub/gnome/sources/libgudev/${version}/libgudev-${version}.tar.xz
-      sha1: 3ec66c925b9d22c385c3907c7ca3f2bb6c705d2c
-      watch:
-        url: anitya://7735
 
 depends:
   - build-tools/meson
   - core/systemd
   - libs/glib
+  - libs/gobject-introspection
+
+files:
+  - download:
+      url: http://ftp.gnome.org/pub/gnome/sources/libgudev/${version}/libgudev-${version}.tar.xz
+      sha1: 38f948d27bd42537f155ad087c99d9856a1ad25e
+      watch:
+        url: anitya://7735
 
 packages:
   libgudev:
@@ -25,5 +26,10 @@ packages:
       - /usr/lib/*.a
       - /usr/lib/*.so
       - /usr/lib/pkgconfig
+
+  libgudev-gir:
+    files:
+      - /usr/lib/girepository-1.0
+      - /usr/share/gir-1.0
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
