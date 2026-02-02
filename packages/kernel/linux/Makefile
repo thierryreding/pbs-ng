@@ -32,12 +32,19 @@ install-args = \
 install-vars = \
 	INSTALL_HDR_PATH=$(DESTDIR)$(PREFIX) \
 	INSTALL_PATH=$(DESTDIR)/boot \
-	INSTALL_MOD_PATH=$(DESTDIR) \
+	INSTALL_MOD_PATH=$(DESTDIR)$(PREFIX) \
 	$(common-vars)
 
 install-targets = \
-	headers_install \
-	zinstall \
+	headers_install
+
+ifeq ($(ARCH),x86)
+  install-targets += install
+else
+	install-targets += zinstall
+endif
+
+install-targets += \
 	modules_install
 
 env = env -i PATH=$(PATH) HOME=$(HOME)
@@ -56,6 +63,7 @@ $(builddir)/stamp-build: $(builddir)/stamp-configure
 $(builddir)/stamp-install: $(builddir)/stamp-build | $(DESTDIR)/boot
 	$(env) $(MAKE) $(install-args) $(install-vars) $(install-targets)
 	find $(DESTDIR)$(PREFIX)/include -name .install -o -name ..install.cmd -delete
+	find $(DESTDIR)$(PREFIX)/lib/modules -type l -name build -delete
 	touch $@
 
 install: $(builddir)/stamp-install
