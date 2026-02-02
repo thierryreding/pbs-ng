@@ -1,11 +1,11 @@
 description: device mapper userspace library and tools
-version: 2.03.16
+version: 2.03.38
 license: GPL-2.0, LGPL-2.1
 
 files:
   - download:
       url: https://mirrors.kernel.org/sourceware/lvm2/LVM2.${version}.tgz
-      sha1: a99cfcbcb2cf665824acde03775dccc9ef54a836
+      sha1: 27eb30dd0a8e7f8f91a1e77eda58469ccba3d53a
       watch:
         url: anitya://5354
 
