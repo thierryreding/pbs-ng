@@ -1,17 +1,17 @@
 description: PCI bus configuraiton space access library and tools
-version: 3.8.0
+version: 3.14.0
 license: GPL-2.0
-
-files:
-  - download:
-      url: https://www.kernel.org/pub/software/utils/pciutils/pciutils-${version}.tar.xz
-      sha1: aca2e5a9fedc1bd35ff28024c9bd5dbf16fb74fc
-      watch:
-        url: anitya://2605
 
 depends:
   - devel/glibc
   - libs/zlib
+
+files:
+  - download:
+      url: https://www.kernel.org/pub/software/utils/pciutils/pciutils-${version}.tar.xz
+      sha1: 83ea1394a2095442731f639b16f38292be67201f
+      watch:
+        url: anitya://2605
 
 packages:
   pciutils:
