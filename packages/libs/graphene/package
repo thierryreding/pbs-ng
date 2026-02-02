@@ -1,16 +1,17 @@
 description: a thin layer of grahic data types
-version: 1.10.6
+version: 1.10.8
 license: MIT
-
-files:
-  - download:
-      url: https://github.com/ebassi/graphene/releases/download/${version}/graphene-${version}.tar.xz
-      sha1: 0bce9014096441fb771db0bc66587d7440190fa5
-      watch:
-        url: anitya://12758
 
 depends:
   - libs/glib
+  - libs/gobject-introspection
+
+files:
+  - download:
+      url: https://github.com/ebassi/graphene/archive/refs/tags/${version}.tar.gz
+      sha1: 6bb33b63e7f9d3cdd0e24f1a7f98a8ec7a1b212b
+      watch:
+        url: anitya://12758
 
 packages:
   graphene:
@@ -24,5 +25,10 @@ packages:
       - /usr/lib/*.a
       - /usr/lib/graphene-${major}.0/include
       - /usr/lib/pkgconfig
+
+  graphene-gir:
+    files:
+      - /usr/lib/girepository-1.0
+      - /usr/share/gir-1.0
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
