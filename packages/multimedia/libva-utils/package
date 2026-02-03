@@ -1,11 +1,11 @@
 description: collection of tests for VA-API
-version: 2.13.0
+version: 2.23.0
 license: MIT
 
 files:
   - download:
       url: https://github.com/intel/libva-utils/releases/download/${version}/libva-utils-${version}.tar.bz2
-      sha1: 7ab945cf232387f762891f9e4f7a6cb41e0766e8
+      sha1: c7d96884b2791c807e81f804cbce451d92907bb1
       watch:
         url: anitya://16334
 
