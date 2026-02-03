@@ -1,17 +1,18 @@
 description: Cross-platform 3D audio library, software implementation
-version: 1.22.2
+version: 1.25.1
 license: LGPL
 
 depends:
   - build-tools/cmake
   - devel/glibc
+  - libs/sdl3
   - libs/sdl-sound
   - multimedia/ffmpeg
 
 files:
   - download:
       url: https://github.com/kcat/openal-soft/archive/refs/tags/${version}.tar.gz
-      sha1: 7667fdc370e633c8bc362e8c44b90055d0de247f
+      sha1: b4ee32a295969b0f9ce51ee71edff85a3617b993
       watch:
         url: anitya://8172
 

@@ -1,0 +1,38 @@
+description: Simple DirectMedia Layer
+version: 3.4.0
+license: Zlib
+
+files:
+  - download:
+      url: https://github.com/libsdl-org/SDL/releases/download/release-${version}/SDL3-${version}.tar.gz
+      sha1: 5d7aaeb4c74efd6dc20331b5b32780795485788b
+      watch:
+        url: anitya://4777
+
+depends:
+  - build-tools/cmake
+  - devel/glibc
+  - libs/mesa
+  - multimedia/libsamplerate
+  - xorg/lib/xext
+  - xorg/lib/xfixes
+  - xorg/lib/xi
+  - xorg/lib/xrandr
+  - xorg/lib/xrender
+  - xorg/lib/xscrnsaver
+  - xorg/lib/xtst
+
+packages:
+  libsdl3:
+    files:
+      - /usr/lib/*.so.*
+
+  libsdl3-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
