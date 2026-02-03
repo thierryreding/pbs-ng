@@ -1,5 +1,5 @@
 description: free version of the SSH connectivity tools
-version: 8.1p1
+version: 10.2p1
 license: custom
 
 depends:
@@ -8,8 +8,8 @@ depends:
 
 files:
   - download:
-      url: http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz
-      sha1: c44b96094869f177735ae053d92bd5fcab1319de
+      url: https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${version}.tar.gz
+      sha1: c34efade16109f065ec8c834f237bcedd8d7ef5c
       watch:
         url: anitya://2565
 
