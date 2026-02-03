@@ -1,33 +1,15 @@
 diff --git a/configure.ac b/configure.ac
-index 6ea38f53b854..4d327fd01bb3 100644
+index fb7e52ebae33..097bcb1a92fc 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -84,6 +84,8 @@ AC_CANONICAL_HOST
- AM_MAINTAINER_MODE
- AM_SILENT_RULES
- 
-+AC_USE_SYSTEM_EXTENSIONS
-+
- AC_ARG_VAR(SYSROOT,[locate config scripts also below that directory])
- 
- AH_TOP([
-@@ -150,8 +152,6 @@ AC_SEARCH_LIBS([strerror],[cposix])
- AC_PROG_INSTALL
- AC_PROG_AWK
- 
--AC_USE_SYSTEM_EXTENSIONS
--
- # Taken from mpfr-4.0.1, then modified for LDADD_FOR_TESTS_KLUDGE
- dnl Under Linux, make sure that the old dtags are used if LD_LIBRARY_PATH
- dnl is defined. The issue is that with the new dtags, LD_LIBRARY_PATH has
-@@ -777,11 +777,7 @@ AC_DEFINE_UNQUOTED(NAME_OF_DEV_URANDOM, "$NAME_OF_DEV_URANDOM",
+@@ -825,11 +825,7 @@ esac
  #
  # gpg-error is required.
  #
 -AM_PATH_GPG_ERROR("$NEED_GPG_ERROR_VERSION")
 -if test "x$GPG_ERROR_LIBS" = "x"; then
 -  AC_MSG_ERROR([libgpg-error is needed.
--                See ftp://ftp.gnupg.org/gcrypt/libgpg-error/ .])
+-                See https://gnupg.org/ftp/gcrypt/gpgrt/ .])
 -fi
 +PKG_CHECK_MODULES([GPG_ERROR], [gpg-error >= $NEED_GPG_ERROR_VERSION])
  
