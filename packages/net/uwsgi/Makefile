@@ -1,14 +1,8 @@
 include $(TOP_SRCDIR)/packages/common.mk
-
-ifeq ($(ARCH),arm64)
-  ARCH = aarch64
-endif
-
-MULTIARCH = $(ARCH)-$(OS)-$(LIBC)$(ABI)
+include $(TOP_SRCDIR)/packages/python-sysconfigdata.mk
 
 env = \
 	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
-	_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata__$(OS)_$(MULTIARCH) \
 	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)' \
 	CC='$(CROSS_COMPILE)gcc' \
 	CPP='$(CROSS_COMPILE)cpp' \
@@ -29,11 +23,7 @@ plugindir = $(PREFIX)/lib/uwsgi
 $(srcdir)/buildconf/pbs.ini: $(TOP_SRCDIR)/$(PKGDIR)/pbs.ini | $(srcdir)
 	sed 's|@PLUGINS@|$(plugins-list)|;s|@PLUGINDIR@|$(plugindir)|' $< > $@
 
-$(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-compile.patch
-	touch $@
-
-$(srcdir)/stamp-build: $(srcdir)/stamp-patch $(srcdir)/buildconf/pbs.ini
+$(srcdir)/stamp-build: $(srcdir)/buildconf/pbs.ini
 	cd $(srcdir) && $(env) python uwsgiconfig.py --build pbs
 	touch $@
 
