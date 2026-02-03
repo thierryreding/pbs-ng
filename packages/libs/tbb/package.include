@@ -1,11 +1,11 @@
 description: thread building blocks
-version: 2021.7.0
+version: 2022.3.0
 license: Apache
 
 files:
   - download:
       url: https://github.com/oneapi-src/oneTBB/archive/v${version}.tar.gz
-      sha1: e4be99dc35948052296105d2ae7da6d34e01ba2d
+      sha1: c1043f39bcb483b7d13aabaf1dcac6547d39ed8b
       watch:
         url: anitya://227581
 
