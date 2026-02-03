@@ -1,5 +1,5 @@
 description: extremely fast compression algorithm
-version: 1.9.3
+version: 1.10.0
 license: BSD, GPL-2.0-only
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://github.com/lz4/lz4/archive/v${version}.tar.gz
-      sha1: 5a19554ef404a609123b756ddcbbb677df838f05
+      sha1: e6a01c6d457365f9e26bc440394daab80ab0aff0
       watch:
         url: anitya://1865
 
