@@ -1,5 +1,5 @@
 description: a C library for reading and writing sound files containing sampled audio data
-version: 1.1.0
+version: 1.2.2
 license: LGPL-2.1
 
 depends:
@@ -12,7 +12,7 @@ depends:
 files:
   - download:
       url: https://github.com/libsndfile/libsndfile/releases/download/${version}/libsndfile-${version}.tar.xz
-      sha1: ba290fdec0cc0a34e0a7b7499a8094816b3fe840
+      sha1: 8d9031e13f56abb79e89a122333ad11fa0512799
       watch:
         url: anitya://13277
 
