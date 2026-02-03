@@ -1,11 +1,14 @@
 description: open-source JPEG 2000 codec written in C
-version: 2.4.0
+version: 2.5.4
 license: BSD-2-clause
+
+depends:
+  - devel/glibc
 
 files:
   - download:
       url: https://github.com/uclouvain/openjpeg/archive/v${version}.tar.gz
-      sha1: bbbf4dc4d9ce95286843cd39ac2febd3fd516c9d
+      sha1: c299b70e495e74d858f6d22051de1d5a01a64d33
       watch:
         url: anitya://2550
 
