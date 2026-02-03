@@ -1,5 +1,5 @@
 description: A library to decode several popular sound file formats such as .WAV and .MP3
-version: 2.0.1
+version: 2.0.4
 license: LGPL-2.1-or-later
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://github.com/icculus/SDL_sound/archive/refs/tags/v${version}.tar.gz
-      sha1: 53b035d88f7348a8c373da71254c9e7b947de5f5
+      sha1: ed40014383174447e30af5ac41233ce3e3b465ef
       watch:
         url: anitya://10262
 
