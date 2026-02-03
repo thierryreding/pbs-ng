@@ -1,5 +1,5 @@
 description: XML-RPC for C and C++
-version: 1.51.03
+version: 1.60.05
 license: custom
 
 depends:
@@ -9,8 +9,8 @@ depends:
 
 files:
   - download:
-      url: https://prdownloads.sourceforge.net/xmlrpc-c/Xmlrpc-c%20Super%20Stable/${version}/xmlrpc-c-${version}.tgz
-      sha1: 6f7501c07ceb7769ee724251ddf516156f033df8
+      url: https://sourceforge.net/projects/xmlrpc-c/files/Xmlrpc-c%20Super%20Stable/${version}/xmlrpc-c-${version}.tgz
+      sha1: 95c60c9c1666873f822465d644ec58380b5e2314
       watch:
         url: anitya://9024
 
