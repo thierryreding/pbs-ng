@@ -1,20 +1,23 @@
 description: library for reading, writing and processing images in a wide variety of file formats
-version: 2.4.5.0
+version: 3.1.10.0
 license: BSD-3-Clause
 
 depends:
+  - devel/python
   - libs/boost
   - libs/libtiff
+  - libs/libultrahdr
   - libs/opencolorio
   - libs/openexr
   - libs/openvdb
+  - libs/ptex
   - libs/pybind11
   - libs/tbb
 
 files:
   - download:
       url: https://github.com/OpenImageIO/oiio/archive/v${version}.tar.gz
-      sha1: 923f26ed3ddd5f426d20db592966563d90149caa
+      sha1: d9e9533ea47b930a0e6fe420538666de09254193
       watch:
         url: anitya://2548
 
