@@ -2,8 +2,9 @@ description: OpenCL conformance test suite
 license: custom
 
 depends:
+  - build-tools/cmake
+  - devel/opencl-headers
   - devel/spirv-llvm
-  - libs/libclcxx
   - libs/mesa
 
 files:
