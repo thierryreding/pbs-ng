@@ -1,7 +1,14 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
+ifeq ($(ARCH),arm64)
+  ARCH = aarch64
+endif
+
+MULTIARCH = $(ARCH)-$(OS)-$(LIBC)$(ABI)
+
 env = \
 	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
+	_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata__$(OS)_$(MULTIARCH) \
 	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)' \
 	CC='$(CROSS_COMPILE)gcc' \
 	CPP='$(CROSS_COMPILE)cpp' \
