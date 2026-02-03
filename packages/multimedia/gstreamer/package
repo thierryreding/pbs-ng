@@ -1,11 +1,11 @@
 description: multimedia graph framework
-version: 1.20.2
+version: 1.28.0
 license: LGPL
 
 files:
   - download:
       url: https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${version}.tar.xz
-      sha1: ab4f9af209d9e1ad86f95407ee4402247853d232
+      sha1: 9e9aeb3b076ac0277b1a9f0b5c6b3d259055a570
       watch:
         url: anitya://1263
 

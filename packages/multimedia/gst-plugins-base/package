@@ -1,13 +1,6 @@
 description: multimedia graph framework - base plugins
-version: 1.20.2
+version: 1.28.0
 license: LGPL
-
-files:
-  - download:
-      url: https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${version}.tar.xz
-      sha1: f9b15502997936ac7460b3c414dfb5dd9c835339
-      watch:
-        url: anitya://21850
 
 depends:
   - libs/glib
@@ -31,6 +24,13 @@ depends:
   - xorg/lib/xcb
   - xorg/lib/xext
   - xorg/lib/xv
+
+files:
+  - download:
+      url: https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${version}.tar.xz
+      sha1: f8344eff45fa8321bb7531977d434481d3d35909
+      watch:
+        url: anitya://21850
 
 packages:
   gst-plugins-base:

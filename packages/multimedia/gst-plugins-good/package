@@ -1,16 +1,17 @@
 description: multimedia graph framework - good plugins
-version: 1.20.2
+version: 1.28.0
 license: LGPL
+
+depends:
+  - multimedia/gst-plugins-base
+  - libs/taglib
 
 files:
   - download:
       url: https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${version}.tar.xz
-      sha1: a5fd08a986ba60fedbca2894d65e30d07de09262
+      sha1: 985967eeed3143e7faaee68807111714d01fec6b
       watch:
         url: anitya://21852
-
-depends:
-  - multimedia/gst-plugins-base
 
 packages:
   gst-plugins-good:

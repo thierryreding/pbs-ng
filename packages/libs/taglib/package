@@ -1,0 +1,29 @@
+description: TagLib Audio Meta-Data Library
+version: 2.1.1
+license: custom
+
+depends:
+  - build-tools/cmake
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/taglib/taglib/releases/download/v${version}/taglib-${version}.tar.gz
+      sha1: 71ed023e644901a961e3cd86ca3ba5f8ea5b9535
+      watch:
+        url: anitya://1982
+
+packages:
+  taglib:
+    files:
+      - /usr/lib/*.so.*
+
+  taglib-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

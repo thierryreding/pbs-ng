@@ -1,17 +1,17 @@
 description: multimedia graph framework - libav plugin
-version: 1.20.2
+version: 1.28.0
 license: GPL
-
-files:
-  - download:
-      url: https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-${version}.tar.xz
-      sha1: f25f781885c250012861ec20c3ef2306b37b873f
-      watch:
-        url: anitya://21848
 
 depends:
   - multimedia/gst-plugins-base
   - multimedia/ffmpeg
+
+files:
+  - download:
+      url: https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-${version}.tar.xz
+      sha1: da28e8f3f26dee6cbc93b68f37d64a8b97f35780
+      watch:
+        url: anitya://21848
 
 packages:
   gst-libav:

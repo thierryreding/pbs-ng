@@ -1,13 +1,6 @@
 description: multimedia graph framework - bad plugins
-version: 1.20.2
+version: 1.28.0
 license: LGPL
-
-files:
-  - download:
-      url: https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${version}.tar.xz
-      sha1: aee89a63071b681ee74cc3e50c4e031e978c09e5
-      watch:
-        url: anitya://21849
 
 depends:
   - libs/cairo
@@ -24,6 +17,13 @@ depends:
   - multimedia/libva
   - multimedia/openal
   - multimedia/opus
+
+files:
+  - download:
+      url: https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${version}.tar.xz
+      sha1: 133de4bcc34e8595740426982d1f5dcc23df8333
+      watch:
+        url: anitya://21849
 
 packages:
   gst-plugins-bad:
