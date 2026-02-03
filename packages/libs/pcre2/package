@@ -1,18 +1,18 @@
 description: a library that implements Perl 5-style regular expressions
-version: 10.39
+version: 10.47
 license: BSD
-
-files:
-  - download:
-      url: https://github.com/PhilipHazel/pcre2/releases/download/pcre2-${version}/pcre2-${version}.tar.bz2
-      sha1: 9cf3ec88cd68dc76354eb0568738c47b57377042
-      watch:
-        url: anitya://5832
 
 depends:
   - devel/glibc
   - libs/bzip2
   - libs/zlib
+
+files:
+  - download:
+      url: https://github.com/PhilipHazel/pcre2/releases/download/pcre2-${version}/pcre2-${version}.tar.bz2
+      sha1: 82fbde112d57224e7dde9c9b5ea5cd8e17ce941e
+      watch:
+        url: anitya://5832
 
 packages:
   libpcre2:
