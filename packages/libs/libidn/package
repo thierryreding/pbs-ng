@@ -1,16 +1,16 @@
 description: implementation of the Stringprep, Punycode and IDNA specifications
-version: 1.41
+version: 1.43
 license: GPL-3.0, LPGL-2.1
+
+depends:
+  - devel/glibc
 
 files:
   - download:
       url: http://ftp.gnu.org/gnu/libidn/libidn-${version}.tar.gz
-      sha1: 527748471e217c2c3857309df85b50a33ca62ab8
+      sha1: 80e9f28762544bf7da490ab4b1a92e725da6ce61
       watch:
         url: anitya://1639
-
-depends:
-  - devel/glibc
 
 packages:
   libidn:
