@@ -1,5 +1,5 @@
 description: light-weight C++ XML processing library
-version: 1.11
+version: 1.15
 license: MIT
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://github.com/zeux/pugixml/releases/download/v${version}/pugixml-${version}.tar.gz
-      sha1: 170a3ab84b58a06ebfef1d72161cd9133bb92c36
+      sha1: 906f1038f0687ce6466687eaa9b457af3c7e3382
       watch:
         url: anitya://3728
 
