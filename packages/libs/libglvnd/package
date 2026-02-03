@@ -1,14 +1,17 @@
 description: GL vendor-neutral dispatch library
-version: 1.3.4
+version: 1.7.0
 license: BSD
 
 depends:
   - build-tools/meson
+  # needed for GLX support
+  - xorg/lib/xext
+  - xorg/proto/xorgproto
 
 files:
   - download:
-      url: https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v${version}/libglvnd-${version}.tar.bz2
-      sha1: 7e8b44b2b8b52904a77612abb85be54bebaadc5e
+      url: https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v${version}/libglvnd-v${version}.tar.bz2
+      sha1: 830fdeb0b24253eea1c1cdc63fbed65f21e2e6bd
       watch:
         url: anitya://12098
 
