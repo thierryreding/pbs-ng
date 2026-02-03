@@ -1,16 +1,17 @@
 package: common C routines used by GTK+ and other libraries
-version: 4.1.2
+version: 4.20.3
 license: LGPL-2.1
 
 files:
   - download:
       url: https://ftp.gnome.org/pub/gnome/sources/gtk/${major}.${minor}/gtk-${version}.tar.xz
-      sha1: 4e2b24d6ad60821931d9a315b1effbb3142a84f6
+      sha1: 48fcd1b061b61419a19d54f384a8a9700dab4102
       watch:
         url: anitya://13942
 
 depends:
   - libs/cairo
+  - multimedia/gst-plugins-bad
 
 packages:
   gtk4:
@@ -20,8 +21,11 @@ packages:
   gtk4-dev:
     files:
       - /usr/include
-      - /usr/lib/*.a
       - /usr/lib/*.so
       - /usr/lib/pkgconfig
+
+  gtk4-utils:
+    files:
+      - /usr/bin
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
