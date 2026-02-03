@@ -1,5 +1,5 @@
 description: IP routing utilities
-version: 5.19.0
+version: 6.12.0
 license: GPL-2.0
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-${version}.tar.xz
-      sha1: 09c80c5d48aba04d9bf6d184b68b817ed5818b41
+      sha1: a18f136d7e4d68d8598a87e3fb939e2d0c144093
       watch:
         url: anitya://1392
 

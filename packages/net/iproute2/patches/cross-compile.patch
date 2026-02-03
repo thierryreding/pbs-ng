@@ -1,8 +1,8 @@
 diff --git a/configure b/configure
-index b85eb58b2ba9..508f4ba0d0e5 100755
+index 158e76e187b2..8f7233afd87c 100755
 --- a/configure
 +++ b/configure
-@@ -17,10 +17,14 @@ check_toolchain()
+@@ -20,10 +20,14 @@ check_toolchain()
      : ${AR=ar}
      : ${CC=gcc}
      : ${YACC=bison}
@@ -16,17 +16,8 @@ index b85eb58b2ba9..508f4ba0d0e5 100755
 +    echo "LDFLAGS:=${LDFLAGS}" >>$CONFIG
  }
  
- check_atm()
-@@ -34,7 +38,7 @@ int main(int argc, char **argv) {
- }
- EOF
- 
--    if $CC -I$INCLUDE -o $TMPDIR/atmtest $TMPDIR/atmtest.c -latm >/dev/null 2>&1; then
-+    if $CC $CFLAGS -I$INCLUDE -o $TMPDIR/atmtest $TMPDIR/atmtest.c -latm >/dev/null 2>&1; then
- 	echo "TC_CONFIG_ATM:=y" >>$CONFIG
- 	echo yes
-     else
-@@ -72,7 +76,7 @@ int main(int argc, char **argv)
+ check_xtables()
+@@ -55,7 +59,7 @@ int main(int argc, char **argv)
  }
  EOF
  
@@ -35,7 +26,7 @@ index b85eb58b2ba9..508f4ba0d0e5 100755
  	$(${PKG_CONFIG} xtables --cflags --libs) -ldl >/dev/null 2>&1; then
  	echo "TC_CONFIG_XT:=y" >>$CONFIG
  	echo "using xtables"
-@@ -107,7 +111,7 @@ int main(int argc, char **argv) {
+@@ -90,7 +94,7 @@ int main(int argc, char **argv) {
  
  EOF
  
@@ -44,7 +35,7 @@ index b85eb58b2ba9..508f4ba0d0e5 100755
  	echo "TC_CONFIG_XT_OLD:=y" >>$CONFIG
  	echo "using old xtables (no need for xt-internal.h)"
      fi
-@@ -141,7 +145,7 @@ int main(int argc, char **argv) {
+@@ -124,7 +128,7 @@ int main(int argc, char **argv) {
  }
  
  EOF
@@ -53,7 +44,7 @@ index b85eb58b2ba9..508f4ba0d0e5 100755
  	    echo "using old xtables with xt-internal.h"
  	    echo "TC_CONFIG_XT_OLD_H:=y" >>$CONFIG
  	fi
-@@ -187,7 +191,7 @@ int main(int argc, char **argv)
+@@ -180,7 +184,7 @@ int main(int argc, char **argv)
  	return 0;
  }
  EOF
@@ -62,7 +53,7 @@ index b85eb58b2ba9..508f4ba0d0e5 100755
  	echo "IP_CONFIG_SETNS:=y" >>$CONFIG
  	echo "yes"
  	echo "CFLAGS += -DHAVE_SETNS" >>$CONFIG
-@@ -218,7 +222,7 @@ int main(void)
+@@ -235,7 +239,7 @@ int main(void)
  #endif
  EOF
  
@@ -71,7 +62,7 @@ index b85eb58b2ba9..508f4ba0d0e5 100755
  	echo "TC_CONFIG_IPSET:=y" >>$CONFIG
  	echo "yes"
      else
-@@ -278,7 +282,7 @@ int main(int argc, char **argv) {
+@@ -413,7 +417,7 @@ int main(int argc, char **argv) {
  	return 0;
  }
  EOF
@@ -80,7 +71,7 @@ index b85eb58b2ba9..508f4ba0d0e5 100755
  	echo "HAVE_BERKELEY_DB:=y" >>$CONFIG
  	echo "yes"
      else
-@@ -297,7 +301,7 @@ int main(int argc, char **argv) {
+@@ -432,7 +436,7 @@ int main(int argc, char **argv) {
  	return 0;
  }
  EOF
