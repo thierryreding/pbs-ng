@@ -6,4 +6,4 @@ version:
 endif
 
 conf-args += \
-	-Dbuild_chamelium=true
+	-Dchamelium=enabled
