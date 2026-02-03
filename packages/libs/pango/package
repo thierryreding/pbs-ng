@@ -1,21 +1,26 @@
 description: text layout and rendering library
-version: 1.50.1
+version: 1.56.4
 license: LGPL-2.1
 
 depends:
   - libs/cairo
   - libs/fontconfig
   - libs/fribidi
+  - libs/gobject-introspection
   - libs/harfbuzz
 
 files:
   - download:
-      url: http://ftp.gnome.org/pub/GNOME/sources/pango/${major}.${minor}/pango-${version}.tar.xz
-      sha1: e3363767d283a2a524f8c000e1716b100afed79d
+      url: https://ftp.gnome.org/pub/GNOME/sources/pango/${major}.${minor}/pango-${version}.tar.xz
+      sha1: aac49ce5326c3547c12792e4dd0a11ff9a7b163b
       watch:
         url: anitya://11783
 
 packages:
+  libpango:
+    files:
+      - /usr/lib/*.so.*
+
   libpango-dev:
     files:
       - /usr/include
@@ -23,8 +28,13 @@ packages:
       - /usr/lib/*.so
       - /usr/lib/pkgconfig
 
-  libpango:
+  libpango-utils:
     files:
-      - /usr/lib/*.so.*
+      - /usr/bin
+
+  libpango-gir:
+    files:
+      - /usr/lib/girepository-1.0
+      - /usr/share/gir-1.0
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
