@@ -1,5 +1,5 @@
 description: OpenVDB - sparse volume data structure and tools
-version: 10.0.1
+version: 13.0.0
 license: MPL-2.0
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://github.com/AcademySoftwareFoundation/openvdb/archive/v${version}.tar.gz
-      sha1: fddf04220fd2805b4ad5884a70613c45b559de27
+      sha1: 22d3b1dcab3a62d8179e283f03590bbaf2169222
       watch:
         url: anitya://21124
 
