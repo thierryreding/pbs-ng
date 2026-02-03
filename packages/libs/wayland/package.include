@@ -1,12 +1,13 @@
 description: A computer display server protocol
-version: 1.21.0
+version: 1.24.0
 license: MIT
 
 files:
-- download:
-    url: https://gitlab.freedesktop.org/wayland/wayland/-/releases/${version}/downloads/wayland-${version}.tar.xz
-    sha1: 59f381d656e09f34135b7222fbf57e05ae7262e6
-    watch:
-      url: anitya://10061
+  - download:
+      # TODO fix attachment warnings
+      url: https://gitlab.freedesktop.org/wayland/wayland/-/releases/${version}/downloads/wayland-${version}.tar.xz
+      sha1: 0145501ee1ab8c1a168b9ad3f27b7b5a34fce6a0
+      watch:
+        url: anitya://10061
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
