@@ -1,16 +1,16 @@
 description: complete solution to record, convert and stream audio and video
-version: 5.1.1
+version: 8.0.1
 license: GPL-3.0-or-later
+
+depends:
+  - devel/glibc
 
 files:
   - download:
       url: https://ffmpeg.org/releases/ffmpeg-${version}.tar.xz
-      sha1: aeda76be4d6682889c67878f6b08524936e6bd7e
+      sha1: 963990565b6599df15e23877e853ec4b0764b8ec
       watch:
         url: anitya://5405
-
-depends:
-  - devel/glibc
 
 packages:
   ffmeg:

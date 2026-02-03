@@ -10,8 +10,8 @@ conf-args = \
 	--sysroot=$(SYSROOT) \
 	--enable-shared \
 	--enable-gpl \
-	--enable-postproc \
 	--enable-swscale \
-	--disable-stripping
+	--disable-stripping \
+	--disable-doc
 
 conf-vars :=
