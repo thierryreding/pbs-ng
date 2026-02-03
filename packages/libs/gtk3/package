@@ -1,13 +1,6 @@
 package: common C routines used by GTK+ and other libraries
-version: 3.24.43
+version: 3.24.51
 license: LGPL
-
-files:
-  - download:
-      url: https://ftp.gnome.org/pub/gnome/sources/gtk+/${major}.${minor}/gtk+-${version}.tar.xz
-      sha1: 4f94c8dca81b26aaea2d17a15f265e3a7d777ea3
-      watch:
-        url: anitya://311549
 
 depends:
   - libs/atk
@@ -22,6 +15,13 @@ depends:
   - libs/pango
   - xorg/lib/xi
 
+files:
+  - download:
+      url: https://gitlab.gnome.org/GNOME/gtk/-/archive/${version}/gtk-${version}.tar.bz2
+      sha1: 237f13aacfc2479968e39a74f2bf89cd706fd073
+      watch:
+        url: anitya://311549
+
 packages:
   gtk3:
     files:
@@ -33,5 +33,10 @@ packages:
       - /usr/lib/*.a
       - /usr/lib/*.so
       - /usr/lib/pkgconfig
+
+  gtk3-gir:
+    files:
+      - /usr/lib/girepository-1.0
+      - /usr/share/gir-1.0
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
