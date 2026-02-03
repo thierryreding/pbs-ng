@@ -1,5 +1,5 @@
 description: library for reading, writing and processing images in a wide variety of file formats
-version: 2.2.0
+version: 2.5.1
 license: BSD-3-Clause
 
 depends:
@@ -17,7 +17,7 @@ depends:
 files:
   - download:
       url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/v${version}.tar.gz
-      sha1: c5343ed34041344c37bc359bce4cf56f33d72780
+      sha1: 2890ef67a7c8057fd12640e93e2b9775a0c0b53a
       watch:
         url: anitya://9631
 
@@ -32,6 +32,7 @@ packages:
       - /usr/include
       - /usr/lib/*.a
       - /usr/lib/*.so
+      - /usr/lib/cmake
       - /usr/lib/pkgconfig
 
   opencolorio-python:
