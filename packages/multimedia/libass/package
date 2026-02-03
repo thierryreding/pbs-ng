@@ -1,17 +1,18 @@
 description: A portable library for SSA/ASS subtitles rendering
-version: 0.15.2
+version: 0.17.4
 license: BSD
-
-files:
-  - download:
-      url: https://github.com/libass/libass/releases/download/${version}/libass-${version}.tar.xz
-      sha1: d7b9698b368569551cb9c8d2007f74c8753775f7
-      watch:
-        url: anitya://1560
 
 depends:
   - devel/glibc
   - libs/fribidi
+  - libs/harfbuzz
+
+files:
+  - download:
+      url: https://github.com/libass/libass/releases/download/${version}/libass-${version}.tar.xz
+      sha1: 91c0412d33f7d3167e394b5c1eb20fad15ff83c1
+      watch:
+        url: anitya://1560
 
 packages:
   libass:
