@@ -1,5 +1,5 @@
 description: Tag Image File Format library
-version: 4.4.0
+version: 4.7.1
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: http://download.osgeo.org/libtiff/tiff-${version}.tar.gz
-      sha1: e11d05db71d243a62800b4bf4479eb4859714405
+      sha1: 3677c549c68801c28bf870f174f0cdf408377b8d
       watch:
         url: anitya://1738
 
@@ -22,6 +22,7 @@ packages:
     files:
       - /usr/include
       - /usr/lib/*.so
+      - /usr/lib/cmake
       - /usr/lib/pkgconfig
 
   libtiff-man:
