@@ -1,0 +1,12 @@
+description: The Open Source toolkit for Secure Socket Layer and Transport Layer Security
+version: 3.6.1
+license: BSD
+
+files:
+  - download:
+      url: https://www.openssl.org/source/openssl-${version}.tar.gz
+      sha1: 845d412b5129870d9f754f89f5e195e2d18ce0e7
+      watch:
+        url: anitya://2566
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,6 +1,4 @@
-description: The Open Source toolkit for Secure Socket Layer and Transport Layer Security
-version: 3.0.7
-license: BSD
+include: packages/libs/openssl/package.include
 
 depends:
   - devel/glibc
@@ -8,11 +6,6 @@ depends:
 
 provides:
   - libs/ssl
-
-files:
-  - download:
-      url: https://www.openssl.org/source/openssl-${version}.tar.gz
-      sha1: f20736d6aae36bcbfa9aba0d358c71601833bf27
 
 packages:
   openssl:
