@@ -1,5 +1,5 @@
 description: Vulkan Development Tools
-version: 1.4.341
+version: 1.4.342
 license: Apache-2.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/v${version}.tar.gz
-      sha1: 6121914ae092528b54e5265949a3aab40fa0a583
+      sha1: 6fbc0623bd01cc25f66998b84b41bb2536f59cd3
       watch:
         url: anitya://242111
 
