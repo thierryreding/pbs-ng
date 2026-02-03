@@ -4,7 +4,7 @@ license: GPL-2.0
 
 files:
   - download:
-      url: http://www.netfilter.org/projects/iptables/files/iptables-${version}.tar.bz2
+      url: https://www.netfilter.org/pub/iptables/iptables-${version}.tar.bz2
       sha1: 98783621a5e58ff55f83b1350523f3de41af621d
       watch:
         url: anitya://1394
