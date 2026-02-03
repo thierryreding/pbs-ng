@@ -1,16 +1,5 @@
-include $(TOP_SRCDIR)/packages/autotools.mk
+include $(TOP_SRCDIR)/packages/meson.mk
 include $(TOP_SRCDIR)/packages/git.mk
 
-ifeq ($(realpath $(srcdir)),$(srcdir))
-$(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && autoreconf --force --install
-	touch $@
-
-$(builddir)/stamp-configure: $(srcdir)/stamp-patch | $(builddir)
-else
-$(builddir)/stamp-prepare: | $(builddir)
-	cd $(srcdir) && autoreconf --force --install
-	touch $@
-
-$(builddir)/stamp-configure: $(builddir)/stamp-prepare
-endif
+conf-args += \
+	-Dflavors=drm-gl,drm-glesv2,gbm-gl,gbm-glesv2,wayland-gl,wayland-glesv2,x11-gl,x11-glesv2,x11-gl-egl

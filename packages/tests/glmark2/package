@@ -2,6 +2,7 @@ description: example GL application using KMS and GBM
 license: custom
 
 depends:
+  - build-tools/meson
   - libs/mesa
 
 packages:
