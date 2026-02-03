@@ -1,15 +1,15 @@
 include $(TOP_SRCDIR)/packages/autotools.mk
 
-$(srcdir)/configure:
-	cd $(srcdir) && autoreconf --force --install
+$(srcdir)/configure: | $(srcdir)
+	cd $(srcdir) && NOCONFIGURE=1 ./autogen.sh
 
-$(builddir)/config.cache: | $(builddir)
-	echo '# generated for $(HOST)' > $@
-	echo 'ac_cv_func_malloc_0_nonnull=yes' >> $@
+$(builddir)/stamp-configure: $(srcdir)/configure
 
 conf-args += \
 	--with-sysroot=$(SYSROOT) \
-	--config-cache \
 	--enable-tools
 
-$(builddir)/stamp-configure: $(srcdir)/configure $(builddir)/config.cache
+# XXX Remove this workaround? The build suddenly started happening with
+# libgpiod v2.2 and this fixes it.
+conf-args += \
+	--disable-dependency-tracking
