@@ -2,15 +2,15 @@ description: Minimalistic user-space library oriented to netlink developers
 version: 1.0.5
 license: GPL-2.0
 
+depends:
+  - devel/glibc
+
 files:
   - download:
-      url: http://www.netfilter.org/projects/libmnl/files/libmnl-${version}.tar.bz2
+      url: https://www.netfilter.org/pub/libmnl/libmnl-${version}.tar.bz2
       sha1: 63c6456b77f7978a7b37e62c1b38346b2ef2d91c
       watch:
         url: anitya://1663
-
-depends:
-  - devel/glibc
 
 packages:
   libmnl:
