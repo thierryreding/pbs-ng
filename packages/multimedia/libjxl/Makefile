@@ -1,0 +1,7 @@
+include $(TOP_SRCDIR)/packages/cmake.mk
+
+cmake-args += \
+	-DJPEGXL_ENABLE_MANPAGES=OFF \
+	-DJPEGXL_ENABLE_SKCMS=OFF \
+	-DJPEGXL_ENABLE_SJPEG=OFF \
+	-DBUILD_TESTING=OFF

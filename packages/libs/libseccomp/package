@@ -1,0 +1,27 @@
+description: enhanced libseccomp library
+version: 2.6.0
+license: LGPL-2.1-only
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/seccomp/libseccomp/releases/download/v${version}/libseccomp-${version}.tar.gz
+      sha1: 2eb0222d379756bd5f0a52c0488a20e3311bbf00
+      watch:
+        url: anitya://13823
+
+packages:
+  libseccomp:
+    files:
+      - /usr/lib/*.so.*
+
+  libseccomp-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

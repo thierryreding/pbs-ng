@@ -1,0 +1,32 @@
+description: generic-purpose lossless compression algorithm
+version: 1.2.0
+license: MIT
+
+depends:
+  - build-tools/cmake
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/google/brotli/archive/refs/tags/v${version}.tar.gz
+      sha1: fb74102a641ecce8ebcb13d2a992975a9f165de5
+      watch:
+        url: anitya://15235
+
+packages:
+  brotli:
+    files:
+      - /usr/lib/*.so.*
+
+  brotli-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  brotli-utils:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

@@ -1,0 +1,28 @@
+description: HEIF and AVIF file format decoder and encoder
+version: 1.21.2
+license: LGPL-3.0-only, GPL-3.0, MIT
+
+depends:
+  - multimedia/libaom
+
+files:
+  - download:
+      url: https://github.com/strukturag/libheif/releases/download/v${version}/libheif-${version}.tar.gz
+      sha1: 2248e6a7477e5121d9ff3016aef4ab848f2c39d5
+      watch:
+        url: anitya://64439
+
+packages:
+  libheif:
+    files:
+      - /usr/lib/*.so.*
+      - /usr/lib/libheif
+
+  libheif-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/cmake
+      - /usr/lib/pkgconfig
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

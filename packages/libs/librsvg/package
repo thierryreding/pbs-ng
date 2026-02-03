@@ -1,0 +1,35 @@
+description: library to render SVG files using cairo as a rendering engine
+version: 2.60.2
+license: LGPL-2.1-only
+
+depends:
+  - build-tools/cargo-c
+  - build-tools/meson
+  - libs/cairo
+  - libs/gdk-pixbuf
+  - libs/pango
+
+files:
+  - download:
+      url: https://gitlab.gnome.org/GNOME/librsvg/-/archive/2.60.2/librsvg-2.60.2.tar.bz2
+      sha1: 15a7571f85b7ba1785fe8886d1ac3d9038eee61b
+      watch:
+        url: anitya://5420
+
+packages:
+  librsvg:
+    files:
+      - /usr/lib/*.so.*
+
+  librsvg-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.a
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  librsvg-utils:
+    files:
+      - /usr/bin
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

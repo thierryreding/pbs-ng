@@ -1,0 +1,16 @@
+description: build and install C-compatible libraries
+version: 0.10.20
+license: MIT
+
+depends:
+  - build-tools/openssl
+  - build-tools/rustup
+
+files:
+  - download:
+      url: https://github.com/lu-zero/cargo-c/archive/refs/tags/v${version}.tar.gz
+      sha1: 133296bbdae1bbc483e336f76a8b3401ac40ce44
+      watch:
+        url: anitya://58394
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

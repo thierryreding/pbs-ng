@@ -1,0 +1,43 @@
+description: sandboxed and extendable image loading
+version: 2.0.7
+license: MPL-2.0
+
+depends:
+  - build-tools/rustup
+  - devel/glibc
+  - libs/librsvg
+  - libs/libseccomp
+  - multimedia/libheif
+  - multimedia/libjxl
+
+files:
+  - download:
+      url: https://gitlab.gnome.org/GNOME/glycin/-/archive/${version}/glycin-${version}.tar.bz2
+      sha1: 35d875bd45d5fe9d60258ad119eb543cbae81008
+      watch:
+        url: anitya://371932
+
+packages:
+  glycin:
+    files:
+      - /usr/lib/*.so.*
+      - /usr/lib/glycin-loaders
+      - /usr/share/glycin-loaders
+      - /usr/share/thumbnailers
+
+  glycin-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+      - /usr/lib/pkgconfig
+
+  glycin-utils:
+    files:
+      - /usr/bin
+
+  glycin-gir:
+    files:
+      - /usr/lib/girepository-1.0
+      - /usr/share/gir-1.0
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
