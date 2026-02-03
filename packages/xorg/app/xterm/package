@@ -1,5 +1,5 @@
 description: X terminal emulator
-version: 349
+version: 406
 license: custom
 
 depends:
@@ -8,8 +8,8 @@ depends:
 
 files:
   - download:
-      url: ftp://ftp.invisible-island.net/pub/xterm/xterm-${version}.tgz
-      sha1: 6d72a128ca89b05d58041618d10c1c7d89e42258
+      url: https://invisible-mirror.net/archives/xterm/xterm-${version}.tgz
+      sha1: 26eb69443a3f5d1455a3f5890782fbf10b8cae4e
       watch:
         url: anitya://5272
 
