@@ -1,13 +1,6 @@
 description: fork of the popular zip manipulation library found in the zlib distribution
-version: 3.0.7
+version: 4.1.0
 license: Zlib
-
-files:
-  - download:
-      url: https://github.com/zlib-ng/minizip-ng/archive/${version}/minizip-ng-${version}.tar.gz
-      sha1: 5c8f76fbc836cfa4e7012a7d749fe01ad0c3b5b9
-      watch:
-        url: anitya://301509
 
 depends:
   - libs/bzip2
@@ -15,6 +8,13 @@ depends:
   - libs/xz
   - libs/zlib
   - libs/zstd
+
+files:
+  - download:
+      url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/${version}.tar.gz
+      sha1: 38e3fec880ac0b033070345974a418eb37a2af54
+      watch:
+        url: anitya://301509
 
 packages:
   minizip-ng:
