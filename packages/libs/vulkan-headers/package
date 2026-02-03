@@ -1,5 +1,5 @@
-description: Vulkan loader
-version: 1.2.202
+description: Vulkan header files and API registry
+version: 1.4.342
 license: Apache-2.0
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/v${version}.tar.gz
-      sha1: cc8802668c2fa889908001b1bd1e894711b9f98a
+      sha1: 359158e2589db4832b39b9cd7bc693fddc255bfb
       watch:
         url: anitya://88835
 
