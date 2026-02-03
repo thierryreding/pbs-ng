@@ -4,8 +4,8 @@ license: GPL-2.0
 
 files:
   - download:
-      url: https://www.netfilter.org/projects/libnftnl/files/libnftnl-${version}.tar.bz2
-      sha1: ba4f824a4e700441aa8475d4ef7f2138e2871c5e
+      url: https://www.netfilter.org/pub/libnftnl/libnftnl-${version}.tar.bz2
+      sha1: a0643322bbfdc7c0abb882af329532823a284c70
       watch:
         url: anitya://1681
 
