@@ -1,11 +1,11 @@
 description: package for correctly-rounded, arbitrary precision decimal floating point arithmetic
-version: 2.5.1
+version: 4.0.1
 license: BSD-2-Clause
 
 files:
   - download:
       url: https://www.bytereef.org/software/mpdecimal/releases/mpdecimal-${version}.tar.gz
-      sha1: 16d0b8df9be8cacda90dd4cd041e3f5838e17074
+      sha1: 38f001142f227fdcb2a493ab4c922112e5b1d2f2
       watch:
         url: anitya://11578
 
