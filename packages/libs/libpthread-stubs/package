@@ -1,14 +1,14 @@
 description: pthread stub library
-version: 0.4
+version: 0.5
 license: custom
 
 depends:
   - devel/glibc
 
 files:
-- download:
-    url: http://xcb.freedesktop.org/dist/libpthread-stubs-${version}.tar.bz2
-    sha1: c42503a2ae0067b2238b2f3fefc86656baa4dd8e
+  - download:
+      url: https://xcb.freedesktop.org/dist/libpthread-stubs-${version}.tar.gz
+      sha1: b15bbcb6b8354c12e4cc47a8c2e788daa374ee04
       watch:
         url: anitya://13519
 
