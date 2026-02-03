@@ -13,7 +13,7 @@ ACLOCAL_PATH := $(BUILD_TOOLS)/share/aclocal:$(SYSROOT)$(PREFIX)/share/aclocal
 LD_LIBRARY_PATH := $(BUILD_TOOLS)/lib
 PATH := $(BUILD_TOOLS)/bin:$(PATH)
 
-PKG_CONFIG_LIBDIR := $(SYSROOT)$(PREFIX)/lib/pkgconfig
+PKG_CONFIG_LIBDIR := $(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig
 PKG_CONFIG_SYSROOT_DIR := $(SYSROOT)
 
 CROSS_COMPILE = $(HOST)-
