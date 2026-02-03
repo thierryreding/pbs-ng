@@ -4,8 +4,8 @@ license: BSD-3-Clause
 
 files:
   - download:
-      url: https://github.com/libevent/libevent/archive/release-${version}-stable.tar.gz
-      sha1: eba253ac0dcdd6572c6631b0c579471d88d3dc8d
+      url: https://github.com/libevent/libevent/releases/download/release-${version}-stable/libevent-${version}-stable.tar.gz
+      sha1: cd55656a9b5bed630b08f05495230affb7996b21
       watch:
         url: anitya://1606
 
