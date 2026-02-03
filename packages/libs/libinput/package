@@ -1,5 +1,5 @@
 description: input device handling library
-version: 1.19.4
+version: 1.30.1
 license: custom
 
 depends:
@@ -12,8 +12,8 @@ depends:
 
 files:
   - download:
-      url: http://www.freedesktop.org/software/libinput/libinput-${version}.tar.xz
-      sha1: 0a8106063861c7f91681babb949b9eb839e858c0
+      url: https://gitlab.freedesktop.org/libinput/libinput/-/archive/${version}/libinput-${version}.tar.bz2
+      sha1: d949b9660e94a06d268f7fcb430dd6921daae374
       watch:
         url: anitya://5781
 
