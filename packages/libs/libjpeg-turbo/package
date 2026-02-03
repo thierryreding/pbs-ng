@@ -1,5 +1,5 @@
 description: JPEG codec library
-version: 2.0.6
+version: 3.1.3
 license: custom
 
 depends:
@@ -8,8 +8,8 @@ depends:
 
 files:
   - download:
-      url: http://prdownloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-${version}.tar.gz
-      sha1: 5406c7676d7df89fb4da791ad5af51202910fb25
+      url: https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/${version}/libjpeg-turbo-${version}.tar.gz
+      sha1: e9bcf65bf26c8313cbdc13cff5de7aacaab1f232
       watch:
         url: anitya://1648
 
@@ -23,6 +23,7 @@ packages:
       - /usr/include
       - /usr/lib/*.a
       - /usr/lib/*.so
+      - /usr/lib/cmake
       - /usr/lib/pkgconfig
 
   libjpeg-utils:
