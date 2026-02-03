@@ -1,5 +1,5 @@
 description: loads and enumerates PKCS#11 modules
-version: 0.23.22
+version: 0.26.1
 license: BSD
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://github.com/p11-glue/p11-kit/releases/download/${version}/p11-kit-${version}.tar.xz
-      sha1: 339e5163ed50a9984a74739b9207ea8cd77fa7e2
+      sha1: 796f3b69cad054a52e04f520459beaaab936b99f
       watch:
         url: anitya://2582
 
