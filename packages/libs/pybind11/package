@@ -1,5 +1,5 @@
 description: seamless operability between C++11 and Python
-version: 2.10.1
+version: 3.0.1
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://github.com/pybind/pybind11/archive/v${version}.tar.gz
-      sha1: 604c8a487d9535407c1045d3461bf38faa6414e2
+      sha1: b20ddcd79e2b03b7e2777a2a0b06b646f2f23ce0
       watch:
         url: anitya://13384
 
