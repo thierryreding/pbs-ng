@@ -1,5 +1,5 @@
 description: utility libraries for XC binding - standard X key constants and conversion to/from keycodes
-version: 0.4.0
+version: 0.4.1
 license: custom
 
 depends:
@@ -7,9 +7,9 @@ depends:
   - xorg/proto/xcb
 
 files:
-- download:
-    url: http://xcb.freedesktop.org/dist/xcb-util-keysyms-${version}.tar.bz2
-    sha1: ff02ee8ac22c53848af50c0a6a6b00feb002c1cb
+  - download:
+      url: https://xcb.freedesktop.org/dist/xcb-util-keysyms-${version}.tar.xz
+      sha1: f5408e9ca09ef225dfc602ab2ba47fa7982fb52e
       watch:
         url: anitya://5168
 
