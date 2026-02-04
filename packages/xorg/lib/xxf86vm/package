@@ -1,5 +1,5 @@
 description: X11 XFree86 video mode extension library
-version: 1.1.4
+version: 1.1.7
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://xorg.freedesktop.org/releases/individual/lib/libXxf86vm-${version}.tar.gz
-      sha1: 7ab340428ec501d6ebe3d307028c7a39f5b38495
+      sha1: 88784737e0808ad1fad523f7c699eacc6ffa5271
       watch:
         url: anitya://1799
 
