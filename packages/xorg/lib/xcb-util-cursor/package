@@ -1,5 +1,5 @@
 description: XCB cursor library
-version: 0.1.5
+version: 0.1.6
 license: custom
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: https://xorg.freedesktop.org/archive/individual/lib/xcb-util-cursor-${version}.tar.xz
-      sha1: efa6642e2585e29abadcb16b492111be80f6b89f
+      sha1: cb40b133ce0e2e7c111d7b8badbfa63d125e1b74
       watch:
         url: anitya://5166
 
