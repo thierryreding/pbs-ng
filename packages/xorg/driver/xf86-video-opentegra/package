@@ -3,6 +3,7 @@ version: 0.6.0
 license: custom
 
 depends:
+  - xorg/xserver
 
 files:
   - download:
