@@ -1,18 +1,9 @@
-description: a library that implements Perl 5-style regular expressions
-version: 10.47
-license: BSD
+include: packages/libs/pcre2/package.include
 
 depends:
   - devel/glibc
   - libs/bzip2
   - libs/zlib
-
-files:
-  - download:
-      url: https://github.com/PhilipHazel/pcre2/releases/download/pcre2-${version}/pcre2-${version}.tar.bz2
-      sha1: 82fbde112d57224e7dde9c9b5ea5cd8e17ce941e
-      watch:
-        url: anitya://5832
 
 packages:
   libpcre2:
