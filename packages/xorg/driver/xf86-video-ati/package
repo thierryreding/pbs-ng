@@ -1,13 +1,15 @@
 description: X.Org ATI video driver
-version: 18.0.1
+version: 22.0.0
 license: custom
 
 depends:
+  - libs/libdrm
+  - xorg/xserver
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/driver/xf86-video-ati-${version}.tar.bz2
-      sha1: b5a0b6a2fa839d668a3fb90280fede95f0bc130d
+      url: https://xorg.freedesktop.org/releases/individual/driver/xf86-video-ati-${version}.tar.xz
+      sha1: e929e28506dbebd40803300678bf43f09117d039
       watch:
         url: anitya://5214
 
