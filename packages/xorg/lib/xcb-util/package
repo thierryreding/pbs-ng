@@ -1,5 +1,5 @@
 description: utility libraries for XC binding
-version: 0.4.0
+version: 0.4.1
 license: custom
 
 depends:
@@ -7,9 +7,9 @@ depends:
   - xorg/proto/xcb
 
 files:
-- download:
-    url: http://xcb.freedesktop.org/dist/xcb-util-${version}.tar.bz2
-    sha1: 7f2e9b7efcc2c34eb1d6ae312c3d73b075832e46
+  - download:
+      url: https://xcb.freedesktop.org/dist/xcb-util-${version}.tar.xz
+      sha1: c5ba133703ca9d5d573a502ef03157de1b424384
       watch:
         url: anitya://5165
 
