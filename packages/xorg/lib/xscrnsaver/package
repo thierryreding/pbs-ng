@@ -1,13 +1,15 @@
 description: X11 Screen Saver extension library
-version: 1.2.3
+version: 1.2.5
 license: custom
 
 depends:
+  - xorg/lib/xext
+  - xorg/proto/xorgproto
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/lib/libXScrnSaver-${version}.tar.bz2
-      sha1: 70c791c5755a298ecf1a0823e239a24fa4b2b42f
+      url: https://xorg.freedesktop.org/releases/individual/lib/libXScrnSaver-${version}.tar.xz
+      sha1: 4a0a2f1893e1228a695e418b96e632866ade1701
       watch:
         url: anitya://1791
 
