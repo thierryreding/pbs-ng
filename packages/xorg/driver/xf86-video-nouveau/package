@@ -1,13 +1,14 @@
 description: Open Source 2D acceleration driver for NVIDIA cards
-version: 1.0.15
+version: 1.0.18
 license: custom
 
 depends:
+  - xorg/xserver
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/driver/xf86-video-nouveau-${version}.tar.bz2
-      sha1: ed699a59ea509550f60019eef1e092ed0ccdea08
+      url: https://xorg.freedesktop.org/releases/individual/driver/xf86-video-nouveau-${version}.tar.xz
+      sha1: 877ed943254916ae66ac1d9d8b864034581ac2cd
       watch:
         url: anitya://5229
 
