@@ -1,5 +1,5 @@
 description: X11 font encoding library
-version: 1.1.4
+version: 1.1.8
 license: custom
 
 depends:
@@ -8,8 +8,8 @@ depends:
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/lib/libfontenc-${version}.tar.bz2
-      sha1: d4f232b0b07487b984e13422ce4130b61a8b9edb
+      url: https://xorg.freedesktop.org/releases/individual/lib/libfontenc-${version}.tar.xz
+      sha1: d320e027a9e87429dec362ec412d07e280c5f750
       watch:
         url: anitya://1613
 
