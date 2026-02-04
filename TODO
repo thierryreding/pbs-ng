@@ -1,0 +1,16 @@
+* add perl and perl-xml-parser as build-tools (needed by intltool)
+
+* create build-tools/openimageio to make ooiotool available which
+  is needed by libs/opencolorio for complete Python docstrings
+
+* implement "provides:" property support
+
+* check warnings for attachment header:
+  - libs/wayland
+
+* add a way for packages to be restricted to a set of architectures
+  - libs/embree (x86-only)
+
+* implement "patches:" property support
+  - the goal is to allow specifying patches in the package file in order
+    to automatically apply them without having to modify the Makefile
