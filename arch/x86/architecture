@@ -51,4 +51,9 @@ cpu:
       defaults:
         generation: x86_64
 
+    core-i9:
+      description: Intel Core i9
+      defaults:
+        generation: x86_64
+
 # vim: et ft=yaml sts=2 sw=2 ts=2
