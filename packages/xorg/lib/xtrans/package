@@ -1,14 +1,14 @@
 description: X transport library
-version: 1.4.0
+version: 1.6.0
 license: custom
 
 depends:
   - devel/glibc
 
 files:
-- download:
-    url: http://xorg.freedesktop.org/releases/individual/lib/xtrans-${version}.tar.bz2
-    sha1: 7c490026efb450798e02b040c05eba5212291c08
+  - download:
+      url: https://xorg.freedesktop.org/releases/individual/lib/xtrans-${version}.tar.xz
+      sha1: b3fd8a1f5d3f7c9d4900593721beb08c75f653db
       watch:
         url: anitya://13441
 
