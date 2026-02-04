@@ -1,11 +1,16 @@
 description: X11 Session Management library
-version: 1.2.3
+version: 1.2.6
 license: custom
+
+depends:
+  - xorg/lib/ice
+  - xorg/lib/xtrans
+  - xorg/proto/xorgproto
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/lib/libSM-${version}.tar.bz2
-      sha1: 437d7b13fa2eba325df3a106f177df46ccec6546
+      url: https://xorg.freedesktop.org/releases/individual/lib/libSM-${version}.tar.xz
+      sha1: cc1f889407c587af6a2de081f5243c7cc216867a
       watch:
         url: anitya://1726
 
