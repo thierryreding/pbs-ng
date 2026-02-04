@@ -1,5 +1,5 @@
 description: X cursor management library
-version: 1.2.0
+version: 1.2.3
 license: custom
 
 depends:
@@ -7,9 +7,9 @@ depends:
   - xorg/lib/xrender
 
 files:
-- download:
-    url: http://xorg.freedesktop.org/releases/individual/lib/libXcursor-${version}.tar.bz2
-    sha1: cca0b34955d3c2f657f05a2a2c40f75353ddd912
+  - download:
+      url: https://xorg.freedesktop.org/releases/individual/lib/libXcursor-${version}.tar.xz
+      sha1: 663463439c6cc32ade4a482c635f36bba499f3b9
       watch:
         url: anitya://1770
 
