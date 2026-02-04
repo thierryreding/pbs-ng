@@ -1,13 +1,14 @@
 description: X11 Input extension library
-version: 1.7.10
+version: 1.8.2
 license: custom
 
 depends:
+  - xorg/lib/xext
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/lib/libXi-${version}.tar.bz2
-      sha1: 79052e50ea07ce2431f8988a60553d9091d46207
+      url: https://xorg.freedesktop.org/releases/individual/lib/libXi-${version}.tar.xz
+      sha1: 2cbad5609569f879dadfebfb82243be1ea9badf6
       watch:
         url: anitya://1778
 
