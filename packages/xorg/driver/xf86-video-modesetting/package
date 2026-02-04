@@ -1,8 +1,9 @@
 description: X.Org generic modesetting video driver
-version: 0.8.1
+version: 0.9.0
 license: custom
 
 depends:
+  - xorg/xserver
 
 files:
   - download:
