@@ -1,5 +1,5 @@
 description: FreeType-based font drawing library for X
-version: 2.3.3
+version: 2.3.9
 license: custom
 
 depends:
@@ -9,8 +9,8 @@ depends:
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/lib/libXft-${version}.tar.bz2
-      sha1: 48f543fe495f545df1794fa36a0a708558ae298c
+      url: https://xorg.freedesktop.org/releases/individual/lib/libXft-${version}.tar.xz
+      sha1: 1c886d1ae2a6d11cdb518787b7a1fed806155936
       watch:
         url: anitya://1777
 
