@@ -1,11 +1,11 @@
 description: X.Org autotools macros
-version: 1.19.2
+version: 1.20.2
 license: custom
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/util/util-macros-${version}.tar.bz2
-      sha1: e8b3a6f2bfde22440fca0974da53da18821a4ee6
+      url: https://xorg.freedesktop.org/releases/individual/util/util-macros-${version}.tar.xz
+      sha1: 3331065b8ce992ab30b0011147cb080e62368e80
       watch:
         url: anitya://5252
 
