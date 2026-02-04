@@ -2,14 +2,14 @@ description: Core utilities for Python packages
 version: 26.0
 license: custom
 
+depends:
+  - build-tools/python
+
 files:
   - download:
       url: https://pypi.python.org/packages/source/p/packaging/packaging-${version}.tar.gz
       sha1: 16021db61cb341a67194df47d4def1b1d623c449
       watch:
         url: anitya://60461
-
-depends:
-  - build-tools/python
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

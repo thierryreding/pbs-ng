@@ -2,16 +2,16 @@ description: Library that provides generic access to USB devices
 version: 1.0.29
 license: LGPL-2.1
 
+depends:
+  - devel/glibc
+  - core/systemd # for libudev
+
 files:
   - download:
       url: https://github.com/libusb/libusb/releases/download/v${version}/libusb-${version}.tar.bz2
       sha1: f85a55310ccb5fc4fd27a55a54d24dba30a1b89f
       watch:
         url: anitya://1749
-
-depends:
-  - devel/glibc
-  - core/systemd # for libudev
 
 packages:
   libusb:

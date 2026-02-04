@@ -2,17 +2,17 @@ description: convert XML to many other formats
 version: 0.0.29
 license: GPL
 
+depends:
+  - build-tools/docbook-4.1
+  - build-tools/docbook-5.0
+  - build-tools/docbook-5.1
+  - build-tools/docbook-xsl
+
 files:
   - download:
       url: https://releases.pagure.org/xmlto/xmlto-${version}.tar.bz2
       sha1: 16ae832cee25a022fd36bc01f55de76dc684c11c
       watch:
         url: anitya://13307
-
-depends:
-  - build-tools/docbook-4.1
-  - build-tools/docbook-5.0
-  - build-tools/docbook-5.1
-  - build-tools/docbook-xsl
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

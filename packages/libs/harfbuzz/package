@@ -2,13 +2,6 @@ description: OpenType text shaping engine
 version: 12.3.2
 license: MIT
 
-files:
-  - download:
-      url: https://github.com/harfbuzz/harfbuzz/releases/download/${version}/harfbuzz-${version}.tar.xz
-      sha1: b5329f7e300b7a37fc7ef0c78f0b8a8d91619029
-      watch:
-        url: anitya://1299
-
 depends:
   - libs/cairo
   - libs/fontconfig
@@ -16,6 +9,13 @@ depends:
   - libs/glib
   - libs/gobject-introspection
   - libs/icu
+
+files:
+  - download:
+      url: https://github.com/harfbuzz/harfbuzz/releases/download/${version}/harfbuzz-${version}.tar.xz
+      sha1: b5329f7e300b7a37fc7ef0c78f0b8a8d91619029
+      watch:
+        url: anitya://1299
 
 packages:
   libharfbuzz:

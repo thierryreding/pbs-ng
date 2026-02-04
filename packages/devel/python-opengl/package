@@ -2,15 +2,15 @@ description: OpenGL bindings for Python
 version: 3.1.7
 license: BSD
 
+depends:
+  - devel/python
+
 files:
   - download:
       url: https://pypi.python.org/packages/source/p/PyOpenGL/PyOpenGL-${version}.tar.gz
       sha1: 3127dd8f3248236ec423593912c4908af183d641
       watch:
         url: anitya://3754
-
-depends:
-  - devel/python
 
 packages:
   python-opengl:

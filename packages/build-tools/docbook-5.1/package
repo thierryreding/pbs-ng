@@ -2,6 +2,9 @@ description:
 version: 5.1
 license:
 
+depends:
+  - build-tools/libxml2
+
 files:
   - download:
       url: https://docbook.org/xml/${version}/docbook-v${version}-os.zip
@@ -9,8 +12,5 @@ files:
       strip: false
       watch:
         url: anitya://227335
-
-depends:
-  - build-tools/libxml2
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

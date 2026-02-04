@@ -2,13 +2,6 @@ description: cross-platform, fast, feature-rich, GPU based terminal
 version: 0.45.0
 license: GPL-3.0
 
-files:
-  - download:
-      url: https://github.com/kovidgoyal/kitty/archive/refs/tags/v${version}.tar.gz
-      sha1: a0ae3fecfc97f8bc9e9d2b82facae01b06dbf9af
-      watch:
-        url: anitya://17405
-
 depends:
   - build-tools/python-installer
   - build-tools/python-setuptools
@@ -21,5 +14,12 @@ depends:
   - libs/openssl
   - libs/zlib
   - xorg/lib/xinerama
+
+files:
+  - download:
+      url: https://github.com/kovidgoyal/kitty/archive/refs/tags/v${version}.tar.gz
+      sha1: a0ae3fecfc97f8bc9e9d2b82facae01b06dbf9af
+      watch:
+        url: anitya://17405
 
 # vim: ft=yaml

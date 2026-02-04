@@ -2,15 +2,15 @@ description: reusable library for GPU-accelerated image/video processing primiti
 version: 4.12.8
 license: MIT
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: https://github.com/Immediate-Mode-UI/Nuklear/archive/refs/tags/${version}.tar.gz
       sha1: 2f12665542cadbd0caf1e00f0d1354ca7cec36d1
       watch:
         url: anitya://388192
-
-depends:
-  - devel/glibc
 
 packages:
   libnuklear-dev:

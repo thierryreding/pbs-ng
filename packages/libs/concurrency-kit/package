@@ -2,15 +2,15 @@ description: concurrency primitives, safe memory reclamation mechanisms and non-
 version: 0.7.2
 license: custom
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: https://github.com/concurrencykit/ck/archive/refs/tags/0.7.1.tar.gz
       sha1: dc54973bd384f8a54a3022a9380c485c353dbcb4
       watch:
         url: anitya://292814
-
-depends:
-  - devel/glibc
 
 packages:
   concurrency-kit:

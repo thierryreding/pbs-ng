@@ -2,16 +2,16 @@ description: collection of tests for VA-API
 version: 2.23.0
 license: MIT
 
+depends:
+  - libs/libdrm
+  - multimedia/libva
+
 files:
   - download:
       url: https://github.com/intel/libva-utils/releases/download/${version}/libva-utils-${version}.tar.bz2
       sha1: c7d96884b2791c807e81f804cbce451d92907bb1
       watch:
         url: anitya://16334
-
-depends:
-  - libs/libdrm
-  - multimedia/libva
 
 packages:
   libva-utils:

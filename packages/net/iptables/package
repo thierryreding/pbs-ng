@@ -2,16 +2,16 @@ description: Linux kernel packet control tool
 version: 1.8.8
 license: GPL-2.0
 
+depends:
+  - devel/glibc
+  - net/libnftnl
+
 files:
   - download:
       url: https://www.netfilter.org/pub/iptables/iptables-${version}.tar.bz2
       sha1: 98783621a5e58ff55f83b1350523f3de41af621d
       watch:
         url: anitya://1394
-
-depends:
-  - devel/glibc
-  - net/libnftnl
 
 packages:
   iptables:

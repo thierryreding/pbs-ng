@@ -2,13 +2,6 @@ description: a free, open-source, and cross-platform media player
 version: 0.41.0
 license: GPL-3.0-or-later
 
-files:
-  - download:
-      url: https://github.com/mpv-player/mpv/archive/v${version}.tar.gz
-      sha1: bf50f97238edb15ed1d9fe0126b59cd9a12aa7e5
-      watch:
-        url: anitya://5348
-
 depends:
   - devel/glibc
   - libs/libplacebo
@@ -18,6 +11,13 @@ depends:
   - multimedia/libvdpau
   - xorg/lib/xscrnsaver
   - xorg/lib/xinerama
+
+files:
+  - download:
+      url: https://github.com/mpv-player/mpv/archive/v${version}.tar.gz
+      sha1: bf50f97238edb15ed1d9fe0126b59cd9a12aa7e5
+      watch:
+        url: anitya://5348
 
 packages:
   mpv:

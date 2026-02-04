@@ -2,15 +2,15 @@ description: totally open, royalty-free, highly versatile audio codec
 version: 1.6.1
 license: BSD
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: https://downloads.xiph.org/releases/opus/opus-${version}.tar.gz
       sha1: 74612396b53f0c0240d2f81d4c7b0eaa14620402
       watch:
         url: anitya://11081
-
-depends:
-  - devel/glibc
 
 packages:
   opus:

@@ -2,15 +2,15 @@ description: DirectX headers for using D3D12
 version: 1.618.2
 license: MIT
 
+depends:
+  - build-tools/meson
+
 files:
   - download:
       url: https://github.com/microsoft/DirectX-Headers/archive/refs/tags/v${version}.tar.gz
       sha1: 179ee2ecb714e07510e6a3607072d4948d67ed24
       watch:
         url: anitya://377275
-
-depends:
-  - build-tools/meson
 
 packages:
   directx-headers:

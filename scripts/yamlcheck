@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+
+import os, sys, yaml
+
+if len(sys.argv) > 1:
+    files = sys.argv[1:]
+else:
+    topdir = os.path.join(os.getcwd(), 'packages')
+    filenames = []
+
+    for directory, subdirs, files in os.walk(topdir):
+        #print('directory:', directory)
+        #print('  subdirs:', subdirs)
+        #print('    files:', files)
+
+        for filename in files:
+            if filename == 'package' or filename == 'package.include':
+                filenames.append(os.path.join(directory, filename))
+
+for filename in filenames:
+    with open(filename, 'r') as fobj:
+        filename = os.path.relpath(filename, os.getcwd())
+
+        data = yaml.load(fobj, Loader = yaml.BaseLoader)
+        seen = {
+                'depends': False,
+                'files': False,
+            }
+
+        #print('data:', data)
+        for key in data:
+            #print('%s' % key)
+
+            if key == 'files':
+                seen['files'] = True
+
+            if key == 'depends':
+                if seen['files']:
+                    print('WARNING: %s: key "%s" should be before "files"' % (filename, key))
+
+                seen['depends'] = True

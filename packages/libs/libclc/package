@@ -2,19 +2,19 @@ description: library requirements of the OpenCL C programming language
 version: 21.1.8
 license: MIT
 
-files:
-  - download:
-      url: https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/libclc-${version}.src.tar.xz
-      sha1: 4740718d294b31ffe9af7d6b4c642a1d4ece5893
-      watch:
-        url: anitya://376264
-
 depends:
   - build-tools/clang
   - build-tools/cmake
   - build-tools/spirv-tools
   - build-tools/spirv-llvm
   - devel/spirv-llvm
+
+files:
+  - download:
+      url: https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/libclc-${version}.src.tar.xz
+      sha1: 4740718d294b31ffe9af7d6b4c642a1d4ece5893
+      watch:
+        url: anitya://376264
 
 packages:
   libclc:

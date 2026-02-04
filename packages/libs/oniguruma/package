@@ -2,15 +2,15 @@ description: regular expression library
 version: 6.9.10
 license: BSD
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: https://github.com/kkos/oniguruma/releases/download/v${version}/onig-${version}.tar.gz
       sha1: bcada943679fa8cecfe359e57d785da9430dcdbc
       watch:
         url: anitya://11184
-
-depends:
-  - devel/glibc
 
 packages:
   libonig:

@@ -2,16 +2,16 @@ description: command-line JSON processor
 version: 1.8.1
 license: MIT
 
+depends:
+  - devel/glibc
+  - libs/oniguruma
+
 files:
   - download:
       url: https://github.com/jqlang/jq/releases/download/jq-${version}/jq-${version}.tar.gz
       sha1: ac8ee9d92fd58805a90e1853df7c35887236d8a8
       watch:
         url: anitya://13252
-
-depends:
-  - devel/glibc
-  - libs/oniguruma
 
 packages:
   jq:

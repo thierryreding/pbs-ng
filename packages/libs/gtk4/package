@@ -2,16 +2,16 @@ package: common C routines used by GTK+ and other libraries
 version: 4.20.3
 license: LGPL-2.1
 
+depends:
+  - libs/cairo
+  - multimedia/gst-plugins-bad
+
 files:
   - download:
       url: https://ftp.gnome.org/pub/gnome/sources/gtk/${major}.${minor}/gtk-${version}.tar.xz
       sha1: 48fcd1b061b61419a19d54f384a8a9700dab4102
       watch:
         url: anitya://13942
-
-depends:
-  - libs/cairo
-  - multimedia/gst-plugins-bad
 
 packages:
   gtk4:

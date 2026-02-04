@@ -2,13 +2,6 @@ package: freedesktop.org shared MIME info
 version: 2.4
 license: GPL-2.0
 
-files:
-  - download:
-      url: https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/${version}/shared-mime-info-${version}.tar.bz2
-      sha1: 85199c1c88313b9611d171ca38effa1d4b7d3e80
-      watch:
-        url: anitya://5524
-
 depends:
   - build-tools/docbook-4.1
   - build-tools/docbook-xsl
@@ -16,6 +9,13 @@ depends:
   - build-tools/xmlto
   - libs/glib
   - libs/libxml2
+
+files:
+  - download:
+      url: https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/${version}/shared-mime-info-${version}.tar.bz2
+      sha1: 85199c1c88313b9611d171ca38effa1d4b7d3e80
+      watch:
+        url: anitya://5524
 
 packages:
   shared-mime-info:

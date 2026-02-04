@@ -2,19 +2,19 @@ package: files shared by VTE libraries
 version: 0.82.3
 license: LGPL-2.1
 
-files:
-  - download:
-      url: https://ftp.gnome.org/pub/gnome/sources/vte/${major}.${minor}/vte-${version}.tar.xz
-      sha1: 5af48c48960794038cafe8d2449fcddf4b81d6e3
-      watch:
-        url: anitya://10895
-
 depends:
   - libs/gnutls
   - libs/pcre2
   - libs/gtk3
   - libs/gtk4
   - libs/icu
+
+files:
+  - download:
+      url: https://ftp.gnome.org/pub/gnome/sources/vte/${major}.${minor}/vte-${version}.tar.xz
+      sha1: 5af48c48960794038cafe8d2449fcddf4b81d6e3
+      watch:
+        url: anitya://10895
 
 packages:
   libvte:

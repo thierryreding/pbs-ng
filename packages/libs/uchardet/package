@@ -2,15 +2,15 @@ description: encoding detector library
 version: 0.0.8
 license: MPL
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: https://www.freedesktop.org/software/uchardet/releases/uchardet-${version}.tar.xz
       sha1: fdc11673bfb0939f48825bf811b64af709339c80
       watch:
         url: anitya://9265
-
-depends:
-  - devel/glibc
 
 packages:
   uchardet:

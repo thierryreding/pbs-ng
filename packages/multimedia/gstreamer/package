@@ -2,13 +2,6 @@ description: multimedia graph framework
 version: 1.28.0
 license: LGPL
 
-files:
-  - download:
-      url: https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${version}.tar.xz
-      sha1: 9e9aeb3b076ac0277b1a9f0b5c6b3d259055a570
-      watch:
-        url: anitya://1263
-
 depends:
   - devel/python
   - libs/glib
@@ -17,6 +10,13 @@ depends:
   - libs/libelf
   - libs/libunwind
   - libs/libxml2
+
+files:
+  - download:
+      url: https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${version}.tar.xz
+      sha1: 9e9aeb3b076ac0277b1a9f0b5c6b3d259055a570
+      watch:
+        url: anitya://1263
 
 packages:
   gstreamer:

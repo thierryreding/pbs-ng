@@ -2,15 +2,15 @@ description: utilities for dealing with MTD devices
 version: 2.3.0
 license: GPL-2.0
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: ftp://ftp.infradead.org/pub/mtd-utils/mtd-utils-${version}.tar.bz2
       sha1: 3267436cac23a9a1721bc2a3cc8fd05a8b10c143
       watch:
         url: anitya://2026
-
-depends:
-  - devel/glibc
 
 packages:
   mtd-utils:

@@ -2,17 +2,17 @@ description: library for handling OpenGL function pointer management
 version: 1.5.10
 license: MIT
 
+depends:
+  - libs/libglvnd
+  - libs/mesa
+  - xorg/lib/x11
+
 files:
   - download:
       url: https://github.com/anholt/libepoxy/archive/refs/tags/${version}.tar.gz
       sha1: f86e817b293eb30ca1e26d159de3a5903ee92f54
       watch:
         url: anitya://6090
-
-depends:
-  - libs/libglvnd
-  - libs/mesa
-  - xorg/lib/x11
 
 packages:
   libepoxy:

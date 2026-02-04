@@ -2,15 +2,15 @@ description: VDPAU info tool
 version: 1.5
 license: custom
 
+depends:
+  - multimedia/libvdpau
+
 files:
   - download:
       url: https://gitlab.freedesktop.org/vdpau/vdpauinfo/-/archive/${version}/vdpauinfo-${version}.tar.bz2
       sha1: a597f62cb77361d47111d8378b71c9ae92f58e96
       watch:
         url: anitya://16031
-
-depends:
-  - multimedia/libvdpau
 
 packages:
   vdpauinfo:

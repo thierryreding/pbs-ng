@@ -2,14 +2,14 @@ description:
 version: 5.0.1
 license:
 
+depends:
+  - build-tools/libxml2
+
 files:
   - download:
       url: https://docbook.org/xml/${version}/docbook-${version}.zip
       sha1: 6b35d6c3454f2ac9be1f6c3706b17d90a868e8c8
       watch:
         url: ignore://
-
-depends:
-  - build-tools/libxml2
 
 # vim: et ft=yaml sts=2 sw=2 ts=2

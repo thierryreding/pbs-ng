@@ -2,18 +2,18 @@ description: password and account management tool suite with support for shadow 
 version: 4.15.0
 license: BSD-3-Clause
 
+depends:
+  - devel/glibc
+  - libs/libcap
+  - libs/libxcrypt
+  - libs/pam
+
 files:
   - download:
       url: https://github.com/shadow-maint/shadow/releases/download/${version}/shadow-${version}.tar.xz
       sha1: cb918a7412f5b57d268e3b1964111c9cdb84bb56
       watch:
         url: anitya://4802
-
-depends:
-  - devel/glibc
-  - libs/libcap
-  - libs/libxcrypt
-  - libs/pam
 
 packages:
   shadow:

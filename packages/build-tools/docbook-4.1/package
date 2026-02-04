@@ -2,6 +2,9 @@ description:
 version: 4.1.2
 license:
 
+depends:
+  - build-tools/libxml2
+
 files:
   - download:
       url: https://docbook.org/xml/${version}/docbkx${major}${minor}${micro}.zip
@@ -9,8 +12,5 @@ files:
       strip: false
       watch:
         url: ignore://
-
-depends:
-  - build-tools/libxml2
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
