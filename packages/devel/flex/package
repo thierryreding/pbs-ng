@@ -1,16 +1,7 @@
-description: A tool for generating text-scanning programs
-version: 2.6.4
-license: custom
+include: packages/devel/flex/package.include
 
 depends:
   - devel/glibc
-
-files:
-  - download:
-      url: https://github.com/westes/flex/releases/download/v${version}/flex-${version}.tar.gz
-      sha1: fafece095a0d9890ebd618adb1f242d8908076e1
-     watch:
-       url: anitya://819
 
 packages:
   flex:
