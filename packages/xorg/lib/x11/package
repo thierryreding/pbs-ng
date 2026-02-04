@@ -1,5 +1,5 @@
 description: X library
-version: 1.6.9
+version: 1.8.12
 license: custom
 
 depends:
@@ -8,9 +8,9 @@ depends:
   - xorg/proto/xorgproto
 
 files:
-- download:
-    url: http://xorg.freedesktop.org/releases/individual/lib/libX11-${version}.tar.bz2
-    sha1: 62456536411f2540fbd4a3f59ed8af94967124c2
+  - download:
+      url: https://xorg.freedesktop.org/releases/individual/lib/libX11-${version}.tar.xz
+      sha1: 0339b900f66d14ca4faf65d8515faa744f75aa2f
       watch:
         url: anitya://1764
 
