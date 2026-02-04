@@ -1,5 +1,5 @@
 description: X11 keyboard file manipulation library
-version: 1.1.0
+version: 1.2.0
 license: custom
 
 depends:
@@ -8,8 +8,8 @@ depends:
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-${version}.tar.bz2
-      sha1: 487f314b6dbc17e93d0fe1e3741392156a9ca895
+      url: https://xorg.freedesktop.org/releases/individual/lib/libxkbfile-${version}.tar.xz
+      sha1: 6f2bf4a219decadb113fb8239b6b8d17433f01de
       watch:
         url: anitya://1781
 
