@@ -1,9 +1,11 @@
 description: SPIR-V Tools
-version: 2022.4
+version: v2026.1
 license: Apache-2.0
 
 files:
-  - source:
-      url: git+https://github.com/KhronosGroup/SPIRV-Tools.git
+  - download:
+      url: https://github.com/KhronosGroup/SPIRV-Tools/archive/refs/tags/${version}.tar.gz
+      filename: spirv-tools-${version}.tar.gz
+      sha1: 2e7c4c2bea88d55a8cceb39763e651cc079f4ba1
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
