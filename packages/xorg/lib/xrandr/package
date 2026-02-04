@@ -1,5 +1,5 @@
 description: X11 RandR extension library
-version: 1.5.2
+version: 1.5.5
 license: custom
 
 depends:
@@ -9,8 +9,8 @@ depends:
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/lib/libXrandr-${version}.tar.bz2
-      sha1: 7a1f6df239341b76fd59ebbe101d6f180adb43bb
+      url: https://xorg.freedesktop.org/releases/individual/lib/libXrandr-${version}.tar.xz
+      sha1: f2655c68e42c374ca9f57b20f7fd81e8c1c30446
       watch:
         url: anitya://1788
 
