@@ -1,5 +1,5 @@
 description: X11 authorisation library
-version: 1.0.9
+version: 1.0.12
 license: custom
 
 depends:
@@ -7,8 +7,8 @@ depends:
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/lib/libXau-${version}.tar.bz2
-      sha1: ef9b1ad00f958c8b6e30a1bbc11fdfac311c9733
+      url: https://xorg.freedesktop.org/releases/individual/lib/libXau-${version}.tar.xz
+      sha1: 5ab09f1f7cfc1962ab9b83b78faad2236989dcad
       watch:
         url: anitya://1765
 
