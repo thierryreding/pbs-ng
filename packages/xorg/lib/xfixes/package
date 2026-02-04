@@ -1,5 +1,5 @@
 description: X11 miscellaneous "fixes" extension library
-version: 5.0.3
+version: 6.0.2
 license: custom
 
 depends:
@@ -8,8 +8,8 @@ depends:
 
 files:
   - download:
-      url: http://xorg.freedesktop.org/releases/individual/lib/libXfixes-${version}.tar.bz2
-      sha1: ca86342d129c02435a9ee46e38fdf1a04d6b4b91
+      url: https://xorg.freedesktop.org/releases/individual/lib/libXfixes-${version}.tar.xz
+      sha1: c271f063ff3af6760fdaafd7eb45c05ccb66a248
       watch:
         url: anitya://1775
 
