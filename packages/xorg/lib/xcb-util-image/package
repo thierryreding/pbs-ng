@@ -1,14 +1,14 @@
 description: utility libraries for XC binding - port of Xlib's XImage and XShmImage functions
-version: 0.4.0
+version: 0.4.1
 license: custom
 
 depends:
   - xorg/lib/xcb-util
 
 files:
-- download:
-    url: http://xcb.freedesktop.org/dist/xcb-util-image-${version}.tar.bz2
-    sha1: c9c9361781911a47b28f74fc6ebe0abd1273fae4
+  - download:
+      url: https://xcb.freedesktop.org/dist/xcb-util-image-${version}.tar.xz
+      sha1: dde9892e5ddd900a2f784304614e1f6344b70279
       watch:
         url: anitya://5167
 
