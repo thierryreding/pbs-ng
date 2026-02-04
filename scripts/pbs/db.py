@@ -691,51 +691,55 @@ class DownloadSourceFile(SourceFile):
             pbs.log.end('done')
 
     def extract_tar(self, file, filesize):
-        with tarfile.open(fileobj = file, mode = 'r') as tar:
-            old_progress = -1
+        try:
+            with tarfile.open(fileobj = file, mode = 'r') as tar:
+                old_progress = -1
 
-            entry = tar.next()
-            if not entry.isdir():
-                print('WARNING: first entry is not a directory')
-                name = os.path.dirname(entry.name)
-            else:
-                name = entry.name
+                entry = tar.next()
+                if not entry.isdir():
+                    print('WARNING: first entry is not a directory')
+                    name = os.path.dirname(entry.name)
+                else:
+                    name = entry.name
 
-            if os.path.exists(name) and force:
-                pbs.log.begin('removing %s...' % name)
-                shutil.rmtree(name)
-                pbs.log.end('done')
+                if os.path.exists(name) and force:
+                    pbs.log.begin('removing %s...' % name)
+                    shutil.rmtree(name)
+                    pbs.log.end('done')
 
-            if not os.path.exists(name):
-                for entry in tar:
-                    if self.strip:
-                        parts = entry.name.split(os.sep)
-                        if len(parts) < 2:
-                            continue
+                if not os.path.exists(name):
+                    for entry in tar:
+                        if self.strip:
+                            parts = entry.name.split(os.sep)
+                            if len(parts) < 2:
+                                continue
 
-                        entry.name = os.path.join(*parts[1:])
+                            entry.name = os.path.join(*parts[1:])
 
-                        # rewrite hard- and symlink names
-                        if entry.issym() or entry.islnk():
-                            link = entry.linkname.split(os.sep)
-                            if link[0] == parts[0]:
-                                entry.linkname = os.path.join(*link[1:])
+                            # rewrite hard- and symlink names
+                            if entry.issym() or entry.islnk():
+                                link = entry.linkname.split(os.sep)
+                                if link[0] == parts[0]:
+                                    entry.linkname = os.path.join(*link[1:])
 
-                    tar.extract(entry, filter = 'fully_trusted')
+                        tar.extract(entry, filter = 'fully_trusted')
 
-                    progress = file.tell() * 100 / filesize
+                        progress = file.tell() * 100 / filesize
 
-                    if progress != old_progress:
-                        pbs.log.begin('extracting %s...%3u%%' %
-                                          (file.name, progress))
-                        old_progress = progress
+                        if progress != old_progress:
+                            pbs.log.begin('extracting %s...%3u%%' %
+                                            (file.name, progress))
+                            old_progress = progress
 
-                status = 'done'
-            else:
-                status = 'skipped'
+                    status = 'done'
+                else:
+                    status = 'skipped'
 
-            pbs.log.begin('extracting %s...' % file.name)
-            pbs.log.end(status)
+                pbs.log.begin('extracting %s...' % file.name)
+                pbs.log.end(status)
+        except tarfile.ReadError as e:
+            pbs.log.error(f'failed to extract {file.name}')
+            raise e
 
     def extract(self, directory, force = False):
         filename = os.path.join('download', self.filename)
