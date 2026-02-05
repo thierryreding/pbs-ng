@@ -23,6 +23,7 @@ packages:
       - /usr/lib/*.a
       - /usr/lib/*.so
       - /usr/lib/pkgconfig
+      - /usr/share/WebP/cmake
 
   libwebp-utils:
     files:
