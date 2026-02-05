@@ -1,5 +1,5 @@
 include $(TOP_SRCDIR)/packages/cmake.mk
-include $(TOP_SRCDIR)/python-sysconfigdata.mk
+include $(TOP_SRCDIR)/packages/python-sysconfigdata.mk
 
 cmake-args += \
 	-DCOMPILER_SUPPORTS_ATOMIC_WITHOUT_LIBATOMIC_EXITCODE__TRYRUN_OUTPUT=0 \
