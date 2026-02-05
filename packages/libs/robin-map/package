@@ -1,0 +1,21 @@
+description: C++ implementation of a fast hash map and hash set using robin hood hashing
+version: 1.4.1
+license: MIT
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://github.com/Tessil/robin-map/archive/refs/tags/v${version}.tar.gz
+      sha1: 72341c64e59c461efb6ada674552e6c0625fc497
+      watch:
+        url: anitya://18602
+
+packages:
+  robin-map-dev:
+    files:
+      - /usr/include
+      - /usr/share/cmake
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

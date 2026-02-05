@@ -1,0 +1,25 @@
+description: library and utilities for processing GIFs
+version: 5.2.2
+license: MIT
+
+depends:
+  - devel/glibc
+
+files:
+  - download:
+      url: https://sourceforge.net/projects/giflib/files/giflib-${version}.tar.gz
+      sha1: 608ba98d2dd8d03dfa7476f434d57de50a33e10b
+      watch:
+        url: anitya://1158
+
+packages:
+  giflib:
+    files:
+      - /usr/lib/*.so.*
+
+  giflib-dev:
+    files:
+      - /usr/include
+      - /usr/lib/*.so
+
+# vim: et ft=yaml sts=2 sw=2 ts=2

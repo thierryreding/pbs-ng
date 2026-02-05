@@ -5,14 +5,27 @@ license: BSD-3-Clause
 depends:
   - devel/python
   - libs/boost
+  - libs/bzip2
+  - libs/freetype
+  - libs/giflib
+  - libs/imath
+  - libs/libjpeg-turbo
+  - libs/libpng
   - libs/libtiff
   - libs/libultrahdr
+  - libs/libwebp
   - libs/opencolorio
   - libs/openexr
+  - libs/openjpeg
+  - libs/openjph
   - libs/openvdb
   - libs/ptex
   - libs/pybind11
+  - libs/robin-map
   - libs/tbb
+  - libs/zlib
+  - multimedia/libheif
+  - multimedia/libjxl
 
 files:
   - download:
