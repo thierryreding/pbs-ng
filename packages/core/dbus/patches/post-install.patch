@@ -2,7 +2,7 @@ diff --git a/meson.build b/meson.build
 index 33294e2e6b11..6bd77f019f04 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -1001,6 +1001,13 @@ if relocation and not (get_option('libdir') in [ 'lib', 'lib64', ])
+@@ -1031,6 +1031,13 @@ if relocation and not (get_option('libdir') in [ 'lib', 'lib64', ])
      endif
  endif
  
@@ -16,7 +16,7 @@ index 33294e2e6b11..6bd77f019f04 100644
  #### Directory to source sysconfdir configuration from
  
  # On Windows this is relative to where we put the bus setup, in
-@@ -1217,6 +1224,7 @@ subdir('cmake')
+@@ -1248,6 +1255,7 @@ subdir('cmake')
  
  meson.add_install_script('meson_post_install.py',
      '@0@'.format(relocation),
@@ -28,7 +28,7 @@ diff --git a/meson_options.txt b/meson_options.txt
 index 68f91f1994d0..dddb9a87b52f 100644
 --- a/meson_options.txt
 +++ b/meson_options.txt
-@@ -177,6 +177,13 @@ option(
+@@ -170,6 +170,13 @@ option(
    description: 'Make pkg-config metadata relocatable'
  )
  
