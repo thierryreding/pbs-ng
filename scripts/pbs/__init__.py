@@ -68,7 +68,7 @@ class Logger():
             'color': '32',
         },
         'info': {
-            'prefix': '*-',
+            'prefix': '*-*',
             'cont': '>',
             'color': '33',
         },
@@ -128,7 +128,7 @@ class Logger():
         self.info_wrap = []
         self.info_cont = []
 
-        for i in range(0, 2):
+        for i in range(0, len(Logger.indents['info'])):
             wrap = Logger.create_wrapper('info', columns, color, False, i)
             cont = Logger.create_wrapper('info', columns, color, True, i)
 

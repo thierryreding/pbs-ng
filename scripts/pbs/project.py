@@ -1,3 +1,5 @@
+import enum
+import errno
 import functools
 import hashlib
 import io
@@ -23,6 +25,163 @@ class BuildError(Exception):
     def __str__(self):
         return 'package %s failed to build: Error %u' % \
                 (self.package.full_name, self.error)
+
+class FilesDB:
+    class Entry:
+        class Type(enum.Enum):
+            REG = 'f'
+            DIR = 'd'
+            SYM = 's'
+            LNK = 'l'
+            CHR = 'c'
+            BLK = 'b'
+            PIP = 'p'
+
+        def __init__(self, type, path):
+            self.type = type
+            self.path = path
+
+        @staticmethod
+        def from_tarinfo(tarinfo):
+            if tarinfo.isdir():
+                type = FilesDB.Entry.Type.DIR
+            elif tarinfo.issym():
+                type = FilesDB.Entry.Type.SYM
+            elif tarinfo.islnk():
+                type = FilesDB.Entry.Type.LNK
+            elif tarinfo.ischr():
+                type = FilesDB.Entry.Type.CHR
+            elif tarinfo.isblk():
+                type = FilesDB.Entry.Type.BLK
+            elif tarinfo.isfifo():
+                type = FilesDB.Entry.Type.PIP
+            else:
+                type = FilesDB.Entry.Type.REG
+
+            return FilesDB.Entry(type, tarinfo.name)
+
+        def __str__(self):
+            return f'{self.type.value} {self.path}'
+
+    @staticmethod
+    def load_file(path):
+        return FilesDB(path, 'r').load()
+
+    def __init__(self, path, mode = 'r'):
+        self.name = os.path.basename(os.path.dirname(path))
+        self.path = path
+        self.mode = mode
+        self.entries = []
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, exc_tb):
+        with io.open(self.path, self.mode) as fobj:
+            for entry in self.entries:
+                print(entry, file = fobj)
+
+    def load(self):
+        with io.open(self.path, 'r') as fobj:
+            for line in reversed(list(fobj.readlines())):
+                type, path = line.split()
+
+                for key, value in FilesDB.Entry.Type.__members__.items():
+                    if type == value.value:
+                        entry = FilesDB.Entry(FilesDB.Entry.Type[key], path)
+                        self.entries.append(entry)
+                        break
+                else:
+                    raise Exception(f'Invalid file type: {type}')
+
+        return self
+
+    def add(self, entry):
+        self.entries.append(FilesDB.Entry.from_tarinfo(entry))
+
+    def entries(self):
+        for line in reversed(list(self.fobj.readlines())):
+            type, path = line.split()
+
+            for key, value in FilesDB.Entry.Type.__members__.items():
+                if type == value.value:
+                    yield FilesDB.Entry(FilesDB.Entry.Type[key], path)
+                    break
+            else:
+                raise Exception(f'Invalid file type: {type}')
+
+class CacheDB:
+    def __init__(self, name):
+        self.name = name
+        self.info = {}
+        self._packages = []
+
+        self.cachedir = os.path.join(pbs.objtree, 'cache', *name.split('/'))
+        self.info_path = os.path.join(self.cachedir, 'info')
+
+        if os.path.exists(self.info_path):
+            with io.open(self.info_path, 'r') as info:
+                self.info = yaml.load(info, Loader = yaml.loader.BaseLoader)
+
+        for entry in os.scandir(self.cachedir):
+            if entry.is_dir():
+                path = os.path.join(self.cachedir, entry.name, 'files')
+                if os.path.exists(path):
+                    self._packages.append(FilesDB.load_file(path))
+                else:
+                    # probably a left-over empty directory, remove it
+                    path = os.path.join(self.cachedir, entry.name)
+                    os.rmdir(path)
+
+    @staticmethod
+    def open(name):
+        return CacheDB(name)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, exc_tb):
+        pass
+
+    @property
+    def packages(self):
+        for package in self._packages:
+            yield package
+
+    def remove(self, sysroot, indent = 0):
+        for package in self._packages:
+            pbs.log.begin(f'{package.name}...', indent = indent + 1)
+
+            for entry in package.entries:
+                path = os.path.join(sysroot, entry.path)
+
+                if entry.type == FilesDB.Entry.Type.DIR:
+                    try:
+                        if os.path.exists(path):
+                            # do not try to remove symlinks to directories
+                            # because it might break other packages that do
+                            # install into the symlink directory
+                            if not os.path.islink(path):
+                                os.rmdir(path)
+                    except OSError as e:
+                        if e.errno != errno.ENOTEMPTY:
+                            raise e
+                else:
+                    if os.path.exists(path):
+                        os.remove(path)
+
+            os.remove(package.path)
+            os.rmdir(os.path.dirname(package.path))
+
+            pbs.log.end('done')
+
+        if os.path.exists(self.info_path):
+            os.remove(self.info_path)
+
+        if os.path.exists(self.cachedir):
+            os.rmdir(self.cachedir)
+        else:
+            print(f'ERROR: cache directory does not exist: {self.cachedir}')
 
 class Architecture():
     def __init__(self, source):
@@ -444,37 +603,53 @@ class Package():
         if not distdir:
             distdir = os.path.join(pbs.objtree, 'dist', pkgtree)
 
+        cachedir = os.path.join(pbs.objtree, 'cache', *self.name.split('/'))
+        indent = 0
+
+        if os.path.exists(cachedir):
+            pbs.log.info(f'updating {self.name}...')
+            self.uninstall(sysroot, indent = 1)
+
+        os.makedirs(cachedir)
+
         with pbs.pushd(sysroot):
             if self.source.packages:
-                pbs.log.info('installing into %s' % os.getcwd())
+                pbs.log.info('installing into %s' % os.getcwd(), indent = indent)
 
             for package in self.source.packages:
                 filename = '%s-%s.tar.xz' % (package.name, self.version)
                 filename = os.path.join(distdir, filename)
 
-                pbs.log.begin('%s...' % filename, indent = 1)
+                pbs.log.begin('%s...' % filename, indent = indent + 1)
 
+                cache = os.path.join(cachedir, package.name)
+                if not os.path.exists(cache):
+                    os.makedirs(cache)
+
+                files_path = os.path.join(cache, 'files')
                 filesize = os.path.getsize(filename)
 
-                with io.open(filename, 'rb') as file:
-                    with tarfile.open(fileobj = file, mode = 'r') as tarball:
-                        for entry in tarball:
-                            try:
-                                if os.path.exists(entry.name):
-                                    if not entry.isdir():
-                                        os.remove(entry.name)
+                with FilesDB(files_path, 'w') as files:
+                    with io.open(filename, 'rb') as file:
+                        with tarfile.open(fileobj = file, mode = 'r') as tarball:
+                            for entry in tarball:
+                                try:
+                                    if os.path.exists(entry.name):
+                                        if not entry.isdir():
+                                            os.remove(entry.name)
 
-                                tarball.extract(entry, filter = 'fully_trusted')
-                            except Exception as e:
-                                pbs.log.begin('%s...' % filename, indent = 1)
-                                pbs.log.fail('failed')
-                                raise
+                                    tarball.extract(entry, filter = 'fully_trusted')
+                                    files.add(entry)
+                                except Exception as e:
+                                    pbs.log.begin('%s...' % filename, indent = indent + 1)
+                                    pbs.log.fail('failed')
+                                    raise
 
-                            progress = file.tell() * 100 / filesize
-                            pbs.log.begin('%s...%3u%%' % (filename, progress),
-                                          indent = 1)
+                                progress = file.tell() * 100 / filesize
+                                pbs.log.begin('%s...%3u%%' % (filename, progress),
+                                            indent = indent + 1)
 
-                pbs.log.begin('%s...' % filename, indent = 1)
+                pbs.log.begin('%s...' % filename, indent = indent + 1)
                 pbs.log.end('done')
 
         filename = os.path.join(pbs.srctree, pkgtree, 'post-install')
@@ -492,6 +667,23 @@ class Package():
 
                     line = line.decode()
                     pbs.log.quote(line)
+
+        info_path = os.path.join(cachedir, 'info')
+
+        with io.open(info_path, 'w') as info:
+            data = {
+                'description': self.source.description,
+                'version': self.source.version,
+            }
+
+            yaml.dump(data, info)
+
+    def uninstall(self, sysroot, distdir = None, indent = 0):
+        if self.source.packages:
+            pbs.log.info(f'uninstalling {self.name} from {sysroot}', indent = indent)
+
+        with CacheDB.open(self.name) as cache:
+            cache.remove(sysroot, indent = indent)
 
     def load(self, values):
         if not values:

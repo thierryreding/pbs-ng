@@ -5,8 +5,8 @@ import tempfile
 
 import sys
 
-description = 'install package(s)'
-usage = 'install [options] package [package...]'
+description = 'uninstall package(s)'
+usage = 'uninstall [options] package [package...]'
 summary = ''
 
 def exec(project, *args):
@@ -39,10 +39,10 @@ def exec(project, *args):
                 print('ERROR: package', name, 'not found')
                 continue
 
-            package.install(target)
+            package.uninstall(target)
     else:
         for package in project.packages:
-            package.install(target)
+            package.uninstall(target)
 
     if path.is_file():
         mnt = libmount.Context()
