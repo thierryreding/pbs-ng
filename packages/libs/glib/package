@@ -2,10 +2,12 @@ include: packages/libs/glib/package.include
 
 depends:
   - build-tools/meson
+  - core/util-linux # for libmount
   - devel/glibc
   - libs/gobject-introspection
   - libs/libffi
   - libs/pcre2
+  - libs/zlib
 
 packages:
   libglib:
