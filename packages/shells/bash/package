@@ -17,7 +17,7 @@ packages:
   bash:
     files:
       - /etc
-      - /bin
+      - /usr/bin
 
   bash-doc:
     files:
