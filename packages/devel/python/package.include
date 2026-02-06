@@ -1,11 +1,11 @@
 description: Python scripting language
-version: 3.14.2
+version: 3.14.3
 license: custom
 
 files:
   - download:
       url: https://python.org/ftp/python/${version}/Python-${version}.tar.xz
-      sha1: b21c499c9e0250c1bfabc29a08c160018d2f6f57
+      sha1: 83eed62ba54742382542474db798717e6ee6b3f2
       watch:
         url: anitya://13254
 
