@@ -1,5 +1,5 @@
 description: A terminal based program for viewing text files
-version: 691
+version: 692
 license: GPL-3.0
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://www.greenwoodsoftware.com/less/less-${version}.tar.gz
-      sha1: 541bcbcbb06fbbbbe821b5bc7f6617dbcba8558e
+      sha1: ff68e6102639f4035c60263706f62541bcecaed4
       watch:
         url: anitya://1550
 
