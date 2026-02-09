@@ -1,5 +1,5 @@
 description: X library
-version: 1.8.12
+version: 1.8.13
 license: custom
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: https://xorg.freedesktop.org/releases/individual/lib/libX11-${version}.tar.xz
-      sha1: 0339b900f66d14ca4faf65d8515faa744f75aa2f
+      sha1: 2282a819c092bd9c94e884911e3bf15ea6d8d37b
       watch:
         url: anitya://1764
 
