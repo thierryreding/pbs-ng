@@ -1,6 +1,4 @@
-description: system and service manager
-version: 259.1
-license: GPL-2.0 LGPL-2.1 MIT
+include: packages/core/systemd/package.include
 
 depends:
   - build-tools/gettext
@@ -8,6 +6,7 @@ depends:
   - build-tools/intltool
   - build-tools/meson
   - build-tools/python-jinja
+  - build-tools/systemd
   - core/util-linux
   - devel/glibc
   - kernel/kmod
@@ -17,13 +16,6 @@ depends:
   - libs/pam
   - libs/xz
   - libs/zlib
-
-files:
-  - download:
-      url: https://github.com/systemd/systemd/archive/v${version}.tar.gz
-      sha1: fa9821ff17cfb878562839a1818c4a47f10b4455
-      watch:
-        url: anitya://5440
 
 packages:
   systemd:
