@@ -1,3 +1,1 @@
 #!/bin/sh
-
-install_firmware nvidia/tegra234/xusb.bin
