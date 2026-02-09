@@ -1,5 +1,5 @@
 description: Linux kernel
-version: 6.18
+version: 6.19
 license: GPL-2.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://www.kernel.org/pub/linux/kernel/v${major}.x/linux-${version}.tar.xz
-      sha1: e513f45ebe2623afd6c98a038af30f4d9690a401
+      sha1: 15346e26d517912eb9a2693e6563826d7516d4d0
       watch:
         url: anitya://358810
 
