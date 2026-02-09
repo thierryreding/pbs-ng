@@ -1,14 +1,15 @@
-description = 'show package information'
-usage = 'show package [package...]'
-summary = ''
+import click
 
-def exec(project, *args):
-    if len(args) < 2:
-        print('usage: %s' % usage)
-        return
+@click.command()
+@click.argument('packages', nargs = -1)
+@click.pass_obj
+def command(context, packages):
+    '''
+    Show package information for a list of packages.
+    '''
 
-    for name in args[1:]:
-        package = project.db.find_package(name)
+    for name in packages:
+        package = context.project.db.find_package(name)
         if not package:
             print('package "%s" not found' % name)
             continue

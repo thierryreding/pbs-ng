@@ -1,24 +1,24 @@
-import argparse
+import click
 
-description = 'configure package(s)'
-usage = 'configure [options] package [package...]'
-summary = ''
+@click.command()
+@click.argument('packages', nargs = -1)
+@click.pass_obj
+def command(context, packages):
+    '''
+    Configure a list of packages. If no PACKAGES are specified, configure all
+    selected packages.
+    '''
 
-def exec(project, *args):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('packages', nargs = '*')
-    args = parser.parse_args(args[1:])
-
-    if len(args.packages):
-        for name in args.packages:
-            package = project.find_package(name)
+    if len(packages):
+        for name in packages:
+            package = context.project.find_package(name)
             if not package:
                 print('ERROR: package', name, 'not found')
                 continue
 
             package.configure()
     else:
-            for package in project.packages:
+            for package in context.project.packages:
                 package.configure()
 
 # vim: et sts=4 sw=4 ts=4

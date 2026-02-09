@@ -1,6 +1,10 @@
-description = 'exit interactive shell'
-usage = 'exit [options]'
-summary = ''
+import click
 
-def exec(project, *args):
+@click.command()
+@click.pass_obj
+def command(context):
+    '''
+    Exit interactive shell.
+    '''
+
     raise EOFError

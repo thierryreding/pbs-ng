@@ -1,9 +1,13 @@
-description = 'list selected packages'
-usage = 'list'
-summary = ''
+import click
 
-def exec(project, *args):
-    for package in project.packages:
-        print('package:', package.name)
+@click.command()
+@click.pass_obj
+def command(context):
+    '''
+    List selected packages.
+    '''
+
+    for package in context.project.packages:
+        print(package.name)
 
 # vim: et sts=4 sw=4 ts=4

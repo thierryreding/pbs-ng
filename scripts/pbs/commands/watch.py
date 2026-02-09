@@ -1,25 +1,25 @@
-import argparse
+import click
 
-description = 'scan for new package version(s)'
-usage = 'watch [options] [package...]'
-summary = ''
+@click.command()
+@click.option('--verbose', '-v', is_flag = True, help = 'show verbose messages')
+@click.argument('packages', nargs = -1)
+@click.pass_obj
+def command(context, verbose, packages):
+    '''
+    Scan for new versions of a list of packages. If no PACKAGES are specified,
+    scan for new versions of all selected packages.
+    '''
 
-def exec(project, *args):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--verbose', '-v', action = 'store_true')
-    parser.add_argument('packages', nargs = '*')
-    args = parser.parse_args(args[1:])
-
-    if len(args.packages):
-        for name in args.packages:
-            package = project.find_package(name)
+    if len(packages):
+        for name in packages:
+            package = context.project.find_package(name)
             if not package:
                 print('ERROR: package', name, 'not found')
                 continue
 
-            package.watch(args.verbose)
+            package.watch(verbose)
     else:
-        for package in project.packages:
-            package.watch(args.verbose)
+        for package in context.project.packages:
+            package.watch(verbose)
 
 # vim: et sts=4 sw=4 ts=4

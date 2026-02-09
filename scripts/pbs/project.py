@@ -84,7 +84,7 @@ class FilesDB:
     def load(self):
         with io.open(self.path, 'r') as fobj:
             for line in reversed(list(fobj.readlines())):
-                type, path = line.split()
+                type, path = line.split(None, 1)
 
                 for key, value in FilesDB.Entry.Type.__members__.items():
                     if type == value.value:
@@ -98,17 +98,6 @@ class FilesDB:
 
     def add(self, entry):
         self.entries.append(FilesDB.Entry.from_tarinfo(entry))
-
-    def entries(self):
-        for line in reversed(list(self.fobj.readlines())):
-            type, path = line.split()
-
-            for key, value in FilesDB.Entry.Type.__members__.items():
-                if type == value.value:
-                    yield FilesDB.Entry(FilesDB.Entry.Type[key], path)
-                    break
-            else:
-                raise Exception(f'Invalid file type: {type}')
 
 class CacheDB:
     def __init__(self, name):
@@ -149,6 +138,9 @@ class CacheDB:
             yield package
 
     def remove(self, sysroot, indent = 0):
+        if not os.path.isabs(sysroot):
+            sysroot = os.path.join(os.getcwd(), sysroot)
+
         for package in self._packages:
             pbs.log.begin(f'{package.name}...', indent = indent + 1)
 
@@ -634,9 +626,9 @@ class Package():
                         with tarfile.open(fileobj = file, mode = 'r') as tarball:
                             for entry in tarball:
                                 try:
-                                    if os.path.exists(entry.name):
-                                        if not entry.isdir():
-                                            os.remove(entry.name)
+                                    if os.path.exists(entry.name) and not os.path.isdir(entry.name):
+                                        pbs.log.error(f'refusing to overwrite existing file {entry.name}')
+                                        continue
 
                                     tarball.extract(entry, filter = 'fully_trusted')
                                     files.add(entry)

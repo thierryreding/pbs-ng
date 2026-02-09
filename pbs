@@ -1,86 +1,19 @@
 #!/usr/bin/python3
 
-import argparse
-import os, os.path
-import readline
-import sys
-import time
-import traceback
-
-parser = argparse.ArgumentParser()
-parser.add_argument('command', nargs = '*')
-args = parser.parse_args(sys.argv[1:])
+import click, os.path, sys
 
 srctree = os.path.realpath(os.path.dirname(sys.argv[0]))
 scripts_dir = os.path.join(srctree, 'scripts')
 sys.path.insert(1, scripts_dir)
 
-import pbs.commands, pbs.db, pbs.project
+import pbs.cli
 
-commands = pbs.commands.load(pbs.srctree)
-db = pbs.db.Database()
-start = time.perf_counter()
-db.load(pbs.srctree)
-end = time.perf_counter()
-print('loaded database in %f seconds' % (end - start))
-
-project = pbs.project.Project(db)
-project.load()
-
-print('source directory:', pbs.srctree)
-print('output directory:', pbs.objtree)
-
-def execute(args):
-    if args[0] not in commands:
-        print('unknown command "%s"' % args[0])
-        return
-
-    try:
-        commands[args[0]].exec(project, *args)
-    # this can happen for commands that take interactive input, but we don't
-    # want those to generate any noise
-    except EOFError:
-        pass
-    except Exception as e:
-        pbs.log.error(e)
-        traceback.print_exc(file = sys.stdout)
-
-if args.command:
-    # if a command was given on the command-line, execute it in batch mode
-    execute(args.command)
-else:
+if __name__ == '__main__':
     pbs.log.startup = False
     pbs.isolate()
 
-    try:
-        readline.read_history_file('.history')
-    except FileNotFoundError:
-        pass
-
-    while True:
-        try:
-            command = input('> ')
-        except EOFError:
-            print()
-            break
-        except KeyboardInterrupt:
-            print('')
-            continue
-
-        if not command:
-            continue
-
-        args = command.split()
-
-        try:
-            execute(args)
-        except KeyboardInterrupt:
-            print('')
-            print('keyboard interrupt!')
-            continue
-
-    readline.write_history_file('.history')
-
-project.save()
+    context = pbs.cli.ContextObject()
+    pbs.cli.CLI(obj = context)()
+    context.project.save()
 
 # vim: et sts=4 sw=4 ts=4

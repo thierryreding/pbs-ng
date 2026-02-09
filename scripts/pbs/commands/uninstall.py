@@ -1,50 +1,47 @@
-import argparse
+import click
 import libmount
 import pathlib
 import tempfile
-
-import sys
 
 description = 'uninstall package(s)'
 usage = 'uninstall [options] package [package...]'
 summary = ''
 
-def exec(project, *args):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--root', type = pathlib.Path, help = 'root directory')
-    parser.add_argument('packages', nargs = '*')
-    args = parser.parse_args(args[1:])
+@click.command()
+@click.option('--root', '-r', type = click.Path(path_type = pathlib.Path), default = 'sysroot', help = 'root directory to uninstall packages from')
+@click.argument('packages', nargs = -1)
+@click.pass_obj
+def command(context, root, packages):
+    '''
+    Uninstall a list of packages. If no PACKAGES are specified, uninstall all
+    selected packages.
+    '''
 
-    if args.root:
-        path = pathlib.Path(args.root)
-    else:
-        path = pathlib.Path('sysroot')
-
-    if path.is_file():
+    if root.is_file():
         mountpoint = tempfile.TemporaryDirectory()
         target = mountpoint.name
 
         mnt = libmount.Context()
-        mnt.source = args.root
+        mnt.source = root
         mnt.target = target
         mnt.options = 'loop'
         mnt.mount()
     else:
-        target = path
+        target = root
 
-    if len(args.packages):
-        for name in args.packages:
-            package = project.find_package(name)
+    if len(packages):
+        for name in packages:
+            package = context.project.find_package(name)
             if not package:
                 print('ERROR: package', name, 'not found')
                 continue
 
             package.uninstall(target)
     else:
-        for package in project.packages:
+        for package in context.project.packages:
             package.uninstall(target)
 
-    if path.is_file():
+    if root.is_file():
         mnt = libmount.Context()
         mnt.target = target
         mnt.umount()

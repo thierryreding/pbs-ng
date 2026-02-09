@@ -1,17 +1,17 @@
-import argparse
+import click
 import os.path
 import pbs
 import shutil
 import subprocess
 
-description = 'build initial ramdisk'
-usage = 'initrd [options]'
-summary = ''
-
-def exec(project, *args):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--output', '-o')
-    args = parser.parse_args(args[1:])
+@click.command()
+@click.option('--output', '-o', type = click.Path(), default = 'initrd.gz', help = 'output filename of the initial ramdisk')
+@click.pass_obj
+def command(context, output):
+    '''
+    Build an initial ramdisk. This uses an existing sysroot as the source for
+    files to be copied.
+    '''
 
     sysroot = os.path.join(pbs.objtree, 'sysroot')
     initrd = os.path.join(pbs.objtree, 'initrd')
@@ -26,16 +26,11 @@ def exec(project, *args):
         shutil.rmtree(initrd)
         pbs.log.end('done')
 
-    if args.output:
-        output = args.output
-    else:
-        output = 'initrd.gz'
+    cmd = [ mkinitrd, '--output', output, sysroot, initrd ]
 
-    command = [ mkinitrd, '--output', output, sysroot, initrd ]
+    pbs.log.info('creating initial ramdisk:', ' '.join(cmd))
 
-    pbs.log.info('creating initial ramdisk:', ' '.join(command))
-
-    with subprocess.Popen(command, stdout=subprocess.PIPE,
+    with subprocess.Popen(cmd, stdout=subprocess.PIPE,
                           stderr=subprocess.STDOUT) as proc:
         while True:
             line = proc.stdout.readline()
