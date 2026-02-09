@@ -626,9 +626,10 @@ class Package():
                         with tarfile.open(fileobj = file, mode = 'r') as tarball:
                             for entry in tarball:
                                 try:
-                                    if os.path.exists(entry.name) and not os.path.isdir(entry.name):
-                                        pbs.log.error(f'refusing to overwrite existing file {entry.name}')
-                                        continue
+                                    if os.path.exists(entry.name):
+                                        if not os.path.isdir(entry.name):
+                                            #pbs.log.warning(f'overwriting existing file: {entry.name}')
+                                            os.remove(entry.name)
 
                                     tarball.extract(entry, filter = 'fully_trusted')
                                     files.add(entry)
