@@ -1,3 +1,11 @@
+* isolate builds into a sysroot that is created from scratch every time
+  - this has the big benefit that it will allow reproducible builds where
+    the build of a package is not impacted by the state of the global sysroot,
+    which could cause additional dependencies to be pulled in
+  - this is also used by most distributions to make sure no extra dependencies
+    get pulled in accidentally, and it helps by making sure all the
+    dependencies are properly documented
+
 * add perl and perl-xml-parser as build-tools (needed by intltool)
 
 * create build-tools/openimageio to make ooiotool available which
