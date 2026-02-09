@@ -1,5 +1,5 @@
 description: an open-source implementation of the OpenGL specification
-version: 25.3.4
+version: 25.3.5
 license: custom
 
 depends:
@@ -35,7 +35,7 @@ depends:
 files:
   - download:
       url: https://archive.mesa3d.org/mesa-${version}.tar.xz
-      sha1: f93e4c168554dfc2932a7b0753376577bd840f2b
+      sha1: 28a652aaae766dbc564232c0d36def1ae7ee62a7
       watch:
         url: anitya://1970
 
