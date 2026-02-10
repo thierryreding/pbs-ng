@@ -1,5 +1,5 @@
 description: A useful diagnostic, instructional and debugging tool
-version: 6.18
+version: 6.19
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://strace.io/files/${version}/strace-${version}.tar.xz
-      sha1: e8f7c82be66c0bfed738465becbf7447ed124677
+      sha1: aae9cf024d9eaeb0ab7e551b8d0b8f23c574df90
       watch:
         url: anitya://4897
 
