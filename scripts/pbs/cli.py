@@ -106,6 +106,8 @@ class REPL(cmd.Cmd):
                 click.echo(e.message)
             except click.exceptions.UsageError as e:
                 pass
+            except pbs.db.ChecksumError as e:
+                pbs.log.error(e)
             except KeyboardInterrupt:
                 print('')
             except Exception as e:
