@@ -4,7 +4,7 @@ import pathlib
 import tempfile
 
 @click.command()
-@click.option('--root', '-r', type = click.Path(path_type = pathlib.Path), default = 'sysroot', help = 'root directory to install packages into')
+@click.option('--root', '-r', type = click.Path(path_type = pathlib.Path), help = 'root directory to install packages into')
 @click.argument('packages', nargs = -1)
 @click.pass_obj
 def command(context, root, packages):
@@ -12,6 +12,9 @@ def command(context, root, packages):
     Install a list of packages. If no PACKAGES are specified, install all
     selected packages.
     '''
+
+    if not root:
+        root = context.project.sysroot
 
     if root.is_file():
         mountpoint = tempfile.TemporaryDirectory()

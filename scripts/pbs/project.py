@@ -13,6 +13,8 @@ import tarfile
 import textwrap
 import yaml
 
+SYSROOT = pbs.objtree / 'sysroot'
+
 def iprint(indent, *args):
     print(' ' * indent, end='')
     print(*args)
@@ -100,12 +102,12 @@ class FilesDB:
         self.entries.append(FilesDB.Entry.from_tarinfo(entry))
 
 class CacheDB:
-    def __init__(self, name):
+    def __init__(self, name, root = SYSROOT):
         self.name = name
         self.info = {}
         self._packages = []
 
-        self.cachedir = os.path.join(pbs.objtree, 'cache', *name.split('/'))
+        self.cachedir = os.path.join(pbs.objtree, root, 'var', 'lib', 'pbs', 'cache', *name.split('/'))
         self.info_path = os.path.join(self.cachedir, 'info')
 
         if os.path.exists(self.info_path):
@@ -123,8 +125,8 @@ class CacheDB:
                     os.rmdir(path)
 
     @staticmethod
-    def open(name):
-        return CacheDB(name)
+    def open(name, root = SYSROOT):
+        return CacheDB(name, root)
 
     def __enter__(self):
         return self
@@ -137,15 +139,15 @@ class CacheDB:
         for package in self._packages:
             yield package
 
-    def remove(self, sysroot, indent = 0):
-        if not os.path.isabs(sysroot):
-            sysroot = os.path.join(os.getcwd(), sysroot)
+    def remove(self, root = SYSROOT, indent = 0):
+        if not os.path.isabs(root):
+            root = os.path.join(os.getcwd(), root)
 
         for package in self._packages:
             pbs.log.begin(f'{package.name}...', indent = indent + 1)
 
             for entry in package.entries:
-                path = os.path.join(sysroot, entry.path)
+                path = os.path.join(root, entry.path)
 
                 if entry.type == FilesDB.Entry.Type.DIR:
                     try:
@@ -582,29 +584,28 @@ class Package():
             os.makedirs(distdir)
 
         self.package(destdir, distdir)
-        self.install(sysroot, distdir)
+        self.install(SYSROOT, distdir)
 
         self.states['build'] = hash
 
-    def install(self, sysroot, distdir = None):
-        if not os.path.exists(sysroot):
-            os.makedirs(sysroot)
+    def install(self, root = SYSROOT, distdir = None):
+        if not os.path.exists(root):
+            os.makedirs(root)
 
         pkgtree = os.path.join('packages', *self.name.split('/'))
 
         if not distdir:
             distdir = os.path.join(pbs.objtree, 'dist', pkgtree)
 
-        cachedir = os.path.join(pbs.objtree, 'cache', *self.name.split('/'))
+        cachedir = os.path.join(pbs.objtree, root, 'var', 'lib', 'pbs', 'cache', *self.name.split('/'))
         indent = 0
 
-        if os.path.exists(cachedir):
             pbs.log.info(f'updating {self.name}...')
-            self.uninstall(sysroot, indent = 1)
+            self.uninstall(root, indent = 1)
 
         os.makedirs(cachedir)
 
-        with pbs.pushd(sysroot):
+        with pbs.pushd(root):
             if self.source.packages:
                 pbs.log.info('installing into %s' % os.getcwd(), indent = indent)
 
@@ -647,7 +648,7 @@ class Package():
 
         filename = os.path.join(pbs.srctree, pkgtree, 'post-install')
         if os.path.exists(filename):
-            command = [ filename, sysroot ]
+            command = [ filename, root ]
 
             with subprocess.Popen(command, stdout = subprocess.PIPE,
                                   stderr = subprocess.STDOUT) as proc:
@@ -671,12 +672,12 @@ class Package():
 
             yaml.dump(data, info)
 
-    def uninstall(self, sysroot, distdir = None, indent = 0):
+    def uninstall(self, root, distdir = None, indent = 0):
         if self.source.packages:
-            pbs.log.info(f'uninstalling {self.name} from {sysroot}', indent = indent)
+            pbs.log.info(f'uninstalling {self.name} from {root}', indent = indent)
 
-        with CacheDB.open(self.name) as cache:
-            cache.remove(sysroot, indent = indent)
+        with CacheDB.open(self.name, root) as cache:
+            cache.remove(root, indent = indent)
 
     def load(self, values):
         if not values:
@@ -849,6 +850,7 @@ class Project():
         self.db = db
         self.target = Target(self)
         self.packages = []
+        self.sysroot = pbs.objtree / 'sysroot'
 
     def setup(self):
         if not os.path.exists('target.mk'):
