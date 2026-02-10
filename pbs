@@ -9,9 +9,6 @@ sys.path.insert(1, scripts_dir)
 import pbs.cli
 
 if __name__ == '__main__':
-    pbs.log.startup = False
-    pbs.isolate()
-
     context = pbs.cli.ContextObject()
     pbs.cli.CLI(obj = context)()
     context.project.save()

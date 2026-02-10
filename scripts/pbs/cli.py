@@ -117,6 +117,9 @@ class REPL(cmd.Cmd):
 @click.pass_context
 def CLI(context):
     if context.invoked_subcommand is None:
+        pbs.log.startup = False
+        pbs.isolate()
+
         click.BaseCommand.context_class = REPLContext
         repl = REPL(context)
         repl.cmdloop()
