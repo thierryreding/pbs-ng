@@ -3,7 +3,7 @@ import errno
 import functools
 import hashlib
 import io
-import os, os.path
+import os, os.path, pathlib
 import pbs.db
 import readline
 import shutil
@@ -70,7 +70,7 @@ class FilesDB:
         return FilesDB(path, 'r').load()
 
     def __init__(self, path, mode = 'r'):
-        self.name = os.path.basename(os.path.dirname(path))
+        self.name = path.parent.name
         self.path = path
         self.mode = mode
         self.entries = []
@@ -107,21 +107,22 @@ class CacheDB:
         self.info = {}
         self._packages = []
 
-        self.cachedir = os.path.join(pbs.objtree, root, 'var', 'lib', 'pbs', 'cache', *name.split('/'))
-        self.info_path = os.path.join(self.cachedir, 'info')
+        self.cachedir = root / 'var' / 'lib' / 'pbs' / 'cache'
+        self.cachedir = self.cachedir.joinpath(*name.split('/'))
+        self.info_path = self.cachedir / 'info'
 
-        if os.path.exists(self.info_path):
+        if self.info_path.exists():
             with io.open(self.info_path, 'r') as info:
                 self.info = yaml.load(info, Loader = yaml.loader.BaseLoader)
 
         for entry in os.scandir(self.cachedir):
             if entry.is_dir():
-                path = os.path.join(self.cachedir, entry.name, 'files')
-                if os.path.exists(path):
+                path = self.cachedir / entry.name / 'files'
+                if path.exists():
                     self._packages.append(FilesDB.load_file(path))
                 else:
                     # probably a left-over empty directory, remove it
-                    path = os.path.join(self.cachedir, entry.name)
+                    path = self.cachedir / entry.name
                     os.rmdir(path)
 
     @staticmethod
@@ -140,39 +141,39 @@ class CacheDB:
             yield package
 
     def remove(self, root = SYSROOT, indent = 0):
-        if not os.path.isabs(root):
-            root = os.path.join(os.getcwd(), root)
+        if not root.is_absolute():
+            root = pathlib.Path.cwd() / root
 
         for package in self._packages:
             pbs.log.begin(f'{package.name}...', indent = indent + 1)
 
             for entry in package.entries:
-                path = os.path.join(root, entry.path)
+                path = root / entry.path
 
                 if entry.type == FilesDB.Entry.Type.DIR:
                     try:
-                        if os.path.exists(path):
+                        if path.exists():
                             # do not try to remove symlinks to directories
                             # because it might break other packages that do
                             # install into the symlink directory
-                            if not os.path.islink(path):
+                            if not path.is_symlink():
                                 os.rmdir(path)
                     except OSError as e:
                         if e.errno != errno.ENOTEMPTY:
                             raise e
                 else:
-                    if os.path.exists(path):
+                    if path.exists():
                         os.remove(path)
 
             os.remove(package.path)
-            os.rmdir(os.path.dirname(package.path))
+            os.rmdir(package.path.parent)
 
             pbs.log.end('done')
 
-        if os.path.exists(self.info_path):
+        if self.info_path.exists():
             os.remove(self.info_path)
 
-        if os.path.exists(self.cachedir):
+        if self.cachedir.exists():
             os.rmdir(self.cachedir)
         else:
             print(f'ERROR: cache directory does not exist: {self.cachedir}')
@@ -524,12 +525,11 @@ class Package():
                 return
 
         parts = self.name.split('/')
-        pkgtree = os.path.join('packages', *parts)
-        srctree = os.path.join(pbs.srctree, pkgtree)
-        objtree = os.path.join(pbs.objtree, pkgtree)
-        destdir = os.path.join(pbs.objtree, pkgtree, 'install')
-        distdir = os.path.join(pbs.objtree, 'dist', pkgtree)
-        sysroot = os.path.join(pbs.objtree, 'sysroot')
+        pkgtree = pathlib.Path('packages', *parts)
+        srctree = pbs.srctree / pkgtree
+        objtree = pbs.objtree / pkgtree
+        destdir = pbs.objtree / pkgtree / 'install'
+        distdir = pbs.objtree / 'dist' / pkgtree
         makefile = os.path.join(srctree, 'Makefile')
 
         if os.path.exists(objtree) and not incremental:
@@ -589,19 +589,20 @@ class Package():
         self.states['build'] = hash
 
     def install(self, root = SYSROOT, distdir = None):
-        if not os.path.exists(root):
+        if not root.exists():
             os.makedirs(root)
 
-        pkgtree = os.path.join('packages', *self.name.split('/'))
+        pkgtree = pathlib.Path('packages').joinpath(*self.name.split('/'))
 
         if not distdir:
-            distdir = os.path.join(pbs.objtree, 'dist', pkgtree)
+            distdir = pbs.objtree / 'dist' / pkgtree
 
-        cachedir = os.path.join(pbs.objtree, root, 'var', 'lib', 'pbs', 'cache', *self.name.split('/'))
+        cachedir = root / 'var' / 'lib' / 'pbs' / 'cache'
+        cachedir = cachedir.joinpath(*self.name.split('/'))
         indent = 0
 
-            pbs.log.info(f'updating {self.name}...')
-            self.uninstall(root, indent = 1)
+        if cachedir.exists():
+            self.uninstall(root)
 
         os.makedirs(cachedir)
 
@@ -611,16 +612,16 @@ class Package():
 
             for package in self.source.packages:
                 filename = '%s-%s.tar.xz' % (package.name, self.version)
-                filename = os.path.join(distdir, filename)
+                filename = distdir / filename
 
                 pbs.log.begin('%s...' % filename, indent = indent + 1)
 
-                cache = os.path.join(cachedir, package.name)
-                if not os.path.exists(cache):
+                cache = cachedir / package.name
+                if not cache.exists():
                     os.makedirs(cache)
 
-                files_path = os.path.join(cache, 'files')
                 filesize = os.path.getsize(filename)
+                files_path = cache / 'files'
 
                 with FilesDB(files_path, 'w') as files:
                     with io.open(filename, 'rb') as file:
@@ -646,8 +647,8 @@ class Package():
                 pbs.log.begin('%s...' % filename, indent = indent + 1)
                 pbs.log.end('done')
 
-        filename = os.path.join(pbs.srctree, pkgtree, 'post-install')
-        if os.path.exists(filename):
+        filename = pbs.srctree / pkgtree / 'post-install'
+        if filename.exists():
             command = [ filename, root ]
 
             with subprocess.Popen(command, stdout = subprocess.PIPE,
@@ -662,7 +663,7 @@ class Package():
                     line = line.decode()
                     pbs.log.quote(line)
 
-        info_path = os.path.join(cachedir, 'info')
+        info_path = cachedir / 'info'
 
         with io.open(info_path, 'w') as info:
             data = {
