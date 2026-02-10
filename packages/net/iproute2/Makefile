@@ -1,16 +1,12 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(srcdir)/stamp-patch: | $(srcdir)
-	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-compile.patch
-	touch $@
-
 env += \
 	CC='$(CROSS_COMPILE)gcc' \
 	AR='$(CROSS_COMPILE)ar' \
 	CFLAGS='$(CFLAGS)' \
 	LDFLAGS='$(LDFLAGS)'
 
-$(srcdir)/stamp-configure: $(srcdir)/stamp-patch
+$(srcdir)/stamp-configure: | $(srcdir)
 	cd $(srcdir) && $(env) ./configure
 	touch $@
 
