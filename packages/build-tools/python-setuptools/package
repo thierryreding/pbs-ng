@@ -1,5 +1,5 @@
 description: Easily download, build, install, upgrade and uninstall Python packages
-version: 80.10.2
+version: 82.0.0
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://pypi.python.org/packages/source/s/setuptools/setuptools-${version}.tar.gz
-      sha1: 6816d09d925d1e7010d3f64f49c283d0cc3c1779
+      sha1: 55aa6a1d86e8d5a831f60eedeba82006808c7a0e
       watch:
         url: anitya://4021
 
