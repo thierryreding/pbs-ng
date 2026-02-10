@@ -4,7 +4,7 @@ import glob
 import hashlib
 import http.client
 import io
-import os, os.path
+import os, os.path, pathlib
 import pbs
 import re
 import readline
@@ -63,6 +63,14 @@ class ChecksumError(Exception):
 
     def __str__(self):
         return '%s: checksum failure for file %s (%s)' % (self.source.source.full_name, self.source.filename, self.new)
+
+class PatchError(Exception):
+    def __init__(self, patch, error):
+        self.patch = patch
+        self.error = error
+
+    def __str__(self):
+        return f'failed to apply patch {self.patch.path}: Error {self.error}'
 
 class Value():
     def __init__(self, option, value):
@@ -898,6 +906,45 @@ class VCSSourceFile(SourceFile):
         pbs.log.begin('%s... ' % self.repository, indent = 1)
         pbs.log.skip('skipped')
 
+class PatchFile(SourceFile):
+    def __init__(self, source):
+        super().__init__(source)
+        self.path = None
+
+    def parse(self, yaml):
+        super().parse(yaml)
+
+        if isinstance(yaml, dict):
+            if 'path' in yaml:
+                self.path = yaml['path']
+        elif isinstance(yaml, str):
+            self.path = yaml
+
+        if not self.path:
+            raise Exception('path must be defined for patch file')
+
+    def apply(self, directory):
+        pbs.log.info(f'applying patch {self.path} to {directory}...')
+
+        pkg = pathlib.Path(*self.source.full_name.split('/'))
+        path = pbs.srctree / 'packages' / pkg / self.path
+
+        with pbs.pushd(directory):
+            with io.open(path, 'r') as patch:
+                with subprocess.Popen(['patch', '-p1'], stdin = patch,
+                                      stderr = subprocess.STDOUT,
+                                      stdout = subprocess.PIPE) as proc:
+                    while True:
+                        line = proc.stdout.readline()
+                        if not line:
+                            break
+
+                        line = line.decode()
+                        pbs.log.quote(line)
+
+                if proc.returncode:
+                    raise PatchError(self, proc.returncode)
+
 class Source():
     class Option():
         def __init__(self, name, parent = None):
@@ -972,6 +1019,7 @@ class Source():
         self.version = ''
 
         self.files = []
+        self.patches = []
         self.depends = []
         self.options = []
         self.packages = []
@@ -997,6 +1045,10 @@ class Source():
                 return source
             elif key == 'source':
                 source = VCSSourceFile(source)
+                source.parse(yaml[key])
+                return source
+            elif key == 'patch':
+                source = PatchFile(source)
                 source.parse(yaml[key])
                 return source
             else:
@@ -1049,7 +1101,11 @@ class Source():
         if 'files' in values:
             for origin in values['files']:
                 source = Source.parse_source_file(self, origin)
-                self.files.append(source)
+
+                if isinstance(source, PatchFile):
+                    self.patches.append(source)
+                else:
+                    self.files.append(source)
 
         if 'packages' in values:
             for name in values['packages']:
@@ -1123,6 +1179,9 @@ class Source():
     def extract(self, directory):
         for source in self.files:
             source.extract(directory)
+
+        for patch in self.patches:
+            patch.apply(directory)
 
     def dump(self, indent = 0):
         iprint(indent, 'Source:', self.name)
