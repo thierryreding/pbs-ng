@@ -109,7 +109,7 @@ class REPL(cmd.Cmd):
             except KeyboardInterrupt:
                 print('')
             except Exception as e:
-                pbs.log.error(e)
+                pbs.log.exception(e)
 
         return False
 

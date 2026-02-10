@@ -2,6 +2,7 @@ import os.path, pathlib
 import shutil
 import sys
 import textwrap
+import traceback
 
 VERSION = '2025.05'
 USER_AGENT = f'Platform Build System/${VERSION}'
@@ -214,6 +215,20 @@ class Logger():
             lines = Logger.wrap(self.error_wrap, *args)
             for line in lines:
                 print(line)
+
+    def exception(self, e):
+        indent = self.colorize('red', True, '!')
+        lines = []
+
+        for line in traceback.format_exception(e):
+            for line in line.split('\n'):
+                if line:
+                    lines.append(f'{indent} {line}')
+
+            indent = self.colorize('red', True, '>')
+
+        for line in lines:
+            print(line)
 
     def quote(self, *args):
         lines = Logger.wrap(self.quote_wrap, *args)
