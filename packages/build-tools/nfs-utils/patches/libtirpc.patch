@@ -1,0 +1,14 @@
+diff --git a/utils/nfsdctl/Makefile.am b/utils/nfsdctl/Makefile.am
+index 89c7ecd6f30b..b5c813bad993 100644
+--- a/utils/nfsdctl/Makefile.am
++++ b/utils/nfsdctl/Makefile.am
+@@ -7,7 +7,7 @@ sbin_PROGRAMS	= nfsdctl
+ 
+ noinst_HEADERS = nfsdctl.h
+ nfsdctl_SOURCES = nfsdctl.c
+-nfsdctl_CFLAGS = $(LIBNL3_CFLAGS) $(LIBNLGENL3_CFLAGS) $(LIBREADLINE_CFLAGS)
+-nfsdctl_LDADD = ../../support/nfs/libnfs.la $(LIBNL3_LIBS) $(LIBNLGENL3_LIBS) $(LIBREADLINE_LIBS)
++nfsdctl_CFLAGS = $(LIBNL3_CFLAGS) $(LIBNLGENL3_CFLAGS) $(LIBREADLINE_CFLAGS) $(TIRPC_CFLAGS)
++nfsdctl_LDADD = ../../support/nfs/libnfs.la $(LIBNL3_LIBS) $(LIBNLGENL3_LIBS) $(LIBREADLINE_LIBS) $(TIRPC_LIBS)
+ 
+ MAINTAINERCLEANFILES = Makefile.in

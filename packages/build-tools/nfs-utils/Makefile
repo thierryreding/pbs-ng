@@ -5,6 +5,7 @@ $(srcdir)/stamp-patch: | $(srcdir)
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/no-statedir.patch
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/std-sbindir.patch
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/udev-libdir.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/libtirpc.patch
 	cd $(srcdir) && autoreconf --force --install --verbose
 	touch $@
 
