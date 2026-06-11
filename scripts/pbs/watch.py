@@ -31,6 +31,9 @@ def retrieve_url(url):
 
     return content, content_type
 
+class NoWatcherException(Exception):
+    pass
+
 class Client(httpx.Client):
     def __init__(self, base_url):
         headers = {
@@ -78,7 +81,7 @@ class PackageWatcher:
             if watcher.match(url):
                 return watcher(url, keywords = keywords)
 
-        raise Exception('no watchers for URL %s' % url)
+        raise NoWatcherException('no watchers for URL %s' % url)
 
 class IndexWatcher(PackageWatcher):
     def __init__(self, url, *, keywords = None, pattern = None):

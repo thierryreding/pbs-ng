@@ -12,6 +12,7 @@ import pbs.watch
 IgnoreWatcher = pbs.watch.IgnoreWatcher
 AnityaWatcher = pbs.watch.AnityaWatcher
 PackageWatcher = pbs.watch.PackageWatcher
+NoWatcherException = pbs.watch.NoWatcherException
 
 srctree = pathlib.Path(sys.argv[0]).parent.resolve()
 objtree = pathlib.Path.cwd()

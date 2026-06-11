@@ -781,7 +781,11 @@ class DownloadSourceFile(SourceFile):
             else:
                 raise Exception('failed to find watcher')
         else:
-            watcher = pbs.PackageWatcher.open(self.url)
+            try:
+                watcher = pbs.PackageWatcher.open(self.url)
+            except pbs.NoWatcherException as e:
+                pbs.log.skip('missing watcher')
+                return
 
         results = watcher.watch(verbose = verbose)
 
