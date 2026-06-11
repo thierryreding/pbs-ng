@@ -1,5 +1,5 @@
 description: Support library for libgcrypt
-version: 1.58
+version: 1.61
 license: LGPL
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-${version}.tar.bz2
-      sha1: a9876a9e4cb54298960bd4202baf891642060428
+      sha1: ec35eea78798a0321986168ea28d55baccd5934b
       watch:
         url: anitya://1628
 
