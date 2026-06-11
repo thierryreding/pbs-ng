@@ -500,10 +500,11 @@ class Package():
                 with tarfile.open(filename, 'w:xz') as tarball:
                     for pattern in package.files:
                         for match in pattern.matches():
-                            func = functools.partial(self.filter,
-                                                     exclude = pattern.exclude)
+                            if pattern.exclude and pattern.exclude(match):
+                                continue
+
                             pbs.log.begin('%s...' % match, indent = 1)
-                            tarball.add(match, filter = func)
+                            tarball.add(match, filter = self.filter)
                             pbs.log.end('done')
 
     def build(self, force = False, incremental = False, dependencies = True, seen = []):

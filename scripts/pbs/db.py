@@ -397,6 +397,9 @@ class Package():
                         for key, value in option.items():
                             if key == 'exclude':
                                 for pattern in value:
+                                    if pattern.startswith(os.sep):
+                                        pattern = pattern[len(os.sep):]
+
                                     self.excludes.append(pattern)
                             else:
                                 pbs.log.error('unknown pattern option:', key)
