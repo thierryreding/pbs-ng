@@ -1,5 +1,5 @@
 description: Python wrapper around the libevdev C library
-version: 0.11
+version: 0.13.1
 license: MIT
 
 depends:
@@ -10,7 +10,7 @@ files:
   - download:
       url: https://pypi.python.org/packages/source/l/libevdev/libevdev-${version}.tar.gz
       filename: python-libevdev-${version}.tar.gz
-      sha1: 1ffd94c2ec458b32d5fc245ce47ae78226def971
+      sha1: 10e09c327344f9fb4c902dcc120e2c221132634d
       watch:
         url: anitya://250362
 
