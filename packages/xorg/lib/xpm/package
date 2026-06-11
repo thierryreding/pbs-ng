@@ -1,5 +1,5 @@
 description: X11 pixmap library
-version: 3.5.18
+version: 3.5.19
 license: custom
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://xorg.freedesktop.org/releases/individual/lib/libXpm-${version}.tar.xz
-      sha1: e5ded26e4e9facf6351c6aed5a036cb23917148b
+      sha1: 7b98920c656786f4089001402938d214e71d847b
       watch:
         url: anitya://1787
 
