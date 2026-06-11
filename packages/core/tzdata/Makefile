@@ -1,31 +1,16 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(builddir):
-	mkdir -p $@
-
-TIMEZONES = \
-	africa \
-	antarctica \
-	asia \
-	australasia \
-	europe \
-	northamerica \
-	southamerica \
-	pacificnew \
-	etcetera \
-	backward \
-	systemv \
-	factory
-
-$(TIMEZONES):
-	cd $(srcdir) && \
-		zic -y ./yearistype -d $(DESTDIR)$(PREFIX)/share/zoneinfo $@
-
-$(builddir)/stamp-install: | $(builddir)
-	cd $(srcdir) && \
-		zic -y ./yearistype -d $(DESTDIR)$(PREFIX)/share/zoneinfo
+$(srcdir)/stamp-build: | $(srcdir)
+	cd $(srcdir) &&  $(MAKE) $(build-args)
 	touch $@
 
-install: $(builddir)/stamp-install
+install-args = \
+	DESTDIR=$(DESTDIR)
+
+$(srcdir)/stamp-install: | $(srcdir)/stamp-build
+	cd $(srcdir) && $(MAKE) $(install-args) install
+	touch $@
+
+install: $(srcdir)/stamp-install
 
 .PHONY: install
