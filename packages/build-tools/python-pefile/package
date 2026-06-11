@@ -1,0 +1,15 @@
+description: Python module to read and work with PE (Portable Executable) files
+version: 2024.8.26
+license: MIT
+
+depends:
+  - build-tools/python
+
+files:
+  - download:
+      url: https://pypi.python.org/packages/source/p/pefile/pefile-${version}.tar.gz
+      sha1: f79d43b5ddce49d449fc6946ab7867e7ec8617ee
+      watch:
+        url: anitya://201044
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
