@@ -1,5 +1,5 @@
 description: simple powerful testing with Python
-version: 8.3.4
+version: 9.0.3
 license: MIT
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://pypi.python.org/packages/source/p/pytest/pytest-${version}.tar.gz
-      sha1: 22630c3b10eebc5625e1929a5af4ef0d01ba650a
+      sha1: e3bcb4809c6f83483c99a8aa03317766730d2f14
       watch:
         url: anitya://3765
 
