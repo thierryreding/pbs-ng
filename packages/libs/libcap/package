@@ -1,5 +1,5 @@
 description: POSIX 1003.1e capabilities
-version: 2.77
+version: 2.78
 license: GPL-2.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-${version}.tar.xz
-      sha1: 73ecf367676c1292ba3425f1256dc120df0a2db4
+      sha1: bfb2212f20f7d856d19346495081284b22d2f4ba
       watch:
         url: anitya://1569
 
