@@ -490,7 +490,7 @@ class Version(_BaseVersion):
     @property
     def dev(self) -> tuple[str, int] | None:
         if self._version.dev:
-            sep, letter, dev = self._version.post
+            sep, letter, dev = self._version.dev
             return "".join([letter, str(dev) if dev else ""])
         else:
             return self._version.dev
