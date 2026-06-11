@@ -1,5 +1,10 @@
 include $(TOP_SRCDIR)/packages/autotools.mk
 
+$(srcdir)/stamp-patch: | $(srcdir)
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cloexec.patch
+	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/open-tree.patch
+	touch $@
+
 $(builddir)/configparms: | $(builddir)
 	echo '# generated' > $@
 	echo 'slibdir=$(PREFIX)/lib' >> $@
@@ -15,7 +20,7 @@ conf-args += \
 conf-vars += \
 	ASFLAGS='$(ASFLAGS)'
 
-$(builddir)/stamp-configure: $(builddir)/configparms
+$(builddir)/stamp-configure: $(srcdir)/stamp-patch $(builddir)/configparms
 
 $(DESTDIR)/etc/ld.so.conf.d:
 	mkdir -p $@
