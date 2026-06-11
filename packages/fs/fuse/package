@@ -1,5 +1,5 @@
 description: FUSE (file system in userspace) library
-version: 3.18.1
+version: 3.18.2
 license: GPL-2.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://github.com/libfuse/libfuse/archive/fuse-${version}.tar.gz
-      sha1: 3870cb2286058bd9da08622d6db8121be5530739
+      sha1: 2c269409be9ce6b2fdcd7a70eec80efdce2ddd68
       watch:
         url: anitya://861
 
