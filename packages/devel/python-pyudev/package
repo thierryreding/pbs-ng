@@ -1,5 +1,5 @@
 description: Python 3.x binding to libudev
-version: 0.24.3
+version: 0.24.4
 license: LGPL
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: https://pypi.python.org/packages/source/p/pyudev/pyudev-${version}.tar.gz
-      sha1: 36eda2928efba724d613894bba2f236781a90939
+      sha1: 74ad4abe12fb82d22b6bf6d9bf550679dd5bf9d9
       watch:
         url: anitya://8485
 
