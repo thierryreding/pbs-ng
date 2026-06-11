@@ -1,5 +1,5 @@
 description: Netfilter library providing interface to the nf_tables subsystem
-version: 1.2.4
+version: 1.3.1
 license: GPL-2.0
 
 depends:
@@ -8,8 +8,8 @@ depends:
 
 files:
   - download:
-      url: https://www.netfilter.org/pub/libnftnl/libnftnl-${version}.tar.bz2
-      sha1: a0643322bbfdc7c0abb882af329532823a284c70
+      url: https://www.netfilter.org/pub/libnftnl/libnftnl-${version}.tar.xz
+      sha1: 2f28c2c238a13a34bda814982f607f3bf6d75d81
       watch:
         url: anitya://1681
 
