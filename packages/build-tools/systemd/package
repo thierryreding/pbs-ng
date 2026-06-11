@@ -2,5 +2,6 @@ include: packages/core/systemd/package.include
 
 depends:
   - build-tools/meson
+  - build-tools/python-pefile
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
