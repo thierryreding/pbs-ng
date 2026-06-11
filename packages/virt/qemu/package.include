@@ -1,11 +1,11 @@
 description: generic and open source machine emulator and virtualizer
-version: 10.2.0
+version: 11.0.1
 license: GPL-2.0
 
 files:
   - download:
       url: https://download.qemu.org/qemu-${version}.tar.xz
-      sha1: ba8b166cd961c26cc71041ae432a4c11fafa9a36
+      sha1: 678aa204fc99b0b262529378b0baca1a68467241
       watch:
         url: anitya://13607
 
