@@ -1,5 +1,5 @@
 description: Library to identify Wacom tablets and their features
-version: 2.17.0
+version: 2.19.0
 license: MIT
 
 depends:
@@ -13,7 +13,7 @@ depends:
 files:
   - download:
       url: https://github.com/linuxwacom/libwacom/releases/download/libwacom-${version}/libwacom-${version}.tar.xz
-      sha1: 760caffd39ae209ba1b73ce0bac7cfb7758b19f4
+      sha1: 6a8f23cead1c9f8a74b3226c3b4f8bc289339062
       watch:
         url: anitya://16887
 
