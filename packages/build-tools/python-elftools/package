@@ -1,5 +1,5 @@
 description: parsing ELF and DWARF in Python
-version: 0.32
+version: 0.33
 license: public domain
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://github.com/eliben/pyelftools/archive/refs/tags/v${version}.tar.gz
-      sha1: b82baf3c4bd648f505eed12afe42f8b60a2a893e
+      sha1: 0263cece5737f5d861300b877dadb76b818e1d70
       watch:
         url: anitya://16219
 
