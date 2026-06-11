@@ -1,11 +1,11 @@
 description: The Open Source toolkit for Secure Socket Layer and Transport Layer Security
-version: 3.6.1
+version: 4.0.1
 license: BSD
 
 files:
   - download:
       url: https://www.openssl.org/source/openssl-${version}.tar.gz
-      sha1: 845d412b5129870d9f754f89f5e195e2d18ce0e7
+      sha1: eaf5ac943564691e22c3a303bc8ffc9ea928fd5a
       watch:
         url: anitya://2566
 
