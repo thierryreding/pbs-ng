@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-${version}.tar.xz
-      sha1: 2b859acd7060e9898ac457dbd26dbebf563cc44b
+      sha1: 6e23f716a86dbec3174c05bdc23a02aa72ac3185
       watch:
         url: anitya://3708
 
