@@ -1,0 +1,25 @@
+diff --git a/man/Makefile.in b/man/Makefile.in
+index 935c1e331b33..f7deb61d7564 100644
+--- a/man/Makefile.in
++++ b/man/Makefile.in
+@@ -277,17 +277,17 @@ checksed:
+ 	$(Q) $(SUBSTVARS)
+ 	$(Q) $(ESCAPEHYPHENS)
+ 
+-$(MAN7INDEX): $(srcdir)/$(MAN7INDEX)_gen
++$(MAN7INDEX): $(MAN7INDEX)_gen
+ 	$(SHOW) "    [INDEX] $@"
+ 	$(Q) $(SUBSTVARS)
+ 	$(Q) $(ESCAPEHYPHENS)
+ 
+-$(MAN7CATEGORIES): $(srcdir)/$(MAN7CATEGORIES)_gen
++$(MAN7CATEGORIES): $(MAN7CATEGORIES)_gen
+ 	$(SHOW) "    [INDEX] $@"
+ 	$(Q) $(SUBSTVARS)
+ 	$(Q) $(ESCAPEHYPHENS)
+ 
+-$(MAN7ARGS): $(srcdir)/$(MAN7ARGS)_gen
++$(MAN7ARGS): $(MAN7ARGS)_gen
+ 	$(SHOW) "    [ARGS] $@"
+ 	$(Q) $(SUBSTVARS)
+ 	$(Q) $(ESCAPEHYPHENS)
