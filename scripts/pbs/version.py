@@ -1,28 +1,88 @@
 from __future__ import annotations
 
-import itertools, packaging.version, re, unittest
-from typing import Any, NamedTuple, Tuple, Union
+from typing import Any, NamedTuple, SupportsInt, Tuple, Union
+import itertools, re, unittest
 
 __all__ = [ 'VERSION_PATTERN', 'InvalidVersion', 'Version', 'parse' ]
 
+class InfinityType:
+    def __repr__(self) -> str:
+        return 'Infinity'
+
+    def __hash__(self) -> int:
+        return hash(repr(self))
+
+    def __lt__(self, other: object) -> bool:
+        return False
+
+    def __le__(self, other: object) -> bool:
+        return isinstance(other, InfinityType)
+
+    def __eq__(self, other: object) -> bool:
+        return isinstance(other, InfinityType)
+
+    def __ne__(self, other: object) -> bool:
+        return not isinstance(other, InfinityType)
+
+    def __gt__(self, other: object) -> bool:
+        return not isinstance(other, InfinityType)
+
+    def __ge__(self, other: object) -> bool:
+        return True
+
+    def __neg__(self) -> NegativeInfinityType:
+        return NegativeInfinity
+
+Infinity = InfinityType()
+
+class NegativeInfinityType:
+    def __repr__(self) -> str:
+        return '-Infinity'
+
+    def __hash__(self) -> int:
+        return hash(repr(self))
+
+    def __lt__(self, other: object) -> bool:
+        return not isinstance(other, NegativeInfinityType)
+
+    def __le__(self, other: object) -> bool:
+        return True
+
+    def __eq__(self, other: object) -> bool:
+        return isinstance(other, NegativeInfinityType)
+
+    def __ne__(self, other: object) -> bool:
+        return not isinstance(other, NegativeInfinityType)
+
+    def __gt__(self, other: object) -> bool:
+        return False
+
+    def __ge__(self, other: object) -> bool:
+        return isinstance(other, NegativeInfinityType)
+
+    def __neg__(self) -> InfinityType:
+        return Infinity
+
+NegativeInfinity = NegativeInfinityType()
+
 CmpPrePostDevType = Union[
-    packaging.version.InfinityType,
-    packaging.version.NegativeInfinityType,
+    InfinityType,
+    NegativeInfinityType,
     Tuple[str, int]
 ]
 
 LocalType = Tuple[Union[int, str], ...]
 
 CmpLocalType = Union[
-    packaging.version.NegativeInfinityType,
-    Tuple[Union[Tuple[int, str], Tuple[packaging.version.NegativeInfinityType, Union[int, str]]], ...],
+    NegativeInfinityType,
+    Tuple[Union[Tuple[int, str], Tuple[NegativeInfinityType, Union[int, str]]], ...],
 ]
 
 PortableType = Tuple[Union[int, str], ...]
 
 CmpPortableType = Union[
-    packaging.version.NegativeInfinityType,
-    Tuple[Union[Tuple[int, str], Tuple[packaging.version.NegativeInfinityType, Union[int, str]]], ...],
+    NegativeInfinityType,
+    Tuple[Union[Tuple[int, str], Tuple[NegativeInfinityType, Union[int, str]]], ...],
 ]
 
 CmpKey = Tuple[
@@ -235,31 +295,31 @@ def _cmpkey(
     # if there is not a pre or a post segment. If we have one of those then
     # the normal sorting rules will handle this case correctly.
     if pre is None and post is None and dev is not None:
-        _pre: CmpPrePostDevType = packaging.version.NegativeInfinity
+        _pre: CmpPrePostDevType = NegativeInfinity
     # Versions without a pre-release (except as noted above) should sort after
     # those with one.
     elif pre is None:
-        _pre = packaging.version.Infinity
+        _pre = Infinity
     else:
         _pre = pre
 
     # Versions without a post segment should sort before those with one.
     if post is None:
-        _post: CmpPrePostDevType = packaging.version.NegativeInfinity
+        _post: CmpPrePostDevType = NegativeInfinity
 
     else:
         _post = post
 
     # Versions without a development segment should sort after those with one.
     if dev is None:
-        _dev: CmpPrePostDevType = packaging.version.Infinity
+        _dev: CmpPrePostDevType = Infinity
 
     else:
         _dev = dev
 
     if local is None:
         # Versions without a local segment should sort before those with one.
-        _local: CmpLocalType = packaging.version.NegativeInfinity
+        _local: CmpLocalType = NegativeInfinity
     else:
         # Versions with a local segment need that segment parsed to implement
         # the sorting rules in PEP440.
@@ -269,14 +329,14 @@ def _cmpkey(
         # - Shorter versions sort before longer versions when the prefixes
         #   match exactly
         _local = tuple(
-            (i, "") if isinstance(i, int) else (packaging.version.NegativeInfinity, i) for i in local
+            (i, "") if isinstance(i, int) else (NegativeInfinity, i) for i in local
         )
 
     if portable is None:
-        _portable: CmpLocalType = packaging.version.NegativeInfinity
+        _portable: CmpLocalType = NegativeInfinity
     else:
         _portable = tuple(
-            (i, "") if isinstance(i, int) else (packaging.version.NegativeInfinity, i) for i in portable
+            (i, "") if isinstance(i, int) else (NegativeInfinity, i) for i in portable
         )
 
     return _release, _pre, _post, _dev, _local, _portable
