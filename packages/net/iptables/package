@@ -1,5 +1,5 @@
 description: Linux kernel packet control tool
-version: 1.8.8
+version: 1.8.13
 license: GPL-2.0
 
 depends:
@@ -8,8 +8,8 @@ depends:
 
 files:
   - download:
-      url: https://www.netfilter.org/pub/iptables/iptables-${version}.tar.bz2
-      sha1: 98783621a5e58ff55f83b1350523f3de41af621d
+      url: https://www.netfilter.org/pub/iptables/iptables-${version}.tar.xz
+      sha1: e486c2df936fc080d2c0a2f5650c672e52e4ee8a
       watch:
         url: anitya://1394
 
