@@ -6,6 +6,9 @@ $(srcdir)/stamp-patch: | $(srcdir)
 
 $(builddir)/stamp-configure: $(srcdir)/stamp-patch
 
+env += \
+	PKG_CONFIG_FDO_SYSROOT_RULES=1
+
 conf-args += \
 	-Dlauncher-permissions=disabled
 
