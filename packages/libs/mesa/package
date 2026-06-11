@@ -241,12 +241,15 @@ packages:
       - /usr/lib/gbm/*.so
       - /usr/lib/vdpau/*
       - /usr/lib/*.so.*
+      - /usr/lib/libvulkan_*.so
       - /usr/share
 
   mesa-dev:
     files:
       - /usr/include
-      - /usr/lib/*.so
+      - /usr/lib/*.so:
+          - exclude:
+              - /usr/lib/libvulkan_*.so
       - /usr/lib/pkgconfig
 
 # vim: et ft=yaml sts=2 sw=2 ts=2
