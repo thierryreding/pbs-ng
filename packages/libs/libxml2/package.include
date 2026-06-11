@@ -1,11 +1,11 @@
 description: XML parsing library
-version: 2.15.1
+version: 2.15.3
 license: MIT
 
 files:
   - download:
       url: https://download.gnome.org/sources/libxml2/${major}.${minor}/libxml2-${version}.tar.xz
-      sha1: 8a5337a2d77caad438dd6f2f473ab29058d94a4b
+      sha1: 7bcba7d68cc46e0555afcf267eccbd4fe26979d9
       watch:
         url: anitya://1783
 
