@@ -1,18 +1,18 @@
 description: time zone and daylight saving time data
-version: 2025c
+version: 2026b
 license: GPL
 
 files:
   - download:
       url: https://www.iana.org/time-zones/repository/releases/tzdata${version}.tar.gz
-      sha1: 1a51542a6f0b3916fb0e89300dd589f68df30e17
+      sha1: 35296933a6e1eb3e1fc2e53bdca217e9876dc578
       strip: false
       watch:
         url: anitya://5021
 
   - download:
       url: https://www.iana.org/time-zones/repository/releases/tzcode${version}.tar.gz
-      sha1: ab010dd023e0899106eb8edea97794cf4bfbea24
+      sha1: 0b09e21124d3a79c4e80a3d18db928e987530f6b
       strip: false
       watch:
         url: anitya://5021
