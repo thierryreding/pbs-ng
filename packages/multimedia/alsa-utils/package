@@ -1,5 +1,5 @@
 description: Advanced Linux Sound Architecture - utilities
-version: 1.2.15.2
+version: 1.2.16
 license: GPL
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: https://www.alsa-project.org/files/pub/utils/alsa-utils-${version}.tar.bz2
-      sha1: 18061a6a7c7f0192fe708d52a4b5928007908392
+      sha1: 4786df38cd517bdf73a8a9191ffd4658e94526b5
       watch:
         url: anitya://37
 
