@@ -1,11 +1,11 @@
 description: SPIR-V/LLVM bi-directional translator
-version: 21.1.4
+version: 22.1.2
 license: custom
 
 files:
   - download:
       url: https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/refs/tags/v${version}.tar.gz
-      sha1: c07dc1f70525349c3dcb369a0f0dc9dd51a1256a
+      sha1: a6cc59eaccee36614c83278a42575e728df75dd1
       watch:
         url: anitya://227273
 
