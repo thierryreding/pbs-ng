@@ -1,12 +1,12 @@
 description: International Components for Unicode
-version: 78.2
+version: 78.3
 license: custom
 
 files:
   - download:
       url: https://github.com/unicode-org/icu/archive/refs/tags/release-${version}.tar.gz
       filename: icu-${version}.tar.gz
-      sha1: 5b80e6bc43804ea19de1971ab67153642f5c1dd2
+      sha1: bd047df199b05cfda0fe5657caadb45e4934c8e6
       watch:
         url: anitya://379847
 
