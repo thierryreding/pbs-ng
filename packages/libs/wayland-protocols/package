@@ -1,5 +1,5 @@
 description: Specifications of extended Wayland protocols
-version: 1.47
+version: 1.49
 license: MIT
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/${version}/downloads/wayland-protocols-${version}.tar.xz
-      sha1: cc3915eb646e607abc82242e84652e4a548832d0
+      sha1: fb934fc767ec68d2335030a41e5f132c03179438
       watch:
         url: anitya://13997
 
