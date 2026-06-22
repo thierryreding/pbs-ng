@@ -1,5 +1,5 @@
 description: free reference library for reading and writing PNGs
-version: 1.6.55
+version: 1.6.58
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://github.com/pnggroup/libpng/archive/refs/tags/v${version}.tar.gz
-      sha1: 8cae28e641033d273e316d5281670fa89872b572
+      sha1: f5a36371029ba4ec1bae7dd02f30b131356facfd
       watch:
         url: anitya://1705
 
