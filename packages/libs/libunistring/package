@@ -1,5 +1,5 @@
 description: library for manipulationg Unicode strings and C strings
-version: 1.4.1
+version: 1.4.2
 license: GPL
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://ftp.gnu.org/gnu/libunistring/libunistring-${version}.tar.gz
-      sha1: f370f2c8a4cd4406140ab770e97d9a5c7dc2468f
+      sha1: 91be967d483213fb4990f64ee7b84236af99045a
       watch:
         url: anitya://1747
 
