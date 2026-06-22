@@ -1,11 +1,11 @@
 description: Low Level Virtual Machine
-version: 21.1.8
+version: 22.1.8
 license: custom
 
 files:
   - download:
       url: https://github.com/llvm/llvm-project/releases/download/llvmorg-${version}/llvm-project-${version}.src.tar.xz
-      sha1: a02f43a68bf59be15a61d6ddd0d99bd4973244f4
+      sha1: b8a2cafc2ba8c91cee103f00454a211cdd7144f3
       watch:
         url: anitya://1830
 
