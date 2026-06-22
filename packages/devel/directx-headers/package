@@ -1,5 +1,5 @@
 description: DirectX headers for using D3D12
-version: 1.618.2
+version: 1.619.1
 license: MIT
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://github.com/microsoft/DirectX-Headers/archive/refs/tags/v${version}.tar.gz
-      sha1: 179ee2ecb714e07510e6a3607072d4948d67ed24
+      sha1: d9631415fe3572dc9facc41bd2e4e606c94ad1e4
       watch:
         url: anitya://377275
 
