@@ -1,11 +1,11 @@
 description: Miscellaneous system utilities for Linux
-version: 2.42.1
+version: 2.42.2
 license: GPL-2.0
 
 files:
   - download:
       url: https://www.kernel.org/pub/linux/utils/util-linux/v${major}.${minor}/util-linux-${version}.tar.xz
-      sha1: 958e42251c774c097cf35953f0cd7441d4b7971e
+      sha1: bcdab8b86394bff5295219c2f1feb0e333d22a86
       watch:
         url: anitya://8179
 
