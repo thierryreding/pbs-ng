@@ -1,5 +1,5 @@
 description: Linux keyboard tools
-version: 2.9.0
+version: 2.10.0
 license: GPL-2.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://mirrors.edge.kernel.org/pub/linux/utils/kbd/kbd-${version}.tar.xz
-      sha1: bf3893410db65231348a2ecdf77db30d6521aa65
+      sha1: 892ff33e60c3542e14ba0a3688f90d87c6634725
       watch:
         url: anitya://1492
 
