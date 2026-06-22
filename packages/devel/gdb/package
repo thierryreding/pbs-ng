@@ -1,5 +1,5 @@
 description: The GNU debugger
-version: 17.1
+version: 17.2
 license: GPL-3.0
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: http://ftp.gnu.org/pub/gnu/gdb/gdb-${version}.tar.xz
-      sha1: c99a59a9f480afb094bc0fbb19ceacdfe3658933
+      sha1: 4a4db2ba512fc30b4ff9129df5efa8524df3588f
       watch:
         url: anitya://11798
 
