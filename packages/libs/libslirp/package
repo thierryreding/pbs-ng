@@ -1,5 +1,5 @@
 description: general purpose TCP-IP emulator
-version: 4.9.1
+version: 4.9.3
 license: MIT
 
 depends:
@@ -10,7 +10,7 @@ files:
   - download:
       url: https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v${version}/libslirp-v${version}.tar.bz2
       filename: libslirp-${version}.tar.bz2
-      sha1: f4d94ea1ac0581748d1ac17d67dcc16158c59b1b
+      sha1: 0a71d4ca9253999a1e314d5de9c4d0e8ae3039a2
       watch:
         url: anitya://96796
 
