@@ -1,0 +1,24 @@
+description: single-file/stream lossless data compression utility
+version: 1.14
+license: GPL-3.0-or-later
+
+depends:
+  - libs/zlib
+
+files:
+  - download:
+      url: https://ftp.gnu.org/gnu/gzip/gzip-${version}.tar.xz
+      sha1: 05f44a8a589df0171e75769e3d11f8b11d692f58
+      watch:
+        url: anitya://1290
+
+packages:
+  gzip:
+    files:
+      - /usr/bin
+
+  gzip-man:
+    files:
+      - /usr/share/man
+
+# vim: et ft=yaml sts=2 sw=2 ts=2
