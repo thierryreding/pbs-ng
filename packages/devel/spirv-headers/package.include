@@ -1,12 +1,12 @@
 description: SPIR-V Headers
-version: 1.4.350.0
+version: 1.4.350.1
 license: custom
 
 files:
   - download:
       url: https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/vulkan-sdk-${version}.tar.gz
       filename: spirv-headers-${version}.tar.gz
-      sha1: 6df145a5bf9e3c6f965eee797c65dab38f717c86
+      sha1: 47654a1f1cae5b88c7f3b81c9ad43ddd8260b385
       # We use the SPIRV-Tools Anitya ID here because SPIRV-Headers has some
       # bogus version numbers that mess up the ordering
       watch:
