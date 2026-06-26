@@ -1,5 +1,5 @@
 description: C library for the Public Suffix List
-version: 0.21.5
+version: 0.22.0
 license: MIT
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://github.com/rockdaboot/libpsl/releases/download/${version}/libpsl-${version}.tar.lz
-      sha1: 9b4f67e420f94fc8506b6a1d5577969ad671b5fb
+      sha1: 83961e5fb679b1164d68bb14c84b257829183e4b
       watch:
         url: anitya://7305
 
