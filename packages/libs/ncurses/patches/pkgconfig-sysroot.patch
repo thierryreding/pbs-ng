@@ -1,0 +1,14 @@
+diff --git a/misc/gen-pkgconfig.in b/misc/gen-pkgconfig.in
+index c369dd26a07c..026ad556e4bd 100644
+--- a/misc/gen-pkgconfig.in
++++ b/misc/gen-pkgconfig.in
+@@ -92,6 +92,9 @@ do
+ 	-specs*) # ignore linker specs-files which were used to build library
+ 		continue
+ 		;;
++  --sysroot=*) # ignore sysroot flags because they aren't persistent
++    continue
++    ;;
+ 	-Wl,-z*) # ignore flags used to manipulate shared image
+ 		continue
+ 		;;

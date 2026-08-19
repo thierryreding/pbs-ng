@@ -3,6 +3,9 @@ include: packages/libs/ncurses/package.include
 depends:
   - devel/glibc
 
+files:
+  - patch: patches/pkgconfig-sysroot.patch
+
 packages:
   ncurses:
     files:
