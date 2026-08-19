@@ -1,1 +1,3 @@
 #!/bin/sh
+
+install_firmware rtl_nic/rtl8126a-3.fw
