@@ -5,6 +5,7 @@ license: custom
 depends:
   - libs/ncurses
   - xorg/lib/xaw
+  - xorg/lib/xt
 
 files:
   - download:
