@@ -6,14 +6,16 @@ import subprocess
 
 @click.command()
 @click.option('--output', '-o', type = click.Path(), default = 'initrd.gz', help = 'output filename of the initial ramdisk')
+@click.option('--sysroot', '-r', type = click.Path(),
+              default = os.path.join(pbs.objtree, 'sysroot'),
+              help = 'path to a sysroot containing installed packages')
 @click.pass_obj
-def command(context, output):
+def command(context, output, sysroot):
     '''
     Build an initial ramdisk. This uses an existing sysroot as the source for
     files to be copied.
     '''
 
-    sysroot = os.path.join(pbs.objtree, 'sysroot')
     initrd = os.path.join(pbs.objtree, 'initrd')
     mkinitrd = os.path.join(sysroot, 'usr/bin/mkinitrd')
 
