@@ -4,6 +4,8 @@ license: Apache-2.0
 
 depends:
   - libs/vulkan-loader
+  - libs/wayland
+  - libs/wayland-protocols
 
 files:
   - download:
