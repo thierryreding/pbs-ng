@@ -4,6 +4,7 @@ license: custom
 
 depends:
   - devel/glibc
+  - libs/zlib
 
 files:
   - download:
