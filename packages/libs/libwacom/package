@@ -8,6 +8,7 @@ depends:
   - devel/python-pytest
   - devel/python-pyudev
   - libs/glib
+  - libs/libevdev
   - libs/libgudev
 
 files:
