@@ -6,6 +6,9 @@ depends:
   - build-tools/cmake
   - devel/glibc
   - libs/vulkan-headers
+  - xorg/lib/x11
+  - xorg/lib/xcb
+  - xorg/lib/xrandr
 
 files:
   - download:
