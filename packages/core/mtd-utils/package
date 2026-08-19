@@ -3,6 +3,7 @@ version: 2.3.1
 license: GPL-2.0
 
 depends:
+  - core/util-linux
   - devel/glibc
   - libs/openssl
 
