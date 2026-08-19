@@ -1,5 +1,5 @@
 description: Vulkan loader
-version: 1.4.354
+version: 1.4.355
 license: Apache-2.0
 
 depends:
@@ -13,7 +13,7 @@ depends:
 files:
   - download:
       url: https://github.com/KhronosGroup/Vulkan-Loader/archive/refs/tags/v${version}.tar.gz
-      sha1: 09ba196e7385e65bf1525f5db8584f143c098b49
+      sha1: 68d3f3c26df7b81cc5520ad48ac830fb190bf701
       watch:
         url: anitya://230557
 
