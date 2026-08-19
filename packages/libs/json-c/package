@@ -1,5 +1,5 @@
 description: A JSON implementation in C
-version: 0.18-20240915
+version: 0.19-20260627
 license: LGPL-2.1 MPL-1.1
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://github.com/json-c/json-c/archive/refs/tags/json-c-${version}.tar.gz
-      sha1: 7c5679b5d797609ed34ec0918bfdb04e78055ade
+      sha1: 301f14d38892ef980fe83bbf59c1dfb8fe443074
       watch:
         url: anitya://1477
 
