@@ -5,6 +5,7 @@ license: custom
 depends:
   - build-tools/meson
   - devel/glibc
+  - libs/bzip2
   - libs/expat
   - libs/freetype
   - libs/json-c
