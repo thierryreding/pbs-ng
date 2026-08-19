@@ -5,6 +5,8 @@ license: custom
 depends:
   - xorg/lib/ice
   - xorg/lib/sm
+  - xorg/lib/x11
+  - xorg/proto/xorgproto
 
 files:
   - download:
