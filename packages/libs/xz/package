@@ -2,6 +2,9 @@ description: Library and command-line tools for XZ and LZMA compressed files
 version: 5.8.3
 license: GPL-2.0+, LGPL-2.1+, GPL-3.0+
 
+depends:
+  - devel/glibc
+
 files:
   - download:
       url: https://github.com/tukaani-project/xz/releases/download/v${version}/xz-${version}.tar.xz
