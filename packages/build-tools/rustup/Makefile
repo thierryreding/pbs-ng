@@ -1,3 +1,6 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/build-tools/common.mk
 
 # rustup 32-bit ARM toolchains aren't endian-specific
@@ -31,6 +34,4 @@ $(BUILD_TOOLS)/.cargo/config.toml: | $(BUILD_TOOLS)/.cargo
 	echo "linker = \"$(HOST)-gcc\"" >> $@
 	echo "ar = \"$(HOST)-ar\"" >> $@
 
-install: $(BUILD_TOOLS)/.cargo/config.toml $(srcdir)/stamp-install
-
-.PHONY: install
+install: $(BUILD_TOOLS)/.cargo/config.toml

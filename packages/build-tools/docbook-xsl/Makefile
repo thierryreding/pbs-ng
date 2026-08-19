@@ -1,3 +1,6 @@
+# not a proper out-of-tree build, but need this for the PBS interface
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/build-tools/common.mk
 
 schemadir = $(BUILD_TOOLS)/share/xml/docbook/schema
@@ -37,6 +40,4 @@ $(BUILD_TOOLS)/etc/xml/catalog: $(srcdir)/stamp-install
 		done \
 	done
 
-install: $(srcdir)/stamp-install $(BUILD_TOOLS)/etc/xml/catalog
-
-.PHONY: install
+install: $(BUILD_TOOLS)/etc/xml/catalog

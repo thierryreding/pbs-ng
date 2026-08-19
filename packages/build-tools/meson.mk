@@ -1,8 +1,5 @@
 include $(TOP_SRCDIR)/packages/build-tools/common.mk
 
-$(builddir):
-	mkdir -p $@
-
 env = \
 	DESTDIR=$(DESTDIR)
 
@@ -19,13 +16,5 @@ $(builddir)/stamp-build: $(builddir)/stamp-configure
 	$(env) ninja -C $(builddir)
 	touch $@
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(builddir)/stamp-install:
 	$(env) $(FAKEROOT) ninja -C $(builddir) install
-
-install: $(builddir)/stamp-install
-
-.PHONY: install
-
-ifeq ($(FORCE),y)
-.PHONY: $(builddir)/stamp-build
-endif

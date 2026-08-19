@@ -1,3 +1,6 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/build-tools/common.mk
 
 schemadir = $(BUILD_TOOLS)/share/xml/docbook/schema
@@ -57,6 +60,4 @@ $(BUILD_TOOLS)/etc/xml/catalog: $(BUILD_TOOLS)/etc/xml/docbook-xml
 		"file://$(BUILD_TOOLS)/etc/xml/docbook-xml" \
 		$@
 
-install: $(srcdir)/stamp-install $(BUILD_TOOLS)/etc/xml/catalog
-
-.PHONY: install
+install: $(BUILD_TOOLS)/etc/xml/catalog

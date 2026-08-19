@@ -22,9 +22,6 @@ install-vars = \
 	CONFIG_PREFIX='$(DESTDIR)' \
 	$(common-vars)
 
-$(builddir):
-	mkdir -p $@
-
 $(builddir)/stamp-configure: | $(builddir)
 	cd $(srcdir) && \
 		$(MAKE) $(conf-args) $(conf-vars) defconfig
@@ -35,11 +32,7 @@ $(builddir)/stamp-build: $(builddir)/stamp-configure
 		$(MAKE) $(build-args) $(build-vars)
 	touch $@
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(builddir)/stamp-install:
 	cd $(srcdir) && \
 		$(MAKE) $(install-args) $(install-vars) install
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: configure build install

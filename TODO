@@ -1,10 +1,10 @@
 * isolate builds into a sysroot that is created from scratch every time
-  - this has the big benefit that it will allow reproducible builds where
-    the build of a package is not impacted by the state of the global sysroot,
-    which could cause additional dependencies to be pulled in
-  - this is also used by most distributions to make sure no extra dependencies
-    get pulled in accidentally, and it helps by making sure all the
-    dependencies are properly documented
+  - this is now implemented, but it might be good to add a way of creating the
+    sysroot inside a tmpfs to reduce wear on the harddrive
+  - maybe a good way would be to use the unshare syscall to create a new
+    namespace, which might also help avoid fakeroot, which doesn't work quite
+    properly for PBS anyway, given that it lacks a way of storing context
+    between "make install" and packaging
 
 * add perl and perl-xml-parser as build-tools (needed by intltool)
 

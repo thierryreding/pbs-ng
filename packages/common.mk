@@ -6,7 +6,6 @@ space := $(empty) $(empty)
 
 DESTDIR = $(TOP_OBJDIR)/$(PKGDIR)/install
 BUILD_TOOLS = $(TOP_OBJDIR)/build-tools
-SYSROOT = $(TOP_OBJDIR)/sysroot
 PREFIX = /usr
 
 ACLOCAL_PATH := $(BUILD_TOOLS)/share/aclocal:$(SYSROOT)$(PREFIX)/share/aclocal
@@ -30,3 +29,8 @@ CXXFLAGS += $(ARCH_CXXFLAGS) --sysroot=$(SYSROOT)
 LDFLAGS += $(ARCH_LDFLAGS) --sysroot=$(SYSROOT)
 
 export ACLOCAL_PATH LD_LIBRARY_PATH PKG_CONFIG_LIBDIR PKG_CONFIG_SYSROOT_DIR
+
+$(DESTDIR):
+	mkdir -p $@
+
+include $(TOP_SRCDIR)/packages/interface.mk

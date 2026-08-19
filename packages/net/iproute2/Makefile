@@ -1,3 +1,6 @@
+# not a proper out-of-tree build
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 
 env += \
@@ -18,7 +21,7 @@ build-args = \
 	SBINDIR='$(PREFIX)/bin' \
 	-j $(JOBS)
 
-$(srcdir)/stamp-build: $(srcdir)/stamp-configure | $(srcdir)
+$(srcdir)/stamp-build: $(srcdir)/stamp-configure
 	cd $(srcdir) && $(MAKE) $(build-args)
 	touch $@
 
@@ -27,10 +30,6 @@ install-args = \
 	PREFIX='$(PREFIX)' \
 	SBINDIR='$(PREFIX)/bin'
 
-$(srcdir)/stamp-install: $(srcdir)/stamp-build
+$(srcdir)/stamp-install:
 	cd $(srcdir) && $(MAKE) $(install-args) install
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

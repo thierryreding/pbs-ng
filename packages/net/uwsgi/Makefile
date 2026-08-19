@@ -1,3 +1,6 @@
+# not a proper out-of-tree build
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 include $(TOP_SRCDIR)/packages/python-sysconfigdata.mk
 
@@ -43,7 +46,3 @@ install-plugins = $(foreach plugin,$(plugins),$(call mkplugin,$(plugin)))
 
 $(srcdir)/stamp-install: $(srcdir)/stamp-install-core $(install-plugins)
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

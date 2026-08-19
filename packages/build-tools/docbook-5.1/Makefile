@@ -1,3 +1,6 @@
+# not a proper out-of-tree build, but need this for the PBS interface
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/build-tools/common.mk
 
 schemadir = $(BUILD_TOOLS)/share/xml/docbook/schema
@@ -44,7 +47,3 @@ $(srcdir)/stamp-install: $(srcdir)/schemas/sch/catalog.xml
 		mkdir -p "$(BUILD_TOOLS)/etc/xml" && \
 		install -m644 docbook-5.1.xml "$(BUILD_TOOLS)/etc/xml"
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

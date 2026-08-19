@@ -1,3 +1,6 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 
 conf-args = \
@@ -32,10 +35,6 @@ install-args = \
 	--includedir=$(DESTDIR)$(PREFIX)/include \
 	--libdir=$(DESTDIR)$(PREFIX)/lib
 
-$(srcdir)/stamp-install: $(srcdir)/stamp-build
+$(srcdir)/stamp-install:
 	cd $(srcdir) && ./b2 install $(build-args) $(install-args) $(build-vars)
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

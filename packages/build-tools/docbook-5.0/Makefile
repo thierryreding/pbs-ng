@@ -1,3 +1,6 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/build-tools/common.mk
 
 schemadir = $(BUILD_TOOLS)/share/xml/docbook/schema
@@ -76,6 +79,4 @@ $(BUILD_TOOLS)/etc/xml/catalog: $(srcdir)/stamp-install
 	xmlcatalog --noout --add "delegateSystem" "$(oasis_url)" "file://$(BUILD_TOOLS)/etc/xml/docbook-5.0.xml" $@
 	xmlcatalog --noout --add "delegateURI" "$(oasis_url)" "file://$(BUILD_TOOLS)/etc/xml/docbook-5.0.xml" $@
 
-install: $(srcdir)/stamp-install $(BUILD_TOOLS)/etc/xml/catalog
-
-.PHONY: install
+install: $(BUILD_TOOLS)/etc/xml/catalog

@@ -1,8 +1,5 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(builddir):
-	mkdir -p $@
-
 $(builddir)/cross-compile.cmake: $(TOP_SRCDIR)/support/cross-compile.cmake.in | $(builddir)
 	sed 's|@ARCH@|$(ARCH)|;s|@HOST@|$(HOST)|;s|@SYSROOT@|$(SYSROOT)|' $< > $@
 
@@ -30,11 +27,7 @@ $(builddir)/stamp-build: $(builddir)/stamp-configure
 install-args = \
 	DESTDIR='$(DESTDIR)'
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(builddir)/stamp-install:
 	cd $(builddir) && \
 		$(env) $(MAKE) $(install-args) install
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install

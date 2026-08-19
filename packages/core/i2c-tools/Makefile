@@ -1,3 +1,6 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 
 common-args = \
@@ -9,7 +12,7 @@ build-args = \
 	LDFLAGS='$(LDFLAGS)' \
 	$(common-args)
 
-$(srcdir)/stamp-build: | $(srcdir)
+$(srcdir)/stamp-build:
 	cd $(srcdir) && $(MAKE) -j $(JOBS) $(build-args)
 	touch $@
 
@@ -17,10 +20,6 @@ install-args = \
 	DESTDIR='$(DESTDIR)' \
 	$(common-args)
 
-$(srcdir)/stamp-install: $(srcdir)/stamp-build
+$(srcdir)/stamp-install:
 	cd $(srcdir) && $(MAKE) $(install-args) install
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

@@ -1,3 +1,6 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 
 # rustup 32-bit ARM toolchains aren't endian-specific
@@ -26,10 +29,6 @@ install-args = \
 	--target $(TARGET) \
 	--path .
 
-$(srcdir)/stamp-install: $(srcdir)/stamp-build
+$(srcdir)/stamp-install:
 	cd $(srcdir) && $(env) cargo install $(install-args)
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

@@ -1,3 +1,6 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 
 env = \
@@ -7,7 +10,7 @@ env = \
 	LDFLAGS='--sysroot $(SYSROOT)' \
 	CXX=$(CROSS_COMPILE)g++
 
-$(srcdir)/stamp-build: | $(srcdir)
+$(srcdir)/stamp-build:
 	cd $(srcdir) && git submodule init && git submodule sync && \
 		git submodule update
 	cd $(srcdir) && \
@@ -17,11 +20,7 @@ $(srcdir)/stamp-build: | $(srcdir)
 install-args = \
 	DESTDIR=$(DESTDIR)
 
-$(srcdir)/stamp-install: $(srcdir)/stamp-build
+$(srcdir)/stamp-install:
 	cd $(srcdir) && \
 		$(env) $(MAKE) $(install-args) install
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

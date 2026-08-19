@@ -13,11 +13,7 @@ $(builddir)/stamp-build: $(builddir)/stamp-configure
 		$(env) make -j $(JOBS)
 	touch $@
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(builddir)/stamp-install:
 	cd $(builddir) && \
 		$(env) make install
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install

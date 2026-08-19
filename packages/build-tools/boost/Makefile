@@ -14,10 +14,6 @@ $(srcdir)/stamp-build: $(srcdir)/stamp-configure
 	cd $(srcdir) && ./b2 $(common-args)
 	touch $@
 
-$(srcdir)/stamp-install: $(srcdir)/stamp-build
+$(srcdir)/stamp-install:
 	cd $(srcdir) && ./b2 install $(common-args)
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

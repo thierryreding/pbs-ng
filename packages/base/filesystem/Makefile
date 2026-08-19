@@ -1,11 +1,11 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(builddir) $(DESTDIR):
-	mkdir -p $@
-
 password = $(shell $(TOP_SRCDIR)/scripts/mkpasswd root)
 
-$(builddir)/stamp-install: | $(builddir) $(DESTDIR)
+$(builddir)/stamp-build:
+	touch $@
+
+$(builddir)/stamp-install: | $(DESTDIR)
 	# directories
 	install -d $(DESTDIR)/boot -m 755
 	install -d $(DESTDIR)/dev -m 755
@@ -58,7 +58,3 @@ $(builddir)/stamp-install: | $(builddir) $(DESTDIR)
 	ln -sf bash $(DESTDIR)/bin/sh
 
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install

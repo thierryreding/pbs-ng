@@ -1,9 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 include $(TOP_SRCDIR)/packages/git.mk
 
-$(builddir):
-	mkdir -p $@
-
 env = env -i PATH='$(PATH)' \
 	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
 	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)'
@@ -36,13 +33,9 @@ install-args += \
 	$(common-args) \
 	-j $(JOBS)
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(builddir)/stamp-install:
 	mkdir -p '$(DESTDIR)$(PREFIX)/lib/ioquake3' && \
 		mkdir -p '$(DESTDIR)$(PREFIX)/bin'
 	cd $(srcdir) && \
 		$(env) $(MAKE) $(install-args) copyfiles
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install

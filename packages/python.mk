@@ -1,3 +1,6 @@
+# not a proper out-of-tree build
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 include $(TOP_SRCDIR)/packages/python-sysconfigdata.mk
 
@@ -9,10 +12,6 @@ install-args += \
 	--prefix=$(PREFIX) \
 	--root=$(DESTDIR)
 
-$(srcdir)/stamp-install: | $(srcdir)
+$(srcdir)/stamp-install:
 	cd $(srcdir) && $(env) python3 -m pip install $(install-args) .
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

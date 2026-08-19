@@ -1,3 +1,6 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 
 $(srcdir)/stamp-patch: | $(srcdir)
@@ -26,11 +29,7 @@ install-args = \
 	LIBDIR='$(PREFIX)/lib' \
 	DESTDIR='$(DESTDIR)'
 
-$(srcdir)/stamp-install: $(srcdir)/stamp-build
+$(srcdir)/stamp-install:
 	cd $(srcdir) && \
 		fakeroot $(MAKE) $(install-args) install
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

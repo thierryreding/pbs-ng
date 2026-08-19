@@ -531,13 +531,16 @@ class Package():
         objtree = pbs.objtree / pkgtree
         destdir = pbs.objtree / pkgtree / 'install'
         distdir = pbs.objtree / 'dist' / pkgtree
+        sysroot = objtree / 'sysroot'
         makefile = os.path.join(srctree, 'Makefile')
 
+        # remove old build tree (unless we're doing an incremental build)
         if os.path.exists(objtree) and not incremental:
             pbs.log.begin('removing %s...' % objtree)
             shutil.rmtree(objtree)
             pbs.log.end('done')
 
+        # create the build tree
         if not os.path.exists(objtree):
             os.makedirs(objtree)
 
@@ -555,11 +558,33 @@ class Package():
                 target = os.path.join(objtree, 'source')
                 self.extract(target)
 
+        # TODO: split the below into separate build and install steps so that
+        # the install step can be run in an isolated namespace
+
+        # create clean sysroot for build
+        if dependencies:
+            installed = []
+
+            if sysroot.exists() and not incremental:
+                pbs.log.begin(f'removing {sysroot}...')
+                shutil.rmtree(sysroot)
+                pbs.log.end('done')
+
+            for source in self.project.depends.walk(self.source):
+                for package in self.project.packages:
+                    if package.source == source:
+                        if not package in installed:
+                            installed.append(package)
+
+            for package in installed:
+                package.install(sysroot)
+
         command = [ 'make', '--no-print-directory', '-C', objtree,
                     '-f', makefile,
                     'TOP_SRCDIR=%s' % pbs.srctree,
                     'TOP_OBJDIR=%s' % pbs.objtree,
                     'PKGDIR=%s' % pkgtree,
+                    'SYSROOT=%s' % sysroot,
                     'FORCE=%s' % ('y' if incremental or force else 'n'),
                     'install' ]
 
@@ -585,7 +610,6 @@ class Package():
             os.makedirs(distdir)
 
         self.package(destdir, distdir)
-        self.install(SYSROOT, distdir)
 
         self.states['build'] = hash
 

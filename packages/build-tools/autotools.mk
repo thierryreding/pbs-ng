@@ -6,9 +6,6 @@ env = \
 CFLAGS = '-I$(BUILD_TOOLS)/include'
 LDFLAGS = '-L$(BUILD_TOOLS)/lib'
 
-$(builddir):
-	mkdir -p $@
-
 $(srcdir)/stamp-patch: | $(srcdir)
 	touch $@
 
@@ -34,11 +31,7 @@ $(builddir)/stamp-build: $(builddir)/stamp-configure
 
 install-args =
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(builddir)/stamp-install:
 	cd $(builddir) && \
 		$(env) $(MAKE) $(install-args) install
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install

@@ -17,7 +17,7 @@ build-args = \
 	RAISE_SETFCAP=no \
 	PAM_CAP=no
 
-$(builddir)/stamp-build: $(srcdir)/stamp-patch | $(builddir)
+$(builddir)/stamp-build: $(srcdir)/stamp-patch
 	cd $(srcdir) && \
 		$(MAKE) $(build-args)
 
@@ -28,11 +28,7 @@ install-args = \
 	RAISE_SETFCAP=no \
 	PAM_CAP=no
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(builddir)/stamp-install:
 	cd $(srcdir) && \
 		$(MAKE) $(install-args) install
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install

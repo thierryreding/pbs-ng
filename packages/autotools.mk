@@ -1,8 +1,5 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(builddir):
-	mkdir -p $@
-
 conf-env = \
 	PKG_CONFIG_LIBDIR='$(SYSROOT)$(PREFIX)/lib/pkgconfig:$(SYSROOT)$(PREFIX)/share/pkgconfig' \
 	PKG_CONFIG_SYSROOT_DIR='$(SYSROOT)'
@@ -39,18 +36,10 @@ $(builddir)/stamp-build: $(builddir)/stamp-configure
 install-args = \
 	DESTDIR='$(DESTDIR)'
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(builddir)/stamp-install:
 	cd $(builddir) && \
 		$(FAKEROOT) $(MAKE) $(install-args) install
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install
-
-ifeq ($(FORCE),y)
-.PHONY: $(builddir)/stamp-build
-endif
 
 # These are useful if the source directory needs to be exclusively accessed
 # for a given build. This can be required if an autotools-based package needs

@@ -1,3 +1,6 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 
 build-args = \
@@ -8,7 +11,7 @@ build-args = \
 	NO_PYTHON=1 \
 	-j $(JOBS)
 
-$(srcdir)/stamp-build: | $(srcdir)
+$(srcdir)/stamp-build:
 	cd $(srcdir) && $(env) $(MAKE) $(build-args)
 
 install-args = \
@@ -16,9 +19,5 @@ install-args = \
 	DESTDIR=$(DESTDIR) \
 	PREFIX=/usr
 
-$(srcdir)/stamp-install: $(srcdir)/stamp-build
+$(srcdir)/stamp-install:
 	cd $(srcdir) && $(env) $(MAKE) $(install-args) install
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

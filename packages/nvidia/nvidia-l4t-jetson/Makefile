@@ -1,9 +1,9 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(builddir) $(DESTDIR):
-	mkdir -p $@
+$(builddir)/stamp-build:
+	touch $@
 
-$(builddir)/stamp-install: | $(builddir) $(DESTDIR)
+$(builddir)/stamp-install: | $(DESTDIR)
 	mkdir -p $(DESTDIR)$(PREFIX)/lib/firmware && \
 		cp -a $(srcdir)/firmware/gv11b $(DESTDIR)$(PREFIX)/lib/firmware
 	mkdir -p $(DESTDIR)$(PREFIX)/lib && \
@@ -19,7 +19,3 @@ $(builddir)/stamp-install: | $(builddir) $(DESTDIR)
 	mkdir -p $(DESTDIR)$(PREFIX)/local/cuda && \
 		cp -a $(srcdir)/cuda/* $(DESTDIR)$(PREFIX)/local/cuda
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install

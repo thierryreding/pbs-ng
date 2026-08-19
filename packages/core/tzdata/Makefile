@@ -1,16 +1,15 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(srcdir)/stamp-build: | $(srcdir)
+$(srcdir)/stamp-build:
 	cd $(srcdir) &&  $(MAKE) $(build-args)
 	touch $@
 
 install-args = \
 	DESTDIR=$(DESTDIR)
 
-$(srcdir)/stamp-install: | $(srcdir)/stamp-build
+$(srcdir)/stamp-install:
 	cd $(srcdir) && $(MAKE) $(install-args) install
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

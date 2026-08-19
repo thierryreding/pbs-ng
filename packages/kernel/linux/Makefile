@@ -49,7 +49,7 @@ install-targets += \
 
 env = env -i PATH=$(PATH) HOME=$(HOME)
 
-$(builddir) $(DESTDIR)/boot:
+$(DESTDIR)/boot:
 	mkdir -p $@
 
 $(builddir)/stamp-configure: | $(builddir)
@@ -60,12 +60,8 @@ $(builddir)/stamp-build: $(builddir)/stamp-configure
 	$(env) $(MAKE) $(common-args) $(common-vars) $(build-targets)
 	touch $@
 
-$(builddir)/stamp-install: $(builddir)/stamp-build | $(DESTDIR)/boot
+$(builddir)/stamp-install: | $(DESTDIR)/boot
 	$(env) $(MAKE) $(install-args) $(install-vars) $(install-targets)
 	find $(DESTDIR)$(PREFIX)/include -name .install -o -name ..install.cmd -delete
 	find $(DESTDIR)$(PREFIX)/lib/modules -type l -name build -delete
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install

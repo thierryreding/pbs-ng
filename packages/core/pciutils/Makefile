@@ -1,8 +1,5 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(builddir):
-	mkdir -p $@
-
 $(srcdir)/stamp-patch:
 	cd $(srcdir) && patch -p1 < $(TOP_SRCDIR)/$(PKGDIR)/patches/cross-compile.patch
 	touch $@
@@ -36,10 +33,6 @@ install-targets = \
 	install-lib \
 	install
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(builddir)/stamp-install:
 	cd $(srcdir) && $(MAKE) $(install-args) $(install-targets)
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install

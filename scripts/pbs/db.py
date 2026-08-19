@@ -1506,4 +1506,45 @@ class DependencyGraph():
             for edge in node.edges:
                 print('   ', edge.source.full_name)
 
+    def walk(self, node, max_depth = 0, include_self = False):
+        if type(node) == str:
+            for n in self.nodes:
+                if n.source.full_name == node:
+                    node = n
+        elif type(node) == Source:
+            for n in self.nodes:
+                if n.source == node:
+                    node = n
+
+        ordered_packages = []
+        visiting = set()
+        visited = set()
+
+        def walk_one(node, depth):
+            if node in visiting:
+                circle = ' -> '.join([v.full_name for v in [*visiting, node]])
+                raise Exception(f'Circular dependency detected: {circle}')
+
+            if node in visited:
+                return
+
+            if max_depth > 0 and depth > max_depth:
+                return
+
+            visiting.add(node)
+
+            for edge in node.edges:
+                walk_one(edge, depth + 1)
+
+            visiting.remove(node)
+            visited.add(node)
+            ordered_packages.append(node.source)
+
+        walk_one(node, 0)
+
+        if include_self:
+            return ordered_packages
+
+        return ordered_packages[:-1]
+
 # vim: et sts=4 sw=4 ts=4

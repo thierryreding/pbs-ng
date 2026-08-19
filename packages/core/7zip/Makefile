@@ -1,3 +1,6 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 
 SUBDIRS = \
@@ -19,11 +22,7 @@ install-args += \
 	DEST_HOME=$(PREFIX) \
 	DEST_MAN=$(PREFIX)/share/man
 
-$(srcdir)/stamp-install: $(srcdir)/stamp-build
+$(srcdir)/stamp-install:
 	install -d $(DESTDIR)$(PREFIX)/bin
 	install -m 755 -t $(DESTDIR)$(PREFIX)/bin $(srcdir)/CPP/7zip/Bundles/Alone2/b/g/7zz
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

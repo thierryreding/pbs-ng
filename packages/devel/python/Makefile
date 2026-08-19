@@ -9,9 +9,6 @@ MULTIARCH = $(ARCH)-$(OS)-$(LIBC)$(ABI)
 MAJOR = $(word 1,$(subst ., ,$(package.version)))
 MINOR = $(word 2,$(subst ., ,$(package.version)))
 
-$(builddir):
-	mkdir -p $@
-
 $(builddir)/config.cache: | $(builddir)
 	echo '# generated for $(HOST)' > $@
 	echo 'ac_cv_buggy_getaddrinfo=no' >> $@
@@ -61,7 +58,7 @@ install-args = \
 	EXTRA_CFLAGS='$(CFLAGS)' \
 	DESTDIR='$(DESTDIR)'
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(builddir)/stamp-install:
 	cd $(builddir) && \
 		$(MAKE) $(install-args) install
 	ln -sf python$(MAJOR) $(DESTDIR)$(PREFIX)/bin/python
@@ -74,7 +71,3 @@ $(BUILD_TOOLS)/lib/python$(MAJOR).$(MINOR)/$(SYSCONFIGDATA): $(builddir)/build/l
 	$(BUILD_TOOLS)/bin/python $(TOP_SRCDIR)/support/export-sysconfigdata $(SYSROOT) $< $@
 
 $(builddir)/stamp-install: $(BUILD_TOOLS)/lib/python$(MAJOR).$(MINOR)/$(SYSCONFIGDATA)
-
-install: $(builddir)/stamp-install
-
-.PHONY: install

@@ -6,9 +6,6 @@ AWK = awk
 
 VERSION = $(shell $(CC) -dumpversion)
 
-$(builddir):
-	mkdir -p $@
-
 srcdir = $(dir $(realpath $(shell $(CC) -print-file-name=libgcc_s.so)))
 sysroot = $(shell $(CC) -print-sysroot)
 
@@ -41,7 +38,7 @@ libgomp-soname = $(call soname,$(libgomp-target))
 $(DESTDIR)$(PREFIX)/lib:
 	install -d $@ -m 755
 
-$(builddir)/stamp-install: $(DESTDIR)$(PREFIX)/lib | $(builddir)
+$(builddir)/stamp-install: $(DESTDIR)$(PREFIX)/lib
 	# libgcc
 	cp -dp $(srcdir)$(libgcc-soname) $(DESTDIR)$(PREFIX)/lib
 	cp -dp $(libgcc) $(DESTDIR)$(PREFIX)/lib
@@ -69,9 +66,7 @@ $(builddir)/stamp-install: $(DESTDIR)$(PREFIX)/lib | $(builddir)
 	cp -dp $(libgomp-soname) $(DESTDIR)$(PREFIX)/lib
 	cp -dp $(libgomp-static) $(DESTDIR)$(PREFIX)/lib
 
-install: $(builddir)/stamp-install
-
 version:
 	@$(CC) -dumpversion
 
-.PHONY: install
+.PHONY: version

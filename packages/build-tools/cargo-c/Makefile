@@ -7,7 +7,3 @@ env += \
 $(srcdir)/stamp-install: | $(srcdir)
 	cargo install --path $(srcdir) --root $(BUILD_TOOLS)
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

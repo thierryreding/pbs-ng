@@ -22,3 +22,5 @@ srcdir = $(CURDIR)/source
 JOBS ?= $(NUM_CPUS)
 
 export ACLOCAL_PATH LD_RUN_PATH LD_LIBRARY_PATH PKG_CONFIG_LIBDIR
+
+include $(TOP_SRCDIR)/packages/interface.mk

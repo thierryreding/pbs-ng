@@ -1,8 +1,5 @@
 include $(TOP_SRCDIR)/packages/build-tools/common.mk
 
-$(builddir):
-	mkdir -p $@
-
 env = \
 	PKG_CONFIG_LIBDIR='$(BUILD_TOOLS)/lib/pkgconfig'
 
@@ -24,11 +21,7 @@ $(builddir)/stamp-build: $(builddir)/stamp-configure
 
 install-args =
 
-$(builddir)/stamp-install: $(builddir)/stamp-build
+$(builddir)/stamp-install:
 	cd $(builddir) && \
 		$(env) $(MAKE) $(install-args) install
 	touch $@
-
-install: $(builddir)/stamp-install
-
-.PHONY: install

@@ -1,3 +1,6 @@
+# not a proper out-of-tree build,
+builddir = $(srcdir)
+
 include $(TOP_SRCDIR)/packages/common.mk
 
 # we need to override PKGDIR when calling the glew's make because it will
@@ -26,11 +29,7 @@ install-args = \
 	PKGDIR='$(DESTDIR)$(PREFIX)/lib/pkgconfig' \
 	GLEW_DEST='$(DESTDIR)$(PREFIX)'
 
-$(srcdir)/stamp-install: $(srcdir)/stamp-build
+$(srcdir)/stamp-install:
 	cd $(srcdir) && \
 		$(FAKEROOT) $(MAKE) $(install-args) install
 	touch $@
-
-install: $(srcdir)/stamp-install
-
-.PHONY: install

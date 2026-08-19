@@ -1,10 +1,6 @@
 include $(TOP_SRCDIR)/packages/common.mk
 
-$(builddir):
-	mkdir -p $@
-
-$(builddir)/.install: | $(builddir)
-	mkdir -p $(DESTDIR)
+$(builddir)/stamp-install: | $(DESTDIR)
 	mkdir $(DESTDIR)/boot
 	mkdir $(DESTDIR)/dev
 	mkdir $(DESTDIR)/etc
@@ -45,7 +41,3 @@ $(builddir)/.install: | $(builddir)
 	ln -sf $(PREFIX)/lib $(DESTDIR)/lib
 
 	touch $@
-
-install: $(builddir)/.install
-
-.PHONY: install
