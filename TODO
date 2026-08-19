@@ -22,3 +22,7 @@
 * implement "patches:" property support
   - the goal is to allow specifying patches in the package file in order
     to automatically apply them without having to modify the Makefile
+
+* during fetch commands, verification stops after the first checksum failure
+  if multiple source files are listed it will not report subsequent failures
+  until the first checksum has been fixed
