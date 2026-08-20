@@ -1,5 +1,5 @@
 description: High productivity build system
-version: 1.11.1
+version: 1.12.0
 license: Apache-2.0
 
 depends:
@@ -10,7 +10,7 @@ depends:
 files:
   - download:
       url: https://github.com/mesonbuild/meson/archive/${version}.tar.gz
-      sha1: c3cf6c1d3785429267f1edce91d944ba2e19e157
+      sha1: 3c2c7dbd1b9f8036938c157fff73aed5cff22ef0
       watch:
         url: anitya://6472
 
