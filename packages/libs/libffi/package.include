@@ -1,11 +1,11 @@
 description: Portable, high-level programming interface to various calling conventions
-version: 3.6.0
+version: 3.8.0
 license: MIT
 
 files:
   - download:
       url: https://github.com/libffi/libffi/releases/download/v${version}/libffi-${version}.tar.gz
-      sha1: 781b5eb67349b75e3714e6a4df4f32b7470774c1
+      sha1: 293229eaf78d7f1efb98269af5898944abea73b1
       watch:
         url: anitya://1611
 
