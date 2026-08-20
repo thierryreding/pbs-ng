@@ -1,5 +1,5 @@
 description: Linux kernel
-version: 7.1
+version: 7.2
 license: GPL-2.0
 
 depends:
@@ -8,7 +8,7 @@ depends:
 files:
   - download:
       url: https://www.kernel.org/pub/linux/kernel/v${major}.x/linux-${version}.tar.xz
-      sha1: 8ac8dc97cd273a5ad7a3bed4f1be71c1b707a8e6
+      sha1: 3b01fdc3fd91d6502836c6cfed49d72c226756ab
       watch:
         url: anitya://358810
 
