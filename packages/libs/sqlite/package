@@ -1,5 +1,5 @@
 description: a C library that implements an SQL database engine
-version: 3.53.3
+version: 3.53.4
 license: custom
 
 depends:
@@ -9,7 +9,7 @@ depends:
 files:
   - download:
       url: https://github.com/sqlite/sqlite/archive/refs/tags/version-${version}.tar.gz
-      sha1: f3434f6648e58a952e29b5e78dbcdcbca7429761
+      sha1: fd36cb0f105705b28dc939425bc089b58e4d6c68
       filename: sqlite-${version}.tar.gz
       watch:
         url: anitya://4877
