@@ -1,9 +1,3 @@
-commit f983fd777c29d672be78fadfbfc43eca1fcc4c44
-Author: Thierry Reding <treding@nvidia.com>
-Date:   Tue Nov 29 14:28:43 2022 +0100
-
-    std-sbindir
-
 diff --git a/tools/rpcctl/Makefile.am b/tools/rpcctl/Makefile.am
 index bb70d6fe4dc0..4040ba762a1d 100644
 --- a/tools/rpcctl/Makefile.am
